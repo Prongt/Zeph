@@ -17,7 +17,7 @@ Private variables use camelCase.
 
 Static variables will be prefixed with an underscore.
 
-**Public variables should be made private and use the [SerializeField] attribute where ever possible.**
+Public variables should be made private and use the **[SerializeField] attribute**where ever possible.
 
 
-**All variables that are accessible from the editor should use the [Tooltip("")] attribute and have an appropriate description.**
+All variables that are accessible from the editor should use the **[Tooltip("")] attribute** and have an appropriate description.
