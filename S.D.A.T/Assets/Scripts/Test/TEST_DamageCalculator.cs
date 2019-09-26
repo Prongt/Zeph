@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
-public class DamageCalculator 
+public class TEST_DamageCalculator 
 {
     public static int CalculateDamage(int amount, float mitigationPercent)
     {
@@ -18,8 +18,8 @@ public class DamageCalculator
         GameObject obj = new GameObject();
 
 
-        obj.transform.position = position + new Vector3(1,1,1);
-        //obj.transform.position = position;
+        //obj.transform.position = position + new Vector3(1,1,1);
+        obj.transform.position = position;
         return obj;
     }
 
