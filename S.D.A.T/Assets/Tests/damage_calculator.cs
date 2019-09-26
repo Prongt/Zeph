@@ -22,6 +22,16 @@ namespace Tests
             int finalDamage = DamageCalculator.CalculateDamage(10, .80f);
             Assert.AreEqual(2, finalDamage);
         }
-
+        
+        [Test]
+        public void CalculateDamage_CubeSpawnsAt10y()
+        {
+           // int finalDamage = DamageCalculator.;
+           var point = new UnityEngine.Vector3(0, 10, 0);
+           var t = DamageCalculator.InstantiateCubeAtPoint(point);
+        
+           
+            Assert.AreEqual(point, t.transform.position);
+        }
     }
 }
