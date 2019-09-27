@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -20,6 +22,7 @@ public class Interactable : MonoBehaviour
         }
         aspects = SetActiveAspects();
         UpdateAspectComponents();
+        
     }
 
     private void UpdateAspectComponents()
@@ -28,37 +31,89 @@ public class Interactable : MonoBehaviour
         {
             if (aspects.Contains(aspect))
             {
-                var type = Type.GetType(aspect.ToString());
-                if (type == null)
+                var aspectComponent = Type.GetType(aspect.ToString());
+                if (aspectComponent == null)
                 {
-                    Debug.LogWarning("The following component " + 
+#if UNITY_EDITOR
+                    Debug.LogError("The following component " + 
                                      aspect.ToString() + " is null and cannot be added to " + gameObject.name);
+#endif
                 }
                 else
                 {
-                    if (!gameObject.GetComponent(type))
+                    if (!gameObject.GetComponent(aspectComponent))
                     {
-                        gameObject.AddComponent(type);
+                        gameObject.AddComponent(aspectComponent);
                     }
                 }
             }
         }
+
         
-//        if (aspects.Contains(AspectTypes.Flamable))
-//        {
-//            var type = Type.GetType(AspectTypes.Flamable.ToString());
-//            if (type == null)
+        List<Aspects> componentList = gameObject.GetComponents<Aspects>().ToList();
+        foreach (var aspect in aspects)
+        {
+            for (int i = 0; i < componentList.Count; i++)
+            {
+                if (Type.GetType(aspect.ToString()) == componentList[i].GetType())
+                {
+                    //good 
+                    componentList.Remove(componentList[i]);
+                    
+                }
+            }
+        }
+        if (componentList.Count > 0)
+        {
+//            for (int i = 0; i < componentList.Count; i++)
 //            {
-//                Debug.LogWarning(type + " is null and cannot be added to " + gameObject.name);
+//                if (Application.isEditor)
+//                    //Removes component when playing
+//                    UnityEditor.EditorApplication.delayCall+=()=>
+//                    {
+//                        DestroyImmediate(gameObject.GetComponent(componentList[i].GetType()));
+//                    };
+//                else
+//                    Destroy(gameObject.GetComponent(componentList[i].GetType()));
+//                
+//                
 //            }
-//            else
-//            {
-//                if (!gameObject.GetComponent(type))
+
+            foreach (Aspects aspect in componentList)
+            {
+//                if (aspects.Contains(aspect.name))
+//                var type = Type.GetType(aspect.ToString());
+                    
+                if (Application.isEditor)
+                    //Removes component when playing
+                    UnityEditor.EditorApplication.delayCall+=()=>
+                    {
+                        DestroyImmediate(gameObject.GetComponent(aspect.GetType()));
+                    };
+//                else
+//                    Destroy(gameObject.GetComponent(Type.GetType(aspect.ToString())));
+
+
+
+//                if (Application.isPlaying)
 //                {
-//                    gameObject.AddComponent(type);
+//                    //Destroy(gameObject.GetComponent(Type.GetType(aspect.ToString())));
+//                    Destroy(gameObject.GetComponent(aspect.GetType()));
+//                    Debug.Log("The following component " + 
+//                                     aspect.ToString() + " on " + gameObject.name + " was removed on play");
+//                    continue;
 //                }
-//            }
-//        }
+#if UNITY_EDITOR
+                
+                Debug.LogWarning("The following component " + 
+                               aspect.ToString() + " on " + gameObject.name + " will be removed on play as it is no longer required");
+
+                
+#endif
+            }
+            
+        }
+
     }
     
 
