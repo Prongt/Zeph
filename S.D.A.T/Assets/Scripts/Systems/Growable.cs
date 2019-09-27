@@ -1,8 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Growable : Aspects
 {
-    
+    [SerializeField] private Material GrowingMaterial;
+    [SerializeField] private GameObject GrowingParticleEffect;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+    }
 }

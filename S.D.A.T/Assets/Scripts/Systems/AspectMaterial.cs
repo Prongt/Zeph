@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "AspectMaterial", menuName = "Aspects/Material", order = 1)]
 public class AspectMaterial : ScriptableObject
@@ -30,4 +24,3 @@ public class AspectMaterial : ScriptableObject
  *
  * burn rate (10% health per second)
  */
-

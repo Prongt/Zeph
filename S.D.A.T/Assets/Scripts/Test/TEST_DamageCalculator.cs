@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
-public class TEST_DamageCalculator 
+public class TEST_DamageCalculator
 {
     public static int CalculateDamage(int amount, float mitigationPercent)
     {
@@ -22,6 +18,4 @@ public class TEST_DamageCalculator
         obj.transform.position = position;
         return obj;
     }
-
-    
 }

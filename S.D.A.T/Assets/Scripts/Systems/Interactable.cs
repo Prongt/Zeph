@@ -1,28 +1,22 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Interactable : MonoBehaviour
 {
-    [Header("Aspects")]
-    [SerializeField] private AspectMaterial aspectMaterial;
+    [Header("Aspects")] [SerializeField] private AspectMaterial aspectMaterial;
     [SerializeField] private List<AspectTypes> additionalAspects;
 
     private List<AspectTypes> aspects;
 
     private void Awake()
     {
-        if (additionalAspects == null)
-        {
-            additionalAspects = new List<AspectTypes>();
-        }
+        if (additionalAspects == null) additionalAspects = new List<AspectTypes>();
+
         aspects = SetActiveAspects();
         UpdateAspectComponents();
-        
     }
 
     private void UpdateAspectComponents()
@@ -31,27 +25,23 @@ public class Interactable : MonoBehaviour
         {
             if (aspects.Contains(aspect))
             {
-                var aspectComponent = Type.GetType(aspect.ToString());
+                Type aspectComponent = Type.GetType(aspect.ToString());
                 if (aspectComponent == null)
                 {
 #if UNITY_EDITOR
-                    Debug.LogError("The following component " + 
-                                     aspect.ToString() + " is null and cannot be added to " + gameObject.name);
+                    Debug.LogError("The following component " +
+                                   aspect + " is null and cannot be added to " + gameObject.name);
 #endif
                 }
                 else
                 {
-                    if (!gameObject.GetComponent(aspectComponent))
-                    {
-                        gameObject.AddComponent(aspectComponent);
-                    }
+                    if (!gameObject.GetComponent(aspectComponent)) gameObject.AddComponent(aspectComponent);
                 }
             }
         }
 
-        
         List<Aspects> componentList = gameObject.GetComponents<Aspects>().ToList();
-        foreach (var aspect in aspects)
+        foreach (AspectTypes aspect in aspects)
         {
             for (int i = 0; i < componentList.Count; i++)
             {
@@ -59,63 +49,30 @@ public class Interactable : MonoBehaviour
                 {
                     //good 
                     componentList.Remove(componentList[i]);
-                    
                 }
             }
         }
+
         if (componentList.Count > 0)
         {
-//            for (int i = 0; i < componentList.Count; i++)
-//            {
-//                if (Application.isEditor)
-//                    //Removes component when playing
-//                    UnityEditor.EditorApplication.delayCall+=()=>
-//                    {
-//                        DestroyImmediate(gameObject.GetComponent(componentList[i].GetType()));
-//                    };
-//                else
-//                    Destroy(gameObject.GetComponent(componentList[i].GetType()));
-//                
-//                
-//            }
-
             foreach (Aspects aspect in componentList)
             {
-//                if (aspects.Contains(aspect.name))
-//                var type = Type.GetType(aspect.ToString());
-                    
-                if (Application.isEditor)
-                    //Removes component when playing
-                    UnityEditor.EditorApplication.delayCall+=()=>
+                if (Application.isEditor) //Removes component in editor
+                {
+                    EditorApplication.delayCall += () =>
                     {
                         DestroyImmediate(gameObject.GetComponent(aspect.GetType()));
                     };
-//                else
-//                    Destroy(gameObject.GetComponent(Type.GetType(aspect.ToString())));
 
-
-
-//                if (Application.isPlaying)
-//                {
-//                    //Destroy(gameObject.GetComponent(Type.GetType(aspect.ToString())));
-//                    Destroy(gameObject.GetComponent(aspect.GetType()));
-//                    Debug.Log("The following component " + 
-//                                     aspect.ToString() + " on " + gameObject.name + " was removed on play");
-//                    continue;
-//                }
-#if UNITY_EDITOR
-                
-                Debug.LogWarning("The following component " + 
-                               aspect.ToString() + " on " + gameObject.name + " will be removed on play as it is no longer required");
-
-                
-#endif
+                    Debug.Log("The following component " +
+                              aspect + " on " + gameObject.name + " was removed");
+                }
+                else //Removes component in play mode
+                    DestroyImmediate(gameObject.GetComponent(aspect.GetType()));
             }
-            
         }
-
     }
-    
+
 
     private List<AspectTypes> SetActiveAspects()
     {
@@ -125,9 +82,7 @@ public class Interactable : MonoBehaviour
             foreach (AspectTypes aspect in aspectMaterial.AspectTypes)
             {
                 if (!tempAspects.Contains(aspect))
-                {
                     tempAspects.Add(aspect);
-                }
             }
         }
 
@@ -136,25 +91,19 @@ public class Interactable : MonoBehaviour
             foreach (AspectTypes aspect in additionalAspects)
             {
                 if (!tempAspects.Contains(aspect))
-                {
                     tempAspects.Add(aspect);
-                }
             }
         }
 
         return tempAspects;
     }
-    
+
 
     private void OnValidate()
     {
-        if (additionalAspects == null)
-        {
-            additionalAspects = new List<AspectTypes>();
-        }
+        if (additionalAspects == null) additionalAspects = new List<AspectTypes>();
+
         aspects = SetActiveAspects();
         UpdateAspectComponents();
     }
-    
-    
 }
