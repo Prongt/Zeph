@@ -15,7 +15,7 @@ public class Interactable : MonoBehaviour
     {
         if (additionalAspects == null) additionalAspects = new List<AspectTypes>();
 
-        aspects = SetActiveAspects();
+        SetActiveAspects();
         UpdateAspectComponents();
     }
 
@@ -74,7 +74,7 @@ public class Interactable : MonoBehaviour
     }
 
 
-    private List<AspectTypes> SetActiveAspects()
+    private void SetActiveAspects()
     {
         List<AspectTypes> tempAspects = new List<AspectTypes>();
         if (aspectMaterial)
@@ -95,7 +95,7 @@ public class Interactable : MonoBehaviour
             }
         }
 
-        return tempAspects;
+        aspects = tempAspects;
     }
 
 
@@ -103,7 +103,15 @@ public class Interactable : MonoBehaviour
     {
         if (additionalAspects == null) additionalAspects = new List<AspectTypes>();
 
-        aspects = SetActiveAspects();
+        SetActiveAspects();
+        UpdateAspectComponents();
+    }
+
+    public void AddAspect(AspectTypes aspectType)
+    {
+        if (additionalAspects == null) additionalAspects = new List<AspectTypes>();
+        additionalAspects.Add(aspectType);
+        SetActiveAspects();
         UpdateAspectComponents();
     }
 }
