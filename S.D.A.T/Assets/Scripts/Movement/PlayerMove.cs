@@ -13,10 +13,9 @@ public class PlayerMove : MonoBehaviour
     private Vector3 forward;
     private Vector3 right;
 
-    [Tooltip("Speed of Player")]
-    [SerializeField]
-    public int speed;
-    
+    [Tooltip("Speed of Player")] 
+    [SerializeField] private FloatVariable speed;
+    [SerializeField] private FloatVariable turnSpeed;
     
     // Start is called before the first frame update
     void Start()
@@ -42,13 +41,13 @@ public class PlayerMove : MonoBehaviour
 
         if (verticalAxis > 0 || verticalAxis < 0)
         {
-            transform.forward = forward * verticalAxis;
+            transform.forward = Vector3.Lerp(transform.forward, forward * verticalAxis, turnSpeed.Value * Time.deltaTime);
         } else if (horAxis > 0 || horAxis < 0)
         {
-            transform.forward = right * horAxis;
+            transform.forward = Vector3.Lerp(transform.forward, right * horAxis, turnSpeed.Value * Time.deltaTime);
         } 
         
-        myBody.AddForce(movement * speed);
+        myBody.AddForce(movement * speed.Value);
    
     }
 }

@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 1073740641}
   - component: {fileID: 1073740642}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -417,7 +417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e6d71d57ca17746b43cc225a7ae04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: {fileID: 11400000, guid: 39363ad09b2a31f4fb7a7320487b3fe2, type: 2}
+  turnSpeed: {fileID: 11400000, guid: d930e5d3ade6e6048873875b1d712848, type: 2}
 --- !u!1 &1897560431
 GameObject:
   m_ObjectHideFlags: 0

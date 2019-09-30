@@ -10,16 +10,28 @@
             <e p="PlayerMove.cs" t="Include" />
           </e>
           <e p="Systems" t="Include">
+            <e p="AspectMaterial.cs" t="Include" />
             <e p="Aspects.cs" t="Include" />
-            <e p="ElementalMaterial.cs" t="Include" />
+            <e p="Element.cs" t="Include" />
+            <e p="Flamable.cs" t="Include" />
+            <e p="Growable.cs" t="Include" />
             <e p="Interactable.cs" t="Include" />
           </e>
           <e p="Test" t="Include">
-            <e p="TEST_DamageCalculator.cs" t="Include" />
+            <e p="Events" t="Include">
+              <e p="Editor" t="Include">
+                <e p="EventEditor.cs" t="Include" />
+              </e>
+              <e p="GameEvent.cs" t="Include" />
+              <e p="GameEventListener.cs" t="Include" />
+            </e>
+            <e p="FloatVariable.cs" t="Include" />
+            <e p="PlayerHealth.cs" t="Include" />
+            <e p="ShowPlayerHealth.cs" t="Include" />
           </e>
         </e>
         <e p="Tests" t="Include">
-          <e p="TEST_DamageCalculator.cs" t="Include" />
+          <e p="TEST_interactable.cs" t="Include" />
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />
