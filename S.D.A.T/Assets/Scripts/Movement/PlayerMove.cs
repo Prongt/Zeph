@@ -26,6 +26,8 @@ public class PlayerMove : MonoBehaviour
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
         myBody = GetComponent<Rigidbody>();
+        
+        transform.forward = forward;
     }
 
     // Update is called once per frame
@@ -36,7 +38,7 @@ public class PlayerMove : MonoBehaviour
         
         Vector3 movement = new Vector3(horAxis + verticalAxis,0,verticalAxis - horAxis);
 
-        transform.forward = forward;
+       
 
         if (verticalAxis > 0 || verticalAxis < 0)
         {
