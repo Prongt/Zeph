@@ -1,32 +1,21 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Aspects : MonoBehaviour
+public abstract class Aspects : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public virtual void Initialize()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Activate()
     {
         
     }
-    
-    
 }
 
 [Serializable]
 public enum AspectTypes
 {
-    Burnable,
-    Wetable,
-    Growable,
-    Damagable,
-    Throwable
-    
+    Flamable,
+    Growable
 }
