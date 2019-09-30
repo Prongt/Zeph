@@ -6,6 +6,11 @@ public abstract class Aspects : MonoBehaviour
     public virtual void Initialize()
     {
     }
+
+    public virtual void Activate()
+    {
+        
+    }
 }
 
 [Serializable]

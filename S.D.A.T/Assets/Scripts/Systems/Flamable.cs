@@ -9,6 +9,11 @@ public class Flamable : Aspects
     {
         base.Initialize();
     }
+
+    public override void Activate()
+    {
+        base.Activate();
+    }
 }
 
 //Fire
