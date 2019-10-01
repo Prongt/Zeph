@@ -7,21 +7,23 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [Header("Aspects")] [SerializeField] private AspectMaterial aspectMaterial;
-    [SerializeField] private List<AspectTypes> additionalAspects;
+    [SerializeField] private List<AspectType> additionalAspects;
 
-    private List<AspectTypes> aspects;
+    private List<AspectType> aspects;
 
     private void Awake()
     {
-        if (additionalAspects == null) additionalAspects = new List<AspectTypes>();
+        if (additionalAspects == null) additionalAspects = new List<AspectType>();
 
         SetActiveAspects();
         UpdateAspectComponents();
+        
     }
 
-    private void UpdateAspectComponents()
+    #region AspectComponents
+private void UpdateAspectComponents()
     {
-        foreach (AspectTypes aspect in aspects)
+        foreach (AspectType aspect in aspects)
         {
             if (aspects.Contains(aspect))
             {
@@ -41,7 +43,7 @@ public class Interactable : MonoBehaviour
         }
 
         List<Aspects> componentList = gameObject.GetComponents<Aspects>().ToList();
-        foreach (AspectTypes aspect in aspects)
+        foreach (AspectType aspect in aspects)
         {
             for (int i = 0; i < componentList.Count; i++)
             {
@@ -57,6 +59,10 @@ public class Interactable : MonoBehaviour
         {
             foreach (Aspects aspect in componentList)
             {
+//                if (PrefabUtility.IsPartOfPrefabAsset(gameObject))
+//                {
+//                    PrefabUtility.ApplyRemovedComponent(gameObject, aspect.GetType(), )
+//                }
                 if (Application.isEditor) //Removes component in editor
                 {
                     EditorApplication.delayCall += () =>
@@ -76,10 +82,10 @@ public class Interactable : MonoBehaviour
 
     private void SetActiveAspects()
     {
-        List<AspectTypes> tempAspects = new List<AspectTypes>();
+        List<AspectType> tempAspects = new List<AspectType>();
         if (aspectMaterial)
         {
-            foreach (AspectTypes aspect in aspectMaterial.AspectTypes)
+            foreach (AspectType aspect in aspectMaterial.AspectTypes)
             {
                 if (!tempAspects.Contains(aspect))
                     tempAspects.Add(aspect);
@@ -88,7 +94,7 @@ public class Interactable : MonoBehaviour
 
         if (additionalAspects.Count >= 1)
         {
-            foreach (AspectTypes aspect in additionalAspects)
+            foreach (AspectType aspect in additionalAspects)
             {
                 if (!tempAspects.Contains(aspect))
                     tempAspects.Add(aspect);
@@ -101,17 +107,87 @@ public class Interactable : MonoBehaviour
 
     private void OnValidate()
     {
-        if (additionalAspects == null) additionalAspects = new List<AspectTypes>();
+        if (additionalAspects == null) additionalAspects = new List<AspectType>();
 
         SetActiveAspects();
         UpdateAspectComponents();
     }
 
-    public void AddAspect(AspectTypes aspectType)
+    public void AddAspect(AspectType aspectType)
     {
-        if (additionalAspects == null) additionalAspects = new List<AspectTypes>();
+        if (additionalAspects == null) additionalAspects = new List<AspectType>();
         additionalAspects.Add(aspectType);
         SetActiveAspects();
         UpdateAspectComponents();
     }
+    
+
+    #endregion
+
+
+    public void TakeInElement(Element element)
+    {
+        //var components = GetComponents<Aspects>();
+        List<Aspects> components = GetComponents<Aspects>().ToList();
+
+
+        foreach (Aspects component in components)
+        {
+            //promotes list
+            foreach (AspectType aspect in element.Promotes)
+            {
+                if (component.AspectType == aspect)
+                {
+                    component.Promote();
+                    //components.Remove(component);
+                }
+            }
+            
+            //negates list
+            foreach (AspectType aspect in element.Negates)
+            {
+                if (component.AspectType == aspect)
+                {
+                    component.Negate();
+                    //components.Remove(component);
+                }
+            }
+        }
+    }
+
+    public Type GetComponentByAspect(AspectType aspectToCall) //TODO cache components to increase performance
+    {
+        foreach (AspectType aspect in aspects)
+        {
+            if (aspect == aspectToCall)
+            {
+                Type aspectComponent = Type.GetType(aspectToCall.ToString());
+                
+                if (aspectComponent != null)
+                {
+                    //component type is valid
+                    
+                    Component component = GetComponent(aspectComponent);
+                    
+                    if (component != null)
+                    {
+                        //Component found on gameobject
+                        //Returns component type
+                        return aspectComponent;
+                    }
+                }
+            }
+        }
+        
+        //If aspect component is not found on the gameobject
+        return null;
+    }
+    
+    /*
+     * Take in element
+     * parameter a list of elements
+     * loop through the elements apects and call promote or negate if there is a relevant component attached
+     store list of aspect components
+     */
+
 }

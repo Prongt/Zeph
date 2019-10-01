@@ -3,7 +3,7 @@
 [CreateAssetMenu(fileName = "AspectMaterial", menuName = "Aspects/Material", order = 2)]
 public class AspectMaterial : ScriptableObject
 {
-    public AspectTypes[] AspectTypes;
+    public AspectType[] AspectTypes;
 }
 
 

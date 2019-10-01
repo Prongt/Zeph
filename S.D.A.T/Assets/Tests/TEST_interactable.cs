@@ -14,7 +14,7 @@ namespace Tests
         {
             var obj = new GameObject();
             obj.AddComponent<Interactable>();
-            obj.GetComponent<Interactable>().AddAspect(AspectTypes.Growable);
+            obj.GetComponent<Interactable>().AddAspect(AspectType.Growable);
 
            bool hasGrowableComponent = false;
            
