@@ -14,8 +14,8 @@ public class PlayerMove : MonoBehaviour
     private Vector3 right;
 
     [Tooltip("Speed of Player")] 
-    [SerializeField] private FloatVariable speed;
-    [SerializeField] private FloatVariable turnSpeed;
+    [SerializeField] private FloatReference speed;
+    [SerializeField] private FloatReference turnSpeed;
     
     // Start is called before the first frame update
     void Start()
