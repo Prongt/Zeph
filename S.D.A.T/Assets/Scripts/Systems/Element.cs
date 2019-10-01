@@ -7,27 +7,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Element", menuName = "Aspects/Element", order = 2)]
 public class Element : ScriptableObject
 {
-    [SerializeField] private ElementsEnum elementEnum;
+    //[SerializeField] private ElementsEnum elementEnum;
     [SerializeField] private List<AspectType> promotes;
     [SerializeField] private List<AspectType> negates;
 
-    public List<AspectType> Promotes
-    {
-        get { return promotes; }
-    }
-    
-    public List<AspectType> Negates
-    {
-        get { return negates; }
-    }
-}
+    public List<AspectType> Promotes => promotes;
 
-[Serializable]
-public enum ElementsEnum
-{
-    light, 
-    wind,
-    heat
+    public List<AspectType> Negates => negates;
 }
 
 /*

@@ -12,18 +12,14 @@ public abstract class Aspects : MonoBehaviour
 
     public virtual void Initialize()
     {
-    }
-
-    public virtual void Activate()
-    {
-        
+        Enum.TryParse(GetType().Name, out AspectType aspectType);
+        //Debug.Log(aspectType);
+        AspectType = aspectType;
     }
 
     public abstract void Promote();
     public abstract void Negate();
-
 }
-
 
 
 [Serializable]

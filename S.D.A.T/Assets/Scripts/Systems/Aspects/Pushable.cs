@@ -5,12 +5,6 @@ using UnityEngine;
 
 public class Pushable : Aspects
 {
-    private void OnValidate()
-    {
-        Enum.TryParse(this.GetType().Name, out AspectType aspectType);
-        AspectType = aspectType;
-    }
-
     public override void Promote()
     {
         //Being pushed

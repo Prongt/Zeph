@@ -6,8 +6,11 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    [Header("Aspects")] [SerializeField] private AspectMaterial aspectMaterial;
-    [SerializeField] private List<AspectType> additionalAspects;
+    [Tooltip("Aspect material used by this object")] [Header("Aspects")] [SerializeField]
+    private AspectMaterial aspectMaterial;
+
+    [Tooltip("Any additional aspects this object requires")] [SerializeField]
+    private List<AspectType> additionalAspects;
 
     private List<AspectType> aspects;
 
@@ -17,12 +20,16 @@ public class Interactable : MonoBehaviour
 
         SetActiveAspects();
         UpdateAspectComponents();
-        
     }
 
     #region AspectComponents
-private void UpdateAspectComponents()
+
+    /// <summary>
+    /// Adds or removes components depending on if they exist in the aspect list
+    /// </summary>
+    private void UpdateAspectComponents()
     {
+        //Add components
         foreach (AspectType aspect in aspects)
         {
             if (aspects.Contains(aspect))
@@ -42,6 +49,7 @@ private void UpdateAspectComponents()
             }
         }
 
+        //Checks if components are still being used
         List<Aspects> componentList = gameObject.GetComponents<Aspects>().ToList();
         foreach (AspectType aspect in aspects)
         {
@@ -55,6 +63,7 @@ private void UpdateAspectComponents()
             }
         }
 
+        //Remove unused components
         if (componentList.Count > 0)
         {
             foreach (Aspects aspect in componentList)
@@ -79,7 +88,9 @@ private void UpdateAspectComponents()
         }
     }
 
-
+    /// <summary>
+    /// Adds all aspects to the aspects list
+    /// </summary>
     private void SetActiveAspects()
     {
         List<AspectType> tempAspects = new List<AspectType>();
@@ -113,6 +124,10 @@ private void UpdateAspectComponents()
         UpdateAspectComponents();
     }
 
+    /// <summary>
+    /// Externally add aspect to this gameobject
+    /// </summary>
+    /// <param name="aspectType"></param>
     public void AddAspect(AspectType aspectType)
     {
         if (additionalAspects == null) additionalAspects = new List<AspectType>();
@@ -120,16 +135,17 @@ private void UpdateAspectComponents()
         SetActiveAspects();
         UpdateAspectComponents();
     }
-    
 
     #endregion
 
 
-    public void TakeInElement(Element element)
+    /// <summary>
+    /// makes gameobject interact with a defined element
+    /// </summary>
+    /// <param name="element"></param>
+    public void ApplyElement(Element element)
     {
-        //var components = GetComponents<Aspects>();
         List<Aspects> components = GetComponents<Aspects>().ToList();
-
 
         foreach (Aspects component in components)
         {
@@ -142,7 +158,7 @@ private void UpdateAspectComponents()
                     //components.Remove(component);
                 }
             }
-            
+
             //negates list
             foreach (AspectType aspect in element.Negates)
             {
@@ -154,40 +170,4 @@ private void UpdateAspectComponents()
             }
         }
     }
-
-    public Type GetComponentByAspect(AspectType aspectToCall) //TODO cache components to increase performance
-    {
-        foreach (AspectType aspect in aspects)
-        {
-            if (aspect == aspectToCall)
-            {
-                Type aspectComponent = Type.GetType(aspectToCall.ToString());
-                
-                if (aspectComponent != null)
-                {
-                    //component type is valid
-                    
-                    Component component = GetComponent(aspectComponent);
-                    
-                    if (component != null)
-                    {
-                        //Component found on gameobject
-                        //Returns component type
-                        return aspectComponent;
-                    }
-                }
-            }
-        }
-        
-        //If aspect component is not found on the gameobject
-        return null;
-    }
-    
-    /*
-     * Take in element
-     * parameter a list of elements
-     * loop through the elements apects and call promote or negate if there is a relevant component attached
-     store list of aspect components
-     */
-
 }

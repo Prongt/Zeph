@@ -3,24 +3,7 @@
 [CreateAssetMenu(fileName = "AspectMaterial", menuName = "Aspects/Material", order = 2)]
 public class AspectMaterial : ScriptableObject
 {
-    public AspectType[] AspectTypes;
+    [SerializeField] private AspectType[] aspectTypes;
+
+    public AspectType[] AspectTypes => aspectTypes;
 }
-
-
-//Damagable
-/*
- * damage effect
- * damaged material
- *
- * damage resistance
- */
-
-
-//Fire
-/*
- * burning material
- * burning particle effect
- * burned material
- *
- * burn rate (10% health per second)
- */

@@ -6,15 +6,12 @@ public class Flamable : Aspects
     [SerializeField] private Material burnedMaterial;
     [SerializeField] private GameObject burningParticleEffect;
 
+    private Material baseMaterial;
+
     public override void Initialize()
     {
-        Enum.TryParse(this.GetType().Name, out AspectType aspectType);
-        AspectType = aspectType;
-    }
-
-    private void Awake()
-    {
-        Initialize();
+        base.Initialize();
+        baseMaterial = GetComponent<Renderer>().material;
     }
 
     public override void Promote()
@@ -27,14 +24,6 @@ public class Flamable : Aspects
     {
         //Extingushed
         Debug.Log("Extingushed");
+        GetComponent<Renderer>().material = baseMaterial;
     }
 }
-
-//Fire
-/*
- * burning material
- * burning particle effect
- * burned material
- *
- * burn rate (10% health per second)
- */

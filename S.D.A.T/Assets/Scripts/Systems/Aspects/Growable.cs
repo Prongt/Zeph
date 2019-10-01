@@ -6,11 +6,6 @@ public class Growable : Aspects
     [SerializeField] private Material GrowingMaterial;
     [SerializeField] private GameObject GrowingParticleEffect;
 
-    public override void Initialize()
-    {
-        Enum.TryParse(this.GetType().Name, out AspectType aspectType);
-        AspectType = aspectType;
-    }
 
     public override void Promote()
     {

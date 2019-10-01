@@ -11,8 +11,8 @@ public class TestElement : MonoBehaviour
     {
         if (other.collider.GetComponent<Interactable>())
         {
-            var thing = other.collider.GetComponent<Interactable>();
-            thing.TakeInElement(element);
+            Interactable thing = other.collider.GetComponent<Interactable>();
+            thing.ApplyElement(element);
         }
     }
 }
