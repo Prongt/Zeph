@@ -32,7 +32,10 @@ namespace Aura2API
         /// </summary>
         static IntroductionScreens()
         {
+            //TODO **Disabled Warning for deprecated code in aura 2**
+#pragma warning disable 618
             SceneView.onSceneGUIDelegate += OnSceneViewGUI;
+#pragma warning restore 618
         }
         #endregion
 

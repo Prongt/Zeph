@@ -72,6 +72,7 @@ public class Interactable : MonoBehaviour
 //                {
 //                    PrefabUtility.ApplyRemovedComponent(gameObject, aspect.GetType(), )
 //                }
+#if UNITY_EDITOR_WIN
                 if (Application.isEditor) //Removes component in editor
                 {
                     EditorApplication.delayCall += () =>
@@ -84,6 +85,11 @@ public class Interactable : MonoBehaviour
                 }
                 else //Removes component in play mode
                     DestroyImmediate(gameObject.GetComponent(aspect.GetType()));
+                #else
+                DestroyImmediate(gameObject.GetComponent(aspect.GetType()));
+                Debug.Log("Standalone");
+#endif
+
             }
         }
     }

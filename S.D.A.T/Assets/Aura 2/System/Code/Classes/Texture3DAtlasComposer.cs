@@ -170,7 +170,7 @@ namespace Aura2API
 
                     for(int i = 0; i < _texturesList.Count; ++i)
                     {
-                        // TODO : DO WITH GRAPHICS.COPYTEXTURES NOW THAT TEXTURE3D COPY ACTUALLY WORKS
+                        // TODO= : DO WITH GRAPHICS.COPYTEXTURES NOW THAT TEXTURE3D COPY ACTUALLY WORKS
                         colorArray = colorArray.Append(_texturesList[i].GetPixels());
                     }
 
