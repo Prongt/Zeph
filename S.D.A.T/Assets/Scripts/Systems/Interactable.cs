@@ -13,6 +13,7 @@ public class Interactable : MonoBehaviour
     private List<AspectType> additionalAspects;
 
     private List<AspectType> aspects;
+    private List<Aspects> aspectComponents;
 
     private void Awake()
     {
@@ -92,6 +93,8 @@ public class Interactable : MonoBehaviour
 
             }
         }
+        
+        aspectComponents = GetComponents<Aspects>().ToList();
     }
 
     /// <summary>
@@ -151,9 +154,7 @@ public class Interactable : MonoBehaviour
     /// <param name="element"></param>
     public void ApplyElement(Element element)
     {
-        List<Aspects> components = GetComponents<Aspects>().ToList();
-
-        foreach (Aspects component in components)
+        foreach (Aspects component in aspectComponents)
         {
             //promotes list
             foreach (AspectType aspect in element.Promotes)
@@ -161,7 +162,6 @@ public class Interactable : MonoBehaviour
                 if (component.AspectType == aspect)
                 {
                     component.Promote();
-                    //components.Remove(component);
                 }
             }
 
@@ -171,7 +171,6 @@ public class Interactable : MonoBehaviour
                 if (component.AspectType == aspect)
                 {
                     component.Negate();
-                    //components.Remove(component);
                 }
             }
         }
