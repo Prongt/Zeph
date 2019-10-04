@@ -37,15 +37,25 @@ public class PlayerMove : MonoBehaviour
         
         Vector3 movement = new Vector3(horAxis + verticalAxis,0,verticalAxis - horAxis);
 
-       
 
-        if (verticalAxis > 0 || verticalAxis < 0)
+        if ((horAxis > 0.5f  && verticalAxis > 0.5f) || (horAxis < -0.5f && verticalAxis < -0.5f))
+        {
+            transform.forward = Vector3.Lerp(transform.forward, (forward + right) * (verticalAxis + horAxis),
+                turnSpeed.Value * Time.deltaTime);
+        }
+        else if ((horAxis < -0.5f && verticalAxis > 0.5f) || (horAxis > 0.5f && verticalAxis < -0.5f)) 
+        {
+            transform.forward = Vector3.Lerp(transform.forward, -(right-forward) * (verticalAxis - horAxis),
+                turnSpeed.Value * Time.deltaTime);
+        } 
+        else if (verticalAxis > 0 || verticalAxis < 0)
         {
             transform.forward = Vector3.Lerp(transform.forward, forward * verticalAxis, turnSpeed.Value * Time.deltaTime);
-        } else if (horAxis > 0 || horAxis < 0)
+        } 
+        else if (horAxis > 0 || horAxis < 0)
         {
             transform.forward = Vector3.Lerp(transform.forward, right * horAxis, turnSpeed.Value * Time.deltaTime);
-        } 
+        }
         
         myBody.AddForce(movement * speed.Value);
    
