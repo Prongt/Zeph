@@ -4,7 +4,7 @@ using UnityEngine;
 public class Flamable : Aspects
 {
     [SerializeField] private Material burnedMaterial;
-    [SerializeField] private GameObject burningParticleEffect;
+    [SerializeField] private ParticleSystem burningParticleEffect;
 
     private Material baseMaterial;
 
@@ -18,6 +18,9 @@ public class Flamable : Aspects
     {
         Debug.Log("On Fire");
         GetComponent<Renderer>().material = burnedMaterial;
+        Instantiate(burningParticleEffect.gameObject, gameObject.transform);
+        burningParticleEffect.Play();
+
     }
 
     public override void Negate()
