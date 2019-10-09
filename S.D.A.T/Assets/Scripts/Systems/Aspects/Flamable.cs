@@ -17,7 +17,7 @@ public class Flamable : Aspects
 
     public override void Promote()
     {
-        Debug.Log("On Fire");
+        //Debug.Log("On Fire");
         GetComponent<Renderer>().material = burnedMaterial;
         Instantiate(burningParticleEffect.gameObject, gameObject.transform);
         burningParticleEffect.Play();
@@ -27,7 +27,7 @@ public class Flamable : Aspects
     public override void Negate()
     {
         //Extingushed
-        Debug.Log("Extingushed");
+        //Debug.Log("Extingushed");
         GetComponent<Renderer>().material = baseMaterial;
     }
 }

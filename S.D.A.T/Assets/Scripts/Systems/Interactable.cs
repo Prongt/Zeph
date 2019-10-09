@@ -154,54 +154,52 @@ public class Interactable : MonoBehaviour
     /// <param name="element"></param>
     public void ApplyElement(Element element)
     {
-//        if (aspectComponents.Count <= 0)
-//        {
-//            return;
-//        }
-//        
-//        for (int i = 0; i < aspectComponents.Count; i++)
-//        {
-//            if (element.Promotes.Count > 0)
-//            for (int p = 0; p < element.Promotes.Count; p++)
-//            {
-//                if (aspectComponents[p].AspectType == element.Promotes[p])
-//                {
-//                    aspectComponents[p].Promote();
-//                }
-//            }
-//            
-//            if (element.Negates.Count > 0)
-//            for (int n = 0; n < element.Negates.Count; n++)
-//            {
-//                if (aspectComponents[n].AspectType == element.Negates[n])
-//                {
-//                    aspectComponents[n].Negate();
-//                }
-//            }
-//        }
-
-        
-        
-        foreach (Aspects component in aspectComponents)
+        if (aspectComponents.Count <= 0)
         {
-            //promotes list
-            foreach (AspectType aspect in element.Promotes)
+            return;
+        }
+        
+        for (int i = 0; i < aspectComponents.Count; i++)
+        {
+            for (int p = 0; p < element.Promotes.Count; p++)
             {
-                if (component.AspectType == aspect)
+                if (aspectComponents[i].AspectType == element.Promotes[p])
                 {
-                    component.Promote();
+                    aspectComponents[i].Promote();
                 }
             }
-
-            //negates list
-            foreach (AspectType aspect in element.Negates)
+            
+            for (int n = 0; n < element.Negates.Count; n++)
             {
-                if (component.AspectType == aspect)
+                if (aspectComponents[i].AspectType == element.Negates[n])
                 {
-                    component.Negate();
+                    aspectComponents[i].Negate();
                 }
             }
         }
+
+        
+        
+//        foreach (Aspects component in aspectComponents)
+//        {
+//            //promotes list
+//            foreach (AspectType aspect in element.Promotes)
+//            {
+//                if (component.AspectType == aspect)
+//                {
+//                    component.Promote();
+//                }
+//            }
+//
+//            //negates list
+//            foreach (AspectType aspect in element.Negates)
+//            {
+//                if (component.AspectType == aspect)
+//                {
+//                    component.Negate();
+//                }
+//            }
+//        }
     }
 
 
