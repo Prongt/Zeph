@@ -124,7 +124,6 @@ public class Interactable : MonoBehaviour
         aspects = tempAspects;
     }
 
-
     private void OnValidate()
     {
         if (additionalAspects == null) additionalAspects = new List<AspectType>();
@@ -177,67 +176,6 @@ public class Interactable : MonoBehaviour
                 }
             }
         }
-
-        
-        
-//        foreach (Aspects component in aspectComponents)
-//        {
-//            //promotes list
-//            foreach (AspectType aspect in element.Promotes)
-//            {
-//                if (component.AspectType == aspect)
-//                {
-//                    component.Promote();
-//                }
-//            }
-//
-//            //negates list
-//            foreach (AspectType aspect in element.Negates)
-//            {
-//                if (component.AspectType == aspect)
-//                {
-//                    component.Negate();
-//                }
-//            }
-//        }
     }
 
-
-    /// <summary>
-    /// makes gameobject interact with a defined elements
-    /// </summary>
-    /// <param name="element"></param>
-    public void ApplyElements(Element[] element)
-    {
-        if (aspectComponents.Count > 0)
-        {
-            return;
-        }
-
-        for (int i = 0; i < aspectComponents.Count; i++)
-        {
-            for (int j = 0; j < element.Length; j++)
-            {
-                if (element[j].Promotes.Count > 0)
-                    for (int p = 0; p < element[j].Promotes.Count; p++)
-                    {
-                        if (aspectComponents[p].AspectType == element[j].Promotes[p])
-                        {
-                            aspectComponents[p].Promote();
-                        }
-                    }
-
-                if (element[j].Negates.Count > 0)
-                    for (int n = 0; n < element[j].Negates.Count; n++)
-                    {
-                        if (aspectComponents[n].AspectType == element[j].Negates[n])
-                        {
-                            aspectComponents[n].Negate();
-                        }
-                    }
-            }
-           
-        }
-    }
-    
 }

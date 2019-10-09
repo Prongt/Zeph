@@ -32,3 +32,4 @@ public class FloatVariable : ScriptableObject
         Value += amount.Value;
     }
 }
+
