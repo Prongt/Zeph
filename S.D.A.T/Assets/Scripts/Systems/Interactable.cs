@@ -154,6 +154,34 @@ public class Interactable : MonoBehaviour
     /// <param name="element"></param>
     public void ApplyElement(Element element)
     {
+//        if (aspectComponents.Count <= 0)
+//        {
+//            return;
+//        }
+//        
+//        for (int i = 0; i < aspectComponents.Count; i++)
+//        {
+//            if (element.Promotes.Count > 0)
+//            for (int p = 0; p < element.Promotes.Count; p++)
+//            {
+//                if (aspectComponents[p].AspectType == element.Promotes[p])
+//                {
+//                    aspectComponents[p].Promote();
+//                }
+//            }
+//            
+//            if (element.Negates.Count > 0)
+//            for (int n = 0; n < element.Negates.Count; n++)
+//            {
+//                if (aspectComponents[n].AspectType == element.Negates[n])
+//                {
+//                    aspectComponents[n].Negate();
+//                }
+//            }
+//        }
+
+        
+        
         foreach (Aspects component in aspectComponents)
         {
             //promotes list
@@ -175,4 +203,43 @@ public class Interactable : MonoBehaviour
             }
         }
     }
+
+
+    /// <summary>
+    /// makes gameobject interact with a defined elements
+    /// </summary>
+    /// <param name="element"></param>
+    public void ApplyElements(Element[] element)
+    {
+        if (aspectComponents.Count > 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < aspectComponents.Count; i++)
+        {
+            for (int j = 0; j < element.Length; j++)
+            {
+                if (element[j].Promotes.Count > 0)
+                    for (int p = 0; p < element[j].Promotes.Count; p++)
+                    {
+                        if (aspectComponents[p].AspectType == element[j].Promotes[p])
+                        {
+                            aspectComponents[p].Promote();
+                        }
+                    }
+
+                if (element[j].Negates.Count > 0)
+                    for (int n = 0; n < element[j].Negates.Count; n++)
+                    {
+                        if (aspectComponents[n].AspectType == element[j].Negates[n])
+                        {
+                            aspectComponents[n].Negate();
+                        }
+                    }
+            }
+           
+        }
+    }
+    
 }

@@ -12,6 +12,7 @@ public class Flamable : Aspects
     {
         base.Initialize();
         baseMaterial = GetComponent<Renderer>().material;
+        burningParticleEffect.Stop();
     }
 
     public override void Promote()

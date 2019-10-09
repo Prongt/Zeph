@@ -86,5 +86,3 @@ public struct PlayerElement
     public Color DebugColor;
     [HideInInspector] public Collider[] colliders;
 }
-
-
