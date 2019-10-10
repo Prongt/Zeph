@@ -92,55 +92,37 @@ public class Interactable : MonoBehaviour
                         componentsToRemove.Add(comps[i]);
                     }
                 }
-//                bool shouldRemove = true;
-//                for (int i = 0; i < used.Count; i++)
-//                {
-//                    if (aspect.GetType() == used[i])
-//                    {
-//                        shouldRemove = false;
-//                    }
-//                }
-//
-//                if (shouldRemove)
-//                {
-//                    var comps = aspect.RequiredComponents();
-//                    for (int i = 0; i < comps.Length; i++)
-//                    {
-//                        componentsToRemove.Add(comps[i]);
-//                    }
-//                }
-                
-                
-//                if (PrefabUtility.IsPartOfPrefabAsset(gameObject))
-//                {
-//                    PrefabUtility.ApplyRemovedComponent(gameObject, aspect.GetType(), )
-//                }
-#if UNITY_EDITOR_WIN
-                if (Application.isEditor) //Removes component in editor
-                {
-                    EditorApplication.delayCall += () =>
-                    {
-                        DestroyImmediate(gameObject.GetComponent(aspect.GetType()));
-                    };
 
-                    Debug.Log("The following component " +
-                              aspect + " on " + gameObject.name + " was removed");
-                }
-                else //Removes component in play mode
-                    DestroyImmediate(gameObject.GetComponent(aspect.GetType()));
-                #else
-                DestroyImmediate(gameObject.GetComponent(aspect.GetType()));
-                Debug.Log("Standalone");
-#endif
-
+                RemoveComponentByType(aspect.GetType());
             }
         }
         
         aspectComponents = GetComponents<Aspects>().ToList();
         UpdateRequiredComponents();
     }
-    
-    
+
+    private void RemoveComponentByType(Type type)
+    {
+        //                if (PrefabUtility.IsPartOfPrefabAsset(gameObject))
+//                {
+//                    PrefabUtility.ApplyRemovedComponent(gameObject, aspect.GetType(), )
+//                }
+#if UNITY_EDITOR_WIN
+        if (Application.isEditor) //Removes component in editor
+        {
+            EditorApplication.delayCall += () => { DestroyImmediate(gameObject.GetComponent(type)); };
+
+            Debug.Log("The following component " +
+                      type.Name + " on " + gameObject.name + " was removed");
+        }
+        else //Removes component in play mode
+            DestroyImmediate(gameObject.GetComponent(type));
+#else
+                DestroyImmediate(gameObject.GetComponent(type));
+                Debug.Log("Standalone");
+#endif
+    }
+
 
     /// <summary>
     /// Adds all aspects to the aspects list
@@ -207,7 +189,7 @@ public class Interactable : MonoBehaviour
             }
         }
 
-        List<Type> tempComponents = new List<Type>();
+        //List<Type> tempComponents = new List<Type>();
         for (int i = 0; i < typesUsedByAspects.Count; i++)
         {
             if (GetComponent(typesUsedByAspects[i]))
@@ -219,19 +201,19 @@ public class Interactable : MonoBehaviour
                 //add component
                 gameObject.AddComponent(typesUsedByAspects[i]);
             }
-            tempComponents.Add(typesUsedByAspects[i]);
+            //tempComponents.Add(typesUsedByAspects[i]);
         }
 
-        foreach (var comp in componentsToRemove)
+        foreach (var type in componentsToRemove)
         {
-            if (typesUsedByAspects.Contains(comp))
+            if (typesUsedByAspects.Contains(type))
             {
                 //keep component
                 //Debug.Log("Hello");
             }
             else
             {
-                componentsToRemove.Remove(comp);
+                componentsToRemove.Remove(type);
             }
         }
         //List<Type> components = new List<Type>();
@@ -239,28 +221,12 @@ public class Interactable : MonoBehaviour
 
 
         //Removes un used components
-        foreach (var comp in componentsToRemove)
+        foreach (var type in componentsToRemove)
         {
             //Destroy(gameObject.GetComponent(componentsToRemove[i]));
            // Debug.Log("Loop");
             
-#if UNITY_EDITOR_WIN
-            if (Application.isEditor) //Removes component in editor
-            {
-                EditorApplication.delayCall += () =>
-                {
-                    DestroyImmediate(gameObject.GetComponent(comp));
-                };
-
-                Debug.Log("The following component " +
-                          comp.Name + " on " + gameObject.name + " was removed");
-            }
-            else //Removes component in play mode
-                DestroyImmediate(gameObject.GetComponent(comp));
-#else
-                DestroyImmediate(gameObject.GetComponent(comp));
-                //Debug.Log("Standalone");
-#endif
+            RemoveComponentByType(type);
         }
 
         //components = tempComponents;
