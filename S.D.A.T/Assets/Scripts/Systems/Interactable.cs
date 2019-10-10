@@ -13,15 +13,15 @@ public class Interactable : MonoBehaviour
     [Tooltip("Any additional aspects this object requires")] [SerializeField]
     private List<AspectType> additionalAspects;
 
-    private List<AspectType> aspects;
-    private List<Aspects> aspectComponents;
-    private List<Type> componentsToRemove;
+    private List<AspectType> aspectTypesList;
+    private List<Aspects> aspectComponentsList;
+    private List<Type> componentsRequiredByAspects;
 
     private void Awake()
     {
         if (additionalAspects == null) additionalAspects = new List<AspectType>();
         
-        if (componentsToRemove == null) componentsToRemove = new List<Type>();
+        if (componentsRequiredByAspects == null) componentsRequiredByAspects = new List<Type>();
         
         SetActiveAspects();
     }
@@ -34,9 +34,9 @@ public class Interactable : MonoBehaviour
     private void UpdateAspectComponents()
     {
         //Add components
-        foreach (AspectType aspect in aspects)
+        foreach (AspectType aspect in aspectTypesList)
         {
-            if (aspects.Contains(aspect))
+            if (aspectTypesList.Contains(aspect))
             {
                 Type aspectComponent = Type.GetType(aspect.ToString());
                 if (aspectComponent == null)
@@ -49,62 +49,44 @@ public class Interactable : MonoBehaviour
                 else
                 {
                     if (!gameObject.GetComponent(aspectComponent)) gameObject.AddComponent(aspectComponent);
-//                    if (aspectComponent.Name == "Pushable")
-//                    {
-//                        gameObject.AddComponent<Rigidbody>();
-//                    }
-
-                    
                 }
             }
         }
-
-        //List<Type> used = new List<Type>();
+        
         //Checks if components are still being used
         List<Aspects> componentList = gameObject.GetComponents<Aspects>().ToList(); 
-        List<string> safeList = new List<string>();
-        foreach (AspectType aspect in aspects)
+
+        foreach (AspectType aspect in aspectTypesList)
         {
             for (int i = 0; i < componentList.Count; i++)
             {
                 if (Type.GetType(aspect.ToString()) == componentList[i].GetType())
                 {
                     //good 
-                    safeList.Add(componentList[i].name);
                     componentList.Remove(componentList[i]);
                 }
             }
         }
         
-        //componentsToRemove = new List<Type>();
+        //Adds all components added by aspects to a global list
         var tempAspects = GetComponents<Aspects>();
         for (int i = 0; i < tempAspects.Length; i++)
         {
-            componentsToRemove.AddRange(tempAspects[i].RequiredComponents());
+            componentsRequiredByAspects.AddRange(tempAspects[i].RequiredComponents());
         }
 
         //Remove unused components
         if (componentList.Count > 0)
         {
-            //Debug.Log(componentList.Count);
             foreach (Aspects aspect in componentList)
             {
-//                if (!safeList.Contains(aspect.name))
-//                {
-//                    var comps = aspect.RequiredComponents();
-//                    for (int i = 0; i < comps.Length; i++)
-//                    {
-//                        componentsToRemove.Add(comps[i]);
-//                    }
-//                }
-
                 RemoveComponentByType(aspect.GetType());
             }
         }
         
-        aspectComponents = GetComponents<Aspects>().ToList();
+        aspectComponentsList = GetComponents<Aspects>().ToList();
+        //Method call is delayed due to unity delay when destroying components
         Invoke("UpdateRequiredComponents", 0.5f);
-        //UpdateRequiredComponents();
     }
 
     private void RemoveComponentByType(Type type)
@@ -154,7 +136,7 @@ public class Interactable : MonoBehaviour
             }
         }
 
-        aspects = tempAspects;
+        aspectTypesList = tempAspects;
         UpdateAspectComponents();
         
     }
@@ -162,7 +144,7 @@ public class Interactable : MonoBehaviour
     private void OnValidate()
     {
         if (additionalAspects == null) additionalAspects = new List<AspectType>();
-        if (componentsToRemove == null) componentsToRemove = new List<Type>();
+        if (componentsRequiredByAspects == null) componentsRequiredByAspects = new List<Type>();
 
         SetActiveAspects();
     }
@@ -180,10 +162,11 @@ public class Interactable : MonoBehaviour
         UpdateAspectComponents();
     }
 
-    #endregion
+    
 
     void UpdateRequiredComponents()
     {
+        //Gets a list of all required assets
         var aspectList = GetComponents<Aspects>();
         List<Type> typesUsedByAspects = new List<Type>();
         for (int i = 0; i < aspectList.Length; i++)
@@ -194,17 +177,8 @@ public class Interactable : MonoBehaviour
                 typesUsedByAspects.Add(x[j]);
             }
         }
-        
-//        HashSet<Type> hashSet = new HashSet<Type>(componentsToRemove);
-//        hashSet.SymmetricExceptWith(typesUsedByAspects);
-        //var result = hashSet.ToList();
 
-//        var list1 = typesUsedByAspects.Except(componentsToRemove);
-//        var list2 = componentsToRemove.Except(typesUsedByAspects);
-//        //var result = list2.Concat(list1).ToList();
-//        var result = typesUsedByAspects.where(i => !componentsToRemove.contains(i));;
-
-
+        //Adds components required by aspects
         for (int i = 0; i < typesUsedByAspects.Count; i++)
         {
             if (GetComponent(typesUsedByAspects[i]))
@@ -216,75 +190,47 @@ public class Interactable : MonoBehaviour
                 //add component
                 gameObject.AddComponent(typesUsedByAspects[i]);
             }
-            //tempComponents.Add(typesUsedByAspects[i]);
         }
-        IEnumerable<Type> result = typesUsedByAspects.AsQueryable().Intersect(componentsToRemove);
-        //var common = typesUsedByAspects.Intersect(componentsToRemove).ToList();
+        
+        //Removes all curently used components from the global component list
+        componentsRequiredByAspects.RemoveAll(type => typesUsedByAspects.Contains(type));
 
-        componentsToRemove.RemoveAll(x => typesUsedByAspects.Contains(x));
-        //b.RemoveAll(x => common.Contains(x));
-        
 
-//        HashSet<int> list1Set = new HashSet<int>(list1);
-//        list1Set.SymmetricExceptWith(list2);
-//        var resultList = list1Set.ToList(); 
-        
-        
-//        foreach (var type in componentsToRemove)
-//        {
-//            if (typesUsedByAspects.Contains(type))
-//            {
-//                //keep component
-//                //Debug.Log("Hello");
-//            }
-//            else
-//            {
-//                componentsToRemove.Remove(type);
-//            }
-//        }
-        //List<Type> components = new List<Type>();
-        
-        
-
-        //Removes un used components
-        foreach (var type in componentsToRemove)
+        //Removes unused components
+        foreach (var type in componentsRequiredByAspects)
         {
-            
-            //Destroy(gameObject.GetComponent(componentsToRemove[i]));
-           // Debug.Log("Loop");
-            
             RemoveComponentByType(type);
         }
-        componentsToRemove = new List<Type>();
-
-        //components = tempComponents;
+        componentsRequiredByAspects = new List<Type>();
     }
+    #endregion
+    
     /// <summary>
     /// makes gameobject interact with a defined element
     /// </summary>
     /// <param name="element"></param>
     public void ApplyElement(Element element, Transform source = null)
     {
-        if (aspectComponents.Count <= 0)
+        if (aspectComponentsList.Count <= 0)
         {
             return;
         }
         
-        for (int i = 0; i < aspectComponents.Count; i++)
+        for (int i = 0; i < aspectComponentsList.Count; i++)
         {
             for (int p = 0; p < element.Promotes.Count; p++)
             {
-                if (aspectComponents[i].AspectType == element.Promotes[p])
+                if (aspectComponentsList[i].AspectType == element.Promotes[p])
                 {
-                    aspectComponents[i].Promote(source);
+                    aspectComponentsList[i].Promote(source);
                 }
             }
             
             for (int n = 0; n < element.Negates.Count; n++)
             {
-                if (aspectComponents[i].AspectType == element.Negates[n])
+                if (aspectComponentsList[i].AspectType == element.Negates[n])
                 {
-                    aspectComponents[i].Negate(source);
+                    aspectComponentsList[i].Negate(source);
                 }
             }
         }
