@@ -76,29 +76,35 @@ public class Interactable : MonoBehaviour
             }
         }
         
-        componentsToRemove = new List<Type>();
+        //componentsToRemove = new List<Type>();
+        var tempAspects = GetComponents<Aspects>();
+        for (int i = 0; i < tempAspects.Length; i++)
+        {
+            componentsToRemove.AddRange(tempAspects[i].RequiredComponents());
+        }
 
         //Remove unused components
         if (componentList.Count > 0)
         {
-            Debug.Log(componentList.Count);
+            //Debug.Log(componentList.Count);
             foreach (Aspects aspect in componentList)
             {
-                if (!safeList.Contains(aspect.name))
-                {
-                    var comps = aspect.RequiredComponents();
-                    for (int i = 0; i < comps.Length; i++)
-                    {
-                        componentsToRemove.Add(comps[i]);
-                    }
-                }
+//                if (!safeList.Contains(aspect.name))
+//                {
+//                    var comps = aspect.RequiredComponents();
+//                    for (int i = 0; i < comps.Length; i++)
+//                    {
+//                        componentsToRemove.Add(comps[i]);
+//                    }
+//                }
 
                 RemoveComponentByType(aspect.GetType());
             }
         }
         
         aspectComponents = GetComponents<Aspects>().ToList();
-        UpdateRequiredComponents();
+        Invoke("UpdateRequiredComponents", 0.1f);
+        //UpdateRequiredComponents();
     }
 
     private void RemoveComponentByType(Type type)
@@ -188,8 +194,17 @@ public class Interactable : MonoBehaviour
                 typesUsedByAspects.Add(x[j]);
             }
         }
+        
+//        HashSet<Type> hashSet = new HashSet<Type>(componentsToRemove);
+//        hashSet.SymmetricExceptWith(typesUsedByAspects);
+        //var result = hashSet.ToList();
 
-        //List<Type> tempComponents = new List<Type>();
+//        var list1 = typesUsedByAspects.Except(componentsToRemove);
+//        var list2 = componentsToRemove.Except(typesUsedByAspects);
+//        //var result = list2.Concat(list1).ToList();
+//        var result = typesUsedByAspects.where(i => !componentsToRemove.contains(i));;
+
+
         for (int i = 0; i < typesUsedByAspects.Count; i++)
         {
             if (GetComponent(typesUsedByAspects[i]))
@@ -203,31 +218,44 @@ public class Interactable : MonoBehaviour
             }
             //tempComponents.Add(typesUsedByAspects[i]);
         }
+        IEnumerable<Type> result = typesUsedByAspects.AsQueryable().Intersect(componentsToRemove);
+        //var common = typesUsedByAspects.Intersect(componentsToRemove).ToList();
 
-        foreach (var type in componentsToRemove)
-        {
-            if (typesUsedByAspects.Contains(type))
-            {
-                //keep component
-                //Debug.Log("Hello");
-            }
-            else
-            {
-                componentsToRemove.Remove(type);
-            }
-        }
-        //List<Type> components = new List<Type>();
+        componentsToRemove.RemoveAll(x => typesUsedByAspects.Contains(x));
+        //b.RemoveAll(x => common.Contains(x));
         
 
+//        HashSet<int> list1Set = new HashSet<int>(list1);
+//        list1Set.SymmetricExceptWith(list2);
+//        var resultList = list1Set.ToList(); 
+        
+        
+//        foreach (var type in componentsToRemove)
+//        {
+//            if (typesUsedByAspects.Contains(type))
+//            {
+//                //keep component
+//                //Debug.Log("Hello");
+//            }
+//            else
+//            {
+//                componentsToRemove.Remove(type);
+//            }
+//        }
+        //List<Type> components = new List<Type>();
+        
+        
 
         //Removes un used components
         foreach (var type in componentsToRemove)
         {
+            
             //Destroy(gameObject.GetComponent(componentsToRemove[i]));
            // Debug.Log("Loop");
             
             RemoveComponentByType(type);
         }
+        componentsToRemove = new List<Type>();
 
         //components = tempComponents;
     }
