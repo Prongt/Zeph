@@ -8,7 +8,7 @@ public class Flamable : Aspects
 
     private Material baseMaterial;
 
-    public override void Initialize()
+    protected override void Initialize()
     {
         base.Initialize();
         baseMaterial = GetComponent<Renderer>().material;

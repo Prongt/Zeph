@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using UnityEditor;
 using UnityEngine;
 
@@ -20,7 +21,6 @@ public class Interactable : MonoBehaviour
         if (additionalAspects == null) additionalAspects = new List<AspectType>();
 
         SetActiveAspects();
-        UpdateAspectComponents();
     }
 
     #region AspectComponents
@@ -104,7 +104,7 @@ public class Interactable : MonoBehaviour
     /// <summary>
     /// Adds all aspects to the aspects list
     /// </summary>
-    private void SetActiveAspects()
+    public void SetActiveAspects()
     {
         List<AspectType> tempAspects = new List<AspectType>();
         if (aspectMaterial)
@@ -126,6 +126,7 @@ public class Interactable : MonoBehaviour
         }
 
         aspects = tempAspects;
+        UpdateAspectComponents();
     }
 
     private void OnValidate()
@@ -133,8 +134,8 @@ public class Interactable : MonoBehaviour
         if (additionalAspects == null) additionalAspects = new List<AspectType>();
 
         SetActiveAspects();
-        UpdateAspectComponents();
     }
+
 
     /// <summary>
     /// Externally add aspect to this gameobject
