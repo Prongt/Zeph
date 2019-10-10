@@ -7,6 +7,20 @@ public class Pushable : Aspects
 {
     [SerializeField] private FloatReference pushForce;
     private Vector3 direction;
+    
+    public Type[] componentTypes = new Type[]
+    {
+        typeof(Rigidbody),
+        typeof(AudioSource)
+    };
+
+
+    public override Type[] RequiredComponents()
+    {
+        return componentTypes;
+    }
+
+
     public override void Promote(Transform source = null)
     {
         //Being pushed

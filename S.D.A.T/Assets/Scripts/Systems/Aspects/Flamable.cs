@@ -7,7 +7,20 @@ public class Flamable : Aspects
     [SerializeField] private ParticleSystem burningParticleEffect;
 
     private Material baseMaterial;
+    
+    
+    public Type[] componentTypes = new Type[]
+    {
+        typeof(AudioSource)
+    };
 
+
+    public override Type[] RequiredComponents()
+    {
+        return componentTypes;
+    }
+    
+    
     protected override void Initialize()
     {
         base.Initialize();

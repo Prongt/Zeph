@@ -15,11 +15,14 @@ public class Interactable : MonoBehaviour
 
     private List<AspectType> aspects;
     private List<Aspects> aspectComponents;
+    private List<Type> componentsToRemove;
 
     private void Awake()
     {
         if (additionalAspects == null) additionalAspects = new List<AspectType>();
-
+        
+        if (componentsToRemove == null) componentsToRemove = new List<Type>();
+        
         SetActiveAspects();
     }
 
@@ -46,16 +49,20 @@ public class Interactable : MonoBehaviour
                 else
                 {
                     if (!gameObject.GetComponent(aspectComponent)) gameObject.AddComponent(aspectComponent);
-                    if (aspectComponent.Name == "Pushable")
-                    {
-                        gameObject.AddComponent<Rigidbody>();
-                    }
+//                    if (aspectComponent.Name == "Pushable")
+//                    {
+//                        gameObject.AddComponent<Rigidbody>();
+//                    }
+
+                    
                 }
             }
         }
 
+        //List<Type> used = new List<Type>();
         //Checks if components are still being used
-        List<Aspects> componentList = gameObject.GetComponents<Aspects>().ToList();
+        List<Aspects> componentList = gameObject.GetComponents<Aspects>().ToList(); 
+        List<string> safeList = new List<string>();
         foreach (AspectType aspect in aspects)
         {
             for (int i = 0; i < componentList.Count; i++)
@@ -63,6 +70,7 @@ public class Interactable : MonoBehaviour
                 if (Type.GetType(aspect.ToString()) == componentList[i].GetType())
                 {
                     //good 
+                    safeList.Add(componentList[i].name);
                     componentList.Remove(componentList[i]);
                 }
             }
@@ -73,6 +81,34 @@ public class Interactable : MonoBehaviour
         {
             foreach (Aspects aspect in componentList)
             {
+                
+                if (!safeList.Contains(aspect.name))
+                {
+                    var comps = aspect.RequiredComponents();
+                    for (int i = 0; i < comps.Length; i++)
+                    {
+                        componentsToRemove.Add(comps[i]);
+                    }
+                }
+//                bool shouldRemove = true;
+//                for (int i = 0; i < used.Count; i++)
+//                {
+//                    if (aspect.GetType() == used[i])
+//                    {
+//                        shouldRemove = false;
+//                    }
+//                }
+//
+//                if (shouldRemove)
+//                {
+//                    var comps = aspect.RequiredComponents();
+//                    for (int i = 0; i < comps.Length; i++)
+//                    {
+//                        componentsToRemove.Add(comps[i]);
+//                    }
+//                }
+                
+                
 //                if (PrefabUtility.IsPartOfPrefabAsset(gameObject))
 //                {
 //                    PrefabUtility.ApplyRemovedComponent(gameObject, aspect.GetType(), )
@@ -99,7 +135,10 @@ public class Interactable : MonoBehaviour
         }
         
         aspectComponents = GetComponents<Aspects>().ToList();
+        UpdateRequiredComponents();
     }
+    
+    
 
     /// <summary>
     /// Adds all aspects to the aspects list
@@ -127,11 +166,13 @@ public class Interactable : MonoBehaviour
 
         aspects = tempAspects;
         UpdateAspectComponents();
+        
     }
 
     private void OnValidate()
     {
         if (additionalAspects == null) additionalAspects = new List<AspectType>();
+        if (componentsToRemove == null) componentsToRemove = new List<Type>();
 
         SetActiveAspects();
     }
@@ -151,7 +192,77 @@ public class Interactable : MonoBehaviour
 
     #endregion
 
+    void UpdateRequiredComponents()
+    {
+        var aspectList = GetComponents<Aspects>();
+        List<Type> typesUsedByAspects = new List<Type>();
+        for (int i = 0; i < aspectList.Length; i++)
+        {
+            Type[] x = aspectList[i].RequiredComponents();
+            for (int j = 0; j < x.Length; j++)
+            {
+                typesUsedByAspects.Add(x[j]);
+            }
+        }
 
+        List<Type> tempComponents = new List<Type>();
+        for (int i = 0; i < typesUsedByAspects.Count; i++)
+        {
+            if (GetComponent(typesUsedByAspects[i]))
+            {
+                //good component previously added
+            }
+            else
+            {
+                //add component
+                gameObject.AddComponent(typesUsedByAspects[i]);
+            }
+            tempComponents.Add(typesUsedByAspects[i]);
+        }
+
+        foreach (var comp in componentsToRemove)
+        {
+            if (typesUsedByAspects.Contains(comp))
+            {
+                //keep component
+                //Debug.Log("Hello");
+            }
+            else
+            {
+                componentsToRemove.Remove(comp);
+            }
+        }
+        //List<Type> components = new List<Type>();
+        
+
+
+        //Removes un used components
+        foreach (var comp in componentsToRemove)
+        {
+            //Destroy(gameObject.GetComponent(componentsToRemove[i]));
+           // Debug.Log("Loop");
+            
+#if UNITY_EDITOR_WIN
+            if (Application.isEditor) //Removes component in editor
+            {
+                EditorApplication.delayCall += () =>
+                {
+                    DestroyImmediate(gameObject.GetComponent(comp));
+                };
+
+                Debug.Log("The following component " +
+                          comp.Name + " on " + gameObject.name + " was removed");
+            }
+            else //Removes component in play mode
+                DestroyImmediate(gameObject.GetComponent(comp));
+#else
+                DestroyImmediate(gameObject.GetComponent(comp));
+                //Debug.Log("Standalone");
+#endif
+        }
+
+        //components = tempComponents;
+    }
     /// <summary>
     /// makes gameobject interact with a defined element
     /// </summary>

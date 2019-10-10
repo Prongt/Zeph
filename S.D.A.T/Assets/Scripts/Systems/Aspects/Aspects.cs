@@ -4,6 +4,8 @@ using UnityEngine;
 public abstract class Aspects : MonoBehaviour
 {
     [HideInInspector] public AspectType AspectType;
+    
+    
     private void Awake()
     {
         Initialize();
@@ -14,7 +16,12 @@ public abstract class Aspects : MonoBehaviour
         Enum.TryParse(GetType().Name, out AspectType aspectType);
         //Debug.Log(aspectType);
         AspectType = aspectType;
+        
     }
+
+    public abstract Type[] RequiredComponents();
+    
+    
 
     public abstract void Promote(Transform source = null);
     public abstract void Negate(Transform source = null);
