@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using UnityEngine;
 
 public class PlayerElementController : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerElementController : MonoBehaviour
     [SerializeField] private float gizmoHeight;
     
     [SerializeField] private KeyCode powerKey;
+    [SerializeField] private ParticleSystem wind;
     
     //number of collisions detected for each element
     private const int maxAffectableObjects = 25;
@@ -27,6 +29,17 @@ public class PlayerElementController : MonoBehaviour
     {
         if (Input.GetKeyDown(powerKey))
         {
+            if (!GameObject.Find("Wind(Clone)"))
+            {
+                Instantiate(wind.gameObject, gameObject.transform);
+                
+            }
+            else if(GameObject.Find("Wind(Clone)"))
+            {
+                Destroy(GameObject.Find("Wind(Clone)"));
+                Instantiate(wind.gameObject, gameObject.transform);
+            }
+            
             for (int i = 0; i < elementData.Length; i++)
             {
                 var size = Physics.OverlapSphereNonAlloc(transform.position, elementData[i].Range, elementData[i].colliders);
