@@ -149,15 +149,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f01d29d88278f45458d99e6b5199e920, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   strength: 1
   scatteringBias: 0
   useColorTemperatureTint: 0
   overrideColor: 0
   overridingColor: {r: 1, g: 1, b: 1, a: 1}
   useShadow: 1
-  shadowMapRenderTexture: {fileID: 666048961}
+  shadowMapRenderTexture: {fileID: 718240885}
   useCookie: 1
   cookieMapRenderTexture: {fileID: 0}
   enableOutOfPhaseColor: 0
@@ -273,8 +273,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdcd06815c47d30489f70df42db56a48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   frustumSettings:
     baseSettings: {fileID: 293650088}
     qualitySettings: {fileID: 846960160}
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
   m_Name: New Aura Base Settings
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   useDensity: 1
   density: 0.25
   useScattering: 1
@@ -593,7 +593,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8334a49e76cafef4da22976db1613959, type: 3}
   m_Name: Default Aura Quality Settings
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   displayVolumetricLightingBuffer: 0
   frustumGridResolution: {x: 160, y: 88, z: 128}
   enableAutomaticStereoResizing: 1
@@ -647,8 +647,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b142c931e4f39c429a012dc68ba0659, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   volumeShape:
     shape: 0
     fading:
@@ -817,7 +817,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &1548607496
+--- !u!84 &1692879575
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -927,7 +927,7 @@ PrefabInstance:
     - target: {fileID: 5991376894092091882, guid: 5d6c452d16630434e9fa06446c82d674,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
-      value: 
+      value:
       objectReference: {fileID: 2100000, guid: 5df6a49ab29d29f408c281f977dda842, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d6c452d16630434e9fa06446c82d674, type: 3}
@@ -1051,8 +1051,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b142c931e4f39c429a012dc68ba0659, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   volumeShape:
     shape: 0
     fading:
@@ -1325,8 +1325,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1333fddadc0d148468c56d6d07dfed75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   AspectType: 0
   burnedMaterial: {fileID: 2100000, guid: 3d1608f71b7f30e4cb23ba205e1be550, type: 2}
   burningParticleEffect: {fileID: 5991376894092091881, guid: 5d6c452d16630434e9fa06446c82d674,
@@ -1341,10 +1341,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   aspectMaterial: {fileID: 11400000, guid: 817d2d5844de2ae49931217ee3c7bc33, type: 2}
-  additionalAspects: 
+  additionalAspects:
 --- !u!1001 &2128616416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1412,10 +1412,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2128616418, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
-      propertyPath: wind
-      value: 
-      objectReference: {fileID: 3897436985873444479, guid: 2057ab285ec01da4e97fbc06cb8e33a6,
+    - target: {fileID: 4890117515526024235, guid: 5c0917fafcb61764aa309728126c3964,
         type: 3}
+      propertyPath: playerSpeed.UseConstant
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890117515526024235, guid: 5c0917fafcb61764aa309728126c3964,
+        type: 3}
+      propertyPath: playerTurnSpeed.UseConstant
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890117515526024235, guid: 5c0917fafcb61764aa309728126c3964,
+        type: 3}
+      propertyPath: playerSpeed.Variable
+      value:
+      objectReference: {fileID: 11400000, guid: 39363ad09b2a31f4fb7a7320487b3fe2,
+        type: 2}
+    - target: {fileID: 4890117515526024235, guid: 5c0917fafcb61764aa309728126c3964,
+        type: 3}
+      propertyPath: playerTurnSpeed.Variable
+      value:
+      objectReference: {fileID: 11400000, guid: d930e5d3ade6e6048873875b1d712848,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c0917fafcb61764aa309728126c3964, type: 3}

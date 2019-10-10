@@ -14,8 +14,8 @@ public class PlayerMove : MonoBehaviour
     private Vector3 right;
 
     [Tooltip("Speed of Player")] 
-    [SerializeField] private FloatReference speed;
-    [SerializeField] private FloatReference turnSpeed;
+    [SerializeField] private FloatReference playerSpeed;
+    [SerializeField] private FloatReference playerTurnSpeed;
     
     // Start is called before the first frame update
     void Start()
@@ -41,23 +41,23 @@ public class PlayerMove : MonoBehaviour
         if ((horAxis > 0.5f  && verticalAxis > 0.5f) || (horAxis < -0.5f && verticalAxis < -0.5f))
         {
             transform.forward = Vector3.Lerp(transform.forward, (forward + right) * (verticalAxis + horAxis),
-                turnSpeed.Value * Time.deltaTime);
+                playerTurnSpeed.Value * Time.deltaTime);
         }
         else if ((horAxis < -0.5f && verticalAxis > 0.5f) || (horAxis > 0.5f && verticalAxis < -0.5f)) 
         {
             transform.forward = Vector3.Lerp(transform.forward, -(right-forward) * (verticalAxis - horAxis),
-                turnSpeed.Value * Time.deltaTime);
+                playerTurnSpeed.Value * Time.deltaTime);
         } 
         else if (verticalAxis > 0 || verticalAxis < 0)
         {
-            transform.forward = Vector3.Lerp(transform.forward, forward * verticalAxis, turnSpeed.Value * Time.deltaTime);
+            transform.forward = Vector3.Lerp(transform.forward, forward * verticalAxis, playerTurnSpeed.Value * Time.deltaTime);
         } 
         else if (horAxis > 0 || horAxis < 0)
         {
-            transform.forward = Vector3.Lerp(transform.forward, right * horAxis, turnSpeed.Value * Time.deltaTime);
+            transform.forward = Vector3.Lerp(transform.forward, right * horAxis, playerTurnSpeed.Value * Time.deltaTime);
         }
         
-        myBody.AddForce(movement * speed.Value);
+        myBody.AddForce(movement * playerSpeed.Value);
    
     }
 }

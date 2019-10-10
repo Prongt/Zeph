@@ -10,12 +10,12 @@ public class Growable : Aspects
     public override void Promote()
     {
         //Growing
-        Debug.Log("Growing");
+        //Debug.Log("Growing");
     }
 
     public override void Negate()
     {
         //Stop growing
-        Debug.Log("Shrinking");
+        //Debug.Log("Shrinking");
     }
 }
