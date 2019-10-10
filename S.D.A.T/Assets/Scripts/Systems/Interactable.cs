@@ -75,13 +75,15 @@ public class Interactable : MonoBehaviour
                 }
             }
         }
+        
+        componentsToRemove = new List<Type>();
 
         //Remove unused components
         if (componentList.Count > 0)
         {
+            Debug.Log(componentList.Count);
             foreach (Aspects aspect in componentList)
             {
-                
                 if (!safeList.Contains(aspect.name))
                 {
                     var comps = aspect.RequiredComponents();
