@@ -17,8 +17,8 @@ public abstract class Aspects : MonoBehaviour
         AspectType = aspectType;
     }
 
-    public abstract void Promote();
-    public abstract void Negate();
+    public abstract void Promote(Transform source = null);
+    public abstract void Negate(Transform source = null);
 }
 
 

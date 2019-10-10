@@ -15,7 +15,7 @@ public class Flamable : Aspects
         burningParticleEffect.Stop();
     }
 
-    public override void Promote()
+    public override void Promote(Transform source = null)
     {
         //Debug.Log("On Fire");
         GetComponent<Renderer>().material = burnedMaterial;
@@ -24,7 +24,7 @@ public class Flamable : Aspects
 
     }
 
-    public override void Negate()
+    public override void Negate(Transform source = null)
     {
         //Extingushed
         //Debug.Log("Extingushed");

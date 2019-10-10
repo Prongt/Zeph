@@ -46,6 +46,10 @@ public class Interactable : MonoBehaviour
                 else
                 {
                     if (!gameObject.GetComponent(aspectComponent)) gameObject.AddComponent(aspectComponent);
+                    if (aspectComponent.Name == "Pushable")
+                    {
+                        gameObject.AddComponent<Rigidbody>();
+                    }
                 }
             }
         }
@@ -151,7 +155,7 @@ public class Interactable : MonoBehaviour
     /// makes gameobject interact with a defined element
     /// </summary>
     /// <param name="element"></param>
-    public void ApplyElement(Element element)
+    public void ApplyElement(Element element, Transform source = null)
     {
         if (aspectComponents.Count <= 0)
         {
@@ -164,7 +168,7 @@ public class Interactable : MonoBehaviour
             {
                 if (aspectComponents[i].AspectType == element.Promotes[p])
                 {
-                    aspectComponents[i].Promote();
+                    aspectComponents[i].Promote(source);
                 }
             }
             
@@ -172,7 +176,7 @@ public class Interactable : MonoBehaviour
             {
                 if (aspectComponents[i].AspectType == element.Negates[n])
                 {
-                    aspectComponents[i].Negate();
+                    aspectComponents[i].Negate(source);
                 }
             }
         }

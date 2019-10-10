@@ -54,7 +54,7 @@ public class PlayerElementController : MonoBehaviour
                         var obj = objec.GetComponent<Interactable>();
                         if (obj)
                         {
-                            obj.ApplyElement(elementData[i].Element);
+                            obj.ApplyElement(elementData[i].Element, gameObject.transform);
                         }
                     }
                 }
