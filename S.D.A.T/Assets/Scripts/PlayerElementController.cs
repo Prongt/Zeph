@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using Aura2API;
 using UnityEngine;
 
 public class PlayerElementController : MonoBehaviour
@@ -13,15 +14,18 @@ public class PlayerElementController : MonoBehaviour
     [SerializeField] private KeyCode powerKey;
     [SerializeField] private ParticleSystem wind;
 
+    private Light light;
+
 
     //number of collisions detected for each element
     private const int maxAffectableObjects = 25;
 
+   
 
     private void Awake()
     {
-
-
+        light = GetComponentInChildren<Light>();
+        
         for (int i = 0; i < elementData.Length; i++)
         {
             elementData[i].colliders = new Collider[25];
@@ -43,6 +47,9 @@ public class PlayerElementController : MonoBehaviour
                 Instantiate(wind.gameObject, gameObject.transform);
             }
 
+            light.intensity = 100;
+            StartCoroutine(LightFade());
+
             for (int i = 0; i < elementData.Length; i++)
             {
                 var size = Physics.OverlapSphereNonAlloc(transform.position, elementData[i].Element.PlayerRange, elementData[i].colliders);
@@ -60,6 +67,20 @@ public class PlayerElementController : MonoBehaviour
                 }
             }
         }
+    }
+    
+    IEnumerator LightFade()
+    {
+        print("Running");
+            light.intensity = Mathf.Lerp(light.intensity, 5, 1 * Time.deltaTime);
+
+            yield return null;
+            if (light.intensity <= 5)
+            {
+                StopCoroutine(LightFade());
+            }
+
+            StartCoroutine(LightFade());
     }
 
     private void OnDrawGizmos()
@@ -100,3 +121,5 @@ public struct PlayerElement
     public Element Element;
     [HideInInspector] public Collider[] colliders;
 }
+
+
