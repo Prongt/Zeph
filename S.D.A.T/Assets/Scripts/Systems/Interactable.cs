@@ -103,7 +103,7 @@ public class Interactable : MonoBehaviour
         }
         
         aspectComponents = GetComponents<Aspects>().ToList();
-        Invoke("UpdateRequiredComponents", 0.1f);
+        Invoke("UpdateRequiredComponents", 0.5f);
         //UpdateRequiredComponents();
     }
 
