@@ -15,6 +15,8 @@ public class PlayerElementController : MonoBehaviour
     [SerializeField] private ParticleSystem wind;
 
     private Light light;
+    private bool powerUsed;
+    private bool routineRunning;
 
 
     //number of collisions detected for each element
@@ -30,12 +32,17 @@ public class PlayerElementController : MonoBehaviour
         {
             elementData[i].colliders = new Collider[25];
         }
+
+        powerUsed = false;
+        routineRunning = false;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(powerKey))
+        if (Input.GetKeyDown(powerKey) && !powerUsed)
         {
+            powerUsed = true;
+            StartCoroutine(Delay());
             if (!GameObject.Find("Wind(Clone)"))
             {
                 Instantiate(wind.gameObject, gameObject.transform);
@@ -46,9 +53,12 @@ public class PlayerElementController : MonoBehaviour
                 Destroy(GameObject.Find("Wind(Clone)"));
                 Instantiate(wind.gameObject, gameObject.transform);
             }
-
+            
             light.intensity = 100;
-            StartCoroutine(LightFade());
+            if (!routineRunning)
+            {
+                StartCoroutine(LightFade());
+            }
 
             for (int i = 0; i < elementData.Length; i++)
             {
@@ -71,16 +81,27 @@ public class PlayerElementController : MonoBehaviour
     
     IEnumerator LightFade()
     {
-        print("Running");
-            light.intensity = Mathf.Lerp(light.intensity, 5, 1 * Time.deltaTime);
+        routineRunning = true;
+        light.intensity = Mathf.Lerp(light.intensity, 5, 0.5f * Time.deltaTime);
 
             yield return null;
-            if (light.intensity <= 5)
+            if (light.intensity <= 6)
             {
                 StopCoroutine(LightFade());
             }
+            else
+            {
+                routineRunning = false;
+                StartCoroutine(LightFade());
+            }
 
-            StartCoroutine(LightFade());
+            /*StartCoroutine(LightFade());*/
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(3f);
+        powerUsed = false;
     }
 
     private void OnDrawGizmos()
