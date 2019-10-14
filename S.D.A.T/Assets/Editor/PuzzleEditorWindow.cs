@@ -93,7 +93,7 @@ public class PuzzleEditorWindow : EditorWindow
                 EditorStyles.toolbarButton);
         
         //GUILayout.EndArea();
-        Debug.Log(SelectedTool);
+//        Debug.Log(SelectedTool);
         
         if (PuzzleBlocks == null)
         {
@@ -174,7 +174,9 @@ public class PuzzleEditorWindow : EditorWindow
     {
         GameObject block = (GameObject) PrefabUtility.InstantiatePrefab(prefab);
         block.transform.parent = parentObj.transform;
+        var p = block.transform.position;
         block.transform.position = pos;
+        pos.y += p.y / 2;
         
         
         Undo.RegisterCreatedObjectUndo(block, "Add " + prefab.name);
