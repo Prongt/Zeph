@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Aura2API;
 using UnityEditor;
 using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
