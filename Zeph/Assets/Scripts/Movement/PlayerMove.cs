@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using UnityEditor;
+﻿using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
     private Rigidbody myBody;
-    private float verticalAxis;
-    private float horAxis;
+    
 
     private Vector3 forward;
     private Vector3 right;
@@ -17,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private FloatReference playerSpeed;
     [SerializeField] private FloatReference playerTurnSpeed;
     
-    // Start is called before the first frame update
+    
     void Start()
     {
         forward = Camera.main.transform.forward;
@@ -26,38 +22,29 @@ public class PlayerMove : MonoBehaviour
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
         myBody = GetComponent<Rigidbody>();
         
+        
         transform.forward = forward;
     }
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
-        verticalAxis = Input.GetAxis("Vertical");
-        horAxis = Input.GetAxis("Horizontal");
-        
-        Vector3 movement = new Vector3(horAxis + verticalAxis,0,verticalAxis - horAxis);
-
-
-        if ((horAxis > 0.5f  && verticalAxis > 0.5f) || (horAxis < -0.5f && verticalAxis < -0.5f))
-        {
-            transform.forward = Vector3.Lerp(transform.forward, (forward + right) * (verticalAxis + horAxis),
-                playerTurnSpeed.Value * Time.deltaTime);
-        }
-        else if ((horAxis < -0.5f && verticalAxis > 0.5f) || (horAxis > 0.5f && verticalAxis < -0.5f)) 
-        {
-            transform.forward = Vector3.Lerp(transform.forward, -(right-forward) * (verticalAxis - horAxis),
-                playerTurnSpeed.Value * Time.deltaTime);
-        } 
-        else if (verticalAxis > 0 || verticalAxis < 0)
-        {
-            transform.forward = Vector3.Lerp(transform.forward, forward * verticalAxis, playerTurnSpeed.Value * Time.deltaTime);
-        } 
-        else if (horAxis > 0 || horAxis < 0)
-        {
-            transform.forward = Vector3.Lerp(transform.forward, right * horAxis, playerTurnSpeed.Value * Time.deltaTime);
-        }
-        
-        myBody.AddForce(movement * playerSpeed.Value);
-   
+        Move();
     }
+    
+    void Move()
+    {
+        var moveSpeed = Time.deltaTime * playerSpeed.Value;
+        
+        //Movement
+        Vector3 movement = new Vector3();
+        movement += right * (moveSpeed * Input.GetAxis("Horizontal")); 
+        movement += forward * (moveSpeed * Input.GetAxis("Vertical"));
+        myBody.MovePosition(myBody.position + (movement * playerSpeed.Value));
+
+        //Rotation
+        Vector3 heading = Vector3.Normalize(movement);
+        Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
+            Time.deltaTime * playerTurnSpeed.Value);
+        transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
+    }  
 }
