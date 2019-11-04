@@ -12,6 +12,9 @@ public class PlayerMove : MonoBehaviour
     [Tooltip("Speed of Player")] 
     [SerializeField] private FloatReference playerSpeed;
     [SerializeField] private FloatReference playerTurnSpeed;
+    [SerializeField] private FloatReference jumpForce;
+
+    private float distanceToGround;
     
     
     void Start()
@@ -22,15 +25,29 @@ public class PlayerMove : MonoBehaviour
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
         myBody = GetComponent<Rigidbody>();
         
-        
+        distanceToGround = GetComponent<Collider>().bounds.extents.y;
         transform.forward = forward;
     }
     
     void FixedUpdate()
     {
         Move();
+        Jump();
     }
-    
+
+    private void Jump()
+    {
+        if (Input.GetButtonDown("Jump") && CheckIfGrounded())
+        {
+            myBody.AddForce(transform.up * jumpForce.Value, ForceMode.Impulse);
+        }
+    }
+
+    private bool CheckIfGrounded()
+    {
+        return Physics.Raycast(transform.position, -transform.up, distanceToGround + 0.1f);
+    }
+
     void Move()
     {
         var moveSpeed = Time.deltaTime * playerSpeed.Value;
