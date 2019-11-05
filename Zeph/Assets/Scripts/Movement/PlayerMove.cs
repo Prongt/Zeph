@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 forward;
     private Vector3 right;
+    private Vector3 movement;
 
     [Tooltip("Speed of Player")] 
     [SerializeField] private FloatReference playerSpeed;
@@ -35,7 +37,15 @@ public class PlayerMove : MonoBehaviour
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
         transform.forward = forward;
     }
-    
+
+    private void Update()
+    {
+        Vector3 heading = Vector3.Normalize(movement);
+        Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
+            Time.deltaTime * playerTurnSpeed.Value);
+        transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
+    }
+
     void FixedUpdate()
     {
 //        if (!GravityDistortion.useNewGravity)
@@ -48,10 +58,10 @@ public class PlayerMove : MonoBehaviour
 //            AltMove();
 //            AltJump();
 //        }
-        //AltMove();
+        AltMove();
         
-        Move();
-        Jump();
+//        Move();
+//        Jump();
     }
 
     private void AltJump()
@@ -89,17 +99,18 @@ public class PlayerMove : MonoBehaviour
             myBody.AddForce(appliedHoverForce, ForceMode.Acceleration);
         }
         
-        Vector3 movement = new Vector3();
-        movement += right * (playerSpeed.Value * Input.GetAxis("Horizontal")); 
-        movement += forward * (playerSpeed.Value * Input.GetAxis("Vertical"));
-        var test = movement * playerSpeed.Value;
-        //myBody.MovePosition(myBody.position + (movement * playerSpeed.Value));
-        myBody.AddRelativeForce(test.x, 0, test.z);
+
         
-                Vector3 heading = Vector3.Normalize(movement);
-        Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
-            Time.deltaTime * playerTurnSpeed.Value);
-        transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
+        movement = new Vector3();
+        movement += right * (Input.GetAxis("Horizontal")); 
+        movement += forward * (Input.GetAxis("Vertical"));
+        movement = Vector3.Normalize(Time.deltaTime  * movement)* playerSpeed.Value;
+        //Debug.Log(test);
+        //myBody.MovePosition(myBody.position + test);
+        myBody.AddForce(movement);    
+        //myBody.AddRelativeForce(test.x, 0, test.z);
+        
+        
         //myBody.AddRelativeTorque(0f, Input.GetAxis ("Horizontal") * turnSpeed, 0f);
     }
 

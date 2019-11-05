@@ -87,7 +87,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.372e-42, y: 1.02e-43, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 4.5904e-41, y: 0, z: 0, w: 0.0006087143}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -197,13 +197,13 @@ Rigidbody:
   m_GameObject: {fileID: 4890117515526024213}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1.2
+  m_Drag: 3.6
   m_AngularDrag: 0.1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!114 &4890117515526024235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,8 +222,18 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 39363ad09b2a31f4fb7a7320487b3fe2, type: 2}
   playerTurnSpeed:
     UseConstant: 0
-    ConstantValue: 0
+    ConstantValue: 0.2
     Variable: {fileID: 11400000, guid: d930e5d3ade6e6048873875b1d712848, type: 2}
+  jumpForce:
+    UseConstant: 0
+    ConstantValue: 20
+    Variable: {fileID: 11400000, guid: 0f606679c896f944ea1e71ee68eab54e, type: 2}
+  speed: 90
+  turnSpeed: 5
+  hoverForce: 65
+  hoverHeight: 2
+  sideMoveMultiplier: 1
+  upMoveMultiplier: 1
 --- !u!114 &2128616418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,7 +315,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c0b89bf08d0ea6044a1415f6d2e070dd, type: 2}
+  - {fileID: 2100000, guid: 3d1608f71b7f30e4cb23ba205e1be550, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
