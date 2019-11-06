@@ -42,7 +42,7 @@ public class PlayerElementController : MonoBehaviour
         {
             powerUsed = true;
             StartCoroutine(Delay());
-            if (!GameObject.Find("Wind(Clone)"))
+            /*if (!GameObject.Find("Wind(Clone)"))
             {
                 Instantiate(wind.gameObject, gameObject.transform);
 
@@ -51,7 +51,7 @@ public class PlayerElementController : MonoBehaviour
             {
                 Destroy(GameObject.Find("Wind(Clone)"));
                 Instantiate(wind.gameObject, gameObject.transform);
-            }
+            }*/
             
             light.intensity = 100;
             if (!routineRunning)

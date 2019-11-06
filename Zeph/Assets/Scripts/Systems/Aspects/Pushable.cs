@@ -60,13 +60,13 @@ public class Pushable : Aspects
         direction = source.transform.position - transform.position;
         myRB.AddForce(direction * pushForce.Value);
 
-        if (orbiting)
+        /*if (orbiting)
         {
             orbiting = false;
             throwable = true;
         }
         
-        StartCoroutine(Delay());
+        StartCoroutine(Delay());*/
         
     }
 
@@ -82,7 +82,7 @@ public class Pushable : Aspects
         {
             return;
         }
-
+        
         float x = -Mathf.Cos(timer) * xSpread;
         float z = Mathf.Sin(timer) * zSpread;
         Vector3 pos = new Vector3(x, yOffset, z);
@@ -93,8 +93,8 @@ public class Pushable : Aspects
     {
         direction = centerPoint.position - transform.position;
         direction = -direction;
-        myRB.AddForce(direction * pushForce.Value);
-        StartCoroutine(Delay());
+        myRB.AddForce(direction * pushForce.Value/2);
+        //StartCoroutine(Delay());
     }
 
     IEnumerator Delay()
@@ -109,6 +109,9 @@ public class Pushable : Aspects
         if (Vector3.Distance(centerPoint.position, transform.position) <= 3)
         {
             orbiting = true;
+            
+            /*direction = centerPoint.transform.position - transform.position;
+            myRB.AddForce(direction * pushForce.Value);*/
         }
     }
 }
