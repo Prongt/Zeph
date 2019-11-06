@@ -61,6 +61,7 @@ public class PlayerElementController : MonoBehaviour
 
             for (int i = 0; i < elementData.Length; i++)
             {
+                elementData[i].colliders = new Collider[maxAffectableObjects];
                 var size = Physics.OverlapSphereNonAlloc(transform.position, elementData[i].Element.PlayerRange, elementData[i].colliders);
                 for (int j = 0; j < elementData[i].colliders.Length; j++)
                 {
