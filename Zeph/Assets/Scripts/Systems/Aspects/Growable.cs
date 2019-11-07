@@ -18,16 +18,16 @@ public class Growable : Aspects
     {
         return componentTypes;
     }
-    
+
     public override void Promote(Transform source = null)
     {
-        //Growing
-        //Debug.Log("Growing");
+        base.Promote(source);
     }
 
     public override void Negate(Transform source = null)
     {
         //Stop growing
         //Debug.Log("Shrinking");
+        base.Promote(source);
     }
 }

@@ -1,11 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Aspects : MonoBehaviour
 {
     [HideInInspector] public AspectType AspectType;
-    
-    
+
+    [SerializeField] private UnityEvent onPromote;
+    [SerializeField] private UnityEvent onNegate;
     private void Awake()
     {
         Initialize();
@@ -20,11 +22,18 @@ public abstract class Aspects : MonoBehaviour
     }
 
     public abstract Type[] RequiredComponents();
-    
-    
 
-    public abstract void Promote(Transform source = null);
-    public abstract void Negate(Transform source = null);
+
+
+    public virtual void Promote(Transform source = null)
+    {
+        onPromote.Invoke();
+    }
+
+    public virtual void Negate(Transform source = null)
+    {
+        onNegate.Invoke();
+    }
 }
 
 
