@@ -1,15 +1,23 @@
-﻿using System;
+﻿//#define HOVER
+#define NOHOVER
+#undef HOVER
+
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 
+
+
 public class PlayerMove : MonoBehaviour
 {
+    
+    
     private Rigidbody myBody;
 
 
     private Vector3 forward;
     private Vector3 right;
-    private Vector3 movement;
+    //private Vector3 movement;
 
     [Tooltip("Speed of Player")] [SerializeField]
     private FloatReference playerSpeed;
@@ -39,28 +47,48 @@ public class PlayerMove : MonoBehaviour
         transform.forward = forward;
     }
 
-
+    private void Update()
+    {
+        Move();
+        Jump();
+    }
 
     void FixedUpdate()
     {
         if (!GravityDistortion.useNewGravity)
         {
-            Move();
-
+            //Move();
+            //Jump();
         }
         else
         {
             AltMove();
         }
+
     }
 
-        private void AltJump()
-        {
 
-        }
 
         private void Move()
         {
+#if NOHOVER
+            
+                   var moveSpeed = Time.deltaTime * playerSpeed.Value;
+                   
+                   //Movement
+                   Vector3 movement = new Vector3();
+                   movement += right * (moveSpeed * Input.GetAxis("Horizontal")); 
+                   movement += forward * (moveSpeed * Input.GetAxis("Vertical"));
+                   myBody.MovePosition(myBody.position + (movement * playerSpeed.Value));
+           
+                   //Rotation
+                   Vector3 heading = Vector3.Normalize(movement);
+                   Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
+                       Time.deltaTime * playerTurnSpeed.Value);
+                   transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
+#endif
+
+#if HOVER
             Ray ray = new Ray(transform.position, -transform.up);
             RaycastHit hit;
 
@@ -84,6 +112,7 @@ public class PlayerMove : MonoBehaviour
             Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
                 Time.deltaTime * playerTurnSpeed.Value);
             transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
+#endif
         }
 
         private void Jump()
@@ -104,6 +133,7 @@ public class PlayerMove : MonoBehaviour
 
         private void AltMove()
         {
+            #if HOVER
             Ray ray = new Ray(transform.position, Physics.gravity);
             Debug.DrawRay(transform.position, Physics.gravity);
             RaycastHit hit;
@@ -129,6 +159,8 @@ public class PlayerMove : MonoBehaviour
             Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
                 Time.deltaTime * playerTurnSpeed.Value);
             transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
+
+#endif
         }
     
 }
