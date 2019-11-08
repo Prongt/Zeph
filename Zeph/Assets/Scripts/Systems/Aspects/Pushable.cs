@@ -6,7 +6,9 @@ using UnityEngine.AI;
 
 public class Pushable : Aspects
 {
-    [SerializeField] private FloatReference pushForce;
+    [SerializeField] private FloatReference pullForce;
+    [SerializeField] private FloatReference maxThrowForce;
+    public float throwForce = 0.5f;
     private Vector3 direction;
     [SerializeField] public float orbitSize = 4;
     private float xSpread;
@@ -18,8 +20,8 @@ public class Pushable : Aspects
     
 
     private float timer;
-    private bool orbiting;
-    private bool throwable;
+    public bool orbiting;
+    public bool throwable;
 
     public Type[] componentTypes = new Type[]
     {
@@ -47,12 +49,10 @@ public class Pushable : Aspects
         if (orbiting)
         {
             Orbit();
+            throwable = true;
         }
-
-        if (throwable)
-        {
-            Throw();
-        }
+        
+        rotSpeed = throwForce;
     }
 
     public override void Promote(Transform source = null)
@@ -62,12 +62,17 @@ public class Pushable : Aspects
         //Debug.Log("Being pushed");
         centerPoint = source.transform;
         direction = source.transform.position - transform.position;
-        myRB.AddForce(direction * pushForce.Value);
+        myRB.AddForce(direction * pullForce.Value);
 
         if (orbiting)
         {
             orbiting = false;
-            throwable = true;
+            //throwable = true;
+        }
+
+        if (throwable)
+        {
+            Throw();
         }
         
         StartCoroutine(Delay());
@@ -91,14 +96,20 @@ public class Pushable : Aspects
         float x = -Mathf.Cos(timer) * xSpread;
         float z = Mathf.Sin(timer) * zSpread;
         Vector3 pos = new Vector3(x, yOffset, z);
+        transform.forward = centerPoint.transform.forward;
         transform.position = pos + centerPoint.position;
+
+        if (throwForce <= maxThrowForce.Value)
+        {
+            throwForce += 1 * Time.deltaTime;
+        }
     }
 
     void Throw()
     {
         direction = centerPoint.position - transform.position;
         direction = -direction;
-        myRB.AddForce(direction * pushForce.Value/20, ForceMode.Impulse);
+        myRB.AddForce(direction * throwForce, ForceMode.Impulse);
         StartCoroutine(Delay());
     }
 

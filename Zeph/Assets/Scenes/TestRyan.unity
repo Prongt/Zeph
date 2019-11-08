@@ -358,17 +358,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1481345518, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
-      propertyPath: centerPoint
-      value: 
-      objectReference: {fileID: 1062540648}
     - target: {fileID: 3018646443490881420, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
       propertyPath: aspectMaterial
       value: 
       objectReference: {fileID: 11400000, guid: 2acb987a995ba514792eb7ece74fef3d,
         type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 1481345518, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
+      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1481345518, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
+      propertyPath: centerPoint
+      value: 
+      objectReference: {fileID: 1062540648}
+    - target: {fileID: 1481345518, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
+      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1481345518, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
+      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1481345518, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
+      propertyPath: pullForce.ConstantValue
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1481345518, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
+      propertyPath: maxThrowForce.ConstantValue
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -8080150693659343983, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
 --- !u!4 &1062540648 stripped
 Transform:
@@ -395,6 +416,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
   burnedMaterial: {fileID: 2100000, guid: 3d1608f71b7f30e4cb23ba205e1be550, type: 2}
   burningParticleEffect: {fileID: 5991376894092091881, guid: 5d6c452d16630434e9fa06446c82d674,
     type: 3}
@@ -561,6 +588,10 @@ PrefabInstance:
     - target: {fileID: 2128616418, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
       propertyPath: drawGizmos
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2128616418, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
+      propertyPath: powerKey
+      value: 101
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
