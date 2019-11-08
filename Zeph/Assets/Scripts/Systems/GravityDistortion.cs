@@ -1,45 +1,29 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GravityDistortion : MonoBehaviour
+public class GravityDistortion : Activator
 {
-    public Vector3 newGravity;
-    private Vector3 ogGravity;
+    [SerializeField] private Vector3 newGravity;
+    private static Vector3 ogGravity = new Vector3(0, -9.81f, 0);
 
     public static bool useNewGravity = false;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         ogGravity = Physics.gravity;
     }
 
-    // Update is called once per frame
-//    void Update()
-//    {
-//        if (Input.GetKeyDown(KeyCode.Q))
-//        {
-//            Physics.gravity = Vector3.up;
-//        }
-//        if (Input.GetKeyDown(KeyCode.E))
-//        {
-//            Physics.gravity = Vector3.down;
-//        }
-//    }
 
-    private void FixedUpdate()
+    public override void Activate()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (!useNewGravity)
         {
-            Physics.gravity = newGravity;
             useNewGravity = true;
+            Physics.gravity = newGravity;
         }
-        
-        if (Input.GetKeyDown(KeyCode.E))
+        else
         {
-            Physics.gravity = ogGravity;
             useNewGravity = false;
+            Physics.gravity = ogGravity;
         }
     }
 }
