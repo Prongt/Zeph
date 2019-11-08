@@ -23,7 +23,7 @@ public class PlayerMove : MonoBehaviour
     public float upMoveMultiplier;
     private float distanceToGround;
 
-    private bool rot = false;
+    private Vector3 oldGravity;
 
     private void Start()
     {
@@ -36,29 +36,26 @@ public class PlayerMove : MonoBehaviour
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
         transform.forward = forward;
         gravityDirection = Physics.gravity;
+        oldGravity = gravityDirection;
     }
 
     private void Update()
     {
         gravityDirection = Physics.gravity;
+        if (gravityDirection != oldGravity)
+        {
+            transform.up = -gravityDirection;
+            oldGravity = gravityDirection;
+        }
+
+        Jump();
         if (!GravityDistortion.useNewGravity)
         {
-
             Move();
-            Jump();
         }
         else
         {
-            Jump();
             AltMove();
-
-            if (!rot)
-            {
-                transform.up = -gravityDirection;
-                rot = true;
-            }
-            
-
         }
     }
 
@@ -68,18 +65,22 @@ public class PlayerMove : MonoBehaviour
         var moveSpeed = Time.deltaTime * playerSpeed.Value;
 
         //Movement
+        
+        //if (Physics.)
+        
         var movement = new Vector3();
         movement += right * (moveSpeed * Input.GetAxis("Horizontal"));
         movement += forward * (moveSpeed * Input.GetAxis("Vertical"));
         myBody.MovePosition(myBody.position + movement * playerSpeed.Value);
 
-
-        
+       
         //Rotation
-        var heading = Vector3.Normalize(movement);
-        Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
-            Time.deltaTime * playerTurnSpeed.Value);
-        transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
+        if (movement.magnitude > 0)
+        {
+            var quat = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement, -gravityDirection),
+                playerTurnSpeed * Time.deltaTime);
+            myBody.MoveRotation(quat);
+        }
     }
 
     private void Jump()
@@ -98,9 +99,6 @@ public class PlayerMove : MonoBehaviour
 
     private void AltMove()
     {
-        
-        
-        
         var moveSpeed = Time.deltaTime * playerSpeed.Value;
 
         //Movement
@@ -110,22 +108,13 @@ public class PlayerMove : MonoBehaviour
 
         myBody.MovePosition(myBody.position + movement * playerSpeed.Value);
 
-
+        //Rotation
         if (movement.magnitude > 0)
         {
-            myBody.MoveRotation(Quaternion.LookRotation(movement, -gravityDirection));
+            var quat = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement, -gravityDirection),
+                playerTurnSpeed * Time.deltaTime);
+            myBody.MoveRotation(quat);
         }
-        //Quaternion.LookRotation(movement);
-        
 
-//        var rot = transform.rotation;
-//        rot.x += movement.normalized.y;
-//        myBody.MoveRotation(rot);
-
-//        var heading = Vector3.Normalize(movement);
-//        Vector3 lerpForward = math.lerp((float3) transform.up, (float3) heading,
-//            Time.deltaTime * playerTurnSpeed.Value);
-//        //transform.forward = new Vector3(lerpForward.y + lerpForward.z, 0, 0);
-//        transform.forward = lerpForward;
     }
 }
