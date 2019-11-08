@@ -8,17 +8,18 @@ public class Pushable : Aspects
 {
     [SerializeField] private FloatReference pushForce;
     private Vector3 direction;
-    [SerializeField] private float xSpread;
-    [SerializeField] private float zSpread;
+    [SerializeField] public float orbitSize = 4;
+    private float xSpread;
+    private float zSpread;
     [SerializeField] private float yOffset;
-    [SerializeField] private Transform centerPoint;
+    private Transform centerPoint;
     [SerializeField] private float rotSpeed;
     private Rigidbody myRB;
     
 
     private float timer;
-    public bool orbiting;
-    public bool throwable;
+    private bool orbiting;
+    private bool throwable;
 
     public Type[] componentTypes = new Type[]
     {
@@ -35,6 +36,8 @@ public class Pushable : Aspects
     void Start()
     {
         myRB = GetComponent<Rigidbody>();
+        xSpread = orbitSize;
+        zSpread = orbitSize;
     }
 
     void Update()
@@ -56,7 +59,7 @@ public class Pushable : Aspects
     {
         //Being pushed
         //Debug.Log("Being pushed");
-        
+        centerPoint = source.transform;
         direction = source.transform.position - transform.position;
         myRB.AddForce(direction * pushForce.Value);
 
