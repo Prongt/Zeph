@@ -66,7 +66,7 @@ public class PlayerMove : MonoBehaviour
 
         //Movement
         
-        //if (Physics.)
+       
         
         var movement = new Vector3();
         movement += right * (moveSpeed * Input.GetAxis("Horizontal"));
@@ -104,8 +104,19 @@ public class PlayerMove : MonoBehaviour
         //Movement
         var movement = new Vector3();
         movement.y = moveSpeed * Input.GetAxis("Vertical");
-        movement.z = moveSpeed * -Input.GetAxis("Horizontal");
+        //Gravity in x dir;
+        if (gravityDirection.x > 0 || gravityDirection.x < 0)
+        {
+            movement.z = moveSpeed * -Input.GetAxis("Horizontal");
+        }
 
+        if (gravityDirection.z > 0 || gravityDirection.z < 0)
+        {
+            movement.x = moveSpeed * Input.GetAxis("Horizontal");
+        }
+        
+        
+        
         myBody.MovePosition(myBody.position + movement * playerSpeed.Value);
 
         //Rotation
@@ -115,6 +126,5 @@ public class PlayerMove : MonoBehaviour
                 playerTurnSpeed * Time.deltaTime);
             myBody.MoveRotation(quat);
         }
-
     }
 }
