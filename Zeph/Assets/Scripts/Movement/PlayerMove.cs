@@ -1,22 +1,16 @@
-﻿//#define HOVER
-#define NOHOVER
-#undef HOVER
-
-using System;
+﻿using System;
 using Unity.Mathematics;
 using UnityEngine;
 
 
-
 public class PlayerMove : MonoBehaviour
 {
-    
-    
     private Rigidbody myBody;
-
-
     private Vector3 forward;
+
     private Vector3 right;
+
+    private Vector3 gravityDirection;
     //private Vector3 movement;
 
     [Tooltip("Speed of Player")] [SerializeField]
@@ -25,17 +19,13 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private FloatReference playerTurnSpeed;
     [SerializeField] private FloatReference jumpForce;
 
-    public float speed = 90f;
-    public float turnSpeed = 5f;
-    public float hoverForce = 65f;
-    public float hoverHeight = 3.5f;
-
     public float sideMoveMultiplier;
     public float upMoveMultiplier;
     private float distanceToGround;
 
+    private bool rot = false;
 
-    void Start()
+    private void Start()
     {
         forward = Camera.main.transform.forward;
         forward.y = 0;
@@ -45,122 +35,97 @@ public class PlayerMove : MonoBehaviour
 
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
         transform.forward = forward;
+        gravityDirection = Physics.gravity;
     }
 
     private void Update()
     {
-        Move();
-        Jump();
-    }
-
-    void FixedUpdate()
-    {
+        gravityDirection = Physics.gravity;
         if (!GravityDistortion.useNewGravity)
         {
-            //Move();
-            //Jump();
+
+            Move();
+            Jump();
         }
         else
         {
+            Jump();
             AltMove();
-        }
 
+            if (!rot)
+            {
+                transform.up = -gravityDirection;
+                rot = true;
+            }
+            
+
+        }
     }
 
 
+    private void Move()
+    {
+        var moveSpeed = Time.deltaTime * playerSpeed.Value;
 
-        private void Move()
+        //Movement
+        var movement = new Vector3();
+        movement += right * (moveSpeed * Input.GetAxis("Horizontal"));
+        movement += forward * (moveSpeed * Input.GetAxis("Vertical"));
+        myBody.MovePosition(myBody.position + movement * playerSpeed.Value);
+
+
+        
+        //Rotation
+        var heading = Vector3.Normalize(movement);
+        Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
+            Time.deltaTime * playerTurnSpeed.Value);
+        transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
+    }
+
+    private void Jump()
+    {
+        if (Input.GetButtonDown("Jump") && CheckIfGrounded())
         {
-#if NOHOVER
-            
-                   var moveSpeed = Time.deltaTime * playerSpeed.Value;
-                   
-                   //Movement
-                   Vector3 movement = new Vector3();
-                   movement += right * (moveSpeed * Input.GetAxis("Horizontal")); 
-                   movement += forward * (moveSpeed * Input.GetAxis("Vertical"));
-                   myBody.MovePosition(myBody.position + (movement * playerSpeed.Value));
-           
-                   //Rotation
-                   Vector3 heading = Vector3.Normalize(movement);
-                   Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
-                       Time.deltaTime * playerTurnSpeed.Value);
-                   transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
-#endif
-
-#if HOVER
-            Ray ray = new Ray(transform.position, -transform.up);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, hoverHeight))
-            {
-                float proportionalHeight = (hoverHeight - hit.distance) / hoverHeight;
-                Vector3 appliedHoverForce = Vector3.up * proportionalHeight * hoverForce;
-                myBody.AddForce(appliedHoverForce, ForceMode.Acceleration);
-            }
-
-
-
-            movement = new Vector3();
-            movement += right * (Input.GetAxis("Horizontal"));
-            movement += forward * (Input.GetAxis("Vertical"));
-            movement = Vector3.Normalize(Time.deltaTime * movement) * playerSpeed.Value;
-
-            myBody.AddForce(movement);
-
-            Vector3 heading = Vector3.Normalize(movement);
-            Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
-                Time.deltaTime * playerTurnSpeed.Value);
-            transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
-#endif
+            myBody.AddForce(-gravityDirection.normalized * jumpForce.Value, ForceMode.Impulse);
         }
+    }
 
-        private void Jump()
+    private bool CheckIfGrounded()
+    {
+        return Physics.Raycast(transform.position, gravityDirection, distanceToGround + 0.1f);
+    }
+
+
+    private void AltMove()
+    {
+        
+        
+        
+        var moveSpeed = Time.deltaTime * playerSpeed.Value;
+
+        //Movement
+        var movement = new Vector3();
+        movement.y = moveSpeed * Input.GetAxis("Vertical");
+        movement.z = moveSpeed * -Input.GetAxis("Horizontal");
+
+        myBody.MovePosition(myBody.position + movement * playerSpeed.Value);
+
+
+        if (movement.magnitude > 0)
         {
-            if (Input.GetButtonDown("Jump") && CheckIfGrounded())
-            {
-                myBody.AddForce(transform.up * jumpForce.Value, ForceMode.Impulse);
-            }
+            myBody.MoveRotation(Quaternion.LookRotation(movement, -gravityDirection));
         }
+        //Quaternion.LookRotation(movement);
+        
 
-        private bool CheckIfGrounded()
-        {
-            return Physics.Raycast(transform.position, -transform.up, distanceToGround + 0.1f);
-        }
+//        var rot = transform.rotation;
+//        rot.x += movement.normalized.y;
+//        myBody.MoveRotation(rot);
 
-
-
-
-        private void AltMove()
-        {
-            #if HOVER
-            Ray ray = new Ray(transform.position, Physics.gravity);
-            Debug.DrawRay(transform.position, Physics.gravity);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, hoverHeight))
-            {
-                float proportionalHeight = (hoverHeight - hit.distance) / hoverHeight;
-                Vector3 appliedHoverForce = hoverForce * proportionalHeight * -Physics.gravity;
-                myBody.AddForce(appliedHoverForce, ForceMode.Acceleration);
-            }
-
-
-
-            movement = new Vector3(0,Input.GetAxis("Vertical"),0);
-            movement += right * (Input.GetAxis("Horizontal"));
-            //movement += forward * (Input.GetAxis("Vertical"));
-            movement = Vector3.Normalize(Time.deltaTime * movement) * playerSpeed.Value;
-
-            myBody.AddForce(movement);
-
-            
-            Vector3 heading = Vector3.Normalize(movement);
-            Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
-                Time.deltaTime * playerTurnSpeed.Value);
-            transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
-
-#endif
-        }
-    
+//        var heading = Vector3.Normalize(movement);
+//        Vector3 lerpForward = math.lerp((float3) transform.up, (float3) heading,
+//            Time.deltaTime * playerTurnSpeed.Value);
+//        //transform.forward = new Vector3(lerpForward.y + lerpForward.z, 0, 0);
+//        transform.forward = lerpForward;
+    }
 }

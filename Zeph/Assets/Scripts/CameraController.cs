@@ -5,15 +5,22 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
+    public FloatReference speed;
+    public FloatReference minDistance;
+    
+    
+    void Update () {
+        float interpolation = speed * Time.deltaTime;
 
-    // Update is called once per frame
-    void Update()
-    {
+        if (Vector3.Distance(transform.position, player.transform.position) > minDistance)
+        {
+            Vector3 position = this.transform.position;
+            position.y = Mathf.Lerp(this.transform.position.y, player.transform.position.y, interpolation);
+            position.x = Mathf.Lerp(this.transform.position.x, player.transform.position.x, interpolation);
+            position.z = Mathf.Lerp(this.transform.position.z, player.transform.position.z, interpolation);
         
+            this.transform.position = position;
+        }
     }
 }
