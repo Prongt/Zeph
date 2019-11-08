@@ -7,7 +7,6 @@ public class PlayerMove : MonoBehaviour
 {
     private Rigidbody myBody;
     private Vector3 forward;
-
     private Vector3 right;
 
     private Vector3 gravityDirection;
@@ -18,9 +17,7 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] private FloatReference playerTurnSpeed;
     [SerializeField] private FloatReference jumpForce;
-
-    public float sideMoveMultiplier;
-    public float upMoveMultiplier;
+    
     private float distanceToGround;
 
     private Vector3 oldGravity;
@@ -42,6 +39,7 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
         gravityDirection = Physics.gravity;
+        //Rotates players transform to be opposite of direction of gravity
         if (gravityDirection != oldGravity)
         {
             transform.up = -gravityDirection;
@@ -49,14 +47,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         Jump();
-        if (!GravityDistortion.useNewGravity)
-        {
-            Move();
-        }
-        else
-        {
-            AltMove();
-        }
+        Move();
     }
 
 
@@ -65,12 +56,31 @@ public class PlayerMove : MonoBehaviour
         var moveSpeed = Time.deltaTime * playerSpeed.Value;
 
         //Movement
-        
-       
-        
         var movement = new Vector3();
-        movement += right * (moveSpeed * Input.GetAxis("Horizontal"));
-        movement += forward * (moveSpeed * Input.GetAxis("Vertical"));
+
+        if (GravityDistortion.useNewGravity)
+        {
+            //Movement in Y dir is constant
+            movement.y = moveSpeed * Input.GetAxis("Vertical");
+            
+            //Gravity in X dir;
+            if (gravityDirection.x > 0 || gravityDirection.x < 0)
+            {
+                movement.z = moveSpeed * -Input.GetAxis("Horizontal");
+            }
+            
+            //Gravity in Z dir
+            if (gravityDirection.z > 0 || gravityDirection.z < 0)
+            {
+                movement.x = moveSpeed * Input.GetAxis("Horizontal");
+            }
+        }
+        else
+        {
+            movement += right * (moveSpeed * Input.GetAxis("Horizontal"));
+            movement += forward * (moveSpeed * Input.GetAxis("Vertical"));
+        }
+
         myBody.MovePosition(myBody.position + movement * playerSpeed.Value);
 
        
@@ -94,37 +104,5 @@ public class PlayerMove : MonoBehaviour
     private bool CheckIfGrounded()
     {
         return Physics.Raycast(transform.position, gravityDirection, distanceToGround + 0.1f);
-    }
-
-
-    private void AltMove()
-    {
-        var moveSpeed = Time.deltaTime * playerSpeed.Value;
-
-        //Movement
-        var movement = new Vector3();
-        movement.y = moveSpeed * Input.GetAxis("Vertical");
-        //Gravity in x dir;
-        if (gravityDirection.x > 0 || gravityDirection.x < 0)
-        {
-            movement.z = moveSpeed * -Input.GetAxis("Horizontal");
-        }
-
-        if (gravityDirection.z > 0 || gravityDirection.z < 0)
-        {
-            movement.x = moveSpeed * Input.GetAxis("Horizontal");
-        }
-        
-        
-        
-        myBody.MovePosition(myBody.position + movement * playerSpeed.Value);
-
-        //Rotation
-        if (movement.magnitude > 0)
-        {
-            var quat = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement, -gravityDirection),
-                playerTurnSpeed * Time.deltaTime);
-            myBody.MoveRotation(quat);
-        }
     }
 }
