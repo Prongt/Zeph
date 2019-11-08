@@ -31,6 +31,7 @@ public class Flamable : Aspects
 
     public override void Promote(Transform source = null)
     {
+        base.Promote(source);
         //Debug.Log("On Fire");
         GetComponent<Renderer>().material = burnedMaterial;
         Instantiate(burningParticleEffect.gameObject, gameObject.transform);
@@ -40,6 +41,7 @@ public class Flamable : Aspects
 
     public override void Negate(Transform source = null)
     {
+        base.Promote(source);
         //Extingushed
         //Debug.Log("Extingushed");
         GetComponent<Renderer>().material = baseMaterial;

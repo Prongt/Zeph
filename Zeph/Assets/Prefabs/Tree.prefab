@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3018646443490881418}
   - component: {fileID: 1481345517}
   - component: {fileID: 1481345518}
+  - component: {fileID: -8080150693659343983}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -236,6 +237,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
   pushForce:
     UseConstant: 1
     ConstantValue: 75
@@ -247,3 +254,24 @@ MonoBehaviour:
   rotSpeed: 0.5
   orbiting: 0
   throwable: 0
+--- !u!114 &-8080150693659343983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3018646443490881463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1333fddadc0d148468c56d6d07dfed75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  burnedMaterial: {fileID: 0}
+  burningParticleEffect: {fileID: 0}

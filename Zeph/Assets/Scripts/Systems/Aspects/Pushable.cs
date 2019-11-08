@@ -57,6 +57,7 @@ public class Pushable : Aspects
 
     public override void Promote(Transform source = null)
     {
+        base.Promote(source);
         //Being pushed
         //Debug.Log("Being pushed");
         centerPoint = source.transform;
@@ -75,6 +76,7 @@ public class Pushable : Aspects
 
     public override void Negate(Transform source = null)
     {
+        base.Promote(source);
         //Not pushed
         //Debug.Log("Not being pushed");
     }

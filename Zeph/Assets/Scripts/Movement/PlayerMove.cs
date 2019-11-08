@@ -2,32 +2,27 @@
 using Unity.Mathematics;
 using UnityEngine;
 
+
 public class PlayerMove : MonoBehaviour
 {
     private Rigidbody myBody;
-
-
     private Vector3 forward;
     private Vector3 right;
-    private Vector3 movement;
+
+    private Vector3 gravityDirection;
+    //private Vector3 movement;
 
     [Tooltip("Speed of Player")] [SerializeField]
     private FloatReference playerSpeed;
 
     [SerializeField] private FloatReference playerTurnSpeed;
     [SerializeField] private FloatReference jumpForce;
-
-    public float speed = 90f;
-    public float turnSpeed = 5f;
-    public float hoverForce = 65f;
-    public float hoverHeight = 3.5f;
-
-    public float sideMoveMultiplier;
-    public float upMoveMultiplier;
+    
     private float distanceToGround;
 
+    private Vector3 oldGravity;
 
-    void Start()
+    private void Start()
     {
         forward = Camera.main.transform.forward;
         forward.y = 0;
@@ -37,98 +32,77 @@ public class PlayerMove : MonoBehaviour
 
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
         transform.forward = forward;
+        gravityDirection = Physics.gravity;
+        oldGravity = gravityDirection;
+    }
+
+    private void Update()
+    {
+        gravityDirection = Physics.gravity;
+        //Rotates players transform to be opposite of direction of gravity
+        if (gravityDirection != oldGravity)
+        {
+            transform.up = -gravityDirection;
+            oldGravity = gravityDirection;
+        }
+
+        Jump();
+        Move();
     }
 
 
-
-    void FixedUpdate()
+    private void Move()
     {
-        if (!GravityDistortion.useNewGravity)
-        {
-            Move();
+        var moveSpeed = Time.deltaTime * playerSpeed.Value;
 
+        //Movement
+        var movement = new Vector3();
+
+        if (GravityDistortion.useNewGravity)
+        {
+            //Movement in Y dir is constant
+            movement.y = moveSpeed * Input.GetAxis("Vertical");
+            
+            //Gravity in X dir;
+            if (gravityDirection.x > 0 || gravityDirection.x < 0)
+            {
+                movement.z = moveSpeed * -Input.GetAxis("Horizontal");
+            }
+            
+            //Gravity in Z dir
+            if (gravityDirection.z > 0 || gravityDirection.z < 0)
+            {
+                movement.x = moveSpeed * Input.GetAxis("Horizontal");
+            }
         }
         else
         {
-            AltMove();
+            movement += right * (moveSpeed * Input.GetAxis("Horizontal"));
+            movement += forward * (moveSpeed * Input.GetAxis("Vertical"));
+        }
+
+        myBody.MovePosition(myBody.position + movement * playerSpeed.Value);
+
+       
+        //Rotation
+        if (movement.magnitude > 0)
+        {
+            var quat = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement, -gravityDirection),
+                playerTurnSpeed * Time.deltaTime);
+            myBody.MoveRotation(quat);
         }
     }
 
-        private void AltJump()
+    private void Jump()
+    {
+        if (Input.GetButtonDown("Jump") && CheckIfGrounded())
         {
-
+            myBody.AddForce(-gravityDirection.normalized * jumpForce.Value, ForceMode.Impulse);
         }
+    }
 
-        private void Move()
-        {
-            Ray ray = new Ray(transform.position, -transform.up);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, hoverHeight))
-            {
-                float proportionalHeight = (hoverHeight - hit.distance) / hoverHeight;
-                Vector3 appliedHoverForce = Vector3.up * proportionalHeight * hoverForce;
-                myBody.AddForce(appliedHoverForce, ForceMode.Acceleration);
-            }
-
-
-
-            movement = new Vector3();
-            movement += right * (Input.GetAxis("Horizontal"));
-            movement += forward * (Input.GetAxis("Vertical"));
-            movement = Vector3.Normalize(Time.deltaTime * movement) * playerSpeed.Value;
-
-            myBody.AddForce(movement);
-
-            Vector3 heading = Vector3.Normalize(movement);
-            Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
-                Time.deltaTime * playerTurnSpeed.Value);
-            transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
-        }
-
-        private void Jump()
-        {
-            if (Input.GetButtonDown("Jump") && CheckIfGrounded())
-            {
-                myBody.AddForce(transform.up * jumpForce.Value, ForceMode.Impulse);
-            }
-        }
-
-        private bool CheckIfGrounded()
-        {
-            return Physics.Raycast(transform.position, -transform.up, distanceToGround + 0.1f);
-        }
-
-
-
-
-        private void AltMove()
-        {
-            Ray ray = new Ray(transform.position, Physics.gravity);
-            Debug.DrawRay(transform.position, Physics.gravity);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, hoverHeight))
-            {
-                float proportionalHeight = (hoverHeight - hit.distance) / hoverHeight;
-                Vector3 appliedHoverForce = hoverForce * proportionalHeight * -Physics.gravity;
-                myBody.AddForce(appliedHoverForce, ForceMode.Acceleration);
-            }
-
-
-
-            movement = new Vector3(0,Input.GetAxis("Vertical"),0);
-            movement += right * (Input.GetAxis("Horizontal"));
-            //movement += forward * (Input.GetAxis("Vertical"));
-            movement = Vector3.Normalize(Time.deltaTime * movement) * playerSpeed.Value;
-
-            myBody.AddForce(movement);
-
-            
-            Vector3 heading = Vector3.Normalize(movement);
-            Vector3 lerpForward = math.lerp((float3) transform.forward, (float3) heading,
-                Time.deltaTime * playerTurnSpeed.Value);
-            transform.forward = new Vector3(lerpForward.x, 0, lerpForward.z);
-        }
-    
+    private bool CheckIfGrounded()
+    {
+        return Physics.Raycast(transform.position, gravityDirection, distanceToGround + 0.1f);
+    }
 }
