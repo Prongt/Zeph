@@ -60,10 +60,12 @@ public class Pushable : Aspects
         base.Promote(source);
         //Being pushed
         //Debug.Log("Being pushed");
+        //Initial pull to center
         centerPoint = source.transform;
         direction = source.transform.position - transform.position;
         myRB.AddForce(direction * pullForce.Value);
 
+        //Checks to activate functions
         if (orbiting)
         {
             orbiting = false;
@@ -92,13 +94,14 @@ public class Pushable : Aspects
         {
             return;
         }
-        
+        //This causes the object to orbit
         float x = -Mathf.Cos(timer) * xSpread;
         float z = Mathf.Sin(timer) * zSpread;
         Vector3 pos = new Vector3(x, yOffset, z);
         transform.forward = centerPoint.transform.forward;
         transform.position = pos + centerPoint.position;
 
+        //This speeds up the orbit
         if (throwForce <= maxThrowForce.Value)
         {
             throwForce += 1 * Time.deltaTime;
@@ -107,6 +110,7 @@ public class Pushable : Aspects
 
     void Throw()
     {
+        //Throws object away from the player
         direction = centerPoint.position - transform.position;
         direction = -direction;
         myRB.AddForce(direction * throwForce, ForceMode.Impulse);
@@ -115,6 +119,7 @@ public class Pushable : Aspects
 
     IEnumerator Delay()
     {
+        //Delay on checks to make things work smoother
         yield return new WaitForSeconds(0.3f);
         
         if (throwable)

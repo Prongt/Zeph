@@ -358,6 +358,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3018646443490881420, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
       propertyPath: aspectMaterial
@@ -390,6 +395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8080150693659343983, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
+    - {fileID: 1481345518, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
 --- !u!4 &1062540648 stripped
 Transform:
@@ -403,6 +409,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 477215929}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1277214320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277214319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cc1a007d369be948bdad9d08ceac61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  GrowingMaterial: {fileID: 2100000, guid: 150e940f494cecf49b4b1d483bd4f7e3, type: 2}
+  GrowingParticleEffect: {fileID: 0}
+  myAnim: {fileID: 0}
 --- !u!114 &1277214328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,6 +453,25 @@ MonoBehaviour:
   burnedMaterial: {fileID: 2100000, guid: 3d1608f71b7f30e4cb23ba205e1be550, type: 2}
   burningParticleEffect: {fileID: 5991376894092091881, guid: 5d6c452d16630434e9fa06446c82d674,
     type: 3}
+--- !u!95 &1277214329
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277214319}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae163ee201d72de4ab8cd511901f7217, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1897560431
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,5 +640,10 @@ PrefabInstance:
       propertyPath: powerKey
       value: 101
       objectReference: {fileID: 0}
+    - target: {fileID: 2128616418, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
+      propertyPath: elementData.Array.data[0].Element
+      value: 
+      objectReference: {fileID: 11400000, guid: 1a24b8a34b645cd44b6e888bf5f25ae7,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
