@@ -8,6 +8,7 @@ public abstract class Aspects : MonoBehaviour
 
     [SerializeField] private UnityEvent onPromote;
     [SerializeField] private UnityEvent onNegate;
+    protected Element element;
     private void Awake()
     {
         Initialize();
@@ -25,10 +26,15 @@ public abstract class Aspects : MonoBehaviour
 
 
 
-    public virtual void Promote(Transform source = null)
+    public virtual void Promote(Transform source = null, Element element = null)
     {
+        if (element != null)
+        {
+            this.element = element;
+        }
         onPromote.Invoke();
     }
+
 
     public virtual void Negate(Transform source = null)
     {

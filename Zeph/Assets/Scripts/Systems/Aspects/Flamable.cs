@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Flamable : Aspects
@@ -7,13 +8,19 @@ public class Flamable : Aspects
     [SerializeField] private Material burnedMaterial;
     [SerializeField] private ParticleSystem burningParticleEffect;
 
+    [SerializeField] private bool canBeSource = false;
+    [SerializeField] private float fireSpreadInterval = 1;
+    [SerializeField] private float fireSpreadRange = 3;
+    
     private Material baseMaterial;
-    private bool isSource;
-    
-    
+    private bool isOnFire = false;
+    private List<Interactable> objectsToBurn = new List<Interactable>();
+
     public Type[] componentTypes = new Type[]
     {
-        typeof(AudioSource)
+        typeof(AudioSource),
+        typeof(SphereCollider),
+        typeof(Rigidbody)
     };
 
 
@@ -28,57 +35,76 @@ public class Flamable : Aspects
         base.Initialize();
         baseMaterial = GetComponent<Renderer>().material;
         burningParticleEffect.Stop();
+        
+            
+        var collider = gameObject.GetComponent<SphereCollider>();
+        collider.isTrigger = true;
+        collider.radius = fireSpreadRange;
     }
 
-    public override void Promote(Transform source = null)
+
+
+    public override void Promote(Transform source = null, Element element = null)
     {
-        base.Promote(source);
-        //Debug.Log("On Fire");
-        GetComponent<Renderer>().material = burnedMaterial;
-        Instantiate(burningParticleEffect.gameObject, gameObject.transform);
-        burningParticleEffect.Play();
-        StartCoroutine(Burn());
+        base.Promote(source, element);
+        
+        if (!isOnFire)
+        {
+            GetComponent<Renderer>().material = burnedMaterial;
+            Instantiate(burningParticleEffect.gameObject, gameObject.transform);
+            burningParticleEffect.Play();
+        }
+        
+        if (canBeSource && !isOnFire)
+        {
+            isOnFire = true;
+            StartCoroutine(FireSpread());
+        }
+        isOnFire = true;
     }
+
 
     public override void Negate(Transform source = null)
     {
         base.Promote(source);
-        //Extingushed
-        //Debug.Log("Extingushed");
         GetComponent<Renderer>().material = baseMaterial;
+        isOnFire = false;
     }
 
-    IEnumerator Burn()
+    
+    IEnumerator FireSpread()
     {
-        //This is broken
-        /*if (burnedMaterial.color.a > 1)
+        while (isOnFire)
         {
-            burnedMaterial.color = Color.Lerp(burnedMaterial.color, new Color(burnedMaterial.color.r, burnedMaterial.color.g, burnedMaterial.color.b, 0), 1 * Time.deltaTime);
+            yield return new WaitForSeconds(fireSpreadInterval);
+            for (int i = 0; i < objectsToBurn.Count; i++)
+            {
+                objectsToBurn[i].ApplyElement(element);
+            }
         }
-        StartCoroutine(Burn());*/
-        yield return null;
     }
 
-    private IEnumerator FireSpread()
+    private void OnTriggerEnter(Collider other)
     {
-//        elementData[i].colliders = new Collider[maxAffectableObjects];
-//        var size = Physics.OverlapSphereNonAlloc(transform.position, elementData[i].Element.PlayerRange, elementData[i].colliders);
-//        for (int j = 0; j < elementData[i].colliders.Length; j++)
-//        {
-//            var objec = elementData[i].colliders[j];
-//            if (objec)
-//            {
-//                var obj = objec.GetComponent<Interactable>();
-//                if (obj)
-//                {
-//                    obj.ApplyElement(elementData[i].Element, gameObject.transform);
-//                }
-//            }
-//        }
-//        
-        yield return new WaitForSeconds(10f);
+        var obj = other.gameObject.GetComponent<Interactable>();
+        if (obj != null)
+        {
+            if (!objectsToBurn.Contains(obj))
+            {
+                objectsToBurn.Add(obj);
+            }
+        }
+    }
 
-
-
+    private void OnTriggerExit(Collider other)
+    {
+        var obj = other.GetComponent<Interactable>();
+        if (obj)
+        {
+            if (objectsToBurn.Contains(obj))
+            {
+                objectsToBurn.Remove(obj);
+            }
+        }
     }
 }
