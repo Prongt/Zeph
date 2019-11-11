@@ -58,7 +58,7 @@ public class PlayerMove : MonoBehaviour
         //Movement
         var movement = new Vector3();
 
-        if (GravityDistortion.useNewGravity)
+        if (GravityRift.useNewGravity)
         {
             //Movement in Y dir is constant
             movement.y = moveSpeed * Input.GetAxis("Vertical");

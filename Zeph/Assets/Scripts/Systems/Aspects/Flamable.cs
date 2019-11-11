@@ -8,6 +8,7 @@ public class Flamable : Aspects
     [SerializeField] private ParticleSystem burningParticleEffect;
 
     private Material baseMaterial;
+    private bool isSource;
     
     
     public Type[] componentTypes = new Type[]
@@ -56,5 +57,28 @@ public class Flamable : Aspects
         }
         StartCoroutine(Burn());*/
         yield return null;
+    }
+
+    private IEnumerator FireSpread()
+    {
+//        elementData[i].colliders = new Collider[maxAffectableObjects];
+//        var size = Physics.OverlapSphereNonAlloc(transform.position, elementData[i].Element.PlayerRange, elementData[i].colliders);
+//        for (int j = 0; j < elementData[i].colliders.Length; j++)
+//        {
+//            var objec = elementData[i].colliders[j];
+//            if (objec)
+//            {
+//                var obj = objec.GetComponent<Interactable>();
+//                if (obj)
+//                {
+//                    obj.ApplyElement(elementData[i].Element, gameObject.transform);
+//                }
+//            }
+//        }
+//        
+        yield return new WaitForSeconds(10f);
+
+
+
     }
 }

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 
-public class GravityDistortion : Activator
+public class GravityRift : Activator
 {
     [SerializeField] private Vector3 newGravity;
     private static Vector3 ogGravity = new Vector3(0, -9.81f, 0);
