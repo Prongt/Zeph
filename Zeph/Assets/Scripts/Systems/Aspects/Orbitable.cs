@@ -114,6 +114,7 @@ public class Orbitable : Aspects
         direction = centerPoint.position - transform.position;
         direction = -direction;
         myRB.AddForce(direction * throwForce, ForceMode.Impulse);
+        throwForce = 0;
         StartCoroutine(Delay());
     }
 
