@@ -222,7 +222,7 @@ public class Interactable : MonoBehaviour
             {
                 if (aspectComponentsList[i].AspectType == element.Promotes[p])
                 {
-                    aspectComponentsList[i].Promote(source);
+                    aspectComponentsList[i].Promote(source, element);
                 }
             }
             

@@ -55,9 +55,9 @@ public class Orbitable : Aspects
         rotSpeed = throwForce;
     }
 
-    public override void Promote(Transform source = null)
+    public override void Promote(Transform source = null, Element element = null)
     {
-        base.Promote(source);
+        base.Promote(source, element);
         //Being pushed
         //Debug.Log("Being pushed");
         //Initial pull to center

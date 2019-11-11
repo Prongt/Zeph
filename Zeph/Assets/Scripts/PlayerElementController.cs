@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerElementController : MonoBehaviour
@@ -59,8 +60,7 @@ public class PlayerElementController : MonoBehaviour
             {
                 StartCoroutine(LightFade());
             }
-            
-            //Vector2 range
+          
 
             for (int i = 0; i < elementData.Length; i++)
             {
@@ -68,20 +68,28 @@ public class PlayerElementController : MonoBehaviour
                 var size = Physics.OverlapSphereNonAlloc(transform.position, elementData[i].Element.PlayerRange, elementData[i].colliders);
                 for (int j = 0; j < elementData[i].colliders.Length; j++)
                 {
-                    var objec = elementData[i].colliders[j];
-                    //if (objec.transform.position.y )
-                    if (objec)
+                    var collisionObj = elementData[i].colliders[j];
+                    
+                    if (collisionObj)
                     {
-                        var obj = objec.GetComponent<Interactable>();
+                        var obj = collisionObj.GetComponent<Interactable>();
                         if (obj)
                         {
-                            obj.ApplyElement(elementData[i].Element, gameObject.transform);
+                            float objY = obj.transform.position.y;
+                            float playerY = transform.position.y;
+
+                            if (Mathf.Abs(objY - playerY) < height)
+                            {
+                                obj.ApplyElement(elementData[i].Element, gameObject.transform);
+                            }
                         }
                     }
                 }
             }
         }
     }
+    
+    
     
     IEnumerator LightFade()
     {

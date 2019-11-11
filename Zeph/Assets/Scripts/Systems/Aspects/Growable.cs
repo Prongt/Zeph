@@ -26,9 +26,9 @@ public class Growable : Aspects
         myAnim = GetComponent<Animator>();
     }
     
-    public override void Promote(Transform source = null)
+    public override void Promote(Transform source = null, Element element = null)
     {
-        base.Promote(source);
+        base.Promote(source, element);
         myAnim.SetBool("Growing", true);
         //gameObject.GetComponent<Renderer>().material = GrowingMaterial;
     }
