@@ -42,5 +42,5 @@ public enum AspectType
 {
     Flamable,
     Growable,
-    Pushable
+    Orbitable
 }

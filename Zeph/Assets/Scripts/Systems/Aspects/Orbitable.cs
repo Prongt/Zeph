@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Pushable : Aspects
+public class Orbitable : Aspects
 {
     [SerializeField] private FloatReference pullForce;
     [SerializeField] private FloatReference maxThrowForce;

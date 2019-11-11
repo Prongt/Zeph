@@ -6,7 +6,7 @@ public class Growable : Aspects
 {
     [SerializeField] private Material GrowingMaterial;
     [SerializeField] private GameObject GrowingParticleEffect;
-    [SerializeField] private Animator myAnim;
+    private Animator myAnim;
 
     
     public Type[] componentTypes = new Type[]
