@@ -4,14 +4,27 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject player;
+    public Transform player;
+
+    private Vector3 cameraOffset;
+
+    [Range(0.01f, 1.0f)] public float smoothFactor = 1f;
     
-    public FloatReference speed;
-    public FloatReference minDistance;
+    //public FloatReference speed;
+    //public FloatReference minDistance;
+
+    void Start()
+    {
+        cameraOffset = transform.position - player.position;
+    }
     
     
-    void Update () {
-        float interpolation = speed * Time.deltaTime;
+    void LateUpdate ()
+    {
+        Vector3 newPos = player.position + cameraOffset;
+
+        transform.position = Vector3.Slerp(transform.position, newPos, smoothFactor);
+        /*float interpolation = speed * Time.deltaTime;
 
         if (Vector3.Distance(transform.position, player.transform.position) > minDistance)
         {
@@ -21,6 +34,6 @@ public class CameraController : MonoBehaviour
             position.z = Mathf.Lerp(this.transform.position.z, player.transform.position.z, interpolation);
         
             this.transform.position = position;
-        }
+        }*/
     }
 }
