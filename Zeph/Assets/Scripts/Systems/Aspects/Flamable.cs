@@ -9,12 +9,15 @@ public class Flamable : Aspects
     [SerializeField] private ParticleSystem burningParticleEffect;
 
     [SerializeField] private bool canBeSource = false;
-    [SerializeField] private float fireSpreadInterval = 1;
-    [SerializeField] private float fireSpreadRange = 3;
+    [HideIf("canBeSource", true)] [SerializeField] private float fireSpreadInterval = 1;
+    [HideIf("canBeSource", true)] [SerializeField] private bool useBoxCollider = false;
+    [HideIf("useBoxCollider", true)] [SerializeField] private Vector3 boxDimensions;
     
+    
+    [HideIf("useBoxCollider", false, true)] [SerializeField] private float fireSpreadRange = 3;
+
     private Material baseMaterial;
     private bool isOnFire = false;
-    private List<Interactable> objectsToBurn = new List<Interactable>();
     private Collider[] colliders = new Collider[25];
 
     public Type[] componentTypes = new Type[]
@@ -35,11 +38,6 @@ public class Flamable : Aspects
         base.Initialize();
         baseMaterial = GetComponent<Renderer>().material;
         burningParticleEffect.Stop();
-        
-            
-//        var collider = gameObject.GetComponent<SphereCollider>();
-//        collider.isTrigger = true;
-//        collider.radius = fireSpreadRange;
     }
 
 
@@ -77,13 +75,19 @@ public class Flamable : Aspects
         while (isOnFire)
         {
             yield return new WaitForSeconds(fireSpreadInterval);
-//            for (int i = 0; i < objectsToBurn.Count; i++)
-//            {
-//                objectsToBurn[i].ApplyElement(element);
-//            }
-
+            
             colliders = new Collider[25];
-            Physics.OverlapSphereNonAlloc(transform.position, fireSpreadRange, colliders);
+            if (useBoxCollider)
+            {
+                
+                Physics.OverlapBoxNonAlloc(transform.position, new Vector3(boxDimensions.x/2,boxDimensions.y/2,boxDimensions.z /2), colliders);
+            }
+            else
+            {
+                Physics.OverlapSphereNonAlloc(transform.position, fireSpreadRange, colliders);
+            }
+            
+            
             for (int i = 0; i < colliders.Length; i++)
             {
                 var collisionObj = colliders[i];
@@ -107,27 +111,30 @@ public class Flamable : Aspects
         }
     }
 
-//    private void OnTriggerEnter(Collider other)
-//    {
-//        var obj = other.gameObject.GetComponent<Interactable>();
-//        if (obj != null)
-//        {
-//            if (!objectsToBurn.Contains(obj))
-//            {
-//                objectsToBurn.Add(obj);
-//            }
-//        }
-//    }
-//
-//    private void OnTriggerExit(Collider other)
-//    {
-//        var obj = other.GetComponent<Interactable>();
-//        if (obj)
-//        {
-//            if (objectsToBurn.Contains(obj))
-//            {
-//                objectsToBurn.Remove(obj);
-//            }
-//        }
-//    }
+    private void OnDrawGizmos()
+    {
+        if (canBeSource == false)
+        {
+            return;
+        }
+        if (element != null)
+        {
+            Gizmos.color = element.DebugColor;
+        }
+        else
+        {
+            Gizmos.color = Color.red;
+        }
+
+        if (useBoxCollider)
+        {
+            Gizmos.DrawWireCube(transform.position, boxDimensions);
+            
+        }
+        else
+        {
+            Gizmos.DrawWireSphere(transform.position, fireSpreadRange);
+        }
+        
+    }
 }
