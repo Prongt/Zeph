@@ -8,6 +8,9 @@ public class Flamable : Aspects
     [SerializeField] private Material burnedMaterial;
     [SerializeField] private ParticleSystem burningParticleEffect;
 
+    [SerializeField] private bool destroyable = false;
+    [HideIf("destroyable", true)] [SerializeField] private float destroyTime = 1.0f;
+
     [SerializeField] private bool canBeSource = false;
     [HideIf("canBeSource", true)] [SerializeField] private float fireSpreadInterval = 1;
     [HideIf("canBeSource", true)] [SerializeField] private bool useBoxCollider = false;
@@ -36,8 +39,18 @@ public class Flamable : Aspects
     protected override void Initialize()
     {
         base.Initialize();
-        baseMaterial = GetComponent<Renderer>().material;
+        var renderer = GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            baseMaterial = renderer.material;
+        }
+        
         burningParticleEffect.Stop();
+
+        if (fireSpreadInterval < 0.01f)
+        {
+            Debug.LogWarning("The fire spread interval on " + gameObject.name + " is too low this may cause performance issues");
+        }
     }
 
 
@@ -59,13 +72,25 @@ public class Flamable : Aspects
             StartCoroutine(FireSpread());
         }
         isOnFire = true;
+
+        if (destroyable)
+        {
+            Debug.Log("Destroying " + gameObject.name + " in " + destroyTime + " seconds");
+            Destroy(this.gameObject, destroyTime);
+        }
     }
 
 
     public override void Negate(Transform source = null)
     {
         base.Promote(source);
-        GetComponent<Renderer>().material = baseMaterial;
+        
+        var renderer = GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.material = baseMaterial;
+        }
+
         isOnFire = false;
     }
 
