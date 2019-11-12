@@ -11,12 +11,9 @@ public class PlayerElementController : MonoBehaviour
     [SerializeField] private float height = 1;
     [SerializeField] private bool drawGizmos = false;
     [HideIf("drawGizmos", true)][SerializeField] private float gizmoHeight;
-
     [SerializeField] private KeyCode powerKey;
-    [SerializeField] private ParticleSystem wind;
-
     private Light light;
-    private bool powerUsed;
+    public bool powerUsed;
     private bool routineRunning;
 
 
@@ -40,26 +37,23 @@ public class PlayerElementController : MonoBehaviour
 
     private void Update()
     {
+        if (light.intensity >= 6)
+        {
+            light.intensity = Mathf.Lerp(light.intensity, 5, 0.5f * Time.deltaTime);
+        }
+        
         if (Input.GetKeyDown(powerKey) && !powerUsed)
         {
             powerUsed = true;
             StartCoroutine(Delay());
-            /*if (!GameObject.Find("Wind(Clone)"))
-            {
-                Instantiate(wind.gameObject, gameObject.transform);
-
-            }
-            else if(GameObject.Find("Wind(Clone)"))
-            {
-                Destroy(GameObject.Find("Wind(Clone)"));
-                Instantiate(wind.gameObject, gameObject.transform);
-            }*/
-            
             light.intensity = 100;
+        
             if (!routineRunning)
             {
-                StartCoroutine(LightFade());
+                //StartCoroutine(LightFade());
             }
+
+           
           
 
             for (int i = 0; i < elementData.Length; i++)
@@ -87,27 +81,6 @@ public class PlayerElementController : MonoBehaviour
                 }
             }
         }
-    }
-    
-    
-    
-    IEnumerator LightFade()
-    {
-        routineRunning = true;
-        light.intensity = Mathf.Lerp(light.intensity, 5, 0.5f * Time.deltaTime);
-
-            yield return null;
-            if (light.intensity <= 6)
-            {
-                StopCoroutine(LightFade());
-            }
-            else
-            {
-                routineRunning = false;
-                StartCoroutine(LightFade());
-            }
-
-            /*StartCoroutine(LightFade());*/
     }
 
     IEnumerator Delay()

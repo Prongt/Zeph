@@ -98,7 +98,7 @@ public class Orbitable : Aspects
         float x = -Mathf.Cos(timer) * xSpread;
         float z = Mathf.Sin(timer) * zSpread;
         Vector3 pos = new Vector3(x, yOffset, z);
-        transform.forward = centerPoint.transform.forward;
+        //transform.forward = centerPoint.transform.forward;
         transform.position = pos + centerPoint.position;
 
         //This speeds up the orbit
@@ -113,9 +113,9 @@ public class Orbitable : Aspects
         //Throws object away from the player
         direction = centerPoint.position - transform.position;
         direction = -direction;
-        myRB.AddForce(direction * throwForce, ForceMode.Impulse);
-        throwForce = 0;
+        myRB.AddForce(direction * throwForce * 2, ForceMode.Impulse);
         StartCoroutine(Delay());
+        throwForce = 0.5f;
     }
 
     IEnumerator Delay()
@@ -127,10 +127,13 @@ public class Orbitable : Aspects
         {
             throwable = false;
         }
-        
-        if (Vector3.Distance(centerPoint.position, transform.position) <= 3)
+
+        if (!gameObject.CompareTag("Heavy"))
         {
-            orbiting = true;
+            if (Vector3.Distance(centerPoint.position, transform.position) <= 3)
+            {
+                orbiting = true;
+            }
         }
     }
 }
