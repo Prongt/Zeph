@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerElementController : MonoBehaviour
 {
     public PlayerElement[] elementData;
-    [SerializeField] private float height;
+    [SerializeField] private float height = 1;
     [SerializeField] private bool drawGizmos = false;
     [HideIf("drawGizmos", true)][SerializeField] private float gizmoHeight;
 

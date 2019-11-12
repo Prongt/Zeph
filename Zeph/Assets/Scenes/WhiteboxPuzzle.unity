@@ -1373,6 +1373,9 @@ MonoBehaviour:
       m_Calls: []
   burnedMaterial: {fileID: 0}
   burningParticleEffect: {fileID: 0}
+  canBeSource: 0
+  fireSpreadInterval: 1
+  fireSpreadRange: 3
 --- !u!114 &1698693762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1387,6 +1390,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 52d90422a83d4db41a3d928d0760060c, type: 2}
   additionalAspects: 
+--- !u!135 &1698693763
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698693756}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1752013138 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7146719050069016613, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
@@ -1633,13 +1649,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022509909}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7988235, y: 0.0653735, z: 0.11299689, w: 0.5872301}
   m_LocalPosition: {x: 0, y: 22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 112.57001, y: -42.097992, z: -38.162994}
 --- !u!1001 &2067494132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1759,7 +1775,7 @@ PrefabInstance:
     - target: {fileID: 659735940685889577, guid: 6bc91f51fd2b356469c94d9a51ec1fe3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 659735940685889577, guid: 6bc91f51fd2b356469c94d9a51ec1fe3,
         type: 3}
@@ -1806,6 +1822,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 659735940685889577, guid: 6bc91f51fd2b356469c94d9a51ec1fe3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 659735940685889577, guid: 6bc91f51fd2b356469c94d9a51ec1fe3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 659735940685889577, guid: 6bc91f51fd2b356469c94d9a51ec1fe3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4525500834151932967, guid: 6bc91f51fd2b356469c94d9a51ec1fe3,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1834,6 +1865,81 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Vertical Slice Room 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 254994068422699141, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Cosmic Gravity Rift 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294057686864801386, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Gravity Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206503782873112394, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Story Nugget Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 3961231203589177210, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Exterior Wall 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7927821785690303306, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Cosmic Gravity Rift 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766954614454578590, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Box Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027555833513048179, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Torch 1 Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027555833513048179, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173110826412673193, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Cosmic GravityRift 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021377460744679321, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Exterior Wall 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380177784343767545, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Cosmic GravityRift 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186178095198533072, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6315008885471303575, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Log Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146719050069016613, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Light Torch 1 Walls
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146719050069016613, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8931774297544875119, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
@@ -1890,11 +1996,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2186178095198533072, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 5327514423038980267, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1904,16 +2005,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6315008885471303575, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Log Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 1766954614454578590, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Box Platform
       objectReference: {fileID: 0}
     - target: {fileID: 7600643173577124257, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
@@ -1925,20 +2016,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7027555833513048179, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+    - target: {fileID: 7600643173577124257, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
-      propertyPath: m_Name
-      value: Torch 1 Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 3961231203589177210, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Exterior Wall 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2021377460744679321, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Exterior Wall 2
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 76720076729159199, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
@@ -1949,16 +2030,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2206503782873112394, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Story Nugget Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 2294057686864801386, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Gravity Wall
       objectReference: {fileID: 0}
     - target: {fileID: 5211609513369191491, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
@@ -2010,41 +2081,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9738aeb1e1d016545b2ddcc117a63632, type: 2}
-    - target: {fileID: 7927821785690303306, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Cosmic Gravity Rift 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2859222075649509530, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3d1608f71b7f30e4cb23ba205e1be550, type: 2}
-    - target: {fileID: 254994068422699141, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Cosmic Gravity Rift 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8159645830022445480, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3d1608f71b7f30e4cb23ba205e1be550, type: 2}
-    - target: {fileID: 4380177784343767545, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Cosmic GravityRift 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1365825960450239807, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3d1608f71b7f30e4cb23ba205e1be550, type: 2}
-    - target: {fileID: 9173110826412673193, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Cosmic GravityRift 4
-      objectReference: {fileID: 0}
     - target: {fileID: 2449002223866521940, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2090,21 +2141,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Large Fungus Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 2829059712763389970, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5201541811510959961, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e543a1df7e5c82441ad5b076c6414a11, type: 2}
-    - target: {fileID: 7146719050069016613, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Light Torch 1 Walls
-      objectReference: {fileID: 0}
-    - target: {fileID: 7146719050069016613, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4821478271505678479, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
       propertyPath: m_IsActive
@@ -2356,6 +2402,9 @@ MonoBehaviour:
       m_Calls: []
   burnedMaterial: {fileID: 0}
   burningParticleEffect: {fileID: 0}
+  canBeSource: 0
+  fireSpreadInterval: 1
+  fireSpreadRange: 3
 --- !u!114 &5571504827403069457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2487,6 +2536,9 @@ MonoBehaviour:
       m_Calls: []
   burnedMaterial: {fileID: 0}
   burningParticleEffect: {fileID: 0}
+  canBeSource: 0
+  fireSpreadInterval: 1
+  fireSpreadRange: 3
 --- !u!114 &5571504827403069460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2618,6 +2670,9 @@ MonoBehaviour:
       m_Calls: []
   burnedMaterial: {fileID: 0}
   burningParticleEffect: {fileID: 0}
+  canBeSource: 0
+  fireSpreadInterval: 1
+  fireSpreadRange: 3
 --- !u!114 &5571504827403069463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2941,7 +2996,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &5571504827403069472
 MonoBehaviour:
@@ -3563,7 +3618,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 96
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &5571504827403069490
 MonoBehaviour:
@@ -3729,6 +3784,9 @@ MonoBehaviour:
       m_Calls: []
   burnedMaterial: {fileID: 0}
   burningParticleEffect: {fileID: 0}
+  canBeSource: 0
+  fireSpreadInterval: 1
+  fireSpreadRange: 3
 --- !u!114 &5571504827403069494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3844,6 +3902,122 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: -7579274770355646218, guid: 4fe89f3edeb0c7e4088b50da6dfb698c, type: 3}
+--- !u!54 &5571504827403069536
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571504827403069445}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &5571504827403069537
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571504827403069445}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.0000002
+  m_Center: {x: 0, y: 0, z: 1.0000002}
+--- !u!54 &5571504827403069538
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571504827403069446}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &5571504827403069539
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571504827403069446}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.0000002
+  m_Center: {x: 0, y: 0, z: 1.0000002}
+--- !u!54 &5571504827403069540
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571504827403069447}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &5571504827403069541
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571504827403069447}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.0000002
+  m_Center: {x: 0, y: 0, z: 1.0000002}
+--- !u!54 &5571504827403069542
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571504827403069454}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!135 &5571504827403069543
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571504827403069454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5.535812
+  m_Center: {x: 0, y: 0, z: -1.2500002}
 --- !u!1 &5726078074872941123 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4015888194937459912, guid: 219d60d73aeaf54458a1a50f257f6864,

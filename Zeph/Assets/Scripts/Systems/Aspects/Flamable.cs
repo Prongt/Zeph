@@ -15,11 +15,11 @@ public class Flamable : Aspects
     private Material baseMaterial;
     private bool isOnFire = false;
     private List<Interactable> objectsToBurn = new List<Interactable>();
+    private Collider[] colliders = new Collider[25];
 
     public Type[] componentTypes = new Type[]
     {
         typeof(AudioSource),
-        typeof(SphereCollider),
         typeof(Rigidbody)
     };
 
@@ -37,9 +37,9 @@ public class Flamable : Aspects
         burningParticleEffect.Stop();
         
             
-        var collider = gameObject.GetComponent<SphereCollider>();
-        collider.isTrigger = true;
-        collider.radius = fireSpreadRange;
+//        var collider = gameObject.GetComponent<SphereCollider>();
+//        collider.isTrigger = true;
+//        collider.radius = fireSpreadRange;
     }
 
 
@@ -77,34 +77,57 @@ public class Flamable : Aspects
         while (isOnFire)
         {
             yield return new WaitForSeconds(fireSpreadInterval);
-            for (int i = 0; i < objectsToBurn.Count; i++)
+//            for (int i = 0; i < objectsToBurn.Count; i++)
+//            {
+//                objectsToBurn[i].ApplyElement(element);
+//            }
+
+            colliders = new Collider[25];
+            Physics.OverlapSphereNonAlloc(transform.position, fireSpreadRange, colliders);
+            for (int i = 0; i < colliders.Length; i++)
             {
-                objectsToBurn[i].ApplyElement(element);
+                var collisionObj = colliders[i];
+                    
+                if (collisionObj)
+                {
+                    var obj = collisionObj.GetComponent<Interactable>();
+                    if (obj)
+                    {
+//                        float objY = obj.transform.position.y;
+//                        float playerY = transform.position.y;
+
+//                        if (Mathf.Abs(objY - playerY) < height)
+//                        {
+//                            obj.ApplyElement(element, gameObject.transform);
+//                        }
+                        obj.ApplyElement(element, transform);
+                    }
+                }
             }
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        var obj = other.gameObject.GetComponent<Interactable>();
-        if (obj != null)
-        {
-            if (!objectsToBurn.Contains(obj))
-            {
-                objectsToBurn.Add(obj);
-            }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        var obj = other.GetComponent<Interactable>();
-        if (obj)
-        {
-            if (objectsToBurn.Contains(obj))
-            {
-                objectsToBurn.Remove(obj);
-            }
-        }
-    }
+//    private void OnTriggerEnter(Collider other)
+//    {
+//        var obj = other.gameObject.GetComponent<Interactable>();
+//        if (obj != null)
+//        {
+//            if (!objectsToBurn.Contains(obj))
+//            {
+//                objectsToBurn.Add(obj);
+//            }
+//        }
+//    }
+//
+//    private void OnTriggerExit(Collider other)
+//    {
+//        var obj = other.GetComponent<Interactable>();
+//        if (obj)
+//        {
+//            if (objectsToBurn.Contains(obj))
+//            {
+//                objectsToBurn.Remove(obj);
+//            }
+//        }
+//    }
 }
