@@ -61,7 +61,12 @@ public class Flamable : Aspects
         
         if (!isOnFire)
         {
-            GetComponent<Renderer>().material = burnedMaterial;
+            var renderer = GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.material = burnedMaterial;
+            }
+            
             Instantiate(burningParticleEffect.gameObject, gameObject.transform);
             burningParticleEffect.Play();
         }
