@@ -51,8 +51,8 @@ public class Orbitable : Aspects
             Orbit();
             throwable = true;
         }
-        
-        rotSpeed = throwForce;
+
+        //rotSpeed = throwForce;
     }
 
     public override void Promote(Transform source = null, Element element = null)

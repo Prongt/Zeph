@@ -7,6 +7,8 @@ public class GravityRift : Activator
     private static Vector3 ogGravity = new Vector3(0, -9.81f, 0);
 
     public static bool useNewGravity = false;
+
+    public bool resetGravity = true;
     // Start is called before the first frame update
     void Awake()
     {
@@ -16,15 +18,22 @@ public class GravityRift : Activator
 
     public override void Activate()
     {
-        if (!useNewGravity)
+        if (!resetGravity)
         {
-            useNewGravity = true;
             Physics.gravity = newGravity;
         }
         else
         {
-            useNewGravity = false;
-            Physics.gravity = ogGravity;
+            if (!useNewGravity)
+            {
+                useNewGravity = true;
+                Physics.gravity = newGravity;
+            }
+            else
+            {
+                useNewGravity = false;
+                Physics.gravity = ogGravity;
+            }
         }
     }
 }

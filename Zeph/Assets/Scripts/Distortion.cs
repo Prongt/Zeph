@@ -7,9 +7,11 @@ using UnityEngine;
 public class Distortion : MonoBehaviour
 {
     [SerializeField] private Animator disAnim1;
-    [SerializeField] private Animator disAnim2;
+    //[SerializeField] private Animator disAnim2;
 
     private bool animating = false;
+
+    [SerializeField] private bool onGround;
     
     // Start is called before the first frame update
     void Start()
@@ -20,12 +22,17 @@ public class Distortion : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (GravityRift.useNewGravity || onGround)
         {
-            animating = !animating;
-            print("doing");
-            disAnim1.SetBool("Animate", animating);
-            disAnim2.SetBool("Animate", animating);
+            if (other.CompareTag("Player"))
+            {
+                animating = !animating;
+                print("doing");
+                disAnim1.SetBool("Animate", animating);
+                //disAnim2.SetBool("Animate", animating);
+            }
         }
+
+
     }
 }
