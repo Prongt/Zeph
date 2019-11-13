@@ -42,7 +42,8 @@ public class PlayerElementController : MonoBehaviour
             light.intensity = Mathf.Lerp(light.intensity, 5, 0.5f * Time.deltaTime);
         }
         
-        if (Input.GetKeyDown(powerKey) && !powerUsed && PlayerMove.IsGrounded)
+        //if (Input.GetKeyDown(powerKey) && !powerUsed && PlayerMove.IsGrounded)
+        if (Input.GetKeyDown(powerKey) && PlayerMove.IsGrounded)
         {
             powerUsed = true;
             StartCoroutine(Delay());

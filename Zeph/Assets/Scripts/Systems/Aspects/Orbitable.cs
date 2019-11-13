@@ -113,7 +113,7 @@ public class Orbitable : Aspects
         //Throws object away from the player
         direction = centerPoint.position - transform.position;
         direction = -direction;
-        myRB.AddForce(direction * throwForce * 2, ForceMode.Impulse);
+        myRB.AddForce(direction * throwForce, ForceMode.Impulse);
         StartCoroutine(Delay());
         throwForce = 0.5f;
     }
