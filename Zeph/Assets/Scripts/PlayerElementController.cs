@@ -42,7 +42,7 @@ public class PlayerElementController : MonoBehaviour
             light.intensity = Mathf.Lerp(light.intensity, 5, 0.5f * Time.deltaTime);
         }
         
-        if (Input.GetKeyDown(powerKey) && !powerUsed)
+        if (Input.GetKeyDown(powerKey) && !powerUsed && PlayerMove.IsGrounded)
         {
             powerUsed = true;
             StartCoroutine(Delay());
@@ -69,7 +69,8 @@ public class PlayerElementController : MonoBehaviour
                         var obj = collisionObj.GetComponent<Interactable>();
                         if (obj)
                         {
-                            float objY = obj.transform.position.y;
+                            float objY =  elementData[i].colliders[j].ClosestPoint(transform.position).y;
+                            //float objY = obj.transform.position.y;
                             float playerY = transform.position.y;
 
                             if (Mathf.Abs(objY - playerY) < height)

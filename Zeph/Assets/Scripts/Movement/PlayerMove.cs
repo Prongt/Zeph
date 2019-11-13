@@ -19,6 +19,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private FloatReference jumpForce;
     
     private float distanceToGround;
+    public static bool IsGrounded;
 
     private Vector3 oldGravity;
 
@@ -46,6 +47,7 @@ public class PlayerMove : MonoBehaviour
             oldGravity = gravityDirection;
         }
 
+        
         Jump();
         Move();
     }
@@ -95,10 +97,19 @@ public class PlayerMove : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && CheckIfGrounded())
+        if (CheckIfGrounded())
         {
-            myBody.AddForce(-gravityDirection.normalized * jumpForce.Value, ForceMode.Impulse);
+            IsGrounded = true;
+            if (Input.GetButtonDown("Jump"))
+            {
+                myBody.AddForce(-gravityDirection.normalized * jumpForce.Value, ForceMode.Impulse);
+            }
         }
+        else
+        {
+            IsGrounded = false;
+        }
+        
     }
 
     private bool CheckIfGrounded()
