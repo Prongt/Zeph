@@ -26,7 +26,7 @@ public class Flamable : Aspects
     public Type[] componentTypes = new Type[]
     {
         typeof(AudioSource),
-        typeof(Rigidbody)
+        //typeof(Rigidbody)
     };
 
 
