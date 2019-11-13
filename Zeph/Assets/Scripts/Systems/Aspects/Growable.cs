@@ -5,13 +5,13 @@ public class Growable : Aspects
 {
     [SerializeField] private Material GrowingMaterial;
     [SerializeField] private GameObject GrowingParticleEffect;
-    private Animator myAnim;
+    public Animator myAnim;
 
     
     public Type[] componentTypes = new Type[]
     {
-        typeof(AudioSource),
-        typeof(Animator)
+        typeof(AudioSource)
+        //typeof(Animator)
     };
 
     
