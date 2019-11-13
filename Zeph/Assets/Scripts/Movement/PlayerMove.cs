@@ -40,13 +40,13 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
         gravityDirection = Physics.gravity;
+        print(gravityDirection);
         //Rotates players transform to be opposite of direction of gravity
         if (gravityDirection != oldGravity)
         {
-            transform.up = -gravityDirection;
+            transform.up = new Vector3(0, -(gravityDirection.x + gravityDirection.z) / 2, 0);
             oldGravity = gravityDirection;
         }
-
         
         Jump();
         Move();
@@ -66,16 +66,24 @@ public class PlayerMove : MonoBehaviour
             movement.y = moveSpeed * Input.GetAxis("Vertical");
             
             //Gravity in X dir;
-            if (gravityDirection.x > 0 || gravityDirection.x < 0)
+            if ((gravityDirection.x > 0 || gravityDirection.x < 0) && (gravityDirection.z > 0 || gravityDirection.z < 0))
             {
+                print("both dir");
+                movement.z = moveSpeed * -Input.GetAxis("Horizontal");
+                movement.x = moveSpeed * -Input.GetAxis("Horizontal");
+            }
+            else if (gravityDirection.x > 0 || gravityDirection.x < 0)
+            {
+                print("x Dir");
                 movement.z = moveSpeed * -Input.GetAxis("Horizontal");
             }
-            
             //Gravity in Z dir
-            if (gravityDirection.z > 0 || gravityDirection.z < 0)
+            else if (gravityDirection.z > 0 || gravityDirection.z < 0)
             {
+                print("Y dir");
                 movement.x = moveSpeed * Input.GetAxis("Horizontal");
             }
+            
         }
         else
         {
