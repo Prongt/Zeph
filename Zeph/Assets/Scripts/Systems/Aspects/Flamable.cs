@@ -12,16 +12,19 @@ public class Flamable : Aspects
     [HideIf("destroyable", true)] [SerializeField] private float destroyTime = 1.0f;
 
     [SerializeField] private bool canBeSource = false;
-    [HideIf("canBeSource", true)] [SerializeField] private float fireSpreadInterval = 1;
+    
     [HideIf("canBeSource", true)] [SerializeField] private bool useBoxCollider = false;
     [HideIf("useBoxCollider", true)] [SerializeField] private Vector3 boxDimensions;
     
     
+    
     [HideIf("useBoxCollider", false, true)] [SerializeField] private float fireSpreadRange = 3;
+    [Range(0.01f, 5f)] [SerializeField] private float fireSpreadPerSecond = 1;
+    [Range(5, 25)] [SerializeField] private int maxNumberOfAffectableObjects = 7;
 
     private Material baseMaterial;
     private bool isOnFire = false;
-    private Collider[] colliders = new Collider[25];
+    private Collider[] colliders = new Collider[10];
 
     public Type[] componentTypes = new Type[]
     {
@@ -47,9 +50,9 @@ public class Flamable : Aspects
         
         burningParticleEffect.Stop();
 
-        if (fireSpreadInterval < 0.01f)
+        if (fireSpreadPerSecond < 0.01f)
         {
-            Debug.LogWarning("The fire spread interval on " + gameObject.name + " is too low this may cause performance issues");
+            //Debug.LogWarning("The fire spread interval on " + gameObject.name + " is too low this may cause performance issues");
         }
     }
 
@@ -80,7 +83,7 @@ public class Flamable : Aspects
 
         if (destroyable)
         {
-            Debug.Log("Destroying " + gameObject.name + " in " + destroyTime + " seconds");
+//            Debug.Log("Destroying " + gameObject.name + " in " + destroyTime + " seconds");
             Destroy(this.gameObject, destroyTime);
         }
     }
@@ -104,40 +107,45 @@ public class Flamable : Aspects
     {
         while (isOnFire)
         {
-            yield return new WaitForSeconds(fireSpreadInterval);
+            yield return new WaitForSeconds(fireSpreadPerSecond);
             
-            colliders = new Collider[25];
+            colliders = new Collider[maxNumberOfAffectableObjects];
             if (useBoxCollider)
             {
-                
                 Physics.OverlapBoxNonAlloc(transform.position, new Vector3(boxDimensions.x/2,boxDimensions.y/2,boxDimensions.z /2), colliders);
             }
             else
             {
                 Physics.OverlapSphereNonAlloc(transform.position, fireSpreadRange, colliders);
             }
-            
-            
-            for (int i = 0; i < colliders.Length; i++)
+
+            foreach (Collider col in colliders)
             {
-                var collisionObj = colliders[i];
-                    
-                if (collisionObj)
+                if (col)
                 {
-                    var obj = collisionObj.GetComponent<Interactable>();
+                    var obj = col.GetComponent<Interactable>();
                     if (obj)
                     {
-//                        float objY = obj.transform.position.y;
-//                        float playerY = transform.position.y;
-
-//                        if (Mathf.Abs(objY - playerY) < height)
-//                        {
-//                            obj.ApplyElement(element, gameObject.transform);
-//                        }
                         obj.ApplyElement(element, transform);
                     }
                 }
+                
             }
+            
+            
+//            for (int i = 0; i < colliders.Length; i++)
+//            {
+//                var collisionObj = colliders[i];
+//                    
+//                if (collisionObj)
+//                {
+//                    var obj = collisionObj.GetComponent<Interactable>();
+//                    if (obj)
+//                    {
+//                        obj.ApplyElement(element, transform);
+//                    }
+//                }
+//            }
         }
     }
 

@@ -40,7 +40,7 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
         gravityDirection = Physics.gravity;
-        print(gravityDirection);
+//        print(gravityDirection);
         //Rotates players transform to be opposite of direction of gravity
         if (gravityDirection != oldGravity)
         {

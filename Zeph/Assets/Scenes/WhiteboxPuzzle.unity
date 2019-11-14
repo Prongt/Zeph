@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -741,7 +741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &276817717
 Transform:
   m_ObjectHideFlags: 0
@@ -956,6 +956,16 @@ PrefabInstance:
         type: 3}
       propertyPath: fireSpreadInterval
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
+        type: 3}
+      propertyPath: maxNumberOfSpreadableObjects
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
+        type: 3}
+      propertyPath: maxNumberOfAffectableObjects
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1590556457564750158, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
         type: 3}
@@ -1435,6 +1445,16 @@ PrefabInstance:
       propertyPath: fireSpreadInterval
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
+        type: 3}
+      propertyPath: maxNumberOfSpreadableObjects
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
+        type: 3}
+      propertyPath: maxNumberOfAffectableObjects
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1590556457564750158, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1609,6 +1629,16 @@ PrefabInstance:
         type: 3}
       propertyPath: fireSpreadInterval
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
+        type: 3}
+      propertyPath: maxNumberOfSpreadableObjects
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
+        type: 3}
+      propertyPath: maxNumberOfAffectableObjects
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1590556457564750158, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
         type: 3}
@@ -2390,26 +2420,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90ec528e554a19c48a20360f6c59a4bf, type: 3}
---- !u!1 &1383618281 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4890117515526024213, guid: 5c0917fafcb61764aa309728126c3964,
-    type: 3}
-  m_PrefabInstance: {fileID: 1497140727}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &1383618285
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1383618281}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1497140727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2477,32 +2487,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4890117515526024212, guid: 5c0917fafcb61764aa309728126c3964,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2128616418, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
-      propertyPath: powerKey
-      value: 101
-      objectReference: {fileID: 0}
-    - target: {fileID: 2128616418, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
-      propertyPath: height
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4890117516617628097, guid: 5c0917fafcb61764aa309728126c3964,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: a97a365a1e297e643b917967f54d13f5,
-        type: 2}
-    - target: {fileID: 4890117515526024232, guid: 5c0917fafcb61764aa309728126c3964,
-        type: 3}
-      propertyPath: m_Drag
-      value: 0.06
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4890117515526024215, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
 --- !u!1 &1534827876 stripped
 GameObject:
@@ -2913,6 +2898,11 @@ PrefabInstance:
       propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 151186579645921417, guid: 6bc91f51fd2b356469c94d9a51ec1fe3,
+        type: 3}
+      propertyPath: maxNumberOfAffectableObjects
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bc91f51fd2b356469c94d9a51ec1fe3, type: 3}
 --- !u!1 &1649267946 stripped
@@ -3153,6 +3143,7 @@ MonoBehaviour:
   useBoxCollider: 0
   boxDimensions: {x: 0, y: 0, z: 0}
   fireSpreadRange: 1.78
+  maxNumberOfAffectableObjects: 25
 --- !u!114 &1698693762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3296,6 +3287,16 @@ PrefabInstance:
         type: 3}
       propertyPath: fireSpreadInterval
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
+        type: 3}
+      propertyPath: maxNumberOfSpreadableObjects
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
+        type: 3}
+      propertyPath: maxNumberOfAffectableObjects
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1590556457564750158, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
         type: 3}
@@ -3494,26 +3495,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree2 (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
-        type: 3}
-      propertyPath: boxDimensions.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
-        type: 3}
-      propertyPath: boxDimensions.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
-        type: 3}
-      propertyPath: boxDimensions.z
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
-        type: 3}
-      propertyPath: fireSpreadInterval
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 1590556457564750158, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3569,18 +3550,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1590556457564750158, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.40108025
-      objectReference: {fileID: 0}
-    - target: {fileID: 1590556457564750158, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.40108025
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4149346249878326597, guid: 24353fd346b7a0e4fa5ac5b09944cd46, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24353fd346b7a0e4fa5ac5b09944cd46, type: 3}
 --- !u!4 &1831412203 stripped
 Transform:
@@ -3588,25 +3558,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1831412202}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1831412204 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2326552805311984477, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
-    type: 3}
-  m_PrefabInstance: {fileID: 1831412202}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1831412205
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831412204}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.0932307, y: 4.1353245, z: 4.7795024}
-  m_Center: {x: 0.07562899, y: 0.086102866, z: 0.9320938}
 --- !u!1 &1858431431 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8747504510041033631, guid: 43c25a8d824ef2e4f842a8103f68b643,
@@ -3940,6 +3891,16 @@ PrefabInstance:
       propertyPath: fireSpreadInterval
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
+        type: 3}
+      propertyPath: maxNumberOfSpreadableObjects
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137960247471020789, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
+        type: 3}
+      propertyPath: maxNumberOfAffectableObjects
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1590556457564750158, guid: 24353fd346b7a0e4fa5ac5b09944cd46,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4210,6 +4171,11 @@ PrefabInstance:
       propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: PillarRiseAnim
       objectReference: {fileID: 0}
+    - target: {fileID: 151186579645921417, guid: 6bc91f51fd2b356469c94d9a51ec1fe3,
+        type: 3}
+      propertyPath: maxNumberOfAffectableObjects
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bc91f51fd2b356469c94d9a51ec1fe3, type: 3}
 --- !u!1 &2139565259
@@ -4353,6 +4319,11 @@ PrefabInstance:
       propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 151186579645921417, guid: 6bc91f51fd2b356469c94d9a51ec1fe3,
+        type: 3}
+      propertyPath: maxNumberOfAffectableObjects
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bc91f51fd2b356469c94d9a51ec1fe3, type: 3}
 --- !u!1 &151186579645921414 stripped
@@ -4395,6 +4366,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gravity Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3667057721482317489, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_Name
+      value: Cosmic Fade Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3667057721482317489, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7055509559926420314, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
@@ -4606,16 +4587,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0ca3e955e25bb864ab25b88023ad8b02, type: 2}
-    - target: {fileID: 3667057721482317489, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_Name
-      value: Cosmic Fade Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 3667057721482317489, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 882873627361158183, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5044,6 +5015,7 @@ MonoBehaviour:
   useBoxCollider: 0
   boxDimensions: {x: 0, y: 0, z: 0}
   fireSpreadRange: 3
+  maxNumberOfAffectableObjects: 25
 --- !u!114 &5571504827403069457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5182,6 +5154,7 @@ MonoBehaviour:
   useBoxCollider: 0
   boxDimensions: {x: 0, y: 0, z: 0}
   fireSpreadRange: 3
+  maxNumberOfAffectableObjects: 25
 --- !u!114 &5571504827403069460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5320,6 +5293,7 @@ MonoBehaviour:
   useBoxCollider: 0
   boxDimensions: {x: 0, y: 0, z: 0}
   fireSpreadRange: 3
+  maxNumberOfAffectableObjects: 25
 --- !u!114 &5571504827403069463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6433,6 +6407,7 @@ MonoBehaviour:
   useBoxCollider: 1
   boxDimensions: {x: 7.02, y: 5.8, z: 12.08}
   fireSpreadRange: 5.5
+  maxNumberOfAffectableObjects: 25
 --- !u!114 &5571504827403069494
 MonoBehaviour:
   m_ObjectHideFlags: 0
