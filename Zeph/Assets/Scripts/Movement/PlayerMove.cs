@@ -140,6 +140,10 @@ public class PlayerMove : MonoBehaviour
                // print("both dir");
                 tempMove.z = -Input.GetAxis("Horizontal");
                 tempMove.x = -Input.GetAxis("Horizontal");
+                tempMove.y = Input.GetAxis("Vertical") * _speed;
+
+                Debug.Log("Gravity");
+                //tempMove.y *= 2;
             }
             else if (gravityDirection.x > 0 || gravityDirection.x < 0)
             {
@@ -155,6 +159,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
+           // Debug.Log("Norm");
              tempMove = (rightVector * _input.x) + (forwardVector * _input.y);
              
         }
