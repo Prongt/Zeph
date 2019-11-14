@@ -7,34 +7,29 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 forwardVector;
     private Vector3 rightVector;
+    
+    [SerializeField] private FloatReference playerSpeed;
+    [SerializeField] private FloatReference playerTurnSpeed;
+    [SerializeField] private FloatReference playerGravityScale;
+    [SerializeField] private FloatReference playerJumpForce;
+    
+    
+    private float desiredAngle;
 
-    private Transform cam;
-    [SerializeField] private float _speed = 5f;
-    [SerializeField] private float _turnSpeed = 10f;
-    [SerializeField] private float _gravity = 20f;
-    [SerializeField] private float _jumpSpeed = 10f;
-
-    [SerializeField] private bool _jump;
-
-
-    private Vector2 _input;
-    private float _angle;
-
-    private Quaternion _targetRotation;
-    private CharacterController _controller;
+    private Quaternion targetRot;
+    private CharacterController characterController;
 
     private Vector3 movement;
 
-    public bool grounded;
-    
 
     private float distanceToGround;
     
     private Vector3 oldGravity;
     private Vector3 gravityDirection;
+
+    public static bool IsGrounded = false;
     void Start()
     {
-        cam = Camera.main.transform;
         forwardVector = Camera.main.transform.forward;
         forwardVector.y = 0;
         forwardVector = Vector3.Normalize(forwardVector);
@@ -44,30 +39,23 @@ public class PlayerMove : MonoBehaviour
         transform.forward = forwardVector;
 
 
-        _controller = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
         
         gravityDirection = Physics.gravity;
         oldGravity = gravityDirection;
         
     }
 
-    public float rot;
- 
 
     private void Update()
     {
-        _controller.Move(Vector3.forward * 0.00f);
-        grounded = CheckIfGrounded();
-        _input.x = Input.GetAxis("Horizontal");
-        _input.y = Input.GetAxis("Vertical");
+        characterController.Move(Vector3.forward * 0.00f);
+        IsGrounded = CheckIfGrounded();
 
         gravityDirection = Physics.gravity;
 
         if (gravityDirection != oldGravity)
         {
-            //transform.up = new Vector3(0, -(gravityDirection.x + gravityDirection.z) / 2, 0);
-            //transform.up = -Physics.gravity;
-            //transform.up = new Vector3(0, -(Physics.gravity.x + Physics.gravity.z) / 2, 0);
             var newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z );
             transform.up = newUp;
             oldGravity = Physics.gravity;
@@ -82,14 +70,14 @@ public class PlayerMove : MonoBehaviour
             SetMove();
             if (Input.GetButtonDown("Jump"))
             {
-                movement.y = _jumpSpeed;
+                movement.y = playerJumpForce.Value;
             }
         }
         
-        if (_input.magnitude > 0.01f)
+        if (movement.magnitude > 0.01f)
         {
             var quat = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement, -gravityDirection),
-                _turnSpeed * Time.deltaTime);
+                playerTurnSpeed.Value * Time.deltaTime);
             quat.x = 0;
             quat.z = 0;
             //transform.rotation = quat;
@@ -107,13 +95,13 @@ public class PlayerMove : MonoBehaviour
 //                    transform.RotateAround(transform.position, transform.up, Time.deltaTime * -angle1 * _turnSpeed);
 //                }
             
-                transform.RotateAround(transform.position, transform.up, Time.deltaTime * -angle1 * _turnSpeed);
+                transform.RotateAround(transform.position, transform.up, Time.deltaTime * -angle1 * playerTurnSpeed.Value);
 
             
             
             
         }
-        movement += Time.deltaTime * _gravity* gravityDirection;
+        movement += Time.deltaTime * playerGravityScale.Value * gravityDirection;
         
         
 
@@ -122,7 +110,7 @@ public class PlayerMove : MonoBehaviour
         
         //movement += Time.deltaTime * _gravity* gravityDirection;
 
-        _controller.Move(movement * Time.deltaTime);
+        characterController.Move(movement * Time.deltaTime);
     }
 
     private Vector3 tempMove;
@@ -140,7 +128,7 @@ public class PlayerMove : MonoBehaviour
                // print("both dir");
                 tempMove.z = -Input.GetAxis("Horizontal");
                 tempMove.x = -Input.GetAxis("Horizontal");
-                tempMove.y = Input.GetAxis("Vertical") * _speed;
+                tempMove.y = Input.GetAxis("Vertical") * playerSpeed.Value;
 
                 Debug.Log("Gravity");
                 //tempMove.y *= 2;
@@ -160,20 +148,20 @@ public class PlayerMove : MonoBehaviour
         else
         {
            // Debug.Log("Norm");
-             tempMove = (rightVector * _input.x) + (forwardVector * _input.y);
+             tempMove = (rightVector * Input.GetAxis("Horizontal")) + (forwardVector * Input.GetAxis("Vertical"));
              
         }
         
         
         movement = tempMove;
-        movement *= _speed;
+        movement *= playerSpeed.Value;
         
     }
 
 
     void ApplyGravity()
     {
-        movement.y -= _gravity * Time.deltaTime;
+        movement.y -= playerGravityScale.Value * Time.deltaTime;
     }
 
 
