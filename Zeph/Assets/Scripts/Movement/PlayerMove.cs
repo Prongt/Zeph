@@ -93,10 +93,23 @@ public class PlayerMove : MonoBehaviour
             quat.x = 0;
             quat.z = 0;
             //transform.rotation = quat;
-            var angle = Quaternion.Angle(transform.rotation, Quaternion.LookRotation(movement, -gravityDirection));
-            Debug.Log(angle);
+            var angle1 = Quaternion.Angle(transform.rotation, Quaternion.LookRotation(movement, -gravityDirection));
+            var angle2 = Quaternion.Angle(Quaternion.LookRotation(movement, -gravityDirection), transform.rotation);
+
+            //if (angle1 > 0.1f)
             
-                transform.RotateAround(transform.position, transform.up, Time.deltaTime * angle);
+//                if (angle1 < angle2)
+//                {
+//                    transform.RotateAround(transform.position, transform.up, Time.deltaTime * angle1 * _turnSpeed);
+//                }
+//                else
+//                {
+//                    transform.RotateAround(transform.position, transform.up, Time.deltaTime * -angle1 * _turnSpeed);
+//                }
+            
+                transform.RotateAround(transform.position, transform.up, Time.deltaTime * -angle1 * _turnSpeed);
+
+            
             
             
         }
