@@ -1,127 +1,175 @@
-﻿using System;
-using Unity.Mathematics;
+﻿using Unity.Mathematics;
 using UnityEngine;
 
 
 public class PlayerMove : MonoBehaviour
 {
-    private Rigidbody myBody;
-    private Vector3 forward;
-    private Vector3 right;
 
-    private Vector3 gravityDirection;
-    //private Vector3 movement;
+    private Vector3 forwardVector;
+    private Vector3 rightVector;
 
-    [Tooltip("Speed of Player")] [SerializeField]
-    private FloatReference playerSpeed;
+    private Transform cam;
+    [SerializeField] private float _speed = 5f;
+    [SerializeField] private float _turnSpeed = 10f;
+    [SerializeField] private float _gravity = 20f;
+    [SerializeField] private float _jumpSpeed = 10f;
 
-    [SerializeField] private FloatReference playerTurnSpeed;
-    [SerializeField] private FloatReference jumpForce;
+    [SerializeField] private bool _jump;
+
+
+    private Vector2 _input;
+    private float _angle;
+
+    private Quaternion _targetRotation;
+    private CharacterController _controller;
+
+    private Vector3 movement;
+
+    public bool grounded;
     
+
     private float distanceToGround;
-    public static bool IsGrounded;
-
+    
     private Vector3 oldGravity;
-
-    private void Start()
+    private Vector3 gravityDirection;
+    void Start()
     {
-        forward = Camera.main.transform.forward;
-        forward.y = 0;
-        forward = Vector3.Normalize(forward);
-        right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
-        myBody = GetComponent<Rigidbody>();
+        cam = Camera.main.transform;
+        forwardVector = Camera.main.transform.forward;
+        forwardVector.y = 0;
+        forwardVector = Vector3.Normalize(forwardVector);
+        rightVector = Quaternion.Euler(new Vector3(0, 90, 0)) * forwardVector;
 
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
-        transform.forward = forward;
+        transform.forward = forwardVector;
+
+
+        _controller = GetComponent<CharacterController>();
+        
         gravityDirection = Physics.gravity;
         oldGravity = gravityDirection;
+        
     }
+
+    public float rot;
+ 
 
     private void Update()
     {
+        _controller.Move(Vector3.forward * 0.00f);
+        grounded = CheckIfGrounded();
+        _input.x = Input.GetAxis("Horizontal");
+        _input.y = Input.GetAxis("Vertical");
+
         gravityDirection = Physics.gravity;
-//        print(gravityDirection);
-        //Rotates players transform to be opposite of direction of gravity
+
         if (gravityDirection != oldGravity)
         {
-            transform.up = new Vector3(0, -(gravityDirection.x + gravityDirection.z) / 2, 0);
-            oldGravity = gravityDirection;
+            //transform.up = new Vector3(0, -(gravityDirection.x + gravityDirection.z) / 2, 0);
+            //transform.up = -Physics.gravity;
+            //transform.up = new Vector3(0, -(Physics.gravity.x + Physics.gravity.z) / 2, 0);
+            var newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z );
+            transform.up = newUp;
+            oldGravity = Physics.gravity;
+        }
+
+        
+        
+        
+        
+        if (CheckIfGrounded())
+        {
+            SetMove();
+            if (Input.GetButtonDown("Jump"))
+            {
+                movement.y = _jumpSpeed;
+            }
         }
         
-        Jump();
-        Move();
+        if (_input.magnitude > 0.01f)
+        {
+            var quat = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement, -gravityDirection),
+                _turnSpeed * Time.deltaTime);
+            quat.x = 0;
+            quat.z = 0;
+            //transform.rotation = quat;
+            var angle = Quaternion.Angle(transform.rotation, Quaternion.LookRotation(movement, -gravityDirection));
+            Debug.Log(angle);
+            
+                transform.RotateAround(transform.position, transform.up, Time.deltaTime * angle);
+            
+            
+        }
+        movement += Time.deltaTime * _gravity* gravityDirection;
+        
+        
+
+       
+
+        
+        //movement += Time.deltaTime * _gravity* gravityDirection;
+
+        _controller.Move(movement * Time.deltaTime);
     }
 
-
-    private void Move()
+    private Vector3 tempMove;
+    void SetMove()
     {
-        var moveSpeed = Time.deltaTime * playerSpeed.Value;
-
-        //Movement
-        var movement = new Vector3();
-
+        //Vector3 tempMove = new Vector3();
         if (GravityRift.useNewGravity)
         {
             //Movement in Y dir is constant
-            movement.y = moveSpeed * Input.GetAxis("Vertical");
+            tempMove.y = Input.GetAxis("Vertical");
             
             //Gravity in X dir;
             if ((gravityDirection.x > 0 || gravityDirection.x < 0) && (gravityDirection.z > 0 || gravityDirection.z < 0))
             {
-                print("both dir");
-                movement.z = moveSpeed * -Input.GetAxis("Horizontal");
-                movement.x = moveSpeed * -Input.GetAxis("Horizontal");
+               // print("both dir");
+                tempMove.z = -Input.GetAxis("Horizontal");
+                tempMove.x = -Input.GetAxis("Horizontal");
             }
             else if (gravityDirection.x > 0 || gravityDirection.x < 0)
             {
-                print("x Dir");
-                movement.z = moveSpeed * -Input.GetAxis("Horizontal");
+//                print("x Dir");
+                tempMove.z = -Input.GetAxis("Horizontal");
             }
             //Gravity in Z dir
             else if (gravityDirection.z > 0 || gravityDirection.z < 0)
             {
-                print("Y dir");
-                movement.x = moveSpeed * Input.GetAxis("Horizontal");
-            }
-            
-        }
-        else
-        {
-            movement += right * (moveSpeed * Input.GetAxis("Horizontal"));
-            movement += forward * (moveSpeed * Input.GetAxis("Vertical"));
-        }
-
-        myBody.MovePosition(myBody.position + movement * playerSpeed.Value);
-
-       
-        //Rotation
-        if (movement.magnitude > 0)
-        {
-            var quat = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement, -gravityDirection),
-                playerTurnSpeed * Time.deltaTime);
-            myBody.MoveRotation(quat);
-        }
-    }
-
-    private void Jump()
-    {
-        if (CheckIfGrounded())
-        {
-            IsGrounded = true;
-            if (Input.GetButtonDown("Jump"))
-            {
-                myBody.AddForce(-gravityDirection.normalized * jumpForce.Value, ForceMode.Impulse);
+               // print("Y dir");
+                tempMove.x = Input.GetAxis("Horizontal");
             }
         }
         else
         {
-            IsGrounded = false;
+             tempMove = (rightVector * _input.x) + (forwardVector * _input.y);
+             
         }
+        
+        
+        movement = tempMove;
+        movement *= _speed;
         
     }
 
+
+    void ApplyGravity()
+    {
+        movement.y -= _gravity * Time.deltaTime;
+    }
+
+
+
+    void Jump()
+    {
+        
+    }
+    
     private bool CheckIfGrounded()
     {
+        //return Physics.Raycast(transform.position, Physics.gravity, distanceToGround + 0.1f);
         return Physics.Raycast(transform.position, gravityDirection, distanceToGround + 0.1f);
     }
+    
+
 }

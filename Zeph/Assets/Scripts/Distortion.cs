@@ -27,7 +27,7 @@ public class Distortion : MonoBehaviour
             if (other.CompareTag("Player"))
             {
                 animating = !animating;
-                print("doing");
+//                print("doing");
                 disAnim1.SetBool("Animate", animating);
                 //disAnim2.SetBool("Animate", animating);
             }
