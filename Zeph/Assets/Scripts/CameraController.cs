@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     private Vector3 cameraOffset;
 
     [Range(0.01f, 1.0f)] public float smoothFactor = 1f;
+    [SerializeField] private bool lookAtPlayer;
     
     //public FloatReference speed;
     //public FloatReference minDistance;
@@ -24,6 +25,11 @@ public class CameraController : MonoBehaviour
         Vector3 newPos = player.position + cameraOffset;
 
         transform.position = Vector3.Slerp(transform.position, newPos, smoothFactor);
+
+        if (lookAtPlayer)
+        {
+            transform.LookAt(player);
+        }
         /*float interpolation = speed * Time.deltaTime;
 
         if (Vector3.Distance(transform.position, player.transform.position) > minDistance)
