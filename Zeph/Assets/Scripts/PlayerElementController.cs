@@ -43,8 +43,8 @@ public class PlayerElementController : MonoBehaviour
         }
         
         //if (Input.GetKeyDown(powerKey) && !powerUsed && PlayerMove.IsGrounded)
-        //if (Input.GetKeyDown(powerKey) )
-        if (Input.GetKeyDown(powerKey) && PlayerMove.IsGrounded)
+        if (Input.GetKeyDown(powerKey) )
+        //if (Input.GetKeyDown(powerKey) && PlayerMove.IsGrounded)
         {
             powerUsed = true;
             StartCoroutine(Delay());

@@ -1959,6 +1959,42 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2048281012}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2048281014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7988491746477343419, guid: 922fe61700b92ac42b2df41bfc67f0bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2048281012}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2048281015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048281014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b81c4da354eec841bc85139a5b9eab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPlayerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  newGravity: {x: 0, y: 0, z: -9.81}
+  resetGravity: 1
+--- !u!65 &2048281019
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048281014}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3, z: 1.8365687}
+  m_Center: {x: 0, y: -1.2200768e-15, z: 0.58171564}
 --- !u!1 &2097619322 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5590770835228431425, guid: 922fe61700b92ac42b2df41bfc67f0bd,
@@ -2010,6 +2046,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ruined Pillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6898759424570496382, guid: a720873750d2e9742883b18fae16ed9c,
+        type: 3}
+      propertyPath: m_Name
+      value: Pillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 9007755096379762434, guid: a720873750d2e9742883b18fae16ed9c,
+        type: 3}
+      propertyPath: m_Name
+      value: Base
       objectReference: {fileID: 0}
     - target: {fileID: 5777596619545814462, guid: a720873750d2e9742883b18fae16ed9c,
         type: 3}
@@ -2065,16 +2111,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9007755096379762434, guid: a720873750d2e9742883b18fae16ed9c,
-        type: 3}
-      propertyPath: m_Name
-      value: Base
-      objectReference: {fileID: 0}
-    - target: {fileID: 6898759424570496382, guid: a720873750d2e9742883b18fae16ed9c,
-        type: 3}
-      propertyPath: m_Name
-      value: Pillar
       objectReference: {fileID: 0}
     - target: {fileID: 7650510101229750956, guid: a720873750d2e9742883b18fae16ed9c,
         type: 3}

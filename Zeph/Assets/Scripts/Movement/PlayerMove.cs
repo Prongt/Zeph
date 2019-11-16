@@ -1,181 +1,210 @@
-﻿using Unity.Mathematics;
+﻿using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 
 public class PlayerMove : MonoBehaviour
 {
 
-    private Vector3 forwardVector;
-    private Vector3 rightVector;
     
-    [SerializeField] private FloatReference playerSpeed;
-    [SerializeField] private FloatReference playerTurnSpeed;
-    [SerializeField] private FloatReference playerGravityScale;
-    [SerializeField] private FloatReference playerJumpForce;
-    
-    
-    private float desiredAngle;
+	public float walkSpeed = 6;
+	public float gravity = -12;
+	public float jumpHeight = 1;
+	[Range(0,1)]
+	public float airControlPercent;
 
-    private Quaternion targetRot;
-    private CharacterController characterController;
+	public float turnSmoothTime = 0.2f;
+	float turnSmoothVelocity;
 
-    private Vector3 movement;
+	public float speedSmoothTime = 0.1f;
+	float speedSmoothVelocity;
+	float currentSpeed;
+	float velocityY;
+	
+	Transform cameraT;
+	CharacterController controller;
+	
+	private Vector3 oldGravity;
+	private Vector3 gravityDirection;
+	private float distanceToGround;
 
+	private bool debugGravity = false;
 
-    private float distanceToGround;
-    
-    private Vector3 oldGravity;
-    private Vector3 gravityDirection;
+	public float rotMul;
 
-    public static bool IsGrounded = false;
-    void Start()
-    {
-        forwardVector = Camera.main.transform.forward;
-        forwardVector.y = 0;
-        forwardVector = Vector3.Normalize(forwardVector);
-        rightVector = Quaternion.Euler(new Vector3(0, 90, 0)) * forwardVector;
+	void Start () {
+		cameraT = Camera.main.transform;
+		controller = GetComponent<CharacterController> ();
+		
+		gravityDirection = Physics.gravity;
+		oldGravity = gravityDirection;
+		
+		distanceToGround = GetComponent<Collider>().bounds.extents.y;
+	}
 
-        distanceToGround = GetComponent<Collider>().bounds.extents.y;
-        transform.forward = forwardVector;
+	void Update () {
+		// input
+		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
+		Vector2 inputDir = input.normalized;
 
+		gravityDirection = Physics.gravity;
 
-        characterController = GetComponent<CharacterController>();
-        
-        gravityDirection = Physics.gravity;
-        oldGravity = gravityDirection;
-        
-    }
+		if (gravityDirection != oldGravity)
+		{
+			var newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
+			transform.up = newUp;
+			oldGravity = Physics.gravity;
+		}
+		
+		
+		if (GravityRift.useNewGravity)
+		{
+			AltMove(inputDir, -Physics.gravity);
+		}
+		else
+		{
+			Move(inputDir, -Physics.gravity);
+		}
 
+		
+		Debug.Log(gravityDirection.magnitude);
 
-    private void Update()
-    {
-        characterController.Move(Vector3.forward * 0.00f);
-        IsGrounded = CheckIfGrounded();
+		if (Input.GetButtonDown("Jump")) {
+			Jump ();
+		}
+	}
+	
 
-        gravityDirection = Physics.gravity;
+	private void AltMove(Vector2 inputDir, Vector3 upAxis)
+	{
+		upAxis.Normalize();
+		
 
-        if (gravityDirection != oldGravity)
-        {
-            var newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z );
-            transform.up = newUp;
-            oldGravity = Physics.gravity;
-        }
+			
+		float targetSpeed = walkSpeed * inputDir.magnitude;
+		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
 
-        
-        
-        
-        
-        if (CheckIfGrounded())
-        {
-            SetMove();
-            if (Input.GetButtonDown("Jump"))
-            {
-                movement.y = playerJumpForce.Value;
-            }
-        }
-        
-        if (movement.magnitude > 0.01f)
-        {
-            var quat = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement, -gravityDirection),
-                playerTurnSpeed.Value * Time.deltaTime);
-            quat.x = 0;
-            quat.z = 0;
-            //transform.rotation = quat;
-            var angle1 = Quaternion.Angle(transform.rotation, Quaternion.LookRotation(movement, -gravityDirection));
-            var angle2 = Quaternion.Angle(Quaternion.LookRotation(movement, -gravityDirection), transform.rotation);
+		Vector3 velocity = new Vector3();
+		if (gravityDirection.x > 0 || gravityDirection.x < 0)
+		{
+              //print("x Dir");
 
-            //if (angle1 > 0.1f)
-            
-//                if (angle1 < angle2)
-//                {
-//                    transform.RotateAround(transform.position, transform.up, Time.deltaTime * angle1 * _turnSpeed);
-//                }
-//                else
-//                {
-//                    transform.RotateAround(transform.position, transform.up, Time.deltaTime * -angle1 * _turnSpeed);
-//                }
-            
-                transform.RotateAround(transform.position, transform.up, Time.deltaTime * -angle1 * playerTurnSpeed.Value);
+			velocityY += Time.deltaTime * gravity;
+			//movement
+			velocity.y = inputDir.y * walkSpeed;
+			velocity.z = -inputDir.x * walkSpeed;
+			//velocity.x -= velocityY;
+			
+			//gravity
+			if (gravityDirection.x > 0)
+			{
+				velocity.x -= velocityY;
+			}else if (gravityDirection.x < 0)
+			{
+				velocity.x += velocityY;
+			}
+			
+			//Rotation 1
+//			if (inputDir != Vector2.zero) 
+//			{
+//			float targetRotation = Mathf.Atan2 (inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
+//			transform.eulerAngles = transform.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
+//			}
+			
+			//Rotation 2
+//			var vel = velocity;
+//			vel.x = 0;
+//			var quat = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(vel, -gravityDirection),
+//				turnSmoothTime * Time.deltaTime);
+////			quat.x = 0;
+//			quat.z = 0;
+//			quat.y = 0;
+			//transform.rotation = transform.rotation * quat;
+			//transform.rotation *= Quaternion.Euler(0,quat.x * rotMul,0);
 
-            
-            
-            
-        }
-        movement += Time.deltaTime * playerGravityScale.Value * gravityDirection;
-        
-        
+			if (debugGravity)
+			{
+				Debug.Log("Up = " + velocity.y + "     Side = " + velocity.z);
+				Debug.Log("x Dir");
+			}
+		}
+		else if (gravityDirection.z > 0 || gravityDirection.z < 0)
+		{
+			velocityY += Time.deltaTime * gravity;
+			//Movement
+			velocity.y = inputDir.y * walkSpeed;
+			velocity.x = -inputDir.x * walkSpeed;
 
-       
+			//Gravity
+			if (gravityDirection.z > 0)
+			{
+				velocity.z -= velocityY;
+			}else if (gravityDirection.z < 0)
+			{
+				velocity.z += velocityY;
+			}
+			
+		}
+		else
+		{
+			velocityY += Time.deltaTime * gravity;
+			velocity = transform.forward * currentSpeed + upAxis * velocityY;
+		}
 
-        
-        //movement += Time.deltaTime * _gravity* gravityDirection;
+		
 
-        characterController.Move(movement * Time.deltaTime);
-    }
+		controller.Move (velocity * Time.deltaTime);
+		currentSpeed = new Vector2 (controller.velocity.x, controller.velocity.y).magnitude;
 
-    private Vector3 tempMove;
-    void SetMove()
-    {
-        //Vector3 tempMove = new Vector3();
-        if (GravityRift.useNewGravity)
-        {
-            //Movement in Y dir is constant
-            tempMove.y = Input.GetAxis("Vertical");
-            
-            //Gravity in X dir;
-            if ((gravityDirection.x > 0 || gravityDirection.x < 0) && (gravityDirection.z > 0 || gravityDirection.z < 0))
-            {
-               // print("both dir");
-                tempMove.z = -Input.GetAxis("Horizontal");
-                tempMove.x = -Input.GetAxis("Horizontal");
-                tempMove.y = Input.GetAxis("Vertical") * playerSpeed.Value;
+		if (controller.isGrounded) {
+			velocityY = 0;
+		}
+	}
 
-                Debug.Log("Gravity");
-                //tempMove.y *= 2;
-            }
-            else if (gravityDirection.x > 0 || gravityDirection.x < 0)
-            {
-//                print("x Dir");
-                tempMove.z = -Input.GetAxis("Horizontal");
-            }
-            //Gravity in Z dir
-            else if (gravityDirection.z > 0 || gravityDirection.z < 0)
-            {
-               // print("Y dir");
-                tempMove.x = Input.GetAxis("Horizontal");
-            }
-        }
-        else
-        {
-           // Debug.Log("Norm");
-             tempMove = (rightVector * Input.GetAxis("Horizontal")) + (forwardVector * Input.GetAxis("Vertical"));
-             
-        }
-        
-        
-        movement = tempMove;
-        movement *= playerSpeed.Value;
-        
-    }
+	void Move(Vector2 inputDir, Vector3 upAxis) {
+		upAxis.Normalize();
+		if (inputDir != Vector2.zero) {
+			float targetRotation = Mathf.Atan2 (inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
+			transform.eulerAngles = upAxis * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
+		}
+			
+		float targetSpeed = walkSpeed * inputDir.magnitude;
+		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
 
+		velocityY += Time.deltaTime * gravity;
+		Vector3 velocity = transform.forward * currentSpeed + upAxis * velocityY;
 
-    void ApplyGravity()
-    {
-        movement.y -= playerGravityScale.Value * Time.deltaTime;
-    }
+		controller.Move (velocity * Time.deltaTime);
+		currentSpeed = new Vector2 (controller.velocity.x, controller.velocity.z).magnitude;
+		
+		
+		if (controller.isGrounded) {
+			velocityY = 0;
+		}
 
+	}
 
+	void Jump() {
+		if (CheckIfGrounded()) {
+			float jumpVelocity = Mathf.Sqrt (-2 * gravity * jumpHeight);
+			velocityY = jumpVelocity;
+		}
+	}
 
-    void Jump()
-    {
-        
-    }
-    
-    private bool CheckIfGrounded()
-    {
-        //return Physics.Raycast(transform.position, Physics.gravity, distanceToGround + 0.1f);
-        return Physics.Raycast(transform.position, gravityDirection, distanceToGround + 0.1f);
-    }
-    
+	float GetModifiedSmoothTime(float smoothTime) {
+		if (controller.isGrounded) {
+			return smoothTime;
+		}
 
+		if (airControlPercent == 0) {
+			return float.MaxValue;
+		}
+		return smoothTime / airControlPercent;
+	}
+	
+	private bool CheckIfGrounded()
+	{
+		//return Physics.Raycast(transform.position, Physics.gravity, distanceToGround + 0.1f);
+		return Physics.Raycast(transform.position, gravityDirection, distanceToGround + 0.1f);
+	}
 }
