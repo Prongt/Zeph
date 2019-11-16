@@ -7,34 +7,33 @@ public class PlayerMove : MonoBehaviour
 {
 
     
-	public float walkSpeed = 6;
-	public float gravity = -12;
-	public float jumpHeight = 1;
+	public float playerMoveSpeed = 6f;
+	public float playerGravity = -12f;
+	public float playerJumpHeight = 1f;
 	[Range(0,1)]
 	public float airControlPercent;
 
-	public float turnSmoothTime = 0.2f;
-	float turnSmoothVelocity;
+	public float playerTurnSpeed = 0.2f;
+	float turnVelocity;
 
-	public float speedSmoothTime = 0.1f;
-	float speedSmoothVelocity;
+	public float velocitySmoothing = 0.1f; 
+	float smoothingVelocity;
 	float currentSpeed;
 	float velocityY;
 	
-	Transform cameraT;
-	CharacterController controller;
+	Transform cam;
+	CharacterController characterController;
 	
 	private Vector3 oldGravity;
 	private Vector3 gravityDirection;
 	private float distanceToGround;
 
 	private bool debugGravity = false;
-
-	public float rotMul;
+	
 
 	void Start () {
-		cameraT = Camera.main.transform;
-		controller = GetComponent<CharacterController> ();
+		cam = Camera.main.transform;
+		characterController = GetComponent<CharacterController> ();
 		
 		gravityDirection = Physics.gravity;
 		oldGravity = gravityDirection;
@@ -43,7 +42,6 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	void Update () {
-		// input
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 		Vector2 inputDir = input.normalized;
 
@@ -67,7 +65,7 @@ public class PlayerMove : MonoBehaviour
 		}
 
 		
-		Debug.Log(gravityDirection.magnitude);
+		//Debug.Log(gravityDirection.magnitude);
 
 		if (Input.GetButtonDown("Jump")) {
 			Jump ();
@@ -81,18 +79,18 @@ public class PlayerMove : MonoBehaviour
 		
 
 			
-		float targetSpeed = walkSpeed * inputDir.magnitude;
-		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
+		float targetSpeed = playerMoveSpeed * inputDir.magnitude;
+		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
 
 		Vector3 velocity = new Vector3();
 		if (gravityDirection.x > 0 || gravityDirection.x < 0)
 		{
               //print("x Dir");
 
-			velocityY += Time.deltaTime * gravity;
+			velocityY += Time.deltaTime * playerGravity;
 			//movement
-			velocity.y = inputDir.y * walkSpeed;
-			velocity.z = -inputDir.x * walkSpeed;
+			velocity.y = inputDir.y * playerMoveSpeed;
+			velocity.z = -inputDir.x * playerMoveSpeed;
 			//velocity.x -= velocityY;
 			
 			//gravity
@@ -130,10 +128,10 @@ public class PlayerMove : MonoBehaviour
 		}
 		else if (gravityDirection.z > 0 || gravityDirection.z < 0)
 		{
-			velocityY += Time.deltaTime * gravity;
+			velocityY += Time.deltaTime * playerGravity;
 			//Movement
-			velocity.y = inputDir.y * walkSpeed;
-			velocity.x = -inputDir.x * walkSpeed;
+			velocity.y = inputDir.y * playerMoveSpeed;
+			velocity.x = -inputDir.x * playerMoveSpeed;
 
 			//Gravity
 			if (gravityDirection.z > 0)
@@ -147,16 +145,16 @@ public class PlayerMove : MonoBehaviour
 		}
 		else
 		{
-			velocityY += Time.deltaTime * gravity;
+			velocityY += Time.deltaTime * playerGravity;
 			velocity = transform.forward * currentSpeed + upAxis * velocityY;
 		}
 
 		
 
-		controller.Move (velocity * Time.deltaTime);
-		currentSpeed = new Vector2 (controller.velocity.x, controller.velocity.y).magnitude;
+		characterController.Move (velocity * Time.deltaTime);
+		currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.y).magnitude;
 
-		if (controller.isGrounded) {
+		if (characterController.isGrounded) {
 			velocityY = 0;
 		}
 	}
@@ -164,21 +162,21 @@ public class PlayerMove : MonoBehaviour
 	void Move(Vector2 inputDir, Vector3 upAxis) {
 		upAxis.Normalize();
 		if (inputDir != Vector2.zero) {
-			float targetRotation = Mathf.Atan2 (inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
-			transform.eulerAngles = upAxis * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
+			float targetRotation = Mathf.Atan2 (inputDir.x, inputDir.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
+			transform.eulerAngles = upAxis * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnVelocity, GetModifiedSmoothTime(playerTurnSpeed));
 		}
 			
-		float targetSpeed = walkSpeed * inputDir.magnitude;
-		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
+		float targetSpeed = playerMoveSpeed * inputDir.magnitude;
+		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
 
-		velocityY += Time.deltaTime * gravity;
+		velocityY += Time.deltaTime * playerGravity;
 		Vector3 velocity = transform.forward * currentSpeed + upAxis * velocityY;
 
-		controller.Move (velocity * Time.deltaTime);
-		currentSpeed = new Vector2 (controller.velocity.x, controller.velocity.z).magnitude;
+		characterController.Move (velocity * Time.deltaTime);
+		currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.z).magnitude;
 		
 		
-		if (controller.isGrounded) {
+		if (characterController.isGrounded) {
 			velocityY = 0;
 		}
 
@@ -186,13 +184,13 @@ public class PlayerMove : MonoBehaviour
 
 	void Jump() {
 		if (CheckIfGrounded()) {
-			float jumpVelocity = Mathf.Sqrt (-2 * gravity * jumpHeight);
+			float jumpVelocity = Mathf.Sqrt (-2 * playerGravity * playerJumpHeight);
 			velocityY = jumpVelocity;
 		}
 	}
 
 	float GetModifiedSmoothTime(float smoothTime) {
-		if (controller.isGrounded) {
+		if (characterController.isGrounded) {
 			return smoothTime;
 		}
 
