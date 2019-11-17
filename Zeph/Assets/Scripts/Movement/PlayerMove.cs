@@ -23,13 +23,15 @@ public class PlayerMove : MonoBehaviour
 	
 	Transform cam;
 	CharacterController characterController;
-	
+
+	private float gravityJump = 0.5f;
 	private Vector3 oldGravity;
 	private Vector3 gravityDirection;
 	private float distanceToGround;
 
 	private bool debugGravity = false;
 	
+	public static bool IsGrounded;
 
 	void Start () {
 		cam = Camera.main.transform;
@@ -37,7 +39,8 @@ public class PlayerMove : MonoBehaviour
 		
 		gravityDirection = Physics.gravity;
 		oldGravity = gravityDirection;
-		
+
+		gravityJump = gravityJump + playerJumpHeight;
 		distanceToGround = GetComponent<Collider>().bounds.extents.y;
 	}
 
@@ -46,6 +49,7 @@ public class PlayerMove : MonoBehaviour
 		Vector2 inputDir = input.normalized;
 
 		gravityDirection = Physics.gravity;
+		IsGrounded = CheckIfGrounded();
 
 		if (gravityDirection != oldGravity)
 		{
@@ -183,8 +187,18 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	void Jump() {
-		if (CheckIfGrounded()) {
-			float jumpVelocity = Mathf.Sqrt (-2 * playerGravity * playerJumpHeight);
+		if (CheckIfGrounded())
+		{
+			float jumpVelocity;
+			if (GravityRift.useNewGravity)
+			{
+				jumpVelocity = Mathf.Sqrt (-2 * playerGravity * gravityJump);
+			}
+			else
+			{
+				jumpVelocity = Mathf.Sqrt (-2 * playerGravity * playerJumpHeight);
+			}
+			//float jumpVelocity = Mathf.Sqrt (-2 * playerGravity * playerJumpHeight);
 			velocityY = jumpVelocity;
 		}
 	}
