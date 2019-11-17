@@ -31,7 +31,9 @@ public class PlayerMove : MonoBehaviour
 
 	private bool debugGravity = false;
 	
-	public static bool IsGrounded;
+	public static bool PlayerIsGrounded;
+	public static bool PlayerUsesGravity = true;
+	private float gravityPull;
 
 	void Start () {
 		cam = Camera.main.transform;
@@ -42,14 +44,24 @@ public class PlayerMove : MonoBehaviour
 
 		gravityJump = gravityJump + playerJumpHeight;
 		distanceToGround = GetComponent<Collider>().bounds.extents.y;
+		gravityPull = playerGravity;
 	}
 
 	void Update () {
+		if (PlayerUsesGravity)
+		{
+			gravityPull = playerGravity;
+		}
+		else
+		{
+			gravityPull = 0;
+		}
+		
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 		Vector2 inputDir = input.normalized;
 
 		gravityDirection = Physics.gravity;
-		IsGrounded = CheckIfGrounded();
+		PlayerIsGrounded = CheckIfGrounded();
 
 		if (gravityDirection != oldGravity)
 		{
@@ -91,7 +103,7 @@ public class PlayerMove : MonoBehaviour
 		{
               //print("x Dir");
 
-			velocityY += Time.deltaTime * playerGravity;
+			velocityY += Time.deltaTime * gravityPull;
 			//movement
 			velocity.y = inputDir.y * playerMoveSpeed;
 			velocity.z = -inputDir.x * playerMoveSpeed;
@@ -132,7 +144,7 @@ public class PlayerMove : MonoBehaviour
 		}
 		else if (gravityDirection.z > 0 || gravityDirection.z < 0)
 		{
-			velocityY += Time.deltaTime * playerGravity;
+			velocityY += Time.deltaTime * gravityPull;
 			//Movement
 			velocity.y = inputDir.y * playerMoveSpeed;
 			velocity.x = -inputDir.x * playerMoveSpeed;
@@ -173,7 +185,7 @@ public class PlayerMove : MonoBehaviour
 		float targetSpeed = playerMoveSpeed * inputDir.magnitude;
 		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
 
-		velocityY += Time.deltaTime * playerGravity;
+		velocityY += Time.deltaTime * gravityPull;
 		Vector3 velocity = transform.forward * currentSpeed + upAxis * velocityY;
 
 		characterController.Move (velocity * Time.deltaTime);
