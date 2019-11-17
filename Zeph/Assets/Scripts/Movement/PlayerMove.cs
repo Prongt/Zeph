@@ -28,6 +28,7 @@ public class PlayerMove : MonoBehaviour
 	private Vector3 oldGravity;
 	private Vector3 gravityDirection;
 	private float distanceToGround;
+	private float distanceToGroundWidth;
 
 	private bool debugGravity = false;
 	
@@ -43,7 +44,8 @@ public class PlayerMove : MonoBehaviour
 		oldGravity = gravityDirection;
 
 		gravityJump = gravityJump + playerJumpHeight;
-		distanceToGround = GetComponent<Collider>().bounds.extents.y;
+		distanceToGround = GetComponent<Collider>().bounds.extents.y + 0.1f;
+		distanceToGroundWidth = GetComponent<Collider>().bounds.extents.x + 0.15f;
 		gravityPull = playerGravity;
 	}
 
@@ -61,7 +63,7 @@ public class PlayerMove : MonoBehaviour
 		Vector2 inputDir = input.normalized;
 
 		gravityDirection = Physics.gravity;
-		PlayerIsGrounded = CheckIfGrounded();
+		PlayerIsGrounded = CheckIfGrounded(gravityDirection, distanceToGround);
 
 		if (gravityDirection != oldGravity)
 		{
@@ -102,9 +104,35 @@ public class PlayerMove : MonoBehaviour
 		if (gravityDirection.x > 0 || gravityDirection.x < 0)
 		{
               //print("x Dir");
+              
 
 			velocityY += Time.deltaTime * gravityPull;
 			//movement
+			velocity.y = inputDir.y * playerMoveSpeed;
+			Debug.Log(velocity.y);
+
+			
+			//Stops player from getting stuck in the ground/wall when the player is in the air and is movinging in the direction of the ground/wall
+			if (!PlayerIsGrounded)
+			{
+				if (CheckIfGrounded(Vector3.down, distanceToGroundWidth))
+				{
+					inputDir.y = -inputDir.y;
+				}
+				if (CheckIfGrounded(Vector3.up, distanceToGroundWidth))
+				{
+					inputDir.y = -inputDir.y;
+				}
+				if (CheckIfGrounded(Vector3.left, distanceToGroundWidth))
+				{
+					inputDir.x = -inputDir.x;
+				}
+				if (CheckIfGrounded(Vector3.right, distanceToGroundWidth))
+				{
+					inputDir.x = -inputDir.x;
+				}
+			}
+			
 			velocity.y = inputDir.y * playerMoveSpeed;
 			velocity.z = -inputDir.x * playerMoveSpeed;
 			//velocity.x -= velocityY;
@@ -199,7 +227,7 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	void Jump() {
-		if (CheckIfGrounded())
+		if (CheckIfGrounded(gravityDirection, distanceToGround))
 		{
 			float jumpVelocity;
 			if (GravityRift.useNewGravity)
@@ -226,9 +254,10 @@ public class PlayerMove : MonoBehaviour
 		return smoothTime / airControlPercent;
 	}
 	
-	private bool CheckIfGrounded()
+	private bool CheckIfGrounded(Vector3 direction, float distance)
 	{
 		//return Physics.Raycast(transform.position, Physics.gravity, distanceToGround + 0.1f);
-		return Physics.Raycast(transform.position, gravityDirection, distanceToGround + 0.1f);
+		return Physics.Raycast(transform.position, direction, distance);
 	}
+	
 }
