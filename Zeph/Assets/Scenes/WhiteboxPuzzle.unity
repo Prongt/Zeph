@@ -38,13 +38,13 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.17569086, g: 0.21984655, b: 0.3021752, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3217,8 +3217,8 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5571504827403069444}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1618614564
-MeshCollider:
+--- !u!65 &1618614561
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3227,10 +3227,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -8672714952799723808, guid: 4fe89f3edeb0c7e4088b50da6dfb698c, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50.00001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0.100000024}
 --- !u!1001 &1647424561
 PrefabInstance:
   m_ObjectHideFlags: 0
