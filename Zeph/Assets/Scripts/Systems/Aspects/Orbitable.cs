@@ -14,7 +14,7 @@ public class Orbitable : Aspects
     private float xSpread;
     private float zSpread;
     [SerializeField] private float yOffset;
-    private Transform centerPoint;
+    public Transform centerPoint = null;
     [SerializeField] private float rotSpeed;
     private Rigidbody myRB;
     
@@ -44,6 +44,9 @@ public class Orbitable : Aspects
 
     void Update()
     {
+        /*print("The Forward" + centerPoint.forward);
+        print("The Direction" + direction);*/
+        
         timer += Time.deltaTime * rotSpeed;
         
         if (orbiting)
@@ -52,7 +55,12 @@ public class Orbitable : Aspects
             throwable = true;
         }
 
-        //rotSpeed = throwForce;
+        if (rotSpeed <= throwForce / 2)
+        {
+            rotSpeed += 0.25f * Time.deltaTime;
+        }
+
+       
     }
 
     public override void Promote(Transform source = null, Element element = null)
@@ -63,13 +71,19 @@ public class Orbitable : Aspects
         //Initial pull to center
         centerPoint = source.transform;
         direction = source.transform.position - transform.position;
-        myRB.AddForce(direction * pullForce.Value);
+        
+        
 
         //Checks to activate functions
         if (orbiting)
         {
             orbiting = false;
             //throwable = true;
+        }
+        else
+        {
+            print("Can Pull");
+            myRB.AddForce(direction * pullForce.Value);
         }
 
         if (throwable)
@@ -110,12 +124,13 @@ public class Orbitable : Aspects
 
     void Throw()
     {
+        rotSpeed = 0;
         //Throws object away from the player
-        direction = centerPoint.position - transform.position;
-        direction = -direction;
-        myRB.AddForce(direction * throwForce, ForceMode.Impulse);
-        StartCoroutine(Delay());
-        throwForce = 0.5f;
+        direction = centerPoint.forward + transform.forward;
+        //direction = -direction;
+        myRB.AddForce(centerPoint.forward * throwForce, ForceMode.Impulse);
+       // StartCoroutine(Delay());
+        //throwForce = 0.5f;
     }
 
     IEnumerator Delay()
@@ -123,17 +138,17 @@ public class Orbitable : Aspects
         //Delay on checks to make things work smoother
         yield return new WaitForSeconds(0.3f);
         
-        if (throwable)
-        {
-            throwable = false;
-        }
-
         if (!gameObject.CompareTag("Heavy"))
         {
             if (Vector3.Distance(centerPoint.position, transform.position) <= 3)
             {
                 orbiting = true;
             }
+        }
+        
+        if (throwable)
+        {
+            throwable = false;
         }
     }
 }
