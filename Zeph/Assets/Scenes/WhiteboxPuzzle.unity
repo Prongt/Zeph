@@ -760,6 +760,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WhiteboxCosmicDistortionGround
       objectReference: {fileID: 0}
+    - target: {fileID: -8747504510041033631, guid: 43c25a8d824ef2e4f842a8103f68b643,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 43c25a8d824ef2e4f842a8103f68b643,
         type: 3}
       propertyPath: m_Controller
@@ -819,6 +824,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2821686770375322773, guid: 43c25a8d824ef2e4f842a8103f68b643,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 505627493365666415, guid: 43c25a8d824ef2e4f842a8103f68b643,
         type: 3}
@@ -1802,7 +1812,7 @@ GameObject:
   - component: {fileID: 748639378}
   m_Layer: 0
   m_Name: Gravity Wall (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2248,6 +2258,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 921413935}
     m_Modifications:
+    - target: {fileID: 2434949835520381987, guid: 6b80bb5ddec94294199625561e2166a2,
+        type: 3}
+      propertyPath: m_Name
+      value: CosmicFadeRift1
+      objectReference: {fileID: 0}
     - target: {fileID: -6423849217065714912, guid: 6b80bb5ddec94294199625561e2166a2,
         type: 3}
       propertyPath: onPlayerEnter.m_PersistentCalls.m_Calls.Array.size
@@ -2273,11 +2288,6 @@ PrefabInstance:
       propertyPath: fadeGameobjects.Array.data[0]
       value: 
       objectReference: {fileID: 382532363}
-    - target: {fileID: 2434949835520381987, guid: 6b80bb5ddec94294199625561e2166a2,
-        type: 3}
-      propertyPath: m_Name
-      value: CosmicFadeRift1
-      objectReference: {fileID: 0}
     - target: {fileID: 286092962406856172, guid: 6b80bb5ddec94294199625561e2166a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3635,9 +3645,11 @@ MonoBehaviour:
   throwForce: 0.5
   orbitSize: 3
   yOffset: 0
+  centerPoint: {fileID: 0}
   rotSpeed: 3
   orbiting: 0
   throwable: 0
+  radiusSpeed: 0.5
 --- !u!114 &1698693761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5240,6 +5252,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7027555833513048179, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 9173110826412673193, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
       propertyPath: m_Name
@@ -5309,6 +5326,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146719050069016613, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 8931774297544875119, guid: 5aeb4c4a789f6c849a80281556a0b2ee,
         type: 3}
@@ -6293,14 +6315,16 @@ MonoBehaviour:
     Variable: {fileID: 0}
   maxThrowForce:
     UseConstant: 1
-    ConstantValue: 6
+    ConstantValue: 10
     Variable: {fileID: 0}
   throwForce: 0.5
   orbitSize: 3
   yOffset: 0.5
+  centerPoint: {fileID: 0}
   rotSpeed: 3
   orbiting: 0
   throwable: 0
+  radiusSpeed: 5
 --- !u!114 &5571504827403069467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7113,9 +7137,11 @@ MonoBehaviour:
   throwForce: 0.5
   orbitSize: 4
   yOffset: 0
+  centerPoint: {fileID: 0}
   rotSpeed: 0
   orbiting: 0
   throwable: 0
+  radiusSpeed: 0.5
 --- !u!114 &5571504827403069491
 MonoBehaviour:
   m_ObjectHideFlags: 0

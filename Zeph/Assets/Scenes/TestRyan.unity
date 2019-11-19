@@ -245,7 +245,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -351,19 +351,20 @@ MonoBehaviour:
       m_Calls: []
   pullForce:
     UseConstant: 1
-    ConstantValue: 25
+    ConstantValue: 50
     Variable: {fileID: 0}
   maxThrowForce:
     UseConstant: 1
     ConstantValue: 10
     Variable: {fileID: 0}
-  throwForce: 10
+  throwForce: 0.5
   orbitSize: 3
   yOffset: 0.6
   centerPoint: {fileID: 1062540648}
   rotSpeed: 0
   orbiting: 0
   throwable: 0
+  radiusSpeed: 1
 --- !u!1 &229795179
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,6 +564,7 @@ MonoBehaviour:
   rotSpeed: 0
   orbiting: 0
   throwable: 0
+  radiusSpeed: 0.5
 --- !u!114 &294001318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,7 +858,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!82 &481835636
 AudioSource:
@@ -963,7 +965,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 481835634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1333fddadc0d148468c56d6d07dfed75, type: 3}
+  m_Script: {fileID: 11500000, guid: 67758dcb4870a3843b9a0e696a3eab98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AspectType: 0
@@ -973,17 +975,22 @@ MonoBehaviour:
   onNegate:
     m_PersistentCalls:
       m_Calls: []
-  burnedMaterial: {fileID: 2100000, guid: 3d1608f71b7f30e4cb23ba205e1be550, type: 2}
-  burningParticleEffect: {fileID: 5991376894092091881, guid: 5d6c452d16630434e9fa06446c82d674,
-    type: 3}
-  destroyable: 0
-  destroyTime: 1
-  canBeSource: 1
-  useBoxCollider: 0
-  boxDimensions: {x: 0, y: 0, z: 0}
-  fireSpreadRange: 3
-  fireSpreadPerSecond: 1
-  maxNumberOfAffectableObjects: 7
+  pullForce:
+    UseConstant: 1
+    ConstantValue: 25
+    Variable: {fileID: 0}
+  maxThrowForce:
+    UseConstant: 1
+    ConstantValue: 10
+    Variable: {fileID: 0}
+  throwForce: 0.5
+  orbitSize: 3
+  yOffset: 0.6
+  centerPoint: {fileID: 0}
+  rotSpeed: 0
+  orbiting: 0
+  throwable: 0
+  radiusSpeed: 0.5
 --- !u!1001 &505433069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1004,17 +1011,17 @@ PrefabInstance:
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 3.04
       objectReference: {fileID: 0}
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1.13
       objectReference: {fileID: 0}
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 2.97
       objectReference: {fileID: 0}
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
@@ -1070,6 +1077,11 @@ PrefabInstance:
         type: 3}
       propertyPath: aspectMaterial
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018646443490881420, guid: 76429ece6aedc8c4f9c31b555e004d8f,
+        type: 3}
+      propertyPath: additionalAspects.Array.data[0]
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1481345518, guid: 76429ece6aedc8c4f9c31b555e004d8f, type: 3}
       propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.size
@@ -1365,7 +1377,7 @@ PrefabInstance:
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
@@ -1375,7 +1387,7 @@ PrefabInstance:
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0.77
       objectReference: {fileID: 0}
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
