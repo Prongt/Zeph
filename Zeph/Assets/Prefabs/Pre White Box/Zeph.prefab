@@ -87,7 +87,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 162, z: 0, w: 168}
+  m_BoundingSphereOverride: {x: 0, y: 2.1206388e+14, z: 8.4e-43, w: 7.67e-43}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -137,6 +137,7 @@ Transform:
   m_Children:
   - {fileID: 193507635}
   - {fileID: 4600892634210165671}
+  - {fileID: 5419553859713054265}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -156,7 +157,8 @@ MonoBehaviour:
   playerGravity: -12
   playerJumpHeight: 1
   airControlPercent: 1
-  playerTurnSpeed: 0.2
+  zephModel: {fileID: 5419553859713054265}
+  playerTurnSpeed: 0.1
   velocitySmoothing: 0.1
 --- !u!114 &2128616418
 MonoBehaviour:
@@ -200,6 +202,81 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1750358986
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4890117515526024212}
+    m_Modifications:
+    - target: {fileID: 9037957396718788576, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_Name
+      value: Zeph_Animated
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419553857965354483, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419553857965354483, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419553857965354483, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419553857965354483, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419553857965354483, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419553857965354483, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419553857965354483, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419553857965354483, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419553857965354483, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419553857965354483, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419553857965354483, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9b2102449c203c44b9de3d5e06611e40, type: 3}
+--- !u!4 &5419553859713054265 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5419553857965354483, guid: 9b2102449c203c44b9de3d5e06611e40,
+    type: 3}
+  m_PrefabInstance: {fileID: 1750358986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8836928574395467965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -211,6 +288,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tpose zeph
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: eecbac3b30db8354aa638cd3be5a0a61,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: eecbac3b30db8354aa638cd3be5a0a61,
         type: 3}
