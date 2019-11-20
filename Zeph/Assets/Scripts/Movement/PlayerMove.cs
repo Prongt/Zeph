@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour
 	[Range(0,1)]
 	public float airControlPercent;
 
+	public Transform zephModel;
+
 	public float playerTurnSpeed = 0.2f;
 	float turnVelocity;
 
@@ -76,6 +78,7 @@ public class PlayerMove : MonoBehaviour
 		if (GravityRift.useNewGravity)
 		{
 			AltMove(inputDir, -Physics.gravity);
+			//Rotate(inputDir);
 		}
 		else
 		{
@@ -236,10 +239,13 @@ public class PlayerMove : MonoBehaviour
 		{
 			float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + 180;
 
-			var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnVelocity,
+			float angle = Mathf.SmoothDampAngle(zephModel.eulerAngles.y, targetRotation, ref turnVelocity,
 				GetModifiedSmoothTime(playerTurnSpeed));
 
-			transform.rotation = Quaternion.AngleAxis(angle, -gravityDirection);
+			//zephModel.rotation = Quaternion.AngleAxis(angle, -gravityDirection);
+			var rot = zephModel.eulerAngles;
+			rot.y = angle;
+			zephModel.eulerAngles = rot;
 		}
 	}
 
