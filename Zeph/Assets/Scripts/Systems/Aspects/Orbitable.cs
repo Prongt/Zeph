@@ -19,6 +19,7 @@ public class Orbitable : Aspects
     [SerializeField] private float yOffset;
     public Transform centerPoint = null;
     [SerializeField] private float rotSpeed;
+    private float rotIncrease = 10;
     
     private Rigidbody myRB;
     
@@ -66,15 +67,7 @@ public class Orbitable : Aspects
             delay = true;
         }
 
-        if (rotSpeed <= throwForce * 10 && canRotate)
-        {
-            rotSpeed += 10 * Time.deltaTime;
-        }
-        else if (!canRotate)
-        {
-            rotSpeed = 0;
-            transform.position = savedTransform;
-        }
+        
 
        
     }
@@ -144,15 +137,46 @@ public class Orbitable : Aspects
             Vector3 pos = new Vector3(x, yOffset, z);
             transform.position = pos + centerPoint.position;
         }
-          */  
+          */
 
-       
+        if (orbitDirection)
+        {
+            if (rotSpeed <= throwForce * 10 && canRotate)
+            {
+                rotSpeed += rotIncrease * Time.deltaTime;
+            }
+        }
+        else
+        {
+            if (rotSpeed <= -throwForce * 10 && canRotate)
+            {
+                rotSpeed -= rotIncrease * Time.deltaTime;
+            } 
+        }
+        /*else if (!canRotate)
+        {
+            rotSpeed = 0;
+            transform.position = savedTransform;
+        }*/
         
-        transform.RotateAround(centerPoint.position, Vector3.up, rotSpeed * Time.deltaTime);
-        var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize + centerPoint.position;
-        transform.position = Vector3.MoveTowards(transform.position, desiredPosition,Time.deltaTime * radiusSpeed);
-        transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
-        
+
+        if (orbitDirection)
+        {
+            transform.RotateAround(centerPoint.position, Vector3.up, rotSpeed * Time.deltaTime);
+            var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize +
+                                  centerPoint.position;
+            transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
+            transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
+        }
+        else
+        {
+            transform.RotateAround(centerPoint.position, Vector3.up, -rotSpeed * Time.deltaTime);
+            var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize +
+                                  centerPoint.position;
+            transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
+            transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
+        }
+
         //This speeds up the orbit
         
         if (throwForce <= maxThrowForce.Value)
@@ -192,7 +216,7 @@ public class Orbitable : Aspects
     }
     
 
-    /*void OnCollisionEnter(Collision other)
+    void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Wall"))
         {
@@ -202,15 +226,17 @@ public class Orbitable : Aspects
                 timer = 0;
             }
             orbitDirection = !orbitDirection;
-#1#
+*/
 
-            savedRotSpeed = rotSpeed;
+            /*savedRotSpeed = rotSpeed;
             //savedTransform = transform.position;
-            canRotate = false;
+            canRotate = false;*/
+
+            orbitDirection = !orbitDirection;
         }
     }
 
-    void OnCollisionExit(Collision other)
+    /*void OnCollisionExit(Collision other)
     {
         if (other.gameObject.CompareTag("Wall"))
         {
