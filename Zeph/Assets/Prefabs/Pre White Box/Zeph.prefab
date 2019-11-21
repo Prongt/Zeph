@@ -87,7 +87,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.1206388e+14, z: 8.4e-43, w: 7.67e-43}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 1e-45}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -157,7 +157,6 @@ MonoBehaviour:
   playerGravity: -12
   playerJumpHeight: 1
   airControlPercent: 1
-  zephModel: {fileID: 5419553859713054265}
   playerTurnSpeed: 0.1
   velocitySmoothing: 0.1
 --- !u!114 &2128616418
@@ -173,12 +172,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementData:
-  - Element: {fileID: 11400000, guid: 1a24b8a34b645cd44b6e888bf5f25ae7, type: 2}
-    colliders: []
-  - Element: {fileID: 11400000, guid: 80407e51511ac444b9f146c50ba8be1c, type: 2}
-    colliders: []
-  - Element: {fileID: 11400000, guid: 83634a75a3a9f1f48af6e7a2b400f02a, type: 2}
-    colliders: []
+  - {fileID: 11400000, guid: 1a24b8a34b645cd44b6e888bf5f25ae7, type: 2}
+  - {fileID: 11400000, guid: 80407e51511ac444b9f146c50ba8be1c, type: 2}
+  - {fileID: 11400000, guid: 83634a75a3a9f1f48af6e7a2b400f02a, type: 2}
   height: 1.5
   drawGizmos: 1
   gizmoHeight: -1
