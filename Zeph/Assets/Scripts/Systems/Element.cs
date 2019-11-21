@@ -12,6 +12,8 @@ public class Element : ScriptableObject
     [SerializeField] private List<AspectType> negates;
     [Tooltip("Only used by the player")][SerializeField] private float playerRange;
     [SerializeField] private Color debugColor;
+    [SerializeField] private string buttonName;
+    [HideInInspector] public Collider[] colliders;
     public List<AspectType> Promotes => promotes;
 
     public List<AspectType> Negates => negates;
@@ -25,6 +27,11 @@ public class Element : ScriptableObject
     public float PlayerRange
     {
         get => playerRange;
+    }
+
+    public string ButtonName
+    {
+        get => buttonName;
     }
 }
 
