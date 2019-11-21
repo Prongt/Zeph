@@ -5,16 +5,14 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-
-    
 	public float playerMoveSpeed = 6f;
 	public float playerGravity = -12f;
 	public float playerJumpHeight = 1f;
 	[Range(0,1)]
 	public float airControlPercent;
 
-	public Transform zephModel;
-	[SerializeField]private Animator zephAnimator;
+	private Transform zephModel;
+	private Animator zephAnimator;
 
 	public float playerTurnSpeed = 0.2f;
 	float turnVelocity;
@@ -40,10 +38,8 @@ public class PlayerMove : MonoBehaviour
 	public static bool PlayerIsGrounded;
 	public static bool PlayerUsesGravity = true;
 	private float gravityPull;
-
-	private Vector3 rotVelocity;
-
-
+	
+	
 	void Start ()
 	{
 		camera = Camera.main.transform;
@@ -56,6 +52,9 @@ public class PlayerMove : MonoBehaviour
 		distanceToGround = GetComponent<Collider>().bounds.extents.y + 0.1f;
 		distanceToGroundWidth = GetComponent<Collider>().bounds.extents.x + 0.15f;
 		gravityPull = playerGravity;
+
+		zephAnimator = GetComponentInChildren<Animator>();
+		zephModel = GetComponentInChildren<Animator>().transform;
 	}
 
 	void Update () {
@@ -79,7 +78,6 @@ public class PlayerMove : MonoBehaviour
 			var newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
 			transform.up = newUp;
 			oldGravity = Physics.gravity;
-			//zephModel.eulerAngles = Vector3.zero;
 		}
 		
 		
@@ -160,9 +158,7 @@ public class PlayerMove : MonoBehaviour
 			{
 				velocity.x += velocityY;
 			}
-			rotVelocity = velocity;
-			rotVelocity.x = 0;
-			
+
 
 			if (debugGravity)
 			{
@@ -188,10 +184,6 @@ public class PlayerMove : MonoBehaviour
 			{
 				velocity.z += velocityY;
 			}
-			
-			rotVelocity = velocity;
-			rotVelocity.z = 0;
-			
 		}
 		else
 		{
@@ -256,48 +248,17 @@ public class PlayerMove : MonoBehaviour
 				var rot = zephModel.localEulerAngles;
 				rot.y = angle;
 				zephModel.localEulerAngles = rot;
-
-				Debug.Log(angle);
-				if (transform.up == -Physics.gravity)
-				{
-//					var wantRot = zephModel.rotation;
-//					wantRot.y += angle;
-//					zephModel.rotation = wantRot;
-
-				}
-				
-				//zephModel.eulerAngles = rot;
-				
-				
-				//zephModel.localEulerAngles = rot;
-				//zephModel.rotation = Quaternion.Euler(rot);
-				//zephModel.Rotate(Vector3.up, zephModel.eulerAngles.y - angle);
-				//zephModel.Rotate(rot, Space.Self);
-
-				//Debug.Log(angle);
-				
-				var diff = Mathf.DeltaAngle(zephModel.rotation.y, angle);
-				if (Mathf.Abs(diff) > 1.0f)
-				{
-					//zephModel.RotateAround(zephModel.position, zephModel.up, Mathf.Abs(diff));
-				}
-				
-//				zephModel.rotation = quaternion.LookRotation(rotVelocity, Vector3.right);
-				
-				
 			}
 			else
 			{
-				float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camera.eulerAngles.y;
+				float targetRotation = Mathf.Atan2(-inputDir.x, -inputDir.y) * Mathf.Rad2Deg + camera.eulerAngles.y;
 
-				float angle = Mathf.SmoothDampAngle(zephModel.eulerAngles.y, targetRotation, ref turnVelocity,
+				float angle = Mathf.SmoothDampAngle(zephModel.localEulerAngles.y, targetRotation, ref turnVelocity,
 					GetModifiedSmoothTime(playerTurnSpeed));
 
-				var rot = zephModel.eulerAngles;
+				var rot = zephModel.localEulerAngles;
 				rot.y = angle;
-				zephModel.eulerAngles = rot;
-				
-				Debug.Log(angle);
+				zephModel.localEulerAngles = rot;
 			}
 		}
 	}
