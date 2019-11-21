@@ -12,10 +12,10 @@ public class PlayerElementController : MonoBehaviour
     [SerializeField] private float height = 1;
     [SerializeField] private bool drawGizmos = false;
     [HideIf("drawGizmos", true)][SerializeField] private float gizmoHeight;
-    [SerializeField] private KeyCode powerKey;
     private Light light;
-    public bool powerUsed;
-    private bool routineRunning;
+
+    private Animator animator;
+    private bool usedPower = false;
 
 
     //number of collisions detected for each element
@@ -26,14 +26,13 @@ public class PlayerElementController : MonoBehaviour
     private void Awake()
     {
         light = GetComponentInChildren<Light>();
+        animator = GetComponentInChildren<Animator>();
         
         for (int i = 0; i < elementData.Length; i++)
         {
             elementData[i].colliders = new Collider[25];
         }
 
-        powerUsed = false;
-        routineRunning = false;
     }
 
     private void Update()
@@ -49,7 +48,7 @@ public class PlayerElementController : MonoBehaviour
             {
                 if (Input.GetButtonDown(elementData[i].ButtonName))
                 {
-                    //Debug.Log(elementData[i].name);
+                    StartCoroutine(UsePowerAnimation());
                     elementData[i].colliders = new Collider[maxAffectableObjects];
                     Physics.OverlapSphereNonAlloc(transform.position, elementData[i].PlayerRange,
                         elementData[i].colliders);
@@ -59,11 +58,12 @@ public class PlayerElementController : MonoBehaviour
 
                         if (collisionObj)
                         {
+
                             var obj = collisionObj.GetComponent<Interactable>();
+                            
                             if (obj)
                             {
                                 var nearestPoint = collisionObj.ClosestPoint(transform.position);
-                                //Debug.Log(nearestPoint);
                                 Vector3 dir = nearestPoint - transform.position;;
                                 RaycastHit hitInfo;
                                 
@@ -85,59 +85,17 @@ public class PlayerElementController : MonoBehaviour
                 }
             }
         }
-        
-        //CombinedPowers();
     }
 
-    private void CombinedPowers()
+    IEnumerator UsePowerAnimation()
     {
-//if (Input.GetKeyDown(powerKey) && !powerUsed && PlayerMove.IsGrounded)
-        //if (Input.GetKeyDown(powerKey) )
-        if (Input.GetButtonDown("FirePower") && PlayerMove.PlayerIsGrounded)
-        {
-            powerUsed = true;
-            StartCoroutine(Delay());
-            light.intensity = 100;
-
-            if (!routineRunning)
-            {
-                //StartCoroutine(LightFade());
-            }
-
-            for (int i = 0; i < elementData.Length; i++)
-            {
-                elementData[i].colliders = new Collider[maxAffectableObjects];
-                var size = Physics.OverlapSphereNonAlloc(transform.position, elementData[i].PlayerRange,
-                    elementData[i].colliders);
-                for (int j = 0; j < elementData[i].colliders.Length; j++)
-                {
-                    var collisionObj = elementData[i].colliders[j];
-
-                    if (collisionObj)
-                    {
-                        var obj = collisionObj.GetComponent<Interactable>();
-                        if (obj)
-                        {
-                            float objY = elementData[i].colliders[j].ClosestPoint(transform.position).y;
-                            //float objY = obj.transform.position.y;
-                            float playerY = transform.position.y;
-
-                            if (Mathf.Abs(objY - playerY) < height)
-                            {
-                                obj.ApplyElement(elementData[i], gameObject.transform);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        animator.SetBool("usePower", true);
+        yield return new WaitForSeconds(1f);
+        animator.SetBool("usePower", false);
     }
 
-    IEnumerator Delay()
-    {
-        yield return new WaitForSeconds(3f);
-        powerUsed = false;
-    }
+
+    
 
     private void OnDrawGizmos()
     {
@@ -177,7 +135,6 @@ public class PlayerElementController : MonoBehaviour
             }
 
             Gizmos.DrawLine(pos, lastPos);
-            //Gizmos.DrawWireSphere(transform.position, elementData[i].Range);
         }
     }
 }
