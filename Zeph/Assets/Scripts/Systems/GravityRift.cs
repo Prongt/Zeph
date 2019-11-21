@@ -1,7 +1,8 @@
 ﻿
+using System;
 using UnityEngine;
 
-public class GravityRift : Activator
+public class GravityRift : Aspects
 {
     [SerializeField] private Vector3 newGravity;
     private static Vector3 ogGravity = new Vector3(0, -9.81f, 0);
@@ -14,10 +15,21 @@ public class GravityRift : Activator
     {
         ogGravity = Physics.gravity;
     }
-
-
-    public override void Activate()
+    
+    public Type[] componentTypes = new Type[]
     {
+        
+    };
+
+    public override Type[] RequiredComponents()
+    {
+        return componentTypes;
+    }
+
+    public override void Promote(Transform source = null, Element element = null)
+    {
+        base.Promote(source, element);
+        
         if (!resetGravity)
         {
             Physics.gravity = newGravity;
@@ -36,4 +48,13 @@ public class GravityRift : Activator
             }
         }
     }
+    
+    public override void Negate(Transform source = null)
+    {
+        base.Promote(source);
+        //Not pushed
+        //Debug.Log("Not being pushed");
+    }
+    
+        
 }

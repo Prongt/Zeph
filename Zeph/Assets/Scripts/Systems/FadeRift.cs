@@ -1,21 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FadeRift : Activator
+public class FadeRift : Aspects
 {
-    [SerializeField] private List<GameObject> fadeGameobjects = new List<GameObject>();
-    public override void Activate()
+
+    public override void Promote(Transform source = null, Element element = null)
     {
-        base.Activate();
-        for (int i = 0; i < fadeGameobjects.Count; i++)
-        {
-            if (fadeGameobjects[i])
-            {
-                var isActive = fadeGameobjects[i].activeSelf;
-                
-                fadeGameobjects[i].SetActive(!isActive);
-            }
-        }
+        base.Promote(source, element);
     }
+
+    public override void Negate(Transform source = null)
+    {
+        base.Promote(source);
+    }
+
+    public override Type[] RequiredComponents()
+    {
+        return componentTypes;
+    }
+    
+    public Type[] componentTypes = new Type[]
+    {
+
+    };
 }

@@ -13,10 +13,10 @@ public class Orbitable : Aspects
     
     private Vector3 direction;
     
-    [SerializeField] public float orbitSize = 4;
+    [SerializeField] public float orbitSize = 3;
     private float xSpread;
     private float zSpread;
-    [SerializeField] private float yOffset;
+    [SerializeField] private float yOffset = 0.5f;
     public Transform centerPoint = null;
     [SerializeField] private float rotSpeed;
     private float rotIncrease = 10;
@@ -33,7 +33,7 @@ public class Orbitable : Aspects
     public bool orbiting;
     public bool throwable;
     
-    public float radiusSpeed =  0.5f;
+    public float radiusSpeed =  10f;
 
     public Type[] componentTypes = new Type[]
     {
@@ -139,6 +139,8 @@ public class Orbitable : Aspects
         }
           */
 
+        myRB.constraints = RigidbodyConstraints.FreezeRotation;
+        
         if (orbitDirection)
         {
             if (rotSpeed <= throwForce * 10 && canRotate)
@@ -187,6 +189,8 @@ public class Orbitable : Aspects
 
     void Throw()
     {
+        myRB.constraints = RigidbodyConstraints.None;
+        
         //Resets the rotation speed
         rotSpeed = 0;
         
@@ -194,6 +198,7 @@ public class Orbitable : Aspects
         direction = centerPoint.forward + transform.forward;
         myRB.AddForce(centerPoint.forward * throwForce, ForceMode.Impulse);
         throwForce = 0.5f;
+        
     }
 
     IEnumerator Delay()
@@ -218,7 +223,7 @@ public class Orbitable : Aspects
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Wall"))
+        if (!other.gameObject.CompareTag("Floor"))
         {
             /*
             if (orbitDirection)
