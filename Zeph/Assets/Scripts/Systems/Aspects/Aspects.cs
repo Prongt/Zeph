@@ -48,5 +48,8 @@ public enum AspectType
 {
     Flamable,
     Growable,
-    Orbitable
+    Orbitable,
+    GravityRift,
+    Distortion,
+    FadeRift
 }
