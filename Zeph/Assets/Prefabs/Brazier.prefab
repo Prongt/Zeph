@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4870401769041597569}
   - component: {fileID: 1843620010}
-  - component: {fileID: 1843620007}
-  - component: {fileID: 1843620008}
-  - component: {fileID: 1843620009}
+  - component: {fileID: 1362796442}
+  - component: {fileID: 7988426004799259034}
+  - component: {fileID: 5145639353498070401}
   m_Layer: 0
   m_Name: Brazier
   m_TagString: Untagged
@@ -48,7 +48,51 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.7291074, y: 1, z: 1.7169666}
   m_Center: {x: -0.00259614, y: 0, z: -0.0029859543}
---- !u!82 &1843620007
+--- !u!114 &1362796442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025292489989712168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectMaterial: {fileID: 11400000, guid: 209792307b5c2a94992aa676a6e5c667, type: 2}
+  additionalAspects: 
+--- !u!114 &7988426004799259034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025292489989712168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1333fddadc0d148468c56d6d07dfed75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  burnedMaterial: {fileID: 0}
+  burningParticleEffect: {fileID: 5991376894092091881, guid: 5d6c452d16630434e9fa06446c82d674,
+    type: 3}
+  destroyable: 0
+  destroyTime: 1
+  canBeSource: 0
+  useBoxCollider: 0
+  boxDimensions: {x: 0, y: 0, z: 0}
+  fireSpreadRange: 3
+  fireSpreadPerSecond: 1
+  maxNumberOfAffectableObjects: 7
+--- !u!82 &5145639353498070401
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,61 +188,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1843620008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025292489989712168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1333fddadc0d148468c56d6d07dfed75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AspectType: 0
-  onPromote:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  onNegate:
-    m_PersistentCalls:
-      m_Calls: []
-  burnedMaterial: {fileID: 2100000, guid: 3d1608f71b7f30e4cb23ba205e1be550, type: 2}
-  burningParticleEffect: {fileID: 5991376894092091881, guid: 5d6c452d16630434e9fa06446c82d674,
-    type: 3}
-  destroyable: 0
-  destroyTime: 1
-  canBeSource: 1
-  useBoxCollider: 1
-  boxDimensions: {x: 3.82, y: 4.32, z: 4.4}
-  fireSpreadRange: 3
-  fireSpreadPerSecond: 1
-  maxNumberOfAffectableObjects: 5
---- !u!114 &1843620009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025292489989712168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aspectMaterial: {fileID: 11400000, guid: 209792307b5c2a94992aa676a6e5c667, type: 2}
-  additionalAspects: 
 --- !u!1001 &7245538910750206208
 PrefabInstance:
   m_ObjectHideFlags: 0
