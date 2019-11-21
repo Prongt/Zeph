@@ -93,8 +93,7 @@ public class PlayerElementController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         animator.SetBool("usePower", false);
     }
-
-
+    
     
 
     private void OnDrawGizmos()

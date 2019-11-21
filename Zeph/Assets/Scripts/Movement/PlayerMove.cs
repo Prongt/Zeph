@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -25,6 +27,7 @@ public class PlayerMove : MonoBehaviour
 	
 	CharacterController characterController;
 	private Transform camera;
+	private Animator animator;
 	
 
 	private float gravityJump = 0.5f;
@@ -44,6 +47,7 @@ public class PlayerMove : MonoBehaviour
 	{
 		camera = Camera.main.transform;
 		characterController = GetComponent<CharacterController> ();
+		animator = GetComponentInChildren<Animator>();
 		
 		gravityDirection = Physics.gravity;
 		oldGravity = gravityDirection;
@@ -97,6 +101,11 @@ public class PlayerMove : MonoBehaviour
 
 		if (Input.GetButtonDown("Jump")) {
 			Jump ();
+		}
+
+		if (Input.GetKeyDown(KeyCode.E))
+		{
+			StartCoroutine(UseJumpAnimation());
 		}
 	}
 	
@@ -233,6 +242,13 @@ public class PlayerMove : MonoBehaviour
 		}
 
 	}
+	
+	IEnumerator UseJumpAnimation()
+	{
+		animator.SetBool("IsJumping", true);
+		yield return new WaitForSeconds(8f);
+		animator.SetBool("IsJumping", false);
+	}
 
 	private void Rotate(Vector2 inputDir)
 	{
@@ -276,6 +292,7 @@ public class PlayerMove : MonoBehaviour
 				jumpVelocity = Mathf.Sqrt (-2 * playerGravity * playerJumpHeight);
 			}
 			velocityY = jumpVelocity;
+			
 		}
 	}
 
