@@ -41,6 +41,11 @@ public class PlayerMove : MonoBehaviour
 	public static bool PlayerIsGrounded;
 	public static bool PlayerUsesGravity = true;
 	private float gravityPull;
+	public static bool _PlayerMovementEnabled = true;
+	public float gravityFlipTime = 2;
+	private Vector3 newUp;
+	private Vector3 originalUp;
+	private Quaternion originalrot;
 	
 	
 	void Start ()
@@ -59,6 +64,10 @@ public class PlayerMove : MonoBehaviour
 
 		zephAnimator = GetComponentInChildren<Animator>();
 		zephModel = GetComponentInChildren<Animator>().transform;
+
+		_PlayerMovementEnabled = true;
+		originalUp = transform.up;
+		originalrot = transform.rotation;
 	}
 
 	void Update () {
@@ -79,34 +88,90 @@ public class PlayerMove : MonoBehaviour
 
 		if (gravityDirection != oldGravity)
 		{
-			var newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
-			transform.up = newUp;
+			if (GravityRift.useNewGravity)
+			{
+				newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
+			}
+			
+			//transform.up = Vector3.Lerp(transform.up, newUp, lerpTime * Time.deltaTime);
+			StartCoroutine(LerpTransformUp());
+			
+			//transform.up = newUp;
+//			if (GravityRift.useNewGravity == false)
+//			{
+//				transform.rotation = originalrot;
+//			}
+			
+			//zephModel.up = transform.up;
+			
 			oldGravity = Physics.gravity;
 		}
-		
-		
-		if (GravityRift.useNewGravity)
+
+
+		if (_PlayerMovementEnabled)
 		{
-			AltMove(inputDir, -Physics.gravity);
+			if (GravityRift.useNewGravity)
+			{
+				AltMove(inputDir, -Physics.gravity);
+			}
+			else
+			{
+				Move(inputDir, -Physics.gravity);
+			}
+		
 			Rotate(inputDir);
+			
+			if (Input.GetButtonDown("Jump")) {
+				Jump ();
+			}
+
+			if (Input.GetKeyDown(KeyCode.E))
+			{
+				StartCoroutine(UseJumpAnimation());
+			}
 		}
 		else
 		{
+			//transform.up = Vector3.Lerp(transform.up, newUp, lerpTime * Time.deltaTime);
 			
-			Move(inputDir, -Physics.gravity);
-			Rotate(inputDir);
-		}
+			if (GravityRift.useNewGravity == false)
+			{
+				transform.up = Vector3.Lerp(transform.up, originalUp, gravityFlipTime * Time.deltaTime);
+				transform.rotation = originalrot;
+				//transform.rotation = Quaternion.Slerp(transform.rotation, originalrot, playerTurnSpeed * Time.deltaTime);
+			}
+			else
+			{
+				transform.up = Vector3.Lerp(transform.up, newUp, gravityFlipTime * Time.deltaTime);
+			}
 
+//			var rot = transform.rotation;
+//			rot.y = -rot.y;
+//			transform.rotation = rot;
+		}
+	}
+
+	IEnumerator LerpTransformUp()
+	{
+		_PlayerMovementEnabled = false;
+		yield return new WaitForSeconds(gravityFlipTime);
 		
-
-		if (Input.GetButtonDown("Jump")) {
-			Jump ();
-		}
-
-		if (Input.GetKeyDown(KeyCode.E))
-		{
-			StartCoroutine(UseJumpAnimation());
-		}
+//		if (GravityRift.useNewGravity == false)
+//		{
+//			
+//			//zephModel.rotation = Quaternion.Lerp(zephModel.rotation, originalrot, Time.deltaTime);
+//			var rot = zephModel.localEulerAngles;
+//			rot.y += 180;
+//			zephModel.localEulerAngles = rot;
+//		}
+//		else
+//		{ 
+//			var rot = zephModel.localEulerAngles;
+//			rot.y += 180;
+//			zephModel.localEulerAngles = rot;
+//		}
+		
+		_PlayerMovementEnabled = true;
 	}
 	
 
@@ -214,33 +279,27 @@ public class PlayerMove : MonoBehaviour
 	void Move(Vector2 inputDir, Vector3 upAxis) {
 		upAxis.Normalize();
 		
-			
 		float targetSpeed = playerMoveSpeed * inputDir.magnitude; 
 
 		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
 
 		velocityY += Time.deltaTime * gravityPull;
-
-
+		
 		Vector3 velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
 		velocity.Normalize();
 		velocity *= currentSpeed;
 
 		var speed = velocity;
 		zephAnimator.SetFloat("moveSpeed", speed.magnitude);
-		
-		
-		
+
 		velocity.y = velocityY;
 
 		characterController.Move (velocity * Time.deltaTime);
 		currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.z).magnitude;
 		
-		
 		if (characterController.isGrounded) {
 			velocityY = 0;
 		}
-
 	}
 	
 	IEnumerator UseJumpAnimation()
@@ -292,7 +351,6 @@ public class PlayerMove : MonoBehaviour
 				jumpVelocity = Mathf.Sqrt (-2 * playerGravity * playerJumpHeight);
 			}
 			velocityY = jumpVelocity;
-			
 		}
 	}
 
