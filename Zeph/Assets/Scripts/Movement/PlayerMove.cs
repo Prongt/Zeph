@@ -117,7 +117,7 @@ public class PlayerMove : MonoBehaviour
 
 			if (Input.GetKeyDown(KeyCode.E))
 			{
-				StartCoroutine(UseJumpAnimation());
+				StartCoroutine(UseDanceAnimation());
 			}
 		}
 		else
@@ -259,11 +259,11 @@ public class PlayerMove : MonoBehaviour
 		}
 	}
 	
-	IEnumerator UseJumpAnimation()
+	IEnumerator UseDanceAnimation()
 	{
-		animator.SetBool("IsJumping", true);
+		animator.SetBool("IsDancing", true);
 		yield return new WaitForSeconds(8f);
-		animator.SetBool("IsJumping", false);
+		animator.SetBool("IsDancing", false);
 	}
 
 	private void Rotate(Vector2 inputDir)
@@ -296,18 +296,23 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	void Jump() {
-		if (CheckIfGrounded(gravityDirection, distanceToGround))
+		if (GravityRift.useNewGravity)
 		{
-			float jumpVelocity;
-			if (GravityRift.useNewGravity)
+			if (CheckIfGrounded(gravityDirection, distanceToGround))
 			{
+				float jumpVelocity;
 				jumpVelocity = Mathf.Sqrt (-2 * playerGravity * gravityJump);
+				velocityY = jumpVelocity;
 			}
-			else
+		}
+		else
+		{
+			if (characterController.isGrounded)
 			{
+				float jumpVelocity;
 				jumpVelocity = Mathf.Sqrt (-2 * playerGravity * playerJumpHeight);
+				velocityY = jumpVelocity;
 			}
-			velocityY = jumpVelocity;
 		}
 	}
 
