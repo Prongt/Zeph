@@ -351,7 +351,7 @@ MonoBehaviour:
       m_Calls: []
   pullForce:
     UseConstant: 1
-    ConstantValue: 50
+    ConstantValue: 100
     Variable: {fileID: 0}
   maxThrowForce:
     UseConstant: 1
@@ -359,8 +359,8 @@ MonoBehaviour:
     Variable: {fileID: 0}
   throwForce: 0.5
   orbitSize: 3
-  yOffset: 0.6
-  centerPoint: {fileID: 1062540648}
+  yOffset: 2
+  centerPoint: {fileID: 262779408}
   rotSpeed: 0
   orbiting: 0
   throwable: 0
@@ -455,6 +455,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 45, y: 45.000004, z: 0}
+--- !u!4 &262779408 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5419553859713054265, guid: 5c0917fafcb61764aa309728126c3964,
+    type: 3}
+  m_PrefabInstance: {fileID: 2147086598}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &294001315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -522,7 +528,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1398070113, guid: 844d01b7599716a459488858e0bb6997, type: 3}
+    - {fileID: 1398070115, guid: 844d01b7599716a459488858e0bb6997, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 844d01b7599716a459488858e0bb6997, type: 3}
 --- !u!1 &294001316 stripped
 GameObject:
@@ -558,13 +566,13 @@ MonoBehaviour:
     ConstantValue: 0
     Variable: {fileID: 0}
   throwForce: 0.5
-  orbitSize: 4
-  yOffset: 0
+  orbitSize: 3
+  yOffset: 0.5
   centerPoint: {fileID: 0}
   rotSpeed: 0
   orbiting: 0
   throwable: 0
-  radiusSpeed: 0.5
+  radiusSpeed: 10
 --- !u!114 &294001318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1362,7 +1370,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1062540648}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3018646443490881463, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
@@ -1377,17 +1385,17 @@ PrefabInstance:
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.4
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.59000003
+      value: 1.59
       objectReference: {fileID: 0}
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.3299999
+      value: 0.77
       objectReference: {fileID: 0}
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
@@ -1412,7 +1420,7 @@ PrefabInstance:
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3018646443490881419, guid: 76429ece6aedc8c4f9c31b555e004d8f,
         type: 3}
@@ -1494,7 +1502,7 @@ GameObject:
   - component: {fileID: 1897560432}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

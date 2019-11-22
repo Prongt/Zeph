@@ -16,7 +16,7 @@ public class Orbitable : Aspects
     [SerializeField] public float orbitSize = 3;
     private float xSpread;
     private float zSpread;
-    [SerializeField] private float yOffset = 0.5f;
+    [SerializeField] private float yOffset = 0;
     public Transform centerPoint = null;
     [SerializeField] private float rotSpeed;
     private float rotIncrease = 10;
@@ -32,7 +32,7 @@ public class Orbitable : Aspects
     private float timer;
     public bool orbiting;
     public bool throwable;
-    
+
     public float radiusSpeed =  10f;
 
     public Type[] componentTypes = new Type[]
@@ -52,6 +52,7 @@ public class Orbitable : Aspects
         myRB = GetComponent<Rigidbody>();
         xSpread = orbitSize;
         zSpread = orbitSize;
+        print("Center Point: " + centerPoint.position);
     }
 
     void Update()
@@ -60,16 +61,17 @@ public class Orbitable : Aspects
         print("The Direction" + direction);*/
         
         
+        
+    }
+
+    void LateUpdate()
+    {
         if (orbiting)
         {
             Orbit();
             throwable = true;
             delay = true;
-        }
-
-        
-
-       
+        } 
     }
 
     public override void Promote(Transform source = null, Element element = null)
@@ -78,7 +80,7 @@ public class Orbitable : Aspects
         //Being pushed
         //Debug.Log("Being pushed");
         //Initial pull to center
-        centerPoint = source.transform;
+        //centerPoint = source.transform;
         direction = source.transform.position - transform.position;
 
 
@@ -114,32 +116,8 @@ public class Orbitable : Aspects
 
     void Orbit()
     {
-        /* Old orbiting code
-         timer += Time.deltaTime * rotSpeed;
-        
-        if (!orbiting)
-        {
-            return;
-        }
-        
-        //This causes the object to orbit
-        if (orbitDirection)
-        {
-            float x = -Mathf.Cos(timer) * xSpread;
-            float z = Mathf.Sin(timer) * zSpread;
-            Vector3 pos = new Vector3(x, yOffset, z);
-            transform.position = pos + centerPoint.position;
-        }
-        else //This changes the orbit direction on collision
-        {
-            float x = Mathf.Cos(timer) * xSpread;
-            float z = Mathf.Sin(timer) * zSpread;
-            Vector3 pos = new Vector3(x, yOffset, z);
-            transform.position = pos + centerPoint.position;
-        }
-          */
-
         myRB.constraints = RigidbodyConstraints.FreezeRotation;
+        myRB.useGravity = false;
         
         if (orbitDirection)
         {
@@ -155,18 +133,15 @@ public class Orbitable : Aspects
                 rotSpeed -= rotIncrease * Time.deltaTime;
             } 
         }
-        /*else if (!canRotate)
-        {
-            rotSpeed = 0;
-            transform.position = savedTransform;
-        }*/
-        
+
 
         if (orbitDirection)
         {
             transform.RotateAround(centerPoint.position, Vector3.up, rotSpeed * Time.deltaTime);
             var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize +
                                   centerPoint.position;
+            //desiredPosition = new Vector3(desiredPosition.x, centerPoint.position.y, desiredPosition.z);
+            print("Desired Pos: " + desiredPosition);
             transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
             transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
         }
@@ -175,6 +150,8 @@ public class Orbitable : Aspects
             transform.RotateAround(centerPoint.position, Vector3.up, -rotSpeed * Time.deltaTime);
             var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize +
                                   centerPoint.position;
+            //desiredPosition = new Vector3(desiredPosition.x, centerPoint.position.y, desiredPosition.z);
+            print("Desired Pos: " + desiredPosition);
             transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
             transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
         }
@@ -190,6 +167,7 @@ public class Orbitable : Aspects
     void Throw()
     {
         myRB.constraints = RigidbodyConstraints.None;
+        myRB.useGravity = true;
         
         //Resets the rotation speed
         rotSpeed = 0;
@@ -225,28 +203,7 @@ public class Orbitable : Aspects
     {
         if (!other.gameObject.CompareTag("Floor"))
         {
-            /*
-            if (orbitDirection)
-            {
-                timer = 0;
-            }
-            orbitDirection = !orbitDirection;
-*/
-
-            /*savedRotSpeed = rotSpeed;
-            //savedTransform = transform.position;
-            canRotate = false;*/
-
             orbitDirection = !orbitDirection;
         }
     }
-
-    /*void OnCollisionExit(Collision other)
-    {
-        if (other.gameObject.CompareTag("Wall"))
-        {
-            rotSpeed = savedRotSpeed;
-            canRotate = true;
-        }
-    }*/
 }

@@ -51,5 +51,6 @@ public enum AspectType
     Orbitable,
     GravityRift,
     Distortion,
-    FadeRift
+    FadeRift,
+    Story
 }
