@@ -41,6 +41,11 @@ public class PlayerMove : MonoBehaviour
 	public static bool PlayerIsGrounded;
 	public static bool PlayerUsesGravity = true;
 	private float gravityPull;
+	public static bool _PlayerMovementEnabled = true;
+	public float gravityFlipTime = 2;
+	private Vector3 newUp;
+	private Vector3 originalUp;
+	private Quaternion originalrot;
 	
 	
 	void Start ()
@@ -59,6 +64,10 @@ public class PlayerMove : MonoBehaviour
 
 		zephAnimator = GetComponentInChildren<Animator>();
 		zephModel = GetComponentInChildren<Animator>().transform;
+
+		_PlayerMovementEnabled = true;
+		originalUp = transform.up;
+		originalrot = transform.rotation;
 	}
 
 	void Update () {
@@ -79,52 +88,70 @@ public class PlayerMove : MonoBehaviour
 
 		if (gravityDirection != oldGravity)
 		{
-			var newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
-			transform.up = newUp;
+			if (GravityRift.useNewGravity)
+			{
+				newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
+			}
+			
+			StartCoroutine(LerpTransformUp());
 			oldGravity = Physics.gravity;
 		}
-		
-		
-		if (GravityRift.useNewGravity)
+
+
+		if (_PlayerMovementEnabled)
 		{
-			AltMove(inputDir, -Physics.gravity);
+			if (GravityRift.useNewGravity)
+			{
+				AltMove(inputDir, -Physics.gravity);
+			}
+			else
+			{
+				Move(inputDir, -Physics.gravity);
+			}
+		
 			Rotate(inputDir);
+			
+			if (Input.GetButtonDown("Jump")) {
+				Jump ();
+			}
+
+			if (Input.GetKeyDown(KeyCode.E))
+			{
+				StartCoroutine(UseDanceAnimation());
+			}
 		}
 		else
 		{
-			
-			Move(inputDir, -Physics.gravity);
-			Rotate(inputDir);
+			if (GravityRift.useNewGravity == false)
+			{
+				transform.up = Vector3.Lerp(transform.up, originalUp, gravityFlipTime * Time.deltaTime);
+				transform.rotation = originalrot;
+			}
+			else
+			{
+				transform.up = Vector3.Lerp(transform.up, newUp, gravityFlipTime * Time.deltaTime);
+			}
 		}
+	}
 
-		
-
-		if (Input.GetButtonDown("Jump")) {
-			Jump ();
-		}
-
-		if (Input.GetKeyDown(KeyCode.E))
-		{
-			StartCoroutine(UseJumpAnimation());
-		}
+	IEnumerator LerpTransformUp()
+	{
+		_PlayerMovementEnabled = false;
+		yield return new WaitForSeconds(gravityFlipTime);
+		_PlayerMovementEnabled = true;
 	}
 	
 
 	private void AltMove(Vector2 inputDir, Vector3 upAxis)
 	{
 		upAxis.Normalize();
-		
 
-			
 		float targetSpeed = playerMoveSpeed * inputDir.magnitude;
 		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
 
 		Vector3 velocity = new Vector3();
 		if (gravityDirection.x > 0 || gravityDirection.x < 0)
 		{
-              //print("x Dir");
-              
-
 			velocityY += Time.deltaTime * gravityPull;
 			//movement
 			velocity.y = inputDir.y * playerMoveSpeed;
@@ -155,10 +182,8 @@ public class PlayerMove : MonoBehaviour
 			velocity.y = inputDir.y * playerMoveSpeed;
 			velocity.z = -inputDir.x * playerMoveSpeed;
 			
-			var speed = velocity;
 			zephAnimator.SetFloat("moveSpeed", velocity.magnitude);
-			//velocity.x -= velocityY;
-			
+
 			//gravity
 			if (gravityDirection.x > 0)
 			{
@@ -199,9 +224,6 @@ public class PlayerMove : MonoBehaviour
 			velocityY += Time.deltaTime * playerGravity;
 			velocity = transform.forward * currentSpeed + upAxis * velocityY;
 		}
-		
-		
-		
 
 		characterController.Move (velocity * Time.deltaTime);
 		currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.y).magnitude;
@@ -214,40 +236,34 @@ public class PlayerMove : MonoBehaviour
 	void Move(Vector2 inputDir, Vector3 upAxis) {
 		upAxis.Normalize();
 		
-			
 		float targetSpeed = playerMoveSpeed * inputDir.magnitude; 
 
 		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
 
 		velocityY += Time.deltaTime * gravityPull;
-
-
+		
 		Vector3 velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
 		velocity.Normalize();
 		velocity *= currentSpeed;
 
 		var speed = velocity;
 		zephAnimator.SetFloat("moveSpeed", speed.magnitude);
-		
-		
-		
+
 		velocity.y = velocityY;
 
 		characterController.Move (velocity * Time.deltaTime);
 		currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.z).magnitude;
 		
-		
 		if (characterController.isGrounded) {
 			velocityY = 0;
 		}
-
 	}
 	
-	IEnumerator UseJumpAnimation()
+	IEnumerator UseDanceAnimation()
 	{
-		animator.SetBool("IsJumping", true);
+		animator.SetBool("IsDancing", true);
 		yield return new WaitForSeconds(8f);
-		animator.SetBool("IsJumping", false);
+		animator.SetBool("IsDancing", false);
 	}
 
 	private void Rotate(Vector2 inputDir)
@@ -280,19 +296,23 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	void Jump() {
-		if (CheckIfGrounded(gravityDirection, distanceToGround))
+		if (GravityRift.useNewGravity)
 		{
-			float jumpVelocity;
-			if (GravityRift.useNewGravity)
+			if (CheckIfGrounded(gravityDirection, distanceToGround))
 			{
+				float jumpVelocity;
 				jumpVelocity = Mathf.Sqrt (-2 * playerGravity * gravityJump);
+				velocityY = jumpVelocity;
 			}
-			else
+		}
+		else
+		{
+			if (characterController.isGrounded)
 			{
+				float jumpVelocity;
 				jumpVelocity = Mathf.Sqrt (-2 * playerGravity * playerJumpHeight);
+				velocityY = jumpVelocity;
 			}
-			velocityY = jumpVelocity;
-			
 		}
 	}
 
@@ -311,5 +331,4 @@ public class PlayerMove : MonoBehaviour
 	{
 		return Physics.Raycast(transform.position, direction, distance);
 	}
-	
 }
