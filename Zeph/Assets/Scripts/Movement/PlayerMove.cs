@@ -93,17 +93,7 @@ public class PlayerMove : MonoBehaviour
 				newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
 			}
 			
-			//transform.up = Vector3.Lerp(transform.up, newUp, lerpTime * Time.deltaTime);
 			StartCoroutine(LerpTransformUp());
-			
-			//transform.up = newUp;
-//			if (GravityRift.useNewGravity == false)
-//			{
-//				transform.rotation = originalrot;
-//			}
-			
-			//zephModel.up = transform.up;
-			
 			oldGravity = Physics.gravity;
 		}
 
@@ -132,22 +122,15 @@ public class PlayerMove : MonoBehaviour
 		}
 		else
 		{
-			//transform.up = Vector3.Lerp(transform.up, newUp, lerpTime * Time.deltaTime);
-			
 			if (GravityRift.useNewGravity == false)
 			{
 				transform.up = Vector3.Lerp(transform.up, originalUp, gravityFlipTime * Time.deltaTime);
 				transform.rotation = originalrot;
-				//transform.rotation = Quaternion.Slerp(transform.rotation, originalrot, playerTurnSpeed * Time.deltaTime);
 			}
 			else
 			{
 				transform.up = Vector3.Lerp(transform.up, newUp, gravityFlipTime * Time.deltaTime);
 			}
-
-//			var rot = transform.rotation;
-//			rot.y = -rot.y;
-//			transform.rotation = rot;
 		}
 	}
 
@@ -155,22 +138,6 @@ public class PlayerMove : MonoBehaviour
 	{
 		_PlayerMovementEnabled = false;
 		yield return new WaitForSeconds(gravityFlipTime);
-		
-//		if (GravityRift.useNewGravity == false)
-//		{
-//			
-//			//zephModel.rotation = Quaternion.Lerp(zephModel.rotation, originalrot, Time.deltaTime);
-//			var rot = zephModel.localEulerAngles;
-//			rot.y += 180;
-//			zephModel.localEulerAngles = rot;
-//		}
-//		else
-//		{ 
-//			var rot = zephModel.localEulerAngles;
-//			rot.y += 180;
-//			zephModel.localEulerAngles = rot;
-//		}
-		
 		_PlayerMovementEnabled = true;
 	}
 	
@@ -178,18 +145,13 @@ public class PlayerMove : MonoBehaviour
 	private void AltMove(Vector2 inputDir, Vector3 upAxis)
 	{
 		upAxis.Normalize();
-		
 
-			
 		float targetSpeed = playerMoveSpeed * inputDir.magnitude;
 		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
 
 		Vector3 velocity = new Vector3();
 		if (gravityDirection.x > 0 || gravityDirection.x < 0)
 		{
-              //print("x Dir");
-              
-
 			velocityY += Time.deltaTime * gravityPull;
 			//movement
 			velocity.y = inputDir.y * playerMoveSpeed;
@@ -220,10 +182,8 @@ public class PlayerMove : MonoBehaviour
 			velocity.y = inputDir.y * playerMoveSpeed;
 			velocity.z = -inputDir.x * playerMoveSpeed;
 			
-			var speed = velocity;
 			zephAnimator.SetFloat("moveSpeed", velocity.magnitude);
-			//velocity.x -= velocityY;
-			
+
 			//gravity
 			if (gravityDirection.x > 0)
 			{
@@ -264,9 +224,6 @@ public class PlayerMove : MonoBehaviour
 			velocityY += Time.deltaTime * playerGravity;
 			velocity = transform.forward * currentSpeed + upAxis * velocityY;
 		}
-		
-		
-		
 
 		characterController.Move (velocity * Time.deltaTime);
 		currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.y).magnitude;
@@ -369,5 +326,4 @@ public class PlayerMove : MonoBehaviour
 	{
 		return Physics.Raycast(transform.position, direction, distance);
 	}
-	
 }
