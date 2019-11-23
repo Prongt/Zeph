@@ -17,7 +17,7 @@ public class Orbitable : Aspects
     private float xSpread;
     private float zSpread;
     [SerializeField] private float yOffset = 0;
-    public Transform centerPoint = null;
+    private Transform centerPoint = null;
     [SerializeField] private float rotSpeed;
     private float rotIncrease = 10;
     
@@ -34,6 +34,7 @@ public class Orbitable : Aspects
     public bool throwable;
 
     public float radiusSpeed =  10f;
+    
 
     public Type[] componentTypes = new Type[]
     {
@@ -52,7 +53,10 @@ public class Orbitable : Aspects
         myRB = GetComponent<Rigidbody>();
         xSpread = orbitSize;
         zSpread = orbitSize;
-        print("Center Point: " + centerPoint.position);
+
+        //TODO find better solution
+        centerPoint = GameObject.FindWithTag("OrbitPoint").transform;
+//        print("Center Point: " + centerPoint.position);
     }
 
     void Update()
@@ -141,7 +145,7 @@ public class Orbitable : Aspects
             var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize +
                                   centerPoint.position;
             //desiredPosition = new Vector3(desiredPosition.x, centerPoint.position.y, desiredPosition.z);
-            print("Desired Pos: " + desiredPosition);
+//            print("Desired Pos: " + desiredPosition);
             transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
             transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
         }
@@ -151,7 +155,7 @@ public class Orbitable : Aspects
             var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize +
                                   centerPoint.position;
             //desiredPosition = new Vector3(desiredPosition.x, centerPoint.position.y, desiredPosition.z);
-            print("Desired Pos: " + desiredPosition);
+           // print("Desired Pos: " + desiredPosition);
             transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
             transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
         }
