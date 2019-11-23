@@ -303,7 +303,6 @@ MonoBehaviour:
   throwForce: 0.5
   orbitSize: 3
   yOffset: 0
-  centerPoint: {fileID: 0}
   rotSpeed: 0
   orbiting: 0
   throwable: 0
@@ -332,12 +331,12 @@ MonoBehaviour:
     type: 3}
   destroyable: 0
   destroyTime: 1
-  canBeSource: 0
+  canBeSource: 1
   useBoxCollider: 0
   boxDimensions: {x: 0, y: 0, z: 0}
-  fireSpreadRange: 3
-  fireSpreadPerSecond: 1
-  maxNumberOfAffectableObjects: 7
+  fireSpreadRange: 1.5
+  fireSpreadPerSecond: 0.1
+  maxNumberOfAffectableObjects: 15
 --- !u!1001 &9111669246664343264
 PrefabInstance:
   m_ObjectHideFlags: 0

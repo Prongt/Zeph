@@ -19,8 +19,8 @@ public class Flamable : Aspects
     
     
     [HideIf("useBoxCollider", false, true)] [SerializeField] private float fireSpreadRange = 3;
-    [Range(0.01f, 5f)] [SerializeField] private float fireSpreadPerSecond = 1;
-    [Range(5, 25)] [SerializeField] private int maxNumberOfAffectableObjects = 7;
+    [Range(0.01f, 5f)] [SerializeField] private float fireSpreadPerSecond = 0.1f;
+    [Range(5, 25)] [SerializeField] private int maxNumberOfAffectableObjects = 15;
 
     private Material baseMaterial;
     private bool isOnFire = false;

@@ -24,6 +24,8 @@ public class Distortion : Aspects
         base.Promote(source,element);
         
         animating = !animating;
+        
+        if (disAnim1 != null)
         disAnim1.SetBool("Animate", animating);
     }
     
