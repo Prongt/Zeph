@@ -121,12 +121,12 @@ public class PlayerMove : MonoBehaviour
 		{
 			if (GravityRift.useNewGravity == false)
 			{
-				transform.up = Vector3.Lerp(transform.up, originalUp, gravityFlipTime * Time.deltaTime);
-				transform.rotation = originalrot;
+				transform.up = Vector3.Lerp(transform.up, originalUp, (gravityFlipTime * 1.5f) * Time.deltaTime);
+				//transform.rotation = originalrot;
 			}
 			else
 			{
-				transform.up = Vector3.Lerp(transform.up, newUp, gravityFlipTime * Time.deltaTime);
+				transform.up = Vector3.Lerp(transform.up, newUp, (gravityFlipTime * 1.5f)  * Time.deltaTime);
 			}
 		}
 	}
