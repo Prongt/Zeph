@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -505,7 +505,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 922fe61700b92ac42b2df41bfc67f0bd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 922fe61700b92ac42b2df41bfc67f0bd,
         type: 3}
@@ -774,7 +774,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 43c25a8d824ef2e4f842a8103f68b643,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 43c25a8d824ef2e4f842a8103f68b643,
         type: 3}
@@ -1121,7 +1121,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 94a52bbc6a129ce49a067277eca92cbc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 94a52bbc6a129ce49a067277eca92cbc,
         type: 3}
@@ -1413,7 +1413,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 3ff94750aaf6f8b4b89e2d7d080ed4e0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 3ff94750aaf6f8b4b89e2d7d080ed4e0,
         type: 3}
@@ -1469,6 +1469,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 9fa1bba2808ab1a4396024e9cc58f39b,
+        type: 3}
+      propertyPath: m_Name
+      value: TorchStandV2
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9fa1bba2808ab1a4396024e9cc58f39b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1523,11 +1528,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 9fa1bba2808ab1a4396024e9cc58f39b,
-        type: 3}
-      propertyPath: m_Name
-      value: TorchStandV2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fa1bba2808ab1a4396024e9cc58f39b, type: 3}
