@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
+﻿using System.Collections;
 using UnityEngine;
-
 
 public class PlayerMove : MonoBehaviour
 {
@@ -34,7 +30,7 @@ public class PlayerMove : MonoBehaviour
 	private Vector3 oldGravity;
 	private Vector3 gravityDirection;
 	private float distanceToGround;
-	private float distanceToGroundWidth;
+	private float characterWidth;
 
 	private bool debugGravity = false;
 	
@@ -46,8 +42,9 @@ public class PlayerMove : MonoBehaviour
 	private Vector3 newUp;
 	private Vector3 originalUp;
 	private Quaternion originalrot;
-	
-	
+
+	public float dist;
+	public LayerMask mask;
 	void Start ()
 	{
 		camera = Camera.main.transform;
@@ -59,7 +56,7 @@ public class PlayerMove : MonoBehaviour
 
 		gravityJump = gravityJump + playerJumpHeight;
 		distanceToGround = GetComponent<Collider>().bounds.extents.y + 0.1f;
-		distanceToGroundWidth = GetComponent<Collider>().bounds.extents.x + 0.15f;
+		characterWidth = GetComponent<Collider>().bounds.extents.x + 0.15f;
 		gravityPull = playerGravity;
 
 		zephAnimator = GetComponentInChildren<Animator>();
@@ -129,6 +126,8 @@ public class PlayerMove : MonoBehaviour
 				transform.up = Vector3.Lerp(transform.up, newUp, (gravityFlipTime * 1.5f)  * Time.deltaTime);
 			}
 		}
+		
+		KnockBack();
 	}
 
 	IEnumerator LerpTransformUp()
@@ -158,19 +157,19 @@ public class PlayerMove : MonoBehaviour
 			//Stops player from getting stuck in the ground/wall when the player is in the air and is movinging in the direction of the ground/wall
 			if (!PlayerIsGrounded)
 			{
-				if (CheckIfGrounded(Vector3.down, distanceToGroundWidth))
+				if (CheckIfGrounded(Vector3.down, characterWidth))
 				{
 					inputDir.y = -inputDir.y;
 				}
-				if (CheckIfGrounded(Vector3.up, distanceToGroundWidth))
+				if (CheckIfGrounded(Vector3.up, characterWidth))
 				{
 					inputDir.y = -inputDir.y;
 				}
-				if (CheckIfGrounded(Vector3.left, distanceToGroundWidth))
+				if (CheckIfGrounded(Vector3.left, characterWidth))
 				{
 					inputDir.x = -inputDir.x;
 				}
-				if (CheckIfGrounded(Vector3.right, distanceToGroundWidth))
+				if (CheckIfGrounded(Vector3.right, characterWidth))
 				{
 					inputDir.x = -inputDir.x;
 				}
@@ -322,6 +321,19 @@ public class PlayerMove : MonoBehaviour
 			return float.MaxValue;
 		}
 		return smoothTime / airControlPercent;
+	}
+
+	
+	public void KnockBack()
+	{
+		//Debug.DrawRay(transform.position, zephModel.forward * dist);
+		Ray ray = new Ray(transform.position, zephModel.forward);
+		
+		if (Physics.Raycast(ray, out RaycastHit hit, dist, mask))
+		{
+			//Debug.Log(hit.collider.name);
+			//Debug.Log("Scream");
+		}
 	}
 	
 	private bool CheckIfGrounded(Vector3 direction, float distance)
