@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
+using Unity.Collections;
+using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Jobs;
 
 public class PlayerElementController : MonoBehaviour
 {
@@ -41,7 +41,12 @@ public class PlayerElementController : MonoBehaviour
         {
             light.intensity = Mathf.Lerp(light.intensity, 5, 0.5f * Time.deltaTime);
         }
-        
+
+        UsePowers();
+    }
+
+    private void UsePowers()
+    {
         if (PlayerMove.PlayerIsGrounded)
         {
             for (int i = 0; i < elementData.Length; i++)
@@ -58,17 +63,18 @@ public class PlayerElementController : MonoBehaviour
 
                         if (collisionObj)
                         {
-
                             var obj = collisionObj.GetComponent<Interactable>();
-                            
+
                             if (obj)
                             {
                                 var nearestPoint = collisionObj.ClosestPoint(transform.position);
-                                Vector3 dir = nearestPoint - transform.position;;
+                                Vector3 dir = nearestPoint - transform.position;
+                                ;
                                 RaycastHit hitInfo;
-                                
-                                 
-                                Physics.Raycast(transform.position, dir, out hitInfo, elementData[i].PlayerRange, LayerMask.NameToLayer("Player"));
+
+
+                                Physics.Raycast(transform.position, dir, out hitInfo, elementData[i].PlayerRange,
+                                    LayerMask.NameToLayer("Player"));
 
                                 if (hitInfo.collider == collisionObj)
                                 {
@@ -82,6 +88,56 @@ public class PlayerElementController : MonoBehaviour
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+    
+    private void UsePowersWithJobs()
+    {
+        if (PlayerMove.PlayerIsGrounded)
+        {
+            for (int i = 0; i < elementData.Length; i++)
+            {
+                if (Input.GetButtonDown(elementData[i].ButtonName))
+                {
+                    StartCoroutine(UsePowerAnimation());
+                    elementData[i].colliders = new Collider[maxAffectableObjects];
+                    Physics.OverlapSphereNonAlloc(transform.position, elementData[i].PlayerRange,
+                        elementData[i].colliders);
+                    NativeHashMap<int, float3> objectPositions = new NativeHashMap<int, float3>(maxAffectableObjects, Allocator.TempJob);
+                    
+                    for (int j = 0; j < elementData[i].colliders.Length; j++)
+                    {
+                        if (elementData[i].colliders[j] != null)
+                        {
+                            objectPositions.TryAdd(j, elementData[i].colliders[j].ClosestPoint(transform.position));
+                        }
+                    }
+
+                    var job = new CheckIfInAreaJob()
+                    {
+                        objectPositions = objectPositions,
+                        maxDist = height,
+                        playerY = transform.position.y
+                    };
+                    
+                    var handle = job.Schedule(objectPositions.Length, 32);
+                    
+                    handle.Complete();
+
+                    var list = new List<Collider>();
+                    NativeArray<int> indexes = job.objectPositions.GetKeyArray(Allocator.TempJob);
+                    for (int j = 0; j < indexes.Length; j++)
+                    {
+                        list.Add(elementData[i].colliders[indexes[i]]);
+                    }
+                    
+
+
+
+
+
                 }
             }
         }
@@ -134,6 +190,26 @@ public class PlayerElementController : MonoBehaviour
             }
 
             Gizmos.DrawLine(pos, lastPos);
+        }
+    }
+}
+
+public struct CheckIfInAreaJob : IJobParallelFor
+{
+    public NativeHashMap<int, float3> objectPositions;
+    public float playerY;
+    public float maxDist;
+    public void Execute(int index)
+    {
+        if (math.abs(objectPositions[index].y - playerY) < maxDist)
+        {
+            //Objects[ObjectPositions[index].y] = true;
+            
+        }
+        else
+        {
+            objectPositions.Remove(index);
+            //Objects[ObjectPositions[index].y] = false;
         }
     }
 }
