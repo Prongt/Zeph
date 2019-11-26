@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -43,8 +44,13 @@ public class PlayerMove : MonoBehaviour
 	private Vector3 originalUp;
 	private Quaternion originalrot;
 
-	public float dist;
+	public float knockBackDistance = 3;
 	public LayerMask mask;
+
+	public float knockBackForce;
+	public float knockBackTime;
+	private float knockBackCounter;
+	private Vector3 velocity;
 	void Start ()
 	{
 		camera = Camera.main.transform;
@@ -90,11 +96,10 @@ public class PlayerMove : MonoBehaviour
 				newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
 			}
 			
-			StartCoroutine(LerpTransformUp());
+			StartCoroutine(PausePlayerMovement(gravityFlipTime));
 			oldGravity = Physics.gravity;
 		}
-
-
+		
 		if (_PlayerMovementEnabled)
 		{
 			if (GravityRift.useNewGravity)
@@ -108,9 +113,7 @@ public class PlayerMove : MonoBehaviour
 		
 			Rotate(inputDir);
 			
-			if (Input.GetButtonDown("Jump")) {
-				Jump ();
-			}
+			Jump();
 
 			
 		}
@@ -126,14 +129,12 @@ public class PlayerMove : MonoBehaviour
 				transform.up = Vector3.Lerp(transform.up, newUp, (gravityFlipTime * 1.5f)  * Time.deltaTime);
 			}
 		}
-		
-		KnockBack();
 	}
 
-	IEnumerator LerpTransformUp()
+	IEnumerator PausePlayerMovement(float pauseTime)
 	{
 		_PlayerMovementEnabled = false;
-		yield return new WaitForSeconds(gravityFlipTime);
+		yield return new WaitForSeconds(pauseTime);
 		_PlayerMovementEnabled = true;
 	}
 	
@@ -236,15 +237,15 @@ public class PlayerMove : MonoBehaviour
 
 		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
 
+		
 		velocityY += Time.deltaTime * gravityPull;
 		
-		Vector3 velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
+		velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
 		velocity.Normalize();
 		velocity *= currentSpeed;
 
 		var speed = velocity;
 		zephAnimator.SetFloat("moveSpeed", speed.magnitude);
-
 		velocity.y = velocityY;
 
 		characterController.Move (velocity * Time.deltaTime);
@@ -292,22 +293,25 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	void Jump() {
-		if (GravityRift.useNewGravity)
+		if (Input.GetButtonDown("Jump"))
 		{
-			if (CheckIfGrounded(gravityDirection, distanceToGround))
+			if (GravityRift.useNewGravity)
 			{
-				float jumpVelocity;
-				jumpVelocity = Mathf.Sqrt (-2 * playerGravity * gravityJump);
-				velocityY = jumpVelocity;
+				if (CheckIfGrounded(gravityDirection, distanceToGround))
+				{
+					float jumpVelocity;
+					jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJump);
+					velocityY = jumpVelocity;
+				}
 			}
-		}
-		else
-		{
-			if (CheckIfGrounded(gravityDirection, distanceToGround))
+			else
 			{
-				float jumpVelocity;
-				jumpVelocity = Mathf.Sqrt (-2 * playerGravity * playerJumpHeight);
-				velocityY = jumpVelocity;
+				if (CheckIfGrounded(gravityDirection, distanceToGround))
+				{
+					float jumpVelocity;
+					jumpVelocity = Mathf.Sqrt(-2 * playerGravity * playerJumpHeight);
+					velocityY = jumpVelocity;
+				}
 			}
 		}
 	}
@@ -324,20 +328,44 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	
-	public void KnockBack()
+	public void KnockBack(Vector3 dir)
 	{
 		//Debug.DrawRay(transform.position, zephModel.forward * dist);
 		Ray ray = new Ray(transform.position, zephModel.forward);
 		
-		if (Physics.Raycast(ray, out RaycastHit hit, dist, mask))
+		if (Physics.Raycast(ray, out RaycastHit hit, knockBackDistance, mask))
 		{
-			//Debug.Log(hit.collider.name);
-			//Debug.Log("Scream");
+			Debug.Log(hit.collider.name);
+			velocity = Vector3.forward * knockBackForce;
+			StartCoroutine(PausePlayerMovement(knockBackTime));
+			//characterController.Move(velocity);
+			
+			Vector3 incomingVec = hit.point - transform.position;
+
+			// Use the point's normal to calculate the reflection vector.
+			Vector3 reflectVec = Vector3.Reflect(incomingVec, hit.normal);
+
+			// Draw lines to show the incoming "beam" and the reflection.
+			Debug.DrawLine(transform.position, hit.point, Color.red);
+			Debug.DrawRay(hit.point, reflectVec, Color.green);
 		}
 	}
 	
 	private bool CheckIfGrounded(Vector3 direction, float distance)
 	{
 		return Physics.Raycast(transform.position, direction, distance);
+	}
+
+	private void OnControllerColliderHit(ControllerColliderHit hit)
+	{
+		if (hit.collider.CompareTag("Water"))
+		{
+			var hitDir = hit.transform.position - transform.position;
+			hitDir.Normalize();
+			
+			KnockBack(hitDir);
+			Debug.Log("Water");
+			
+		}
 	}
 }
