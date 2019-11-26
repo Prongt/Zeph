@@ -46,7 +46,7 @@ public class PlayerMove : MonoBehaviour
 
 	[Header("Water Knock Back")]
 	public float knockBackDistance = 0.75f;
-	public LayerMask waterLayerMask = LayerMask.NameToLayer("OnlyPlayer");
+	public LayerMask waterLayerMask;
 	public float knockBackForce = 1.0f;
 	public float movePauseTime = 0.25f;
 
@@ -100,7 +100,7 @@ public class PlayerMove : MonoBehaviour
 			oldGravity = Physics.gravity;
 		}
 		
-		KnockBack(Vector3.up);
+		KnockBack();
 		
 		if (_PlayerMovementEnabled)
 		{
@@ -330,31 +330,21 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	
-	public void KnockBack(Vector3 dir)
+	public void KnockBack()
 	{
 		//Debug.DrawRay(transform.position, zephModel.forward * dist);
 		Ray ray = new Ray(transform.position, zephModel.forward);
 		
-			if (Physics.Raycast(ray, out RaycastHit hit, knockBackDistance, waterLayerMask))
-			{
+		if (Physics.Raycast(ray, out RaycastHit hit, knockBackDistance, waterLayerMask))
+		{
+			StartCoroutine(PausePlayerMovement(movePauseTime));
 
-				Debug.Log(hit.collider.name);
-				//velocity = Vector3.forward * knockBackForce;
-				StartCoroutine(PausePlayerMovement(movePauseTime));
-				//characterController.Move(velocity);
-			
-				Vector3 incomingVec = transform.position - hit.point;
-				_PlayerMovementEnabled = false;
-				Debug.Log(incomingVec);
-				incomingVec.Normalize();
-				characterController.Move(incomingVec * knockBackForce);
-				//transform.position += incomingVec * knockBackForce;
-
-			}
-//		velocity = dir * knockBackForce;
-//		//StartCoroutine(PausePlayerMovement(knockBackTime));
-//		_PlayerMovementEnabled = false;
-//		characterController.Move(velocity);
+		
+			Vector3 knockBackVector = transform.position - hit.point;
+			Debug.Log(knockBackVector);
+			knockBackVector.Normalize();
+			characterController.Move(knockBackVector * knockBackForce);
+		}
 	}
 	
 	private bool CheckIfGrounded(Vector3 direction, float distance)
