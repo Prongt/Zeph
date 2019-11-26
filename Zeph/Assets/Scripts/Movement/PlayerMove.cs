@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -43,8 +44,13 @@ public class PlayerMove : MonoBehaviour
 	private Vector3 originalUp;
 	private Quaternion originalrot;
 
-	public float dist;
-	public LayerMask mask;
+	[Header("Water Knock Back")]
+	public float knockBackDistance = 0.75f;
+	public LayerMask waterLayerMask;
+	public float knockBackForce = 1.0f;
+	public float movePauseTime = 0.25f;
+
+	private Vector3 velocity;
 	void Start ()
 	{
 		camera = Camera.main.transform;
@@ -90,11 +96,12 @@ public class PlayerMove : MonoBehaviour
 				newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
 			}
 			
-			StartCoroutine(LerpTransformUp());
+			StartCoroutine(PausePlayerMovement(gravityFlipTime));
 			oldGravity = Physics.gravity;
 		}
-
-
+		
+		KnockBack();
+		
 		if (_PlayerMovementEnabled)
 		{
 			if (GravityRift.useNewGravity)
@@ -108,9 +115,7 @@ public class PlayerMove : MonoBehaviour
 		
 			Rotate(inputDir);
 			
-			if (Input.GetButtonDown("Jump")) {
-				Jump ();
-			}
+			Jump();
 
 			
 		}
@@ -126,14 +131,12 @@ public class PlayerMove : MonoBehaviour
 				transform.up = Vector3.Lerp(transform.up, newUp, (gravityFlipTime * 1.5f)  * Time.deltaTime);
 			}
 		}
-		
-		KnockBack();
 	}
 
-	IEnumerator LerpTransformUp()
+	IEnumerator PausePlayerMovement(float pauseTime)
 	{
 		_PlayerMovementEnabled = false;
-		yield return new WaitForSeconds(gravityFlipTime);
+		yield return new WaitForSeconds(pauseTime);
 		_PlayerMovementEnabled = true;
 	}
 	
@@ -236,15 +239,15 @@ public class PlayerMove : MonoBehaviour
 
 		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
 
+		
 		velocityY += Time.deltaTime * gravityPull;
 		
-		Vector3 velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
+		velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
 		velocity.Normalize();
 		velocity *= currentSpeed;
 
 		var speed = velocity;
 		zephAnimator.SetFloat("moveSpeed", speed.magnitude);
-
 		velocity.y = velocityY;
 
 		characterController.Move (velocity * Time.deltaTime);
@@ -292,22 +295,25 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	void Jump() {
-		if (GravityRift.useNewGravity)
+		if (Input.GetButtonDown("Jump"))
 		{
-			if (CheckIfGrounded(gravityDirection, distanceToGround))
+			if (GravityRift.useNewGravity)
 			{
-				float jumpVelocity;
-				jumpVelocity = Mathf.Sqrt (-2 * playerGravity * gravityJump);
-				velocityY = jumpVelocity;
+				if (CheckIfGrounded(gravityDirection, distanceToGround))
+				{
+					float jumpVelocity;
+					jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJump);
+					velocityY = jumpVelocity;
+				}
 			}
-		}
-		else
-		{
-			if (CheckIfGrounded(gravityDirection, distanceToGround))
+			else
 			{
-				float jumpVelocity;
-				jumpVelocity = Mathf.Sqrt (-2 * playerGravity * playerJumpHeight);
-				velocityY = jumpVelocity;
+				if (CheckIfGrounded(gravityDirection, distanceToGround))
+				{
+					float jumpVelocity;
+					jumpVelocity = Mathf.Sqrt(-2 * playerGravity * playerJumpHeight);
+					velocityY = jumpVelocity;
+				}
 			}
 		}
 	}
@@ -329,10 +335,15 @@ public class PlayerMove : MonoBehaviour
 		//Debug.DrawRay(transform.position, zephModel.forward * dist);
 		Ray ray = new Ray(transform.position, zephModel.forward);
 		
-		if (Physics.Raycast(ray, out RaycastHit hit, dist, mask))
+		if (Physics.Raycast(ray, out RaycastHit hit, knockBackDistance, waterLayerMask))
 		{
-			//Debug.Log(hit.collider.name);
-			//Debug.Log("Scream");
+			StartCoroutine(PausePlayerMovement(movePauseTime));
+
+		
+			Vector3 knockBackVector = transform.position - hit.point;
+			Debug.Log(knockBackVector);
+			knockBackVector.Normalize();
+			characterController.Move(knockBackVector * knockBackForce);
 		}
 	}
 	
@@ -340,4 +351,5 @@ public class PlayerMove : MonoBehaviour
 	{
 		return Physics.Raycast(transform.position, direction, distance);
 	}
+	
 }
