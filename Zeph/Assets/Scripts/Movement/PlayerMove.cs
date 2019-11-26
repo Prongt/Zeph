@@ -44,12 +44,12 @@ public class PlayerMove : MonoBehaviour
 	private Vector3 originalUp;
 	private Quaternion originalrot;
 
-	public float knockBackDistance = 3;
-	public LayerMask mask;
+	[Header("Water Knock Back")]
+	public float knockBackDistance = 0.75f;
+	public LayerMask waterLayerMask = LayerMask.NameToLayer("OnlyPlayer");
+	public float knockBackForce = 1.0f;
+	public float movePauseTime = 0.25f;
 
-	public float knockBackForce;
-	public float knockBackTime;
-	private float knockBackCounter;
 	private Vector3 velocity;
 	void Start ()
 	{
@@ -99,6 +99,8 @@ public class PlayerMove : MonoBehaviour
 			StartCoroutine(PausePlayerMovement(gravityFlipTime));
 			oldGravity = Physics.gravity;
 		}
+		
+		KnockBack(Vector3.up);
 		
 		if (_PlayerMovementEnabled)
 		{
@@ -333,39 +335,31 @@ public class PlayerMove : MonoBehaviour
 		//Debug.DrawRay(transform.position, zephModel.forward * dist);
 		Ray ray = new Ray(transform.position, zephModel.forward);
 		
-		if (Physics.Raycast(ray, out RaycastHit hit, knockBackDistance, mask))
-		{
-			Debug.Log(hit.collider.name);
-			velocity = Vector3.forward * knockBackForce;
-			StartCoroutine(PausePlayerMovement(knockBackTime));
-			//characterController.Move(velocity);
+			if (Physics.Raycast(ray, out RaycastHit hit, knockBackDistance, waterLayerMask))
+			{
+
+				Debug.Log(hit.collider.name);
+				//velocity = Vector3.forward * knockBackForce;
+				StartCoroutine(PausePlayerMovement(movePauseTime));
+				//characterController.Move(velocity);
 			
-			Vector3 incomingVec = hit.point - transform.position;
+				Vector3 incomingVec = transform.position - hit.point;
+				_PlayerMovementEnabled = false;
+				Debug.Log(incomingVec);
+				incomingVec.Normalize();
+				characterController.Move(incomingVec * knockBackForce);
+				//transform.position += incomingVec * knockBackForce;
 
-			// Use the point's normal to calculate the reflection vector.
-			Vector3 reflectVec = Vector3.Reflect(incomingVec, hit.normal);
-
-			// Draw lines to show the incoming "beam" and the reflection.
-			Debug.DrawLine(transform.position, hit.point, Color.red);
-			Debug.DrawRay(hit.point, reflectVec, Color.green);
-		}
+			}
+//		velocity = dir * knockBackForce;
+//		//StartCoroutine(PausePlayerMovement(knockBackTime));
+//		_PlayerMovementEnabled = false;
+//		characterController.Move(velocity);
 	}
 	
 	private bool CheckIfGrounded(Vector3 direction, float distance)
 	{
 		return Physics.Raycast(transform.position, direction, distance);
 	}
-
-	private void OnControllerColliderHit(ControllerColliderHit hit)
-	{
-		if (hit.collider.CompareTag("Water"))
-		{
-			var hitDir = hit.transform.position - transform.position;
-			hitDir.Normalize();
-			
-			KnockBack(hitDir);
-			Debug.Log("Water");
-			
-		}
-	}
+	
 }
