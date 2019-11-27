@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.24102013, g: 0.3280688, b: 0.7452864, a: 1}
+  m_IndirectSpecularColor: {r: 0.24110898, g: 0.32797116, b: 0.7448796, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -280,6 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 817d2d5844de2ae49931217ee3c7bc33, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
 --- !u!1001 &22247887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1720,6 +1721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 0b0ffe6f8e2b0464ab8fddec3d12384f, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
 --- !u!1001 &514086070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1932,6 +1934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 0b0ffe6f8e2b0464ab8fddec3d12384f, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
 --- !u!65 &520537098
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2297,6 +2300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 223357f6529f1184cbeb29ca942817f3, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
 --- !u!65 &619561223
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2389,6 +2393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 223357f6529f1184cbeb29ca942817f3, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
 --- !u!65 &833589837
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2593,6 +2598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 223357f6529f1184cbeb29ca942817f3, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 1
 --- !u!1 &859135401 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7585872645706457787, guid: 922fe61700b92ac42b2df41bfc67f0bd,
@@ -3853,6 +3859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 7685cfa8738cfc1458431b9e72ca2ad2, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
 --- !u!114 &1294175013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4781,6 +4788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 53ef36bdcecb58b4aaec5bef01377d44, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 1
 --- !u!1 &1635644049 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5667241438014873649, guid: 922fe61700b92ac42b2df41bfc67f0bd,
@@ -5219,6 +5227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 53ef36bdcecb58b4aaec5bef01377d44, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
 --- !u!1001 &1748620814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5314,6 +5323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 0b0ffe6f8e2b0464ab8fddec3d12384f, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 1
 --- !u!114 &1748763363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6037,7 +6047,7 @@ PrefabInstance:
     - target: {fileID: 4890117515526024235, guid: 5c0917fafcb61764aa309728126c3964,
         type: 3}
       propertyPath: waterLayerMask.m_Bits
-      value: 16
+      value: 4112
       objectReference: {fileID: 0}
     - target: {fileID: 4890117515526024235, guid: 5c0917fafcb61764aa309728126c3964,
         type: 3}
@@ -6070,7 +6080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 193507634, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 4.5919e-41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 193507634, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
       propertyPath: m_BoundingSphereOverride.z
@@ -6078,7 +6088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 193507634, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 4.5133637e-20
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
@@ -6224,6 +6234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 53ef36bdcecb58b4aaec5bef01377d44, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
 --- !u!65 &2045195528
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6737,6 +6748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 53ef36bdcecb58b4aaec5bef01377d44, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
 --- !u!1 &2048281021 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1604291756532092253, guid: 922fe61700b92ac42b2df41bfc67f0bd,
@@ -6916,6 +6928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 817d2d5844de2ae49931217ee3c7bc33, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
 --- !u!1001 &2116207347
 PrefabInstance:
   m_ObjectHideFlags: 0
