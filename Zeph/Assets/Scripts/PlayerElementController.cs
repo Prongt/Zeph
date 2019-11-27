@@ -82,7 +82,7 @@ public class PlayerElementController : MonoBehaviour
 
                                     if (Mathf.Abs(nearestPoint.y - playerY) < height)
                                     {
-                                        obj.ApplyElement(elementData[i], gameObject.transform);
+                                        obj.ApplyElement(elementData[i], gameObject.transform, true);
                                     }
                                 }
                             }

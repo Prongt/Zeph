@@ -12,6 +12,8 @@ public class Interactable : MonoBehaviour
 
     [Tooltip("Any additional aspects this object requires")] [SerializeField]
     private List<AspectType> additionalAspects;
+    
+    [SerializeField] protected bool onlyActivatedByPlayer = false;
 
     private List<AspectType> aspectTypesList;
     private List<Aspects> aspectComponentsList;
@@ -209,12 +211,21 @@ public class Interactable : MonoBehaviour
     /// makes gameobject interact with a defined element
     /// </summary>
     /// <param name="element"></param>
-    public void ApplyElement(Element element, Transform source = null)
+    public void ApplyElement(Element element, Transform source = null, bool isPlayer = false)
     {
         if (aspectComponentsList.Count <= 0)
         {
             return;
         }
+
+        if (onlyActivatedByPlayer)
+        {
+            if (isPlayer == false)
+            {
+                return;
+            }
+        }
+        
         
         for (int i = 0; i < aspectComponentsList.Count; i++)
         {
