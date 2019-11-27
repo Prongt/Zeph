@@ -341,7 +341,7 @@ public class PlayerMove : MonoBehaviour
 
 		
 			Vector3 knockBackVector = transform.position - hit.point;
-			Debug.Log(knockBackVector);
+			//Debug.Log(knockBackVector);
 			knockBackVector.Normalize();
 			characterController.Move(knockBackVector * knockBackForce);
 		}
