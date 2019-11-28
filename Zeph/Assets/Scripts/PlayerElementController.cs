@@ -4,6 +4,7 @@ using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Experimental.VFX;
 using UnityEngine.Jobs;
 
 public class PlayerElementController : MonoBehaviour
@@ -16,6 +17,9 @@ public class PlayerElementController : MonoBehaviour
 
     private Animator animator;
     private bool usedPower = false;
+
+    [SerializeField] private VisualEffect fireEffect;
+    [SerializeField] private VisualEffect leafEffect;
 
 
     //number of collisions detected for each element
@@ -53,6 +57,14 @@ public class PlayerElementController : MonoBehaviour
             {
                 if (Input.GetButtonDown(elementData[i].ButtonName))
                 {
+                    if (elementData[i].ButtonName == "FirePower")
+                    {
+                        fireEffect.SetInt("Spawn Rate", 40);
+                    } else if (elementData[i].ButtonName == "OrbitPower")
+                    {
+                        leafEffect.SetInt("Spawn Rate", 30);
+                    }
+                    
                     StartCoroutine(UsePowerAnimation());
                     elementData[i].colliders = new Collider[maxAffectableObjects];
                     Physics.OverlapSphereNonAlloc(transform.position, elementData[i].PlayerRange,
@@ -148,6 +160,8 @@ public class PlayerElementController : MonoBehaviour
         animator.SetBool("usePower", true);
         yield return new WaitForSeconds(1f);
         animator.SetBool("usePower", false);
+        fireEffect.SetInt("Spawn Rate", 0);
+        leafEffect.SetInt("Spawn Rate",0);
     }
     
     
