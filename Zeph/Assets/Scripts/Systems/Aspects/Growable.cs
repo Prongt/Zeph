@@ -11,6 +11,7 @@ public class Growable : Aspects
     [SerializeField] private Material mat;
     private float matX;
     [SerializeField] private Animator groundDistort;
+    [SerializeField] private GameObject distortBridge;
 
     
     public Type[] componentTypes = new Type[]
@@ -45,6 +46,16 @@ public class Growable : Aspects
        if (gameObject.CompareTag("Bridge"))
        {
            mat.SetFloat("Vector1_D0BABF75", matX);
+       }
+
+       if (!groundDistort.GetBool("Animate") && matX <= 1)
+       {
+           distortBridge.SetActive(true);
+            gameObject.SetActive(false);
+       } else if (groundDistort.GetBool("Animate") && matX <= -13)
+       {
+           distortBridge.SetActive(true);
+           gameObject.SetActive(false);
        }
    }
     
