@@ -51,7 +51,7 @@ MonoBehaviour:
   Path: event:/Test
   guid: ea86d36ddd5c0d4f917c7ddeb7c6a531
   Banks:
-  - {fileID: -3281929106237382143}
+  - {fileID: 8183367729941242610}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   lastModified: 637106424462886568
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-3281929106237382143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   lastModified: 637106424463196634
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1806454486886563888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,16 +183,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 7411789105777402815}
-  - {fileID: -4504594727255740324}
-  - {fileID: -3281929106237382143}
+  - {fileID: 2985857272577215172}
+  - {fileID: 8183367729941242610}
   EditorEvents:
   - {fileID: -8124698859482860354}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -4504594727255740324}
+  - {fileID: 2985857272577215172}
   StringsBanks:
   - {fileID: 7411789105777402815}
-  stringsBankWriteTime: 637106424462906566
+  stringsBankWriteTime: 637106426781101915
   cacheVersion: 3
 --- !u!114 &660006889734973006
 MonoBehaviour:
@@ -248,6 +248,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &2985857272577215172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637106426781091914
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &3327288482875247239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,11 +298,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: ../ZephAudio/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637106424462906566
+  lastModified: 637106426781101915
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 776
+  Exists: 1
+--- !u!114 &8183367729941242610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Music.bank
+  SubDir: 
+  lastModified: 637106426797947183
+  LoadResult: 0
+  FileSizes: []
   Exists: 1
 --- !u!114 &8301109577145312700
 MonoBehaviour:
