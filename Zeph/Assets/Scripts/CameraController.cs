@@ -6,7 +6,8 @@ public class CameraController : MonoBehaviour
 {
     private Transform player;
 
-    [Range(0.0f, 1.0f)] [SerializeField] private float smoothFactor = 1f;
+    [Range(0.0f, 30.0f)] [SerializeField] private float smoothFactor = 1f;
+    [Range(0.0f, 30.0f)] [SerializeField] private float rotationFactor = 1f;
 
     private Transform camMain;
     private Transform camAlt;
@@ -36,16 +37,24 @@ public class CameraController : MonoBehaviour
     
     void LateUpdate ()
     {
+        Vector3 desiredPosition;
         if (GravityRift.useNewGravity)
-        {
-            transform.position = Vector3.Slerp(transform.position, camAlt.position, smoothFactor * Time.deltaTime);
+        { 
+            desiredPosition = Vector3.Slerp(transform.position, camAlt.position, smoothFactor * Time.deltaTime);
         }
         else
         {
-            transform.position = Vector3.Slerp(transform.position, camMain.position, smoothFactor);
+            desiredPosition =  Vector3.Slerp(transform.position, camMain.position, smoothFactor * Time.deltaTime);
+           
         }
-        
-        transform.LookAt(player);
+
+        if (desiredPosition.magnitude > 0.1f)
+        {
+            transform.position = desiredPosition;
+        }
+
+        transform.LookAt(player.position);
+       
     }
     
 }
