@@ -117,10 +117,70 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2, y: 1e-44, z: 7.7727e+31, w: 9.403967e-39}
+  m_BoundingSphereOverride: {x: 0, y: 1.4811844e+21, z: 9.01e-43, w: 1.0770848e+21}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &543090847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543090848}
+  m_Layer: 9
+  m_Name: Cam Main
+  m_TagString: Cam/Main
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &543090848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543090847}
+  m_LocalRotation: {x: 0, y: 0.92387956, z: -0.38268343, w: 0}
+  m_LocalPosition: {x: 0.21, y: 14.4, z: 7.77}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4890117515526024212}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 45, y: 180, z: 0}
+--- !u!1 &1220546986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1220546987}
+  m_Layer: 9
+  m_Name: Cam Alt
+  m_TagString: Cam/Alt
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1220546987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220546986}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4890117515526024212}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &337320229415340673
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +448,8 @@ Transform:
   - {fileID: 2408870523393289901}
   - {fileID: 8829680332137081097}
   - {fileID: 4871547756568620857}
+  - {fileID: 543090848}
+  - {fileID: 1220546987}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -409,11 +471,11 @@ MonoBehaviour:
   airControlPercent: 1
   playerTurnSpeed: 0.1
   velocitySmoothing: 0.1
-  gravityFlipTime: 1
+  gravityFlipTime: 2
   knockBackDistance: 0.75
   waterLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4112
   knockBackForce: 1
   movePauseTime: 0.25
 --- !u!114 &2128616418
@@ -432,7 +494,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1a24b8a34b645cd44b6e888bf5f25ae7, type: 2}
   - {fileID: 11400000, guid: 83634a75a3a9f1f48af6e7a2b400f02a, type: 2}
   - {fileID: 11400000, guid: 80407e51511ac444b9f146c50ba8be1c, type: 2}
-  height: 13
+  height: 1.3
   drawGizmos: 1
   gizmoHeight: -1
   fireEffect: {fileID: 516347797060133683}
@@ -743,6 +805,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702353718748228240, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.12905157
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702353718748228240, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.10651136
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702353718748228240, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.037335973
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702353718748228240, guid: 9b2102449c203c44b9de3d5e06611e40,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9851939
       objectReference: {fileID: 0}
     - target: {fileID: 6926924635224829537, guid: 9b2102449c203c44b9de3d5e06611e40,
         type: 3}

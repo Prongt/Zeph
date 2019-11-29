@@ -124,7 +124,7 @@ public class PlayerMove : MonoBehaviour
 			if (GravityRift.useNewGravity == false)
 			{
 				transform.up = Vector3.Lerp(transform.up, originalUp, (gravityFlipTime * 1.5f) * Time.deltaTime);
-				transform.rotation = originalrot;
+				//transform.rotation = originalrot;
 			}
 			else
 			{
@@ -282,7 +282,7 @@ public class PlayerMove : MonoBehaviour
 			}
 			else
 			{
-				float targetRotation = Mathf.Atan2(-inputDir.x, -inputDir.y) * Mathf.Rad2Deg + camera.eulerAngles.y;
+				float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camera.eulerAngles.y;
 
 				float angle = Mathf.SmoothDampAngle(zephModel.localEulerAngles.y, targetRotation, ref turnVelocity,
 					GetModifiedSmoothTime(playerTurnSpeed));

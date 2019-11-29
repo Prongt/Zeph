@@ -4,42 +4,48 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform player;
+    private Transform player;
 
-    private Vector3 cameraOffset;
+    [Range(0.0f, 1.0f)] [SerializeField] private float smoothFactor = 1f;
 
-    [Range(0.01f, 1.0f)] public float smoothFactor = 1f;
-    [SerializeField] private bool lookAtPlayer;
-    
-    //public FloatReference speed;
-    //public FloatReference minDistance;
+    private Transform camMain;
+    private Transform camAlt;
 
     void Start()
     {
-        cameraOffset = transform.position - player.position;
+        player = FindObjectOfType<PlayerMove>().transform;
+        for (int i = 0; i < player.childCount; i++)
+        {
+            if (player.GetChild(i).CompareTag("Cam/Main"))
+            {
+                camMain = player.GetChild(i).transform;
+            }
+            
+            if (player.GetChild(i).CompareTag("Cam/Alt"))
+            {
+                camAlt = player.GetChild(i).transform;
+            }
+        }
+
+        if (camMain == null || camAlt == null)
+        {
+            Debug.LogWarning("Camera transforms are null!");
+        }
     }
     
     
     void LateUpdate ()
     {
-        Vector3 newPos = player.position + cameraOffset;
-
-        transform.position = Vector3.Slerp(transform.position, newPos, smoothFactor);
-
-        if (lookAtPlayer)
+        if (GravityRift.useNewGravity)
         {
-            transform.LookAt(player);
+            transform.position = Vector3.Slerp(transform.position, camAlt.position, smoothFactor * Time.deltaTime);
         }
-        /*float interpolation = speed * Time.deltaTime;
-
-        if (Vector3.Distance(transform.position, player.transform.position) > minDistance)
+        else
         {
-            Vector3 position = this.transform.position;
-            position.y = Mathf.Lerp(this.transform.position.y, player.transform.position.y, interpolation);
-            position.x = Mathf.Lerp(this.transform.position.x, player.transform.position.x, interpolation);
-            position.z = Mathf.Lerp(this.transform.position.z, player.transform.position.z, interpolation);
+            transform.position = Vector3.Slerp(transform.position, camMain.position, smoothFactor);
+        }
         
-            this.transform.position = position;
-        }*/
+        transform.LookAt(player);
     }
+    
 }
