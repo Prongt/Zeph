@@ -1356,7 +1356,6 @@ GameObject:
   m_Component:
   - component: {fileID: 363327982}
   - component: {fileID: 363327981}
-  - component: {fileID: 363327984}
   - component: {fileID: 363327983}
   m_Layer: 0
   m_Name: Directional Light
@@ -1452,7 +1451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Test
+  Event: event:/Music
   PlayEvent: 1
   StopEvent: 2
   AllowFadeout: 1
@@ -1462,19 +1461,6 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
---- !u!114 &363327984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363327980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ListenerNumber: -1
 --- !u!1 &422779773
 GameObject:
   m_ObjectHideFlags: 3
@@ -1572,6 +1558,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1939583393}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &502381065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502381064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: -1
 --- !u!114 &502381068
 MonoBehaviour:
   m_ObjectHideFlags: 0
