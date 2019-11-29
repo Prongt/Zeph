@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class Flamable : Aspects
@@ -28,7 +29,7 @@ public class Flamable : Aspects
 
     public Type[] componentTypes = new Type[]
     {
-        typeof(AudioSource),
+        //typeof(StudioEventEmitter),
         //typeof(Rigidbody)
     };
 

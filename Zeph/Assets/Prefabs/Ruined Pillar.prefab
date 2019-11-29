@@ -220,12 +220,11 @@ MonoBehaviour:
     Variable: {fileID: 0}
   throwForce: 0.5
   orbitSize: 4
-  yOffset: 0
-  centerPoint: {fileID: 0}
   rotSpeed: 0
   orbiting: 0
   throwable: 0
   radiusSpeed: 0.5
+  orbitEffect: {fileID: 0}
 --- !u!114 &237474038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +239,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 8cce4da513af75744bf08ed16b0b525d, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
+--- !u!114 &-2431405808662966468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6898759424570496382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!54 &635907893
 Rigidbody:
   m_ObjectHideFlags: 0

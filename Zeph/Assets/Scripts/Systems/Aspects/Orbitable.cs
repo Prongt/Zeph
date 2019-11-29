@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using TreeEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -41,7 +42,6 @@ public class Orbitable : Aspects
     public Type[] componentTypes = new Type[]
     {
         typeof(Rigidbody),
-        typeof(AudioSource)
     };
 
 

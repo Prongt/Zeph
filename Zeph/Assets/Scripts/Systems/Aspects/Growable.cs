@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
+using FMODUnity;
 using UnityEngine;
 
 public class Growable : Aspects
@@ -16,8 +17,6 @@ public class Growable : Aspects
     
     public Type[] componentTypes = new Type[]
     {
-        typeof(AudioSource)
-        //typeof(Animator)
     };
 
     

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1398070114}
   - component: {fileID: 1398070113}
   - component: {fileID: 1398070115}
+  - component: {fileID: 4086989470586638596}
   m_Layer: 0
   m_Name: Log 1
   m_TagString: Untagged
@@ -164,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 52d90422a83d4db41a3d928d0760060c, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
 --- !u!65 &1398070118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -302,11 +304,11 @@ MonoBehaviour:
     Variable: {fileID: 0}
   throwForce: 0.5
   orbitSize: 3
-  yOffset: 0
   rotSpeed: 0
   orbiting: 0
   throwable: 0
   radiusSpeed: 10
+  orbitEffect: {fileID: 0}
 --- !u!114 &1398070115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +339,29 @@ MonoBehaviour:
   fireSpreadRange: 1.5
   fireSpreadPerSecond: 0.1
   maxNumberOfAffectableObjects: 15
+--- !u!114 &4086989470586638596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8688567687851389637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1001 &9111669246664343264
 PrefabInstance:
   m_ObjectHideFlags: 0
