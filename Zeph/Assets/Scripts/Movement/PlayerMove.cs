@@ -49,6 +49,7 @@ public class PlayerMove : MonoBehaviour
 	public LayerMask waterLayerMask;
 	public float knockBackForce = 1.0f;
 	public float movePauseTime = 0.25f;
+	public float checkDist = 2;
 
 	private Vector3 velocity;
 	void Start ()
@@ -332,10 +333,11 @@ public class PlayerMove : MonoBehaviour
 	
 	public void KnockBack()
 	{
+		//Forward
 		//Debug.DrawRay(transform.position, zephModel.forward * dist);
-		Ray ray = new Ray(transform.position, zephModel.forward);
+		Ray forwardRay = new Ray(transform.position, zephModel.forward);
 		
-		if (Physics.Raycast(ray, out RaycastHit hit, knockBackDistance, waterLayerMask))
+		if (Physics.Raycast(forwardRay, out RaycastHit hit, knockBackDistance, waterLayerMask))
 		{
 			StartCoroutine(PausePlayerMovement(movePauseTime));
 
@@ -345,11 +347,78 @@ public class PlayerMove : MonoBehaviour
 			knockBackVector.Normalize();
 			characterController.Move(knockBackVector * knockBackForce);
 		}
+		
+		Ray downRay = new Ray(transform.position, -transform.up);
+
+		if (Physics.Raycast(downRay, out RaycastHit downHit, knockBackDistance, waterLayerMask))
+		{
+			//Log above water
+
+			//StartCoroutine(PausePlayerMovement(movePauseTime));
+
+		
+			Vector3 knockBackVector = transform.position + Vector3.right + Vector3.forward;
+			//Debug.Log(knockBackVector);
+			knockBackVector.Normalize();
+			characterController.Move(knockBackVector * knockBackForce);
+			
+			NewMethod();
+		}
 	}
-	
+
+	private void NewMethod()
+	{
+		Ray Ray1 = new Ray(transform.position + (Vector3.forward * checkDist), -transform.up);
+		Ray Ray2 = new Ray(transform.position + (Vector3.back * checkDist), -transform.up);
+		Ray Ray3 = new Ray(transform.position + (Vector3.left * checkDist), -transform.up);
+		Ray Ray4 = new Ray(transform.position + (Vector3.right * checkDist), -transform.up);
+		if (Physics.Raycast(Ray1, out RaycastHit hit1, Mathf.Infinity))
+		{
+			var layer = hit1.collider.gameObject.layer;
+			if (!IsInLayerMask(layer, waterLayerMask))
+			{
+				Debug.Log("Ray 1 Success");
+			}
+		}
+
+		if (Physics.Raycast(Ray2, out RaycastHit hit2, Mathf.Infinity))
+		{
+			var layer = hit1.collider.gameObject.layer;
+			if (!IsInLayerMask(layer, waterLayerMask))
+			{
+				Debug.Log("Ray 2 Success");
+			}
+		}
+
+		if (Physics.Raycast(Ray3, out RaycastHit hit3, Mathf.Infinity))
+		{
+			var layer = hit1.collider.gameObject.layer;
+			if (!IsInLayerMask(layer, waterLayerMask))
+			{
+				Debug.Log("Ray 3 Success");
+			}
+		}
+
+		if (Physics.Raycast(Ray4, out RaycastHit hit4, Mathf.Infinity))
+		{
+			var layer = hit1.collider.gameObject.layer;
+			if (!IsInLayerMask(layer, waterLayerMask))
+			{
+				Debug.Log("Ray 4 Success");
+			}
+		}
+
+		Debug.DrawRay(transform.position + (Vector3.forward * checkDist), -transform.up * 20f);
+	}
+
 	private bool CheckIfGrounded(Vector3 direction, float distance)
 	{
 		return Physics.Raycast(transform.position, direction, distance);
+	}
+	
+	public static bool IsInLayerMask(int layer, LayerMask layermask)
+	{
+		return layermask == (layermask | (1 << layer));
 	}
 	
 }
