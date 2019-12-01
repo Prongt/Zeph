@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using FMODUnity;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -49,14 +50,14 @@ public class PlayerMove : MonoBehaviour
 	public LayerMask waterLayerMask;
 	public float knockBackForce = 1.0f;
 	public float movePauseTime = 0.25f;
-	public float checkDist = 2;
+	public StudioEventEmitter splashEmitter;
 
 	private Vector3 velocity;
 	void Start ()
 	{
 		camera = Camera.main.transform;
-		characterController = GetComponent<CharacterController> ();
-		animator = GetComponentInChildren<Animator>();
+		
+		GrabComponents();
 		
 		gravityDirection = Physics.gravity;
 		oldGravity = gravityDirection;
@@ -65,13 +66,29 @@ public class PlayerMove : MonoBehaviour
 		distanceToGround = GetComponent<Collider>().bounds.extents.y + 0.1f;
 		characterWidth = GetComponent<Collider>().bounds.extents.x + 0.15f;
 		gravityPull = playerGravity;
-
-		zephAnimator = GetComponentInChildren<Animator>();
-		zephModel = GetComponentInChildren<Animator>().transform;
+		
+		zephModel = zephAnimator.transform;
 
 		_PlayerMovementEnabled = true;
 		originalUp = transform.up;
 		originalrot = transform.rotation;
+	}
+
+	private void OnValidate()
+	{
+		GrabComponents();
+	}
+
+	private void GrabComponents()
+	{
+		if (splashEmitter == null)
+		{
+			splashEmitter = GetComponent<StudioEventEmitter>();
+		}
+		
+		characterController = GetComponent<CharacterController> ();
+		animator = GetComponentInChildren<Animator>();
+		zephAnimator = GetComponentInChildren<Animator>();
 	}
 
 	void Update () {
@@ -346,6 +363,8 @@ public class PlayerMove : MonoBehaviour
 			//Debug.Log(knockBackVector);
 			knockBackVector.Normalize();
 			characterController.Move(knockBackVector * knockBackForce);
+			splashEmitter.Play();
+			
 		}
 		
 		
@@ -355,6 +374,7 @@ public class PlayerMove : MonoBehaviour
 			Vector3 knockBackVector = transform.position + Vector3.right + Vector3.forward;
 			knockBackVector.Normalize();
 			characterController.Move(knockBackVector * knockBackForce);
+			splashEmitter.Play();
 		}
 	}
 
