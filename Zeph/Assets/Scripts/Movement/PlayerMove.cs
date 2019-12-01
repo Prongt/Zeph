@@ -49,6 +49,7 @@ public class PlayerMove : MonoBehaviour
 	public LayerMask waterLayerMask;
 	public float knockBackForce = 1.0f;
 	public float movePauseTime = 0.25f;
+	public float checkDist = 2;
 
 	private Vector3 velocity;
 	void Start ()
@@ -332,10 +333,11 @@ public class PlayerMove : MonoBehaviour
 	
 	public void KnockBack()
 	{
+		//Forward
 		//Debug.DrawRay(transform.position, zephModel.forward * dist);
-		Ray ray = new Ray(transform.position, zephModel.forward);
+		Ray forwardRay = new Ray(transform.position, zephModel.forward);
 		
-		if (Physics.Raycast(ray, out RaycastHit hit, knockBackDistance, waterLayerMask))
+		if (Physics.Raycast(forwardRay, out RaycastHit hit, knockBackDistance, waterLayerMask))
 		{
 			StartCoroutine(PausePlayerMovement(movePauseTime));
 
@@ -345,11 +347,24 @@ public class PlayerMove : MonoBehaviour
 			knockBackVector.Normalize();
 			characterController.Move(knockBackVector * knockBackForce);
 		}
+		
+		
+		Ray downRay = new Ray(transform.position, -transform.up);
+		if (Physics.Raycast(downRay, out RaycastHit downHit, knockBackDistance, waterLayerMask))
+		{
+			Vector3 knockBackVector = transform.position + Vector3.right + Vector3.forward;
+			knockBackVector.Normalize();
+			characterController.Move(knockBackVector * knockBackForce);
+		}
 	}
+
 	
+
 	private bool CheckIfGrounded(Vector3 direction, float distance)
 	{
 		return Physics.Raycast(transform.position, direction, distance);
 	}
+	
+	
 	
 }
