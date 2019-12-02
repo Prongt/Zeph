@@ -51,7 +51,7 @@ MonoBehaviour:
   Path: event:/WaterSplash
   guid: a289a65b62a6624fbb231d40b66d095c
   Banks:
-  - {fileID: -6593870932179545294}
+  - {fileID: 3434528578593094681}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -77,6 +77,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-8285899004304496964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Music.bank
+  SubDir: 
+  lastModified: 637108411877192900
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-8234250290841483945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +242,7 @@ MonoBehaviour:
   lastModified: 637108451628983923
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-6475745470584892993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +334,7 @@ MonoBehaviour:
   lastModified: 637108033659499518
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-4972261860687276055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,7 +658,7 @@ MonoBehaviour:
   lastModified: 637108451629083258
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-387876037607079677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,18 +727,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 7411789105777402815}
-  - {fileID: -6593870932179545294}
-  - {fileID: -5701697685420300643}
-  - {fileID: -633256379294016119}
+  - {fileID: 3434528578593094681}
+  - {fileID: 7054321869782412961}
+  - {fileID: -8285899004304496964}
   EditorEvents:
   - {fileID: 7837150099270196092}
   - {fileID: -8545857610618671217}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -5701697685420300643}
+  - {fileID: 7054321869782412961}
   StringsBanks:
   - {fileID: 7411789105777402815}
-  stringsBankWriteTime: 637108451629003469
+  stringsBankWriteTime: 637108411876853825
   cacheVersion: 3
 --- !u!114 &660006889734973006
 MonoBehaviour:
@@ -974,6 +992,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &3434528578593094681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Effects.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Effects.bank
+  SubDir: 
+  lastModified: 637108411876584520
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &3593052552146771607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1172,6 +1208,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &7054321869782412961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108309525617232
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &7105689019664934583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1222,7 +1276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: ../ZephAudio/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637108451629003469
+  lastModified: 637108411876853825
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1279,7 +1333,7 @@ MonoBehaviour:
   Path: event:/Music
   guid: ea86d36ddd5c0d4f917c7ddeb7c6a531
   Banks:
-  - {fileID: -633256379294016119}
+  - {fileID: -8285899004304496964}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
