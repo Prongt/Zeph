@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using FMODUnity;
+using TreeEditor;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Experimental.VFX;
 
 public class Orbitable : Aspects
