@@ -100,7 +100,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614551}
   - {fileID: 8926484042661614552}
   m_OutputSlots: []
-  m_Disabled: 0
+  m_Disabled: 1
   attribute: lifetime
   Composition: 0
   Source: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"aa3c3a9320c28694c87162c323dd3a26","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"8132390ca8ee7e248b73db767a16656d","type":3}}'
     m_Space: 2147483647
   m_Property:
     name: mainTexture
@@ -258,9 +258,9 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 40
+      m_SerializableObject: 1000
     min: 0
-    max: 40
+    max: 1000
     descendantCount: 0
   m_GraphVersion: 2
   m_saved: 1
@@ -737,7 +737,7 @@ VisualEffectResource:
   - compute: 1
     name: '[System 1]Initialize'
     source: "#pragma kernel CSMain\r\n#define NB_THREADS_PER_GROUP 64\n#define VFX_USE_LIFETIME_CURRENT
-      1\n#define VFX_USE_SEED_CURRENT 1\n#define VFX_USE_POSITION_CURRENT 1\n#define
+      1\n#define VFX_USE_POSITION_CURRENT 1\n#define VFX_USE_SEED_CURRENT 1\n#define
       VFX_USE_DIRECTION_CURRENT 1\n#define VFX_USE_ANGLEZ_CURRENT 1\n#define VFX_USE_TEXINDEX_CURRENT
       1\n#define VFX_USE_ALIVE_CURRENT 1\n#define VFX_USE_AGE_CURRENT 1\n#define VFX_LOCAL_SPACE
       1\n#include \"Packages/com.unity.visualeffectgraph/Shaders/RenderPipeline/LWRP/VFXDefines.hlsl\"\n\n\r\n\r\n#include
@@ -753,13 +753,11 @@ VisualEffectResource:
       VFX_USE_SPAWNER_FROM_GPU\r\nStructuredBuffer<uint> eventList;\r\nByteAddressBuffer
       inputAdditional;\r\n#endif\r\n\r\nvoid SetAttribute_F0142CB9(inout float lifetime,
       float Lifetime) /*attribute:lifetime Composition:Overwrite Source:Slot Random:Off
-      channels:XYZ */\n{\n    lifetime = Lifetime;\n}\nvoid SetAttribute_F01429A3(inout
-      float lifetime, inout uint seed, float A, float B) /*attribute:lifetime Composition:Overwrite
-      Source:Slot Random:Uniform channels:XYZ */\n{\n    lifetime = lerp(A,B,RAND);\n}\nvoid
-      PositionCircle_0(inout float3 position, inout uint seed, inout float3 direction,
-      float rNorm, float sinTheta, float cosTheta, float3 ArcCircle_circle_center)
-      /*positionMode:Surface spawnMode:Randomized */\n{\n    \n    direction = float3(sinTheta,
-      cosTheta, 0.0f);\n    position.xy += float2(sinTheta, cosTheta) * rNorm + ArcCircle_circle_center.xy;\n
+      channels:XYZ */\n{\n    lifetime = Lifetime;\n}\nvoid PositionCircle_0(inout
+      float3 position, inout uint seed, inout float3 direction, float rNorm, float
+      sinTheta, float cosTheta, float3 ArcCircle_circle_center) /*positionMode:Surface
+      spawnMode:Randomized */\n{\n    \n    direction = float3(sinTheta, cosTheta,
+      0.0f);\n    position.xy += float2(sinTheta, cosTheta) * rNorm + ArcCircle_circle_center.xy;\n
       \   position.z += ArcCircle_circle_center.z;\n    \n}\nvoid SetAttribute_44ECFF73(inout
       float angleZ, inout uint seed, float A, float B) /*attribute:angle Composition:Add
       Source:Slot Random:PerComponent channels:Z */\n{\n    angleZ += lerp(A.x,B.x,RAND);\n}\n\n\r\n\r\n[numthreads(NB_THREADS_PER_GROUP,1,1)]\r\nvoid
@@ -782,37 +780,35 @@ VisualEffectResource:
       += uint(asfloat(sourceAttributeBuffer.Load((sourceIndex * 0x1 + 0x0) << 2)));\n
       \           if (id < currentSumSpawnCount)\n            {\n                break;\n
       \           }\n        }\n        */\n        \n\r\n#endif\r\n        float
-      lifetime = (float)1;\n        uint seed = (uint)0;\n        float3 position
-      = float3(0, 0, 0);\n        float3 direction = float3(0, 0, 1);\n        float
+      lifetime = (float)1;\n        float3 position = float3(0, 0, 0);\n        uint
+      seed = (uint)0;\n        float3 direction = float3(0, 0, 1);\n        float
       angleZ = (float)0;\n        float texIndex = (float)0;\n        bool alive =
       (bool)true;\n        float age = (float)0;\n        \n\r\n#if VFX_USE_PARTICLEID_CURRENT\r\n
       \        particleId = particleIndex;\r\n#endif\r\n#if VFX_USE_SEED_CURRENT\r\n
       \       seed = WangHash(particleIndex ^ systemSeed);\r\n#endif\r\n        \r\n
       \       {\n            SetAttribute_F0142CB9( /*inout */lifetime, (float)1);\n
-      \       }\n        {\n            SetAttribute_F01429A3( /*inout */lifetime,
-      \ /*inout */seed, (float)3, (float)5);\n        }\n        {\n            float
-      tmp_y = pow((float)1, (float)0.5);\n            float tmp_ba = tmp_y * (float)0.75;\n
-      \           float tmp_bc = RAND;\n            float tmp_bd = (float)6.28318548
-      * tmp_bc;\n            float tmp_be = sin(tmp_bd);\n            float tmp_bf
-      = cos(tmp_bd);\n            PositionCircle_0( /*inout */position,  /*inout */seed,
-      \ /*inout */direction, tmp_ba, tmp_be, tmp_bf, float3(0, 0, 0));\n        }\n
-      \       {\n            SetAttribute_44ECFF73( /*inout */angleZ,  /*inout */seed,
-      (float)-90, (float)90);\n        }\n        \n\r\n\r\n#if VFX_USE_ALIVE_CURRENT\r\n
-      \       if (alive)\r\n        {\r\n\t\t\tuint deadIndex = deadListIn.DecrementCounter();\r\n
-      \           uint index = deadListIn[deadIndex];\r\n            attributeBuffer.Store((index
-      * 0x1 + 0x0) << 2,asuint(lifetime));\n            attributeBuffer.Store3((index
-      * 0x4 + 0x2740) << 2,asuint(position));\n            attributeBuffer.Store((index
-      * 0x4 + 0x2743) << 2,asuint(angleZ));\n            attributeBuffer.Store((index
-      * 0x3 + 0xC440) << 2,asuint(texIndex));\n            attributeBuffer.Store((index
-      * 0x3 + 0xC441) << 2,uint(alive));\n            attributeBuffer.Store((index
-      * 0x3 + 0xC442) << 2,asuint(age));\n            \n\r\n        }\r\n#else\r\n
-      \       uint index = particleIndex;\r\n        attributeBuffer.Store((index
-      * 0x1 + 0x0) << 2,asuint(lifetime));\n        attributeBuffer.Store3((index
-      * 0x4 + 0x2740) << 2,asuint(position));\n        attributeBuffer.Store((index
-      * 0x4 + 0x2743) << 2,asuint(angleZ));\n        attributeBuffer.Store((index
-      * 0x3 + 0xC440) << 2,asuint(texIndex));\n        attributeBuffer.Store((index
-      * 0x3 + 0xC441) << 2,uint(alive));\n        attributeBuffer.Store((index * 0x3
-      + 0xC442) << 2,asuint(age));\n        \n\r\n#endif\r\n    }\r\n}\r\n"
+      \       }\n        {\n            float tmp_y = pow((float)1, (float)0.5);\n
+      \           float tmp_ba = tmp_y * (float)0.75;\n            float tmp_bc =
+      RAND;\n            float tmp_bd = (float)6.28318548 * tmp_bc;\n            float
+      tmp_be = sin(tmp_bd);\n            float tmp_bf = cos(tmp_bd);\n            PositionCircle_0(
+      /*inout */position,  /*inout */seed,  /*inout */direction, tmp_ba, tmp_be, tmp_bf,
+      float3(0, 0, 0));\n        }\n        {\n            SetAttribute_44ECFF73(
+      /*inout */angleZ,  /*inout */seed, (float)-90, (float)90);\n        }\n        \n\r\n\r\n#if
+      VFX_USE_ALIVE_CURRENT\r\n        if (alive)\r\n        {\r\n\t\t\tuint deadIndex
+      = deadListIn.DecrementCounter();\r\n            uint index = deadListIn[deadIndex];\r\n
+      \           attributeBuffer.Store((index * 0x1 + 0x0) << 2,asuint(lifetime));\n
+      \           attributeBuffer.Store3((index * 0x4 + 0x2740) << 2,asuint(position));\n
+      \           attributeBuffer.Store((index * 0x4 + 0x2743) << 2,asuint(angleZ));\n
+      \           attributeBuffer.Store((index * 0x3 + 0xC440) << 2,asuint(texIndex));\n
+      \           attributeBuffer.Store((index * 0x3 + 0xC441) << 2,uint(alive));\n
+      \           attributeBuffer.Store((index * 0x3 + 0xC442) << 2,asuint(age));\n
+      \           \n\r\n        }\r\n#else\r\n        uint index = particleIndex;\r\n
+      \       attributeBuffer.Store((index * 0x1 + 0x0) << 2,asuint(lifetime));\n
+      \       attributeBuffer.Store3((index * 0x4 + 0x2740) << 2,asuint(position));\n
+      \       attributeBuffer.Store((index * 0x4 + 0x2743) << 2,asuint(angleZ));\n
+      \       attributeBuffer.Store((index * 0x3 + 0xC440) << 2,asuint(texIndex));\n
+      \       attributeBuffer.Store((index * 0x3 + 0xC441) << 2,uint(alive));\n        attributeBuffer.Store((index
+      * 0x3 + 0xC442) << 2,asuint(age));\n        \n\r\n#endif\r\n    }\r\n}\r\n"
   - compute: 1
     name: '[System 1]Update'
     source: "#pragma kernel CSMain\r\n#define NB_THREADS_PER_GROUP 64\n#define VFX_USE_LIFETIME_CURRENT
@@ -837,7 +833,7 @@ VisualEffectResource:
       = asfloat(attributeBuffer.Load((index * 0x3 + 0xC440) << 2));\n\t\t\tfloat age
       = asfloat(attributeBuffer.Load((index * 0x3 + 0xC442) << 2));\n\t\t\t\n\r\n\t\t\t\r\n#if
       VFX_USE_OLDPOSITION_CURRENT\r\n\t\t\toldPosition = position;\r\n#endif\r\n\t\t\t\r\n\t\t\t{\n\t\t\t
-      \   FlipbookPlay_0( /*inout */texIndex, (float)20, deltaTime_a);\n\t\t\t}\n\t\t\tAge(
+      \   FlipbookPlay_0( /*inout */texIndex, (float)60, deltaTime_a);\n\t\t\t}\n\t\t\tAge(
       /*inout */age, deltaTime_a);\n\t\t\tReap(age, lifetime,  /*inout */alive);\n\t\t\t\n\r\n\t\t\tif
       (alive)\r\n\t\t\t{\r\n\t\t\t\tattributeBuffer.Store((index * 0x3 + 0xC440) <<
       2,asuint(texIndex));\n\t\t\t\tattributeBuffer.Store((index * 0x3 + 0xC442) <<
@@ -851,7 +847,7 @@ VisualEffectResource:
       + 0xC441) << 2));\n\t\tfloat age = asfloat(attributeBuffer.Load((index * 0x3
       + 0xC442) << 2));\n\t\t\n\r\n\t\t\r\n#if VFX_USE_OLDPOSITION_CURRENT\r\n\t\toldPosition
       = position;\r\n#endif\r\n\t\t\r\n\t\t{\n\t\t    FlipbookPlay_0( /*inout */texIndex,
-      (float)20, deltaTime_a);\n\t\t}\n\t\tAge( /*inout */age, deltaTime_a);\n\t\tReap(age,
+      (float)60, deltaTime_a);\n\t\t}\n\t\tAge( /*inout */age, deltaTime_a);\n\t\tReap(age,
       lifetime,  /*inout */alive);\n\t\t\n\r\n\t\tattributeBuffer.Store((index * 0x3
       + 0xC440) << 2,asuint(texIndex));\n\t\tattributeBuffer.Store((index * 0x3 +
       0xC441) << 2,uint(alive));\n\t\tattributeBuffer.Store((index * 0x3 + 0xC442)
@@ -1038,13 +1034,13 @@ VisualEffectResource:
         data[0]: -1
         data[1]: -1
         data[2]: -1
-        data[3]: 1
+        data[3]: 5
       - op: 1
         valueIndex: 1
         data[0]: -1
         data[1]: -1
         data[2]: -1
-        data[3]: 5
+        data[3]: 1
       - op: 1
         valueIndex: 2
         data[0]: -1
@@ -1059,7 +1055,7 @@ VisualEffectResource:
         data[3]: 1
       - op: 65
         valueIndex: 4
-        data[0]: 1
+        data[0]: 0
         data[1]: -1
         data[2]: -1
         data[3]: -1
@@ -1080,61 +1076,61 @@ VisualEffectResource:
         data[0]: -1
         data[1]: -1
         data[2]: -1
-        data[3]: 14
+        data[3]: 1
       - op: 1
         valueIndex: 8
         data[0]: -1
         data[1]: -1
         data[2]: -1
-        data[3]: 1
-      - op: 1
-        valueIndex: 9
-        data[0]: -1
-        data[1]: -1
-        data[2]: -1
-        data[3]: 2
-      - op: 56
-        valueIndex: 11
-        data[0]: 6
-        data[1]: -1
-        data[2]: -1
-        data[3]: 0
-      - op: 57
-        valueIndex: 15
-        data[0]: 7
-        data[1]: -1
-        data[2]: -1
-        data[3]: 0
-      - op: 6
-        valueIndex: 16
-        data[0]: -1
-        data[1]: -1
-        data[2]: -1
-        data[3]: -1
-      - op: 1
-        valueIndex: 17
-        data[0]: -1
-        data[1]: -1
-        data[2]: -1
-        data[3]: 1
+        data[3]: 14
       - op: 31
-        valueIndex: 18
+        valueIndex: 9
         data[0]: 4
         data[1]: 5
         data[2]: -1
         data[3]: 1
       - op: 1
-        valueIndex: 19
+        valueIndex: 10
+        data[0]: -1
+        data[1]: -1
+        data[2]: -1
+        data[3]: 2
+      - op: 56
+        valueIndex: 12
+        data[0]: 6
+        data[1]: -1
+        data[2]: -1
+        data[3]: 0
+      - op: 57
+        valueIndex: 16
+        data[0]: 8
+        data[1]: -1
+        data[2]: -1
+        data[3]: 0
+      - op: 6
+        valueIndex: 17
+        data[0]: -1
+        data[1]: -1
+        data[2]: -1
+        data[3]: -1
+      - op: 1
+        valueIndex: 18
+        data[0]: -1
+        data[1]: -1
+        data[2]: -1
+        data[3]: 3
+      - op: 1
+        valueIndex: 21
         data[0]: -1
         data[1]: -1
         data[2]: -1
         data[3]: 1
       - op: 1
-        valueIndex: 20
+        valueIndex: 22
         data[0]: -1
         data[1]: -1
         data[2]: -1
-        data[3]: 3
+        data[3]: 1
       - op: 1
         valueIndex: 23
         data[0]: -1
@@ -1146,33 +1142,21 @@ VisualEffectResource:
         data[0]: -1
         data[1]: -1
         data[2]: -1
-        data[3]: 1
+        data[3]: 3
       - op: 1
-        valueIndex: 26
-        data[0]: -1
-        data[1]: -1
-        data[2]: -1
-        data[3]: 1
-      - op: 1
-        valueIndex: 27
+        valueIndex: 28
         data[0]: -1
         data[1]: -1
         data[2]: -1
         data[3]: 3
       - op: 1
-        valueIndex: 30
-        data[0]: -1
-        data[1]: -1
-        data[2]: -1
-        data[3]: 3
-      - op: 1
-        valueIndex: 33
+        valueIndex: 31
         data[0]: -1
         data[1]: -1
         data[2]: -1
         data[3]: 1
       - op: 1
-        valueIndex: 34
+        valueIndex: 32
         data[0]: -1
         data[1]: -1
         data[2]: -1
@@ -1183,39 +1167,35 @@ VisualEffectResource:
     m_PropertySheet:
       m_Float:
         m_Array:
-        - m_ExpressionIndex: 0
-          m_Value: 6.2831855
-        - m_ExpressionIndex: 2
+        - m_ExpressionIndex: 1
           m_Value: 1
-        - m_ExpressionIndex: 3
+        - m_ExpressionIndex: 2
           m_Value: 0.5
+        - m_ExpressionIndex: 3
+          m_Value: 6.2831855
         - m_ExpressionIndex: 5
           m_Value: 0
-        - m_ExpressionIndex: 8
+        - m_ExpressionIndex: 7
           m_Value: 0.75
-        - m_ExpressionIndex: 13
-          m_Value: 20
         - m_ExpressionIndex: 15
-          m_Value: -90
-        - m_ExpressionIndex: 18
-          m_Value: 5
-        - m_ExpressionIndex: 19
-          m_Value: 3
-        - m_ExpressionIndex: 22
           m_Value: 90
+        - m_ExpressionIndex: 16
+          m_Value: -90
+        - m_ExpressionIndex: 20
+          m_Value: 60
       m_Vector2f:
         m_Array:
-        - m_ExpressionIndex: 9
+        - m_ExpressionIndex: 10
           m_Value: {x: 8, y: 8}
         - m_ExpressionIndex: 17
           m_Value: {x: 0.125, y: 0.125}
       m_Vector3f:
         m_Array:
-        - m_ExpressionIndex: 16
+        - m_ExpressionIndex: 14
           m_Value: {x: 0, y: 0, z: 0}
-        - m_ExpressionIndex: 20
+        - m_ExpressionIndex: 18
           m_Value: {x: 2, y: 3, z: 2}
-        - m_ExpressionIndex: 21
+        - m_ExpressionIndex: 19
           m_Value: {x: 0, y: 1, z: 0}
       m_Vector4f:
         m_Array: []
@@ -1223,8 +1203,8 @@ VisualEffectResource:
         m_Array: []
       m_Int:
         m_Array:
-        - m_ExpressionIndex: 1
-          m_Value: 40
+        - m_ExpressionIndex: 0
+          m_Value: 1000
       m_Matrix4x4f:
         m_Array: []
       m_AnimationCurve:
@@ -1256,7 +1236,7 @@ VisualEffectResource:
             m_RotationOrder: 4
       m_Gradient:
         m_Array:
-        - m_ExpressionIndex: 7
+        - m_ExpressionIndex: 8
           m_Value:
             serializedVersion: 2
             key0: {r: 1.9607843, g: 0.62482816, b: 0, a: 0}
@@ -1288,13 +1268,13 @@ VisualEffectResource:
             m_NumAlphaKeys: 4
       m_NamedObject:
         m_Array:
-        - m_ExpressionIndex: 23
-          m_Value: {fileID: 2800000, guid: aa3c3a9320c28694c87162c323dd3a26, type: 3}
+        - m_ExpressionIndex: 21
+          m_Value: {fileID: 2800000, guid: 8132390ca8ee7e248b73db767a16656d, type: 3}
       m_Bool:
         m_Array: []
     m_ExposedExpressions:
     - nameId: Spawn Rate
-      index: 1
+      index: 0
     m_Buffers:
     - type: 1
       size: 80240
@@ -1456,7 +1436,7 @@ VisualEffectResource:
       temporaryBuffers: []
       values:
       - nameId: Rate
-        index: 14
+        index: 9
       params: []
       processor: {fileID: 0}
       shaderSourceIndex: -1
@@ -1477,9 +1457,9 @@ VisualEffectResource:
       index: 1
     values:
     - nameId: bounds_center
-      index: 21
+      index: 19
     - nameId: bounds_size
-      index: 20
+      index: 18
     tasks:
     - type: 536870912
       buffers:
@@ -1495,9 +1475,9 @@ VisualEffectResource:
       values: []
       params:
       - nameId: bounds_center
-        index: 21
+        index: 19
       - nameId: bounds_size
-        index: 20
+        index: 18
       processor: {fileID: 0}
       shaderSourceIndex: 0
     - type: 805306368
@@ -1509,7 +1489,7 @@ VisualEffectResource:
       temporaryBuffers: []
       values:
       - nameId: deltaTime_a
-        index: 12
+        index: 13
       params: []
       processor: {fileID: 0}
       shaderSourceIndex: 1
@@ -1520,11 +1500,11 @@ VisualEffectResource:
       temporaryBuffers: []
       values:
       - nameId: gradient_b
-        index: 11
+        index: 12
       - nameId: Scale_x_d
-        index: 10
+        index: 11
       - nameId: mainTexture
-        index: 23
+        index: 21
       params:
       - nameId: sortPriority
         index: 0
@@ -2069,7 +2049,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 20
+      m_SerializableObject: 60
     m_Space: 2147483647
   m_Property:
     name: FrameRate
@@ -2585,7 +2565,7 @@ MonoBehaviour:
     m_Type:
       m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-    m_SerializableObject: 40
+    m_SerializableObject: 1000
   m_IsOutput: 0
   m_Tooltip: 
   m_Nodes:
@@ -2595,7 +2575,7 @@ MonoBehaviour:
       inputSlot: {fileID: 8926484042661614661}
     position: {x: 537, y: -29}
     expandedSlots: []
-    expanded: 0
+    expanded: 1
 --- !u!114 &8926484042661614659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2620,7 +2600,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 40
+      m_SerializableObject: 1000
     m_Space: 2147483647
   m_Property:
     name: o
