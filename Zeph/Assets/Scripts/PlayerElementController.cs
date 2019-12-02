@@ -59,7 +59,7 @@ public class PlayerElementController : MonoBehaviour
                 {
                     if (elementData[i].ButtonName == "FirePower")
                     {
-                        fireEffect.SetInt("Spawn Rate", 1000);
+                        fireEffect.SetInt("Spawn Rate", 40);
                     } else if (elementData[i].ButtonName == "OrbitPower")
                     {
                         leafEffect.SetInt("Spawn Rate", 30);
