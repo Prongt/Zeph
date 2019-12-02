@@ -45,16 +45,16 @@ public class Growable : Aspects
        if (gameObject.CompareTag("Bridge"))
        {
            mat.SetFloat("Vector1_D0BABF75", matX);
-       }
-
-       if (!groundDistort.GetBool("Animate") && matX <= 1)
-       {
-           distortBridge.SetActive(true);
-            gameObject.SetActive(false);
-       } else if (groundDistort.GetBool("Animate") && matX <= -13)
-       {
-           distortBridge.SetActive(true);
-           gameObject.SetActive(false);
+           
+           if (!groundDistort.GetBool("Animate") && matX <= 1)
+           {
+               distortBridge.SetActive(true);
+               gameObject.SetActive(false);
+           } else if (groundDistort.GetBool("Animate") && matX <= -13)
+           {
+               distortBridge.SetActive(true);
+               gameObject.SetActive(false);
+           }
        }
    }
     
