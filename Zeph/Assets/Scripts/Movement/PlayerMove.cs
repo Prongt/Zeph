@@ -37,7 +37,6 @@ public class PlayerMove : MonoBehaviour
 	private bool debugGravity = false;
 	
 	public static bool PlayerIsGrounded;
-	public static bool PlayerUsesGravity = true;
 	private float gravityPull;
 	public static bool _PlayerMovementEnabled = true;
 	public float gravityFlipTime = 2;
@@ -72,6 +71,7 @@ public class PlayerMove : MonoBehaviour
 		_PlayerMovementEnabled = true;
 		originalUp = transform.up;
 		originalrot = transform.rotation;
+		gravityPull = playerGravity;
 	}
 
 	private void OnValidate()
@@ -92,15 +92,6 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	void Update () {
-		if (PlayerUsesGravity)
-		{
-			gravityPull = playerGravity;
-		}
-		else
-		{
-			gravityPull = 0;
-		}
-		
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 		Vector2 inputDir = input.normalized;
 
@@ -269,7 +260,7 @@ public class PlayerMove : MonoBehaviour
 		velocity.y = velocityY;
 
 		characterController.Move (velocity * Time.deltaTime);
-		currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.z).magnitude;
+		//currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.z).magnitude;
 		
 		if (characterController.isGrounded) {
 			velocityY = 0;
