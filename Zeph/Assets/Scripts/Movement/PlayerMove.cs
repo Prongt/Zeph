@@ -62,7 +62,7 @@ public class PlayerMove : MonoBehaviour
 		oldGravity = gravityDirection;
 
 		gravityJump = gravityJump + playerJumpHeight;
-		distanceToGround = GetComponent<Collider>().bounds.extents.y + 0.1f;
+		distanceToGround = GetComponent<Collider>().bounds.extents.y + 1.0f;
 		characterWidth = GetComponent<Collider>().bounds.extents.x + 0.15f;
 		gravityPull = playerGravity;
 		
@@ -317,8 +317,10 @@ public class PlayerMove : MonoBehaviour
 			}
 			else
 			{
+				Debug.Log("Space");
 				if (CheckIfGrounded(gravityDirection, distanceToGround))
 				{
+					Debug.Log("Jump");	
 					float jumpVelocity;
 					jumpVelocity = Mathf.Sqrt(-2 * playerGravity * playerJumpHeight);
 					velocityY = jumpVelocity;
