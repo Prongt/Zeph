@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 9208862592938453265}
   - component: {fileID: 9208862592938453267}
   - component: {fileID: 9208862592938453270}
-  - component: {fileID: 502381065}
   - component: {fileID: 502381068}
+  - component: {fileID: 1675192038}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01170ec73f604f4ea53336345b1ded3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothFactor: 0.65
+  smoothFactor: 60
+  rotationFactor: 1
 --- !u!20 &9208862592938453270
 Camera:
   m_ObjectHideFlags: 0
@@ -90,19 +91,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &502381065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9208862592938453271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ListenerNumber: -1
 --- !u!114 &502381068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,3 +111,16 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &1675192038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9208862592938453271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: -1
