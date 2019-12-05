@@ -98,11 +98,11 @@ public class Growable : Aspects
        {
            mat.SetFloat("Vector1_D0BABF75", matX);
            
-           if (!groundDistort.GetBool("Animate") && matX <= 1)
+           if (!groundDistort.GetBool("Distort") && matX <= 1)
            {
                distortBridge.SetActive(true);
                gameObject.SetActive(false);
-           } else if (groundDistort.GetBool("Animate") && matX <= -13)
+           } else if (groundDistort.GetBool("Distort") && matX <= -13)
            {
                distortBridge.SetActive(true);
                gameObject.SetActive(false);
@@ -144,7 +144,7 @@ public class Growable : Aspects
     IEnumerator Appear()
     {
         yield return new WaitForSeconds(0f);
-        if (!groundDistort.GetBool("Animate"))
+        if (!groundDistort.GetBool("Distort"))
         {
             if (matX >= 1)
             {
@@ -158,7 +158,7 @@ public class Growable : Aspects
                 gameObject.GetComponent<BoxCollider>().isTrigger = false;
                 StopCoroutine(Appear());
             }
-        } else if (groundDistort.GetBool("Animate"))
+        } else if (groundDistort.GetBool("Distort"))
         {
             if (matX >= -13)
             {
