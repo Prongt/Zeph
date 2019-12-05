@@ -4309,6 +4309,10 @@ MonoBehaviour:
   distortBridge: {fileID: 4591082493043640125}
   isTree: 0
   useDynamicMeshCollider: 0
+  colliders:
+    small: {fileID: 0}
+    grown: {fileID: 0}
+    distort: {fileID: 0}
 --- !u!1 &896678526322523571
 GameObject:
   m_ObjectHideFlags: 0
@@ -4879,7 +4883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2537635938976407157
 Transform:
   m_ObjectHideFlags: 0
@@ -4888,8 +4892,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2537635938976407162}
   m_LocalRotation: {x: -0, y: 0.000000014901159, z: -0, w: 1}
-  m_LocalPosition: {x: -18.41, y: 0, z: -8.85}
-  m_LocalScale: {x: 13.443, y: 3.9257, z: 3.167764}
+  m_LocalPosition: {x: -18.4022, y: -0.67, z: -8.85}
+  m_LocalScale: {x: 13.459131, y: 3.9257, z: 3.167764}
   m_Children: []
   m_Father: {fileID: 2537635940463526488}
   m_RootOrder: 5
@@ -4909,7 +4913,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2537635938976407162}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5510,7 +5514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2537635939974625279
 Transform:
   m_ObjectHideFlags: 0
@@ -5519,8 +5523,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2537635939974625276}
   m_LocalRotation: {x: -0, y: 0.70710707, z: -0, w: 0.7071066}
-  m_LocalPosition: {x: -13.25, y: 0, z: -14.12}
-  m_LocalScale: {x: 13.443, y: 3.9257, z: 3.167764}
+  m_LocalPosition: {x: -13.25, y: -0.67, z: -17.173}
+  m_LocalScale: {x: 13.698418, y: 3.9257, z: 3.167764}
   m_Children: []
   m_Father: {fileID: 2537635940463526488}
   m_RootOrder: 4
@@ -5540,7 +5544,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2537635939974625276}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6811,21 +6815,6 @@ Transform:
   m_Father: {fileID: 2537635940303016195}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &288218242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5770962044927383442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aspectMaterial: {fileID: 11400000, guid: 2acb987a995ba514792eb7ece74fef3d, type: 2}
-  additionalAspects: 
-  onlyActivatedByPlayer: 1
 --- !u!64 &7952038203108541068
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6839,7 +6828,7 @@ MeshCollider:
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
-  m_Mesh: {fileID: -3821158633717573227, guid: 68ed4f64d152cdd48a81980ea2acbcd8, type: 3}
+  m_Mesh: {fileID: -464873966514129645, guid: 68ed4f64d152cdd48a81980ea2acbcd8, type: 3}
 --- !u!114 &288218241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6847,7 +6836,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5770962044927383442}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cc1a007d369be948bdad9d08ceac61a, type: 3}
   m_Name: 
@@ -6865,6 +6854,28 @@ MonoBehaviour:
   distortBridge: {fileID: 0}
   isTree: 1
   useDynamicMeshCollider: 1
+  colliders:
+    small: {fileID: -3821158633717573227, guid: 68ed4f64d152cdd48a81980ea2acbcd8,
+      type: 3}
+    grown: {fileID: -6554324754841644835, guid: 68ed4f64d152cdd48a81980ea2acbcd8,
+      type: 3}
+    distort: {fileID: -464873966514129645, guid: 68ed4f64d152cdd48a81980ea2acbcd8,
+      type: 3}
+--- !u!114 &288218242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5770962044927383442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectMaterial: {fileID: 11400000, guid: 2acb987a995ba514792eb7ece74fef3d, type: 2}
+  additionalAspects: 
+  onlyActivatedByPlayer: 1
 --- !u!65 &2537635939303251110
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6945,6 +6956,10 @@ MonoBehaviour:
   distortBridge: {fileID: 0}
   isTree: 0
   useDynamicMeshCollider: 0
+  colliders:
+    small: {fileID: 0}
+    grown: {fileID: 0}
+    distort: {fileID: 0}
 --- !u!1 &5869280008849898338
 GameObject:
   m_ObjectHideFlags: 0

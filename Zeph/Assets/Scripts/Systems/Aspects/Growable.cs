@@ -17,9 +17,11 @@ public class Growable : Aspects
     
     [SerializeField] private bool isTree = false;
     [SerializeField] private bool useDynamicMeshCollider = false;
+    [SerializeField] private Colliders colliders;
 
     private SkinnedMeshRenderer meshRenderer;
     private MeshCollider meshCollider;
+    private Mesh mesh;
     
     public Type[] componentTypes = new Type[]
     {
@@ -50,6 +52,8 @@ public class Growable : Aspects
             myAnim = GetComponent<Animator>();
             meshRenderer = GetComponent<SkinnedMeshRenderer>();
             meshCollider = GetComponent<MeshCollider>();
+
+            meshCollider.sharedMesh = colliders.small;
             
             if (meshRenderer == null)
             {
@@ -59,9 +63,19 @@ public class Growable : Aspects
     }
 
    void Update()
-   {
+   { //Mothra
        if (isTree)
        {
+           if (myAnim.GetBool("Distort") && myAnim.GetBool("Grow"))
+           {
+               meshCollider.sharedMesh = colliders.distort;
+           }
+
+           if (myAnim.GetBool("Distort") == false && myAnim.GetBool("Grow"))
+           {
+               meshCollider.sharedMesh = colliders.grown;
+           }
+
            if (Distortion.isDistorting)
            {
                myAnim.SetBool("Distort", true);
@@ -71,10 +85,13 @@ public class Growable : Aspects
                myAnim.SetBool("Distort", false);
            }
 
-           if (useDynamicMeshCollider)
-           {
-               meshCollider.sharedMesh = meshRenderer.sharedMesh;
-           }
+//           if (useDynamicMeshCollider)
+//           {
+//               //meshRenderer.sharedMesh.MarkDynamic();
+//               meshRenderer.BakeMesh(meshRenderer.sharedMesh);
+//               meshCollider.sharedMesh = meshRenderer.sharedMesh;
+//
+//           }
        }
        
        
@@ -157,5 +174,14 @@ public class Growable : Aspects
                 StopCoroutine(Appear());
             }
         }
+    }
+
+    [Serializable]
+    private struct Colliders
+    {
+        public Mesh small;
+        public Mesh grown;
+        public Mesh distort;
+            
     }
 }
