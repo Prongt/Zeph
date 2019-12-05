@@ -143,12 +143,12 @@ public class Growable : Aspects
 
     IEnumerator Appear()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0f);
         if (!groundDistort.GetBool("Animate"))
         {
             if (matX >= 1)
             {
-                matX -= 15 * Time.deltaTime;
+                matX -= 5 * Time.deltaTime;
                 StartCoroutine(Appear());
             }
             else
@@ -162,7 +162,7 @@ public class Growable : Aspects
         {
             if (matX >= -13)
             {
-                matX -= 15 * Time.deltaTime;
+                matX -= 5 * Time.deltaTime;
                 StartCoroutine(Appear());
             }
             else
