@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
+using UnityEngine.Experimental.VFX;
 
 public class Flamable : Aspects
 {
     [SerializeField] private Material burnedMaterial;
-    [SerializeField] private ParticleSystem burningParticleEffect;
+    [SerializeField] private VisualEffect burningParticleEffect;
 
     [SerializeField] private bool destroyable = false;
     [HideIf("destroyable", true)] [SerializeField] private float destroyTime = 1.0f;

@@ -11,9 +11,7 @@ GameObject:
   - component: {fileID: 1086888655620837468}
   - component: {fileID: 8236628272920767082}
   - component: {fileID: 2410244580838102675}
-  - component: {fileID: 5623728598351825380}
-  - component: {fileID: 2448567514921756358}
-  - component: {fileID: 2866159575660809043}
+  - component: {fileID: 6726646795384947199}
   m_Layer: 0
   m_Name: Cosmic Rotation Rift
   m_TagString: Untagged
@@ -51,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4129306772428579407}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -82,7 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &5623728598351825380
+--- !u!65 &6726646795384947199
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,44 +91,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5749741, y: 1.5261344, z: 0.6728062}
-  m_Center: {x: -0.122912765, y: 0.0728578, z: 0.33621576}
---- !u!114 &2448567514921756358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4129306772428579407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aspectMaterial: {fileID: 11400000, guid: 53ef36bdcecb58b4aaec5bef01377d44, type: 2}
-  additionalAspects: 
-  onlyActivatedByPlayer: 0
---- !u!114 &2866159575660809043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4129306772428579407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b81c4da354eec841bc85139a5b9eab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AspectType: 0
-  onPromote:
-    m_PersistentCalls:
-      m_Calls: []
-  onNegate:
-    m_PersistentCalls:
-      m_Calls: []
-  newGravity: {x: 0, y: 0, z: -9.81}
-  resetGravity: 1
+  m_Size: {x: 1.5749763, y: 1.5261344, z: 0.38649195}
+  m_Center: {x: -0.12291277, y: 0.0728578, z: 0.19305864}
 --- !u!1001 &3414170084231723360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,6 +100,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1086888655620837468}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 4baf73d2b36f0c44bb88a18dcc28a704,
+        type: 3}
+      propertyPath: m_Name
+      value: DistortionRiftPlaneV1
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4baf73d2b36f0c44bb88a18dcc28a704,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -192,11 +159,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 4baf73d2b36f0c44bb88a18dcc28a704,
-        type: 3}
-      propertyPath: m_Name
-      value: DistortionRiftPlaneV1
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 4baf73d2b36f0c44bb88a18dcc28a704,
         type: 3}
