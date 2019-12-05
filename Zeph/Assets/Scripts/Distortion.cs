@@ -7,16 +7,17 @@ using UnityEngine;
 public class Distortion : Aspects
 {
     [SerializeField] private Animator disAnim1;
-    //[SerializeField] private Animator disAnim2;
 
+
+    public static bool isDistorting = false;
     private bool animating = false;
 
     [SerializeField] private bool onGround;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    protected override void Initialize()
     {
-        
+        base.Initialize();
+        isDistorting = false;
     }
 
     public override void Promote(Transform source = null, Element element = null)
@@ -24,6 +25,8 @@ public class Distortion : Aspects
         base.Promote(source,element);
         
         animating = !animating;
+
+        isDistorting = !isDistorting;
         
         if (disAnim1 != null)
         disAnim1.SetBool("Animate", animating);
