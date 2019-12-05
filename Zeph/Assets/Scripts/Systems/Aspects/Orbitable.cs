@@ -32,7 +32,7 @@ public class Orbitable : Aspects
     public float radiusSpeed =  10f;
     
     //VFX of the orbiting affect
-    //[SerializeField] private VisualEffect orbitEffect;
+    [SerializeField] private VisualEffect orbitEffect;
     
 
     public Type[] componentTypes = new Type[]
@@ -61,24 +61,6 @@ public class Orbitable : Aspects
         if (orbiting)
         {
             Orbit();
-            
-            /*//Changing the orbit direction on collisions
-            if (orbitDirection)
-            {
-                if (rotSpeed <= throwForce * 10 && canRotate)
-                {
-                    rotSpeed += rotIncrease * Time.deltaTime;
-                }
-            }
-            else
-            {
-                if (rotSpeed <= throwForce * 10 && canRotate)
-                {
-                    rotSpeed -= rotIncrease * Time.deltaTime;
-                } 
-            }*/
-            rotSpeed = throwForce * 10;
-            
             throwable = true;
             delay = true;
         } 
@@ -129,12 +111,26 @@ public class Orbitable : Aspects
         //Setting parent means the object does trail behind the player.
         gameObject.transform.SetParent(GameObject.Find("Zeph").transform);
         //Affecting the spawn rate of the vfx to have it start "playing".
-       // orbitEffect.SetInt("Spawn Rate", 80);
+        orbitEffect.SetInt("Spawn Rate", 80);
         //Sake of ease constraints added
         myRB.constraints = RigidbodyConstraints.FreezeRotation;
         myRB.useGravity = false;
         
-       
+        //Changing the orbit direction on collisions
+        if (orbitDirection)
+        {
+            if (rotSpeed <= throwForce * 10 && canRotate)
+            {
+                rotSpeed += rotIncrease * Time.deltaTime;
+            }
+        }
+        else
+        {
+            if (rotSpeed <= -throwForce * 10 && canRotate)
+            {
+                rotSpeed -= rotIncrease * Time.deltaTime;
+            } 
+        }
 
 
         //The orbiting code. Rotates around a point, gets a desired position, moves towards that desired position. forces the object to be on the right y level
@@ -175,7 +171,7 @@ public class Orbitable : Aspects
     {
         //unparents the object, turns off the particles and undoes the constraints
         gameObject.transform.SetParent(GameObject.Find("Interactables").transform);
-        //orbitEffect.SetInt("Spawn Rate", 0);
+        orbitEffect.SetInt("Spawn Rate", 0);
         myRB.constraints = RigidbodyConstraints.None;
         myRB.useGravity = true;
         
