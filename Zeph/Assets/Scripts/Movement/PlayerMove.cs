@@ -238,6 +238,7 @@ public class PlayerMove : MonoBehaviour
 
 		if (characterController.isGrounded) {
 			velocityY = 0;
+			animator.SetBool("IsJumping", false);
 		}
 	}
 
@@ -264,6 +265,7 @@ public class PlayerMove : MonoBehaviour
 		
 		if (characterController.isGrounded) {
 			velocityY = 0;
+			animator.SetBool("IsJumping", false);
 		}
 	}
 	
@@ -317,10 +319,11 @@ public class PlayerMove : MonoBehaviour
 			}
 			else
 			{
-				Debug.Log("Space");
+				//Debug.Log("Space");
 				if (CheckIfGrounded(gravityDirection, distanceToGround))
 				{
-					Debug.Log("Jump");	
+					//Debug.Log("Jump");	
+					animator.SetBool("IsJumping", true);
 					float jumpVelocity;
 					jumpVelocity = Mathf.Sqrt(-2 * playerGravity * playerJumpHeight);
 					velocityY = jumpVelocity;
