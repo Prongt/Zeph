@@ -6,14 +6,20 @@ using UnityEngine;
 
 public class Growable : Aspects
 {
-    [SerializeField] private Material GrowingMaterial;
-    [SerializeField] private GameObject GrowingParticleEffect;
+    //[SerializeField] private Material GrowingMaterial;
+    //[SerializeField] private GameObject GrowingParticleEffect;
     public Animator myAnim;
     [SerializeField] private Material mat;
     private float matX;
     [SerializeField] private Animator groundDistort;
     [SerializeField] private GameObject distortBridge;
 
+    
+    [SerializeField] private bool isTree = false;
+    [SerializeField] private bool useDynamicMeshCollider = false;
+
+    private SkinnedMeshRenderer meshRenderer;
+    private MeshCollider meshCollider;
     
     public Type[] componentTypes = new Type[]
     {
@@ -38,10 +44,40 @@ public class Growable : Aspects
             mat = gameObject.GetComponent<MeshRenderer>().material;
             matX = mat.GetFloat("Vector1_D0BABF75");
         }
+        
+        if (isTree)
+        {
+            myAnim = GetComponent<Animator>();
+            meshRenderer = GetComponent<SkinnedMeshRenderer>();
+            meshCollider = GetComponent<MeshCollider>();
+            
+            if (meshRenderer == null)
+            {
+                Debug.Log("No SkinnedMeshRenderer on " + gameObject.name + " id: " + gameObject.GetInstanceID());
+            }
+        }
     }
 
    void Update()
    {
+       if (isTree)
+       {
+           if (Distortion.isDistorting)
+           {
+               myAnim.SetBool("Distort", true);
+           }
+           else
+           {
+               myAnim.SetBool("Distort", false);
+           }
+
+           if (useDynamicMeshCollider)
+           {
+               meshCollider.sharedMesh = meshRenderer.sharedMesh;
+           }
+       }
+       
+       
        if (gameObject.CompareTag("Bridge"))
        {
            mat.SetFloat("Vector1_D0BABF75", matX);
@@ -62,6 +98,12 @@ public class Growable : Aspects
     {
         base.Promote(source, element);
         print("IM GROWING");
+        
+        if (isTree)
+        {
+            myAnim.SetBool("Grow", true);
+        }
+        
         if (gameObject.CompareTag("Plant"))
         {
             myAnim.SetBool("Growing", true);

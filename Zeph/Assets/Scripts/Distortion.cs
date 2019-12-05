@@ -7,23 +7,17 @@ using UnityEngine;
 public class Distortion : Aspects
 {
     [SerializeField] private Animator disAnim1;
-    [SerializeField] private bool useDynamicMeshCollider = false;
 
-    private SkinnedMeshRenderer meshRenderer;
+
+    public static bool isDistorting = false;
     private bool animating = false;
 
     [SerializeField] private bool onGround;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    protected override void Initialize()
     {
-        meshRenderer = GetComponent<SkinnedMeshRenderer>();
-        if (meshRenderer == null)
-        {
-            Debug.Log("No SkinnedMeshRenderer on " + gameObject.name + " id: " + gameObject.GetInstanceID());
-        }
-        
-        //meshRenderer.b
+        base.Initialize();
+        isDistorting = false;
     }
 
     public override void Promote(Transform source = null, Element element = null)
@@ -31,6 +25,8 @@ public class Distortion : Aspects
         base.Promote(source,element);
         
         animating = !animating;
+
+        isDistorting = !isDistorting;
         
         if (disAnim1 != null)
         disAnim1.SetBool("Animate", animating);
