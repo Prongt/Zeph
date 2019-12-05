@@ -7,8 +7,9 @@ using UnityEngine;
 public class Distortion : Aspects
 {
     [SerializeField] private Animator disAnim1;
-    //[SerializeField] private Animator disAnim2;
+    [SerializeField] private bool useDynamicMeshCollider = false;
 
+    private SkinnedMeshRenderer meshRenderer;
     private bool animating = false;
 
     [SerializeField] private bool onGround;
@@ -16,7 +17,13 @@ public class Distortion : Aspects
     // Start is called before the first frame update
     void Start()
     {
+        meshRenderer = GetComponent<SkinnedMeshRenderer>();
+        if (meshRenderer == null)
+        {
+            Debug.Log("No SkinnedMeshRenderer on " + gameObject.name + " id: " + gameObject.GetInstanceID());
+        }
         
+        //meshRenderer.b
     }
 
     public override void Promote(Transform source = null, Element element = null)
