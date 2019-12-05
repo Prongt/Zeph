@@ -64,6 +64,8 @@ public class PlayerElementController : MonoBehaviour
                     {
                         leafEffect.SetInt("Spawn Rate", 30);
                     }
+
+                    light.intensity = 100;
                     
                     StartCoroutine(UsePowerAnimation());
                     elementData[i].colliders = new Collider[maxAffectableObjects];
