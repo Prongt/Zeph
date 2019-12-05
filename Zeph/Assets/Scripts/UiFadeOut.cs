@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UiFadeOut : MonoBehaviour
 {
+    
     [SerializeField] private float fadeTime = 2.0f;
 
     private MaskableGraphic[] guiElements;
