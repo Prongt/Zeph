@@ -16,7 +16,6 @@ public class Growable : Aspects
 
     
     [SerializeField] private bool isTree = false;
-    [SerializeField] private bool useDynamicMeshCollider = false;
     [SerializeField] private Colliders colliders;
 
     private SkinnedMeshRenderer meshRenderer;
