@@ -51,8 +51,10 @@ public class Growable : Aspects
             myAnim = GetComponent<Animator>();
             meshRenderer = GetComponent<SkinnedMeshRenderer>();
             meshCollider = GetComponent<MeshCollider>();
-
-            meshCollider.sharedMesh = colliders.small;
+            
+            colliders.small.isTrigger = false;
+            colliders.distort.SetActive(false);
+            colliders.grown.SetActive(false);
             
             if (meshRenderer == null)
             {
@@ -67,13 +69,18 @@ public class Growable : Aspects
        {
            if (myAnim.GetBool("Distort") && myAnim.GetBool("Grow"))
            {
-               meshCollider.sharedMesh = colliders.distort;
+               //meshCollider.sharedMesh = colliders.distort;
+               colliders.small.isTrigger = true;
+               colliders.distort.SetActive(true);
+               colliders.grown.SetActive(false);
            }
 
            if (myAnim.GetBool("Distort") == false && myAnim.GetBool("Grow"))
            {
-               meshCollider.sharedMesh = colliders.grown;
-               
+               //meshCollider.sharedMesh = colliders.grown;
+               colliders.small.isTrigger = true;
+               colliders.distort.SetActive(false);
+               colliders.grown.SetActive(true);
            }
 
            if (Distortion.isDistorting)
@@ -179,9 +186,8 @@ public class Growable : Aspects
     [Serializable]
     private struct Colliders
     {
-        public Mesh small;
-        public Mesh grown;
-        public Mesh distort;
-            
+        public Collider small;
+        public GameObject grown;
+        public GameObject distort;
     }
 }

@@ -378,7 +378,14 @@ public class PlayerMove : MonoBehaviour
 
 	private bool CheckIfGrounded(Vector3 direction, float distance)
 	{
-		return Physics.Raycast(transform.position, direction, distance);
+		if (GravityRift.useNewGravity)
+		{
+			return Physics.Raycast(transform.position, direction, distance);
+		}
+		else
+		{
+			return characterController.isGrounded;
+		}
 	}
 	
 	
