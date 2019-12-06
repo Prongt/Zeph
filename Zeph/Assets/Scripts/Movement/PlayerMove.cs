@@ -62,7 +62,7 @@ public class PlayerMove : MonoBehaviour
 		oldGravity = gravityDirection;
 
 		gravityJump = gravityJump + playerJumpHeight;
-		distanceToGround = GetComponent<Collider>().bounds.extents.y + 1.0f;
+		distanceToGround = GetComponent<Collider>().bounds.extents.y + 0.1f;
 		characterWidth = GetComponent<Collider>().bounds.extents.x + 0.15f;
 		gravityPull = playerGravity;
 		
