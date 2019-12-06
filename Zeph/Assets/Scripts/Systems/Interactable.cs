@@ -231,7 +231,7 @@ public class Interactable : MonoBehaviour
         {
             for (int p = 0; p < element.Promotes.Count; p++)
             {
-                if (aspectComponentsList[i].AspectType == element.Promotes[p])
+                if (aspectComponentsList[i].GetType().ToString() == element.Promotes[p].ToString())
                 {
                     aspectComponentsList[i].Promote(source, element);
                 }
@@ -239,7 +239,7 @@ public class Interactable : MonoBehaviour
             
             for (int n = 0; n < element.Negates.Count; n++)
             {
-                if (aspectComponentsList[i].AspectType == element.Negates[n])
+                if (aspectComponentsList[i].GetType().ToString() == element.Negates[n].ToString())
                 {
                     aspectComponentsList[i].Negate(source);
                 }
