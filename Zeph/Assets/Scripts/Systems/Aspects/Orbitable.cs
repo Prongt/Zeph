@@ -81,6 +81,20 @@ public class Orbitable : Aspects
         {
             delay = true;
             orbiting = false;
+            
+            if (rotSpeed <= throwForce * 10 && canRotate)
+            {
+                rotSpeed = throwForce * 10;
+            }
+            if (rotSpeed <= -throwForce * 10 && canRotate)
+            {
+                rotSpeed = throwForce * 10;
+            } 
+            //Changing the orbit direction on collisions
+            else
+            {
+                
+            }
         }
         else
         {
@@ -116,21 +130,7 @@ public class Orbitable : Aspects
         myRB.constraints = RigidbodyConstraints.FreezeRotation;
         myRB.useGravity = false;
         
-        //Changing the orbit direction on collisions
-        if (orbitDirection)
-        {
-            if (rotSpeed <= throwForce * 10 && canRotate)
-            {
-                rotSpeed += rotIncrease * Time.deltaTime;
-            }
-        }
-        else
-        {
-            if (rotSpeed <= -throwForce * 10 && canRotate)
-            {
-                rotSpeed -= rotIncrease * Time.deltaTime;
-            } 
-        }
+        
 
 
         //The orbiting code. Rotates around a point, gets a desired position, moves towards that desired position. forces the object to be on the right y level

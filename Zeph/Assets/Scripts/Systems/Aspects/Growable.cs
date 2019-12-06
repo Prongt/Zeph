@@ -73,6 +73,7 @@ public class Growable : Aspects
            if (myAnim.GetBool("Distort") == false && myAnim.GetBool("Grow"))
            {
                meshCollider.sharedMesh = colliders.grown;
+               
            }
 
            if (Distortion.isDistorting)
