@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 8438672649559369552}
   - component: {fileID: 596505603078446438}
   - component: {fileID: 6592073331590996383}
+  - component: {fileID: 239745073501347346}
+  - component: {fileID: 4466020939538036953}
+  - component: {fileID: 1587168425559190081}
   m_Layer: 0
   m_Name: story_rune
   m_TagString: Untagged
@@ -78,3 +81,50 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &239745073501347346
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4847959833671669059}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.573982, y: 1.5242847, z: 1.6443634}
+  m_Center: {x: 0, y: 0, z: 0.6642407}
+--- !u!114 &4466020939538036953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4847959833671669059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectMaterial: {fileID: 11400000, guid: 7685cfa8738cfc1458431b9e72ca2ad2, type: 2}
+  additionalAspects: 
+  onlyActivatedByPlayer: 1
+--- !u!114 &1587168425559190081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4847959833671669059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0fd5e24deef95c468608d523ced0f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
