@@ -63,9 +63,11 @@ public class PlayerElementController : MonoBehaviour
                     } else if (elementData[i].ButtonName == "OrbitPower")
                     {
                         leafEffect.SetInt("Spawn Rate", 30);
+                    } else if (elementData[i].ButtonName == "LightPower")
+                    {
+                        light.intensity = 100f;
                     }
 
-                    light.intensity = 100;
                     
                     StartCoroutine(UsePowerAnimation());
                     elementData[i].colliders = new Collider[maxAffectableObjects];
