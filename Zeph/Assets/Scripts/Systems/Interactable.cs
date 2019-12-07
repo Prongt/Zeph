@@ -100,7 +100,7 @@ public class Interactable : MonoBehaviour
 #if UNITY_EDITOR_WIN
         if (Application.isEditor) //Removes component in editor
         {
-            EditorApplication.delayCall += () => { DestroyImmediate(gameObject.GetComponent(type)); };
+            EditorApplication.delayCall += () => { DestroyImmediate(gameObject.GetComponent(type), true); };
 
             Debug.Log("The following component " +
                       type.Name + " on " + gameObject.name + " was removed");
