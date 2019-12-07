@@ -11,9 +11,12 @@ GameObject:
   - component: {fileID: 94891979401177775}
   - component: {fileID: 8937984446723952793}
   - component: {fileID: 3402064988363910240}
+  - component: {fileID: 8107333053924217510}
+  - component: {fileID: 7134668082210917720}
+  - component: {fileID: 7312836316527053380}
   m_Layer: 0
   m_Name: Cosmic Distortion Rift
-  m_TagString: Untagged
+  m_TagString: Rift
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3966059492015823036}
-  m_LocalRotation: {x: 0.000000021855689, y: 0.0008204759, z: -1.7935447e-11, w: -0.9999997}
+  m_LocalRotation: {x: 0, y: -0.0008203576, z: 0, w: 0.9999997}
   m_LocalPosition: {x: -28.76, y: 11.303913, z: 12.768965}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -48,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3966059492015823036}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -79,6 +82,55 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &8107333053924217510
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3966059492015823036}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5749741, y: 1.5261347, z: 0.9}
+  m_Center: {x: -0.122912765, y: 0.07285781, z: 0.02048286}
+--- !u!114 &7134668082210917720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3966059492015823036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92de12aee320a8e479171bf04c82fb16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  myAnim: {fileID: 0}
+  onGround: 0
+--- !u!114 &7312836316527053380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3966059492015823036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectMaterial: {fileID: 11400000, guid: 0b0ffe6f8e2b0464ab8fddec3d12384f, type: 2}
+  additionalAspects: 
+  onlyActivatedByPlayer: 1
 --- !u!1001 &7871316478110514786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,6 +142,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DistortionRiftPlaneV1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4baf73d2b36f0c44bb88a18dcc28a704,
+        type: 3}
+      propertyPath: m_TagString
+      value: Rift
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4baf73d2b36f0c44bb88a18dcc28a704,
         type: 3}
