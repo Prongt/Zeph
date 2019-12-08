@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Experimental.VFX;
 
@@ -34,6 +35,8 @@ public class Orbitable : Aspects
     //VFX of the orbiting affect
     [SerializeField] private VisualEffect orbitEffect;
     
+    [SerializeField] private StudioEventEmitter collisionSoundEventEmitter;
+    
 
     public Type[] componentTypes = new Type[]
     {
@@ -52,6 +55,11 @@ public class Orbitable : Aspects
 
         //TODO find better solution
         centerPoint = GameObject.FindWithTag("OrbitPoint").transform;
+        
+        if (collisionSoundEventEmitter == null)
+        {
+            collisionSoundEventEmitter = GetComponent<StudioEventEmitter>();
+        }
     }
     
 
@@ -210,6 +218,18 @@ public class Orbitable : Aspects
         if (!other.gameObject.CompareTag("Floor"))
         {
             orbitDirection = !orbitDirection;
+
+            if (orbiting)
+            {
+                if (collisionSoundEventEmitter != null)
+                {
+                    if (collisionSoundEventEmitter.IsPlaying())
+                    {
+                        collisionSoundEventEmitter.Stop();
+                    }
+                    collisionSoundEventEmitter.Play();
+                }
+            }
         }
     }
 }
