@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +10,9 @@ public abstract class Aspects : MonoBehaviour
     [SerializeField] private UnityEvent onPromote;
     [SerializeField] private UnityEvent onNegate;
     protected Element element;
+    
+    [SerializeField] private float coolDownTime = 0.0f;
+    protected bool isCoolDownComplete = true;
     private void Awake()
     {
         Initialize();
@@ -28,11 +32,31 @@ public abstract class Aspects : MonoBehaviour
 
     public virtual void Promote(Transform source = null, Element element = null)
     {
+        if (isCoolDownComplete == false)
+        {
+            //Debug.Log("return");
+            return;
+        }
+        else
+        {
+            StartCoroutine(CoolDownCoroutine());
+        }
+        
+        
         if (element != null)
         {
             this.element = element;
         }
         onPromote.Invoke();
+    }
+
+    IEnumerator CoolDownCoroutine()
+    {
+        isCoolDownComplete = false;
+        
+        yield return new WaitForSeconds(coolDownTime);
+
+        isCoolDownComplete = true;
     }
 
 

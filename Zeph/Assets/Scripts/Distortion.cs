@@ -47,7 +47,14 @@ public class Distortion : Aspects
 
     public override void Promote(Transform source = null, Element element = null)
     {
+        if (isCoolDownComplete == false)
+        {
+            Debug.Log("Cool down not complete on " + gameObject.name);
+            return;
+        }
         base.Promote(source,element);
+        
+        
         
         animating = !animating;
 

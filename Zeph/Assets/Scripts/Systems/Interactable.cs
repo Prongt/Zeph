@@ -14,6 +14,7 @@ public class Interactable : MonoBehaviour
     private List<AspectType> additionalAspects;
     
     [SerializeField] protected bool onlyActivatedByPlayer = false;
+    
 
     private List<AspectType> aspectTypesList;
     private List<Aspects> aspectComponentsList;
