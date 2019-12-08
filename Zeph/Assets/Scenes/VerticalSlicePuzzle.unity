@@ -7662,13 +7662,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675878380664328399}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -22.499, y: 3.98, z: 19.781}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.0009994507, y: 1.48, z: -0.0189991}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 675878380857932081}
-  m_Father: {fileID: 3050711281753179375}
-  m_RootOrder: 13
+  m_Father: {fileID: 8615268225381861960}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!73398921 &675878380664328393
 VFXRenderer:
@@ -8877,13 +8877,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675878380895071754}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2.75, y: 2.025, z: 19.781}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.010000229, y: 1.5250001, z: -0.0189991}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 675878380279567670}
-  m_Father: {fileID: 3050711281753179375}
-  m_RootOrder: 12
+  m_Father: {fileID: 2444900465473124693}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!73398921 &675878380895496652
 VFXRenderer:
@@ -12888,7 +12888,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0}
-  m_Center: {x: 0, y: 0, z: -0.17847443}
+  m_Center: {x: 0, y: 0, z: -0.04222107}
 --- !u!4 &2036213073239471804
 Transform:
   m_ObjectHideFlags: 0
@@ -16416,8 +16416,6 @@ Transform:
   - {fileID: 6353149420726068586}
   - {fileID: 3463833782562922768}
   - {fileID: 3850761339378036014}
-  - {fileID: 675878380895071755}
-  - {fileID: 675878380664328392}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16726,8 +16724,7 @@ PrefabInstance:
         type: 3}
       propertyPath: burningParticleEffect
       value: 
-      objectReference: {fileID: 1693926694, guid: 4597b336e8f6dab4d8864df2a8ba6c59,
-        type: 3}
+      objectReference: {fileID: 675878380664328394}
     - target: {fileID: 1121511046965888213, guid: 710e389d0c1c87043af04ea87bb09894,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -18279,6 +18276,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gravity Rift 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2780225050631537860, guid: eb448211219e19c44b3c43559199fabb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb448211219e19c44b3c43559199fabb, type: 3}
 --- !u!23 &3325047632728430682
@@ -18650,6 +18652,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gravity Rift 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2780225050631537860, guid: eb448211219e19c44b3c43559199fabb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb448211219e19c44b3c43559199fabb, type: 3}
@@ -20062,6 +20069,11 @@ PrefabInstance:
     - target: {fileID: 8420017243178866023, guid: eb448211219e19c44b3c43559199fabb,
         type: 3}
       propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2780225050631537860, guid: eb448211219e19c44b3c43559199fabb,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -24150,6 +24162,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gravity Rift 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2780225050631537860, guid: eb448211219e19c44b3c43559199fabb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb448211219e19c44b3c43559199fabb, type: 3}
 --- !u!33 &7543522986161766458
@@ -25250,7 +25267,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gravity Rift 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2780225050631537860, guid: eb448211219e19c44b3c43559199fabb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eb448211219e19c44b3c43559199fabb, type: 3}
 --- !u!23 &8168963408806880919
 MeshRenderer:
