@@ -13,6 +13,8 @@ public class GravityRift : Aspects
     // Start is called before the first frame update
     void Awake()
     {
+        Debug.LogWarning("Hard setting gravity to default gravity");
+        Physics.gravity = new Vector3(0, -9.81f, 0);
         ogGravity = Physics.gravity;
     }
     
@@ -28,6 +30,7 @@ public class GravityRift : Aspects
 
     public override void Promote(Transform source = null, Element element = null)
     {
+        Debug.Log("Here " + gameObject.name);
         if (isCoolDownComplete == false)
         {
             Debug.Log("Cool down not complete on " + gameObject.name);
