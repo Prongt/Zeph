@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     private Transform player;
 
-    [Range(0.0f, 60.0f)] [SerializeField] private float smoothFactor = 1f;
+    [Range(0.0f, 300.0f)] [SerializeField] private float smoothFactor = 1f;
     [Range(0.0f, 30.0f)] [SerializeField] private float rotationFactor = 1f;
 
     private Transform camMain;
