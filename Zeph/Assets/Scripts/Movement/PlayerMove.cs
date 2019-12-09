@@ -312,6 +312,7 @@ public class PlayerMove : MonoBehaviour
 			{
 				if (CheckIfGrounded(gravityDirection, distanceToGround))
 				{
+					animator.SetBool("IsJumping", true);
 					float jumpVelocity;
 					jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJump);
 					velocityY = jumpVelocity;

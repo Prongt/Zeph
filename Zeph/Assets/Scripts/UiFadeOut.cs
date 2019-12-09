@@ -35,7 +35,7 @@ public class UiFadeOut : MonoBehaviour
 
     public void FadeUi()
     {
-        Debug.Log("No");
+        //Debug.Log("No");
         gameObject.SetActive(false);
 
 //        foreach (var element in guiElements)
