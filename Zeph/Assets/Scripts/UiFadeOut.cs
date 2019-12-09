@@ -1,27 +1,33 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UiFadeOut : MonoBehaviour
 {
-    
+    [SerializeField] private List<string> storyText;
     [SerializeField] private float fadeTime = 2.0f;
 
     private MaskableGraphic[] guiElements;
     private float[] alphas;
 
+    private Text text;
+    private int storyIndex = 0;
     
     private void Awake()
     {
         guiElements = GetComponentsInChildren<MaskableGraphic>();
         alphas = new float[guiElements.Length];
-        
+        text = GetComponentInChildren<Text>();
         
         for (int i = 0; i < alphas.Length; i++)
         {
             alphas[i] = guiElements[i].color.a;
         }
+
+        storyIndex = 0;
+
     }
 
     private void Update()
@@ -29,6 +35,21 @@ public class UiFadeOut : MonoBehaviour
         if (Input.GetButtonDown("Escape"))
         {
             FadeUi();
+        }
+        DisplayText();
+    }
+
+    private void DisplayText()
+    {
+        text.text = storyText[storyIndex];
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (storyIndex == storyText.Count)
+            {
+                FadeUi();
+                return;
+            }
+            storyIndex++;
         }
     }
 
