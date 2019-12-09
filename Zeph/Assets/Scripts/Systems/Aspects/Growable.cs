@@ -12,7 +12,7 @@ public class Growable : Aspects
     [SerializeField] private Material mat;
     private float matX;
     [SerializeField] private Animator groundDistort;
-    [SerializeField] private GameObject distortBridge;
+    //[SerializeField] private GameObject distortBridge;
 
     
     [SerializeField] private bool isTree = false;
@@ -21,6 +21,8 @@ public class Growable : Aspects
     private SkinnedMeshRenderer meshRenderer;
     private MeshCollider meshCollider;
     private Mesh mesh;
+
+    private bool hasGrown = false;
     
     public Type[] componentTypes = new Type[]
     {
@@ -42,7 +44,8 @@ public class Growable : Aspects
 
         if (gameObject.CompareTag("Bridge"))
         {
-            mat = gameObject.GetComponent<MeshRenderer>().material;
+            myAnim = GetComponent<Animator>();
+            mat = gameObject.GetComponent<SkinnedMeshRenderer>().material;
             matX = mat.GetFloat("Vector1_D0BABF75");
         }
         
@@ -64,7 +67,7 @@ public class Growable : Aspects
     }
 
    void Update()
-   { //Mothra
+   {
        if (isTree)
        {
            if (myAnim.GetBool("Distort") && myAnim.GetBool("Grow"))
@@ -108,12 +111,26 @@ public class Growable : Aspects
            
            if (!groundDistort.GetBool("Distort") && matX <= 1)
            {
-               distortBridge.SetActive(true);
-               gameObject.SetActive(false);
+               //distortBridge.SetActive(true);
+               //gameObject.SetActive(false);
            } else if (groundDistort.GetBool("Distort") && matX <= -13)
            {
-               distortBridge.SetActive(true);
-               gameObject.SetActive(false);
+               //distortBridge.SetActive(true);
+               //gameObject.SetActive(false);
+           }
+           
+           if (Distortion.isDistorting)
+           {
+               myAnim.SetBool("Distort", true);
+           }
+           else
+           {
+               myAnim.SetBool("Distort", false);
+           }
+
+           if (myAnim.GetBool("Distort") && matX < 1 && matX > -13)
+           {
+               matX -= 5 * Time.deltaTime;
            }
        }
    }
@@ -152,18 +169,23 @@ public class Growable : Aspects
     IEnumerator Appear()
     {
         yield return new WaitForSeconds(0f);
+        if (groundDistort.GetBool("Distort") && hasGrown)
+        {
+            matX = -14;
+        }
         if (!groundDistort.GetBool("Distort"))
         {
             if (matX >= 1)
             {
                 matX -= 5 * Time.deltaTime;
                 StartCoroutine(Appear());
-            }
+            } 
             else
             {
-                gameObject.GetComponent<BoxCollider>().center = new Vector3(-6.721177f,-3.552706e-16f, 0.1f);
+                hasGrown = true;
+                /*gameObject.GetComponent<BoxCollider>().center = new Vector3(-6.721177f,-3.552706e-16f, 0.1f);
                 gameObject.GetComponent<BoxCollider>().size = new Vector3(18.35765f,3,0.2f);
-                gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                gameObject.GetComponent<BoxCollider>().isTrigger = false;*/
                 StopCoroutine(Appear());
             }
         } else if (groundDistort.GetBool("Distort"))
@@ -175,9 +197,10 @@ public class Growable : Aspects
             }
             else
             {
-                gameObject.GetComponent<BoxCollider>().center = new Vector3(0,2.384186e-08f, 0.1f);
+                hasGrown = true;
+                /*gameObject.GetComponent<BoxCollider>().center = new Vector3(0,2.384186e-08f, 0.1f);
                 gameObject.GetComponent<BoxCollider>().size = new Vector3(31.76197f,3,0.2f);
-                gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                gameObject.GetComponent<BoxCollider>().isTrigger = false;*/
                 StopCoroutine(Appear());
             }
         }
