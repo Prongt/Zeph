@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
@@ -9,21 +11,21 @@ using UnityEngine.Jobs;
 
 public class PlayerElementController : MonoBehaviour
 {
-    public Element[] elementData;
+    public PlayerElementData[] elementData;
     [SerializeField] private float height = 1;
     [SerializeField] private bool drawGizmos = false;
     [HideIf("drawGizmos", true)][SerializeField] private float gizmoHeight;
-    private Light light;
+    private new Light light;
 
     private Animator animator;
     private bool usedPower = false;
 
     [SerializeField] private VisualEffect fireEffect;
     [SerializeField] private VisualEffect leafEffect;
-
+    //private static readonly int usePower = Animator.StringToHash("usePower");
 
     //number of collisions detected for each element
-    private const int maxAffectableObjects = 25;
+    private const int MaxAffectableObjects = 25;
 
    
 
@@ -34,7 +36,7 @@ public class PlayerElementController : MonoBehaviour
         
         for (int i = 0; i < elementData.Length; i++)
         {
-            elementData[i].colliders = new Collider[25];
+            elementData[i].element.colliders = new Collider[25];
         }
 
     }
@@ -55,27 +57,37 @@ public class PlayerElementController : MonoBehaviour
         {
             for (int i = 0; i < elementData.Length; i++)
             {
-                if (Input.GetButtonDown(elementData[i].ButtonName))
+                if (Input.GetButtonDown(elementData[i].element.ButtonName))
                 {
-                    if (elementData[i].ButtonName == "FirePower")
+                    if (elementData[i].element.ButtonName == "FirePower")
                     {
                         fireEffect.SetInt("Spawn Rate", 1000);
-                    } else if (elementData[i].ButtonName == "OrbitPower")
+                    } else if (elementData[i].element.ButtonName == "OrbitPower")
                     {
                         leafEffect.SetInt("Spawn Rate", 30);
-                    } else if (elementData[i].ButtonName == "LightPower")
+                    } else if (elementData[i].element.ButtonName == "LightPower")
                     {
                         light.intensity = 100f;
                     }
-
+                    //Trigger Audio Effect
+                    var audioEmitter = elementData[i].audioEmitter;
+                    if (audioEmitter)
+                    {
+                        if (audioEmitter.IsPlaying())
+                        {
+                            audioEmitter.Stop();
+                        }
+                        audioEmitter.Play();
+                    }
+                    
                     
                     StartCoroutine(UsePowerAnimation());
-                    elementData[i].colliders = new Collider[maxAffectableObjects];
-                    Physics.OverlapSphereNonAlloc(transform.position, elementData[i].PlayerRange,
-                        elementData[i].colliders);
-                    for (int j = 0; j < elementData[i].colliders.Length; j++)
+                    elementData[i].element.colliders = new Collider[MaxAffectableObjects];
+                    Physics.OverlapSphereNonAlloc(transform.position, elementData[i].element.PlayerRange,
+                        elementData[i].element.colliders);
+                    for (int j = 0; j < elementData[i].element.colliders.Length; j++)
                     {
-                        var collisionObj = elementData[i].colliders[j];
+                        var collisionObj = elementData[i].element.colliders[j];
 
                         if (collisionObj)
                         {
@@ -83,13 +95,11 @@ public class PlayerElementController : MonoBehaviour
 
                             if (obj)
                             {
-                                var nearestPoint = collisionObj.ClosestPoint(transform.position);
-                                Vector3 dir = nearestPoint - transform.position;
-                                ;
-                                RaycastHit hitInfo;
+                                var position = transform.position;
+                                var nearestPoint = collisionObj.ClosestPoint(position);
+                                Vector3 dir = nearestPoint - position;
 
-
-                                Physics.Raycast(transform.position, dir, out hitInfo, elementData[i].PlayerRange,
+                                Physics.Raycast(position, dir, out RaycastHit hitInfo, elementData[i].element.PlayerRange,
                                     LayerMask.NameToLayer("Player"));
 
                                 if (hitInfo.collider == collisionObj)
@@ -98,7 +108,7 @@ public class PlayerElementController : MonoBehaviour
 
                                     if (Mathf.Abs(nearestPoint.y - playerY) < height)
                                     {
-                                        obj.ApplyElement(elementData[i], gameObject.transform, true);
+                                        obj.ApplyElement(elementData[i].element, gameObject.transform, true);
                                     }
                                 }
                             }
@@ -109,56 +119,7 @@ public class PlayerElementController : MonoBehaviour
         }
     }
     
-    private void UsePowersWithJobs()
-    {
-        if (PlayerMove.PlayerIsGrounded)
-        {
-            for (int i = 0; i < elementData.Length; i++)
-            {
-                if (Input.GetButtonDown(elementData[i].ButtonName))
-                {
-                    StartCoroutine(UsePowerAnimation());
-                    elementData[i].colliders = new Collider[maxAffectableObjects];
-                    Physics.OverlapSphereNonAlloc(transform.position, elementData[i].PlayerRange,
-                        elementData[i].colliders);
-                    NativeHashMap<int, float3> objectPositions = new NativeHashMap<int, float3>(maxAffectableObjects, Allocator.TempJob);
-                    
-                    for (int j = 0; j < elementData[i].colliders.Length; j++)
-                    {
-                        if (elementData[i].colliders[j] != null)
-                        {
-                            objectPositions.TryAdd(j, elementData[i].colliders[j].ClosestPoint(transform.position));
-                        }
-                    }
-
-                    var job = new CheckIfInAreaJob()
-                    {
-                        objectPositions = objectPositions,
-                        maxDist = height,
-                        playerY = transform.position.y
-                    };
-                    
-                    var handle = job.Schedule(objectPositions.Length, 32);
-                    
-                    handle.Complete();
-
-                    var list = new List<Collider>();
-                    NativeArray<int> indexes = job.objectPositions.GetKeyArray(Allocator.TempJob);
-                    for (int j = 0; j < indexes.Length; j++)
-                    {
-                        list.Add(elementData[i].colliders[indexes[i]]);
-                    }
-                    
-
-
-
-
-
-                }
-            }
-        }
-    }
-
+    
     IEnumerator UsePowerAnimation()
     {
         animator.SetBool("usePower", true);
@@ -177,10 +138,11 @@ public class PlayerElementController : MonoBehaviour
             return;
         }
 
-        Vector3 topGizmo = transform.position;
+        var position = transform.position;
+        Vector3 topGizmo = position;
         topGizmo.y += height;
 
-        Vector3 bottomGizmo = transform.position;
+        Vector3 bottomGizmo = position;
         bottomGizmo.y -= height;
 
         DrawGizmosAtHeight(topGizmo);
@@ -191,18 +153,17 @@ public class PlayerElementController : MonoBehaviour
     {
         for (int i = 0; i < elementData.Length; i++)
         {
-            Gizmos.color = elementData[i].DebugColor;
-            float theta = 0;
-            float x = elementData[i].PlayerRange * Mathf.Cos(theta);
-            float y = elementData[i].PlayerRange * Mathf.Sin(theta);
+            Gizmos.color = elementData[i].element.DebugColor;
+            const float theta = 0;
+            float x = elementData[i].element.PlayerRange * Mathf.Cos(theta);
+            float y = elementData[i].element.PlayerRange * Mathf.Sin(theta);
             Vector3 pos = position + new Vector3(x, gizmoHeight, y);
-            Vector3 newPos = pos;
             Vector3 lastPos = pos;
             for (float thetaLoop = 0.1f; thetaLoop < Mathf.PI * 2; thetaLoop += 0.1f)
             {
-                x = elementData[i].PlayerRange * Mathf.Cos(thetaLoop);
-                y = elementData[i].PlayerRange * Mathf.Sin(thetaLoop);
-                newPos = position + new Vector3(x, 0, y);
+                x = elementData[i].element.PlayerRange * Mathf.Cos(thetaLoop);
+                y = elementData[i].element.PlayerRange * Mathf.Sin(thetaLoop);
+                var newPos = position + new Vector3(x, 0, y);
                 Gizmos.DrawLine(pos, newPos);
                 pos = newPos;
             }
@@ -210,27 +171,16 @@ public class PlayerElementController : MonoBehaviour
             Gizmos.DrawLine(pos, lastPos);
         }
     }
-}
-
-public struct CheckIfInAreaJob : IJobParallelFor
-{
-    public NativeHashMap<int, float3> objectPositions;
-    public float playerY;
-    public float maxDist;
-    public void Execute(int index)
+    
+    [Serializable]
+    public struct PlayerElementData
     {
-        if (math.abs(objectPositions[index].y - playerY) < maxDist)
-        {
-            //Objects[ObjectPositions[index].y] = true;
-            
-        }
-        else
-        {
-            objectPositions.Remove(index);
-            //Objects[ObjectPositions[index].y] = false;
-        }
+        public Element element;
+        public StudioEventEmitter audioEmitter;
     }
 }
+
+
 
 
 
