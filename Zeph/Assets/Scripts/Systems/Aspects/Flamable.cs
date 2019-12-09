@@ -28,6 +28,8 @@ public class Flamable : Aspects
     private bool isOnFire = false;
     private Collider[] colliders = new Collider[10];
 
+    private Animator myAnim;
+
     public Type[] componentTypes = new Type[]
     {
         //typeof(StudioEventEmitter),
@@ -57,6 +59,8 @@ public class Flamable : Aspects
         {
             //Debug.LogWarning("The fire spread interval on " + gameObject.name + " is too low this may cause performance issues");
         }
+
+        myAnim = GetComponent<Animator>();
     }
 
 
@@ -73,7 +77,7 @@ public class Flamable : Aspects
                 renderer.material = burnedMaterial;
             }
             
-            Instantiate(burningParticleEffect.gameObject, gameObject.transform);
+            //Instantiate(burningParticleEffect.gameObject, gameObject.transform);
             burningParticleEffect.Play();
         }
         
@@ -87,7 +91,7 @@ public class Flamable : Aspects
         if (destroyable)
         {
 //            Debug.Log("Destroying " + gameObject.name + " in " + destroyTime + " seconds");
-            Destroy(this.gameObject, destroyTime);
+            myAnim.SetBool("Burning", true);
         }
     }
 
