@@ -58,7 +58,10 @@ public class Distortion : Aspects
         
         animating = !animating;
 
-        isDistorting = !isDistorting;
+        if (gameObject.CompareTag(("Rift")))
+        {
+            isDistorting = !isDistorting;
+        }
     }
     
     public override void Negate(Transform source = null)

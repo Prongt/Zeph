@@ -23,8 +23,7 @@ public class Orbitable : Aspects
     private Rigidbody myRB;
 
     private bool delay = false;
-    private bool canRotate = true;
-    
+
     //Bools controlling if the object orbits or is thrown
     public bool orbiting;
     public bool throwable;
@@ -33,7 +32,7 @@ public class Orbitable : Aspects
     public float radiusSpeed =  10f;
     
     //VFX of the orbiting affect
-    [SerializeField] private VisualEffect orbitEffect;
+    //[SerializeField] private VisualEffect orbitEffect;
     
     [SerializeField] private StudioEventEmitter collisionSoundEventEmitter;
     
@@ -61,7 +60,19 @@ public class Orbitable : Aspects
             collisionSoundEventEmitter = GetComponent<StudioEventEmitter>();
         }
     }
-    
+
+    void Update()
+    {
+        if (rotSpeed <= throwForce * 10)
+        {
+            rotSpeed = throwForce * 10;
+        }
+        if (rotSpeed <= -throwForce * 10)
+        {
+            rotSpeed = throwForce * 10;
+        } 
+        
+    }
 
     //Orbit function called on late update to allow time for the player to move first
     void LateUpdate()
@@ -89,20 +100,6 @@ public class Orbitable : Aspects
         {
             delay = true;
             orbiting = false;
-            
-            if (rotSpeed <= throwForce * 10 && canRotate)
-            {
-                rotSpeed = throwForce * 10;
-            }
-            if (rotSpeed <= -throwForce * 10 && canRotate)
-            {
-                rotSpeed = throwForce * 10;
-            } 
-            //Changing the orbit direction on collisions
-            else
-            {
-                
-            }
         }
         else
         {
@@ -133,7 +130,7 @@ public class Orbitable : Aspects
         //Setting parent means the object does trail behind the player.
         gameObject.transform.SetParent(GameObject.Find("Zeph").transform);
         //Affecting the spawn rate of the vfx to have it start "playing".
-        orbitEffect.SetInt("Spawn Rate", 80);
+       // orbitEffect.SetInt("Spawn Rate", 80);
         //Sake of ease constraints added
         myRB.constraints = RigidbodyConstraints.FreezeRotation;
         myRB.useGravity = false;
@@ -179,7 +176,7 @@ public class Orbitable : Aspects
     {
         //unparents the object, turns off the particles and undoes the constraints
         gameObject.transform.SetParent(GameObject.Find("Interactables").transform);
-        orbitEffect.SetInt("Spawn Rate", 0);
+        //orbitEffect.SetInt("Spawn Rate", 0);
         myRB.constraints = RigidbodyConstraints.None;
         myRB.useGravity = true;
         
