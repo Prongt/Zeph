@@ -42,9 +42,9 @@ public class UiFadeOut : MonoBehaviour
     private void DisplayText()
     {
         text.text = storyText[storyIndex];
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Story"))
         {
-            if (storyIndex == storyText.Count)
+            if (storyIndex == storyText.Count -1)
             {
                 FadeUi();
                 return;
@@ -58,6 +58,7 @@ public class UiFadeOut : MonoBehaviour
     {
         //Debug.Log("No");
         gameObject.SetActive(false);
+        storyIndex = 0;
 
 //        foreach (var element in guiElements)
 //        {
