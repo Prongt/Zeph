@@ -495,35 +495,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!1 &402379805 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4890117515526024213, guid: 5c0917fafcb61764aa309728126c3964,
-    type: 3}
-  m_PrefabInstance: {fileID: 1965716836}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &402379806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402379805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  Event: event:/WaterSplash
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &422779773
 GameObject:
   m_ObjectHideFlags: 3
@@ -847,35 +818,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &639471109 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1283062846, guid: 5c0917fafcb61764aa309728126c3964,
-    type: 3}
-  m_PrefabInstance: {fileID: 1965716836}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &639471110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 639471109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  Event: event:/PlayerWindAbility
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &682562121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1486,6 +1428,7 @@ MonoBehaviour:
   fireSpreadRange: 3
   fireSpreadPerSecond: 0.1
   maxNumberOfAffectableObjects: 15
+  fireEventEmitter: {fileID: 0}
 --- !u!4 &1056997962 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3774394975222681577, guid: c1d0ded682ee9824a90c743295c336be,
@@ -3407,42 +3350,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 193507634, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
-      propertyPath: m_BoundingSphereOverride.x
-      value: 4.26e-43
-      objectReference: {fileID: 0}
-    - target: {fileID: 193507634, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
-      propertyPath: m_BoundingSphereOverride.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 193507634, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
-      propertyPath: m_BoundingSphereOverride.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 193507634, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
-      propertyPath: m_BoundingSphereOverride.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 193507634, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
-      propertyPath: m_Lightmapping
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1648449280, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
-      propertyPath: m_Convex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2128616418, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
-      propertyPath: elementData.Array.data[1].audioEmitter
-      value: 
-      objectReference: {fileID: 639471110}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
---- !u!2083052967 &1965716837 stripped
-VisualEffect:
-  m_CorrespondingSourceObject: {fileID: 6608159784179967517, guid: 5c0917fafcb61764aa309728126c3964,
-    type: 3}
-  m_PrefabInstance: {fileID: 1965716836}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2086763016
 GameObject:
   m_ObjectHideFlags: 0
@@ -17600,45 +17509,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1398070113, guid: 844d01b7599716a459488858e0bb6997, type: 3}
-      propertyPath: orbitEffect
-      value: 
-      objectReference: {fileID: 1965716837}
-    - target: {fileID: 1398070113, guid: 844d01b7599716a459488858e0bb6997, type: 3}
-      propertyPath: orbiting
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1398070113, guid: 844d01b7599716a459488858e0bb6997, type: 3}
-      propertyPath: rotSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1398070113, guid: 844d01b7599716a459488858e0bb6997, type: 3}
-      propertyPath: maxThrowForce.ConstantValue
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1398070115, guid: 844d01b7599716a459488858e0bb6997, type: 3}
-      propertyPath: fireSpreadRange
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 675878379130914365, guid: 844d01b7599716a459488858e0bb6997,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4086989470586638596, guid: 844d01b7599716a459488858e0bb6997,
-        type: 3}
-      propertyPath: Event
-      value: event:/OrbitingLogCollision
-      objectReference: {fileID: 0}
-    - target: {fileID: 4086989470586638596, guid: 844d01b7599716a459488858e0bb6997,
-        type: 3}
-      propertyPath: OverrideMinDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4086989470586638596, guid: 844d01b7599716a459488858e0bb6997,
-        type: 3}
-      propertyPath: OverrideMaxDistance
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 844d01b7599716a459488858e0bb6997, type: 3}
@@ -19115,6 +18989,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 770102d23c118a54e8942d6a7ab2b9ba, type: 2}
+    - target: {fileID: 675878380664328393, guid: 710e389d0c1c87043af04ea87bb09894,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 710e389d0c1c87043af04ea87bb09894, type: 3}
 --- !u!4 &3050711281879524832
@@ -30075,6 +29954,11 @@ PrefabInstance:
       propertyPath: burningParticleEffect
       value: 
       objectReference: {fileID: 675878380895071749}
+    - target: {fileID: 675878380664328393, guid: 710e389d0c1c87043af04ea87bb09894,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 710e389d0c1c87043af04ea87bb09894, type: 3}
 --- !u!1 &9003693066209806180

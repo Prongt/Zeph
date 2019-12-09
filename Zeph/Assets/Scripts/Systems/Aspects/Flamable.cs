@@ -24,6 +24,8 @@ public class Flamable : Aspects
     [Range(0.01f, 5f)] [SerializeField] private float fireSpreadPerSecond = 0.1f;
     [Range(5, 25)] [SerializeField] private int maxNumberOfAffectableObjects = 15;
 
+    [Header("Audio")] [SerializeField] private StudioEventEmitter fireEventEmitter;
+
     private Material baseMaterial;
     private bool isOnFire = false;
     private Collider[] colliders = new Collider[10];
@@ -92,6 +94,16 @@ public class Flamable : Aspects
         {
 //            Debug.Log("Destroying " + gameObject.name + " in " + destroyTime + " seconds");
             myAnim.SetBool("Burning", true);
+        }
+        else
+        {
+            if (fireEventEmitter)
+            {
+                if (!fireEventEmitter.IsPlaying())
+                {
+                    fireEventEmitter.Play();
+                }
+            }
         }
     }
 

@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 1398070113}
   - component: {fileID: 1398070115}
   - component: {fileID: 4086989470586638596}
+  - component: {fileID: 1970962841}
   m_Layer: 0
   m_Name: Log 1
   m_TagString: Untagged
@@ -296,21 +297,22 @@ MonoBehaviour:
   onNegate:
     m_PersistentCalls:
       m_Calls: []
+  coolDownTime: 0
   pullForce:
     UseConstant: 1
     ConstantValue: 100
     Variable: {fileID: 0}
   maxThrowForce:
     UseConstant: 1
-    ConstantValue: 10
+    ConstantValue: 15
     Variable: {fileID: 0}
   throwForce: 0.5
   orbitSize: 3
-  rotSpeed: 100
+  rotSpeed: 0
   orbiting: 0
   throwable: 0
   radiusSpeed: 10
-  orbitEffect: {fileID: 0}
+  collisionSoundEventEmitter: {fileID: 4086989470586638596}
 --- !u!114 &1398070115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +332,7 @@ MonoBehaviour:
   onNegate:
     m_PersistentCalls:
       m_Calls: []
+  coolDownTime: 0
   burnedMaterial: {fileID: 0}
   burningParticleEffect: {fileID: 675878379130914366}
   destroyable: 0
@@ -337,9 +340,10 @@ MonoBehaviour:
   canBeSource: 1
   useBoxCollider: 0
   boxDimensions: {x: 0, y: 0, z: 0}
-  fireSpreadRange: 2
+  fireSpreadRange: 3
   fireSpreadPerSecond: 0.1
   maxNumberOfAffectableObjects: 15
+  fireEventEmitter: {fileID: 1970962841}
 --- !u!114 &4086989470586638596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,7 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: 
+  Event: event:/OrbitingLogCollision
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -361,8 +365,31 @@ MonoBehaviour:
   Preload: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1970962841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8688567687851389637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/FireCrackling
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &9111669246664343264
 PrefabInstance:
   m_ObjectHideFlags: 0
