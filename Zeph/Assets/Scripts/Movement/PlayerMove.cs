@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using FMODUnity;
 using UnityEngine;
 
@@ -31,7 +30,7 @@ public class PlayerMove : MonoBehaviour
 	private float gravityJump = 0.5f;
 	private Vector3 oldGravity;
 	private Vector3 gravityDirection;
-	private float distanceToGround;
+	private float playerYHeight;
 	private float characterWidth;
 
 	private bool debugGravity = false;
@@ -42,7 +41,6 @@ public class PlayerMove : MonoBehaviour
 	public float gravityFlipTime = 2;
 	private Vector3 newUp;
 	private Vector3 originalUp;
-	private Quaternion originalrot;
 
 	[Header("Water Knock Back")]
 	public float knockBackDistance = 0.75f;
@@ -62,7 +60,7 @@ public class PlayerMove : MonoBehaviour
 		oldGravity = gravityDirection;
 
 		gravityJump = gravityJump + playerJumpHeight;
-		distanceToGround = GetComponent<Collider>().bounds.extents.y + 0.1f;
+		playerYHeight = GetComponent<Collider>().bounds.extents.y + 0.1f;
 		characterWidth = GetComponent<Collider>().bounds.extents.x + 0.15f;
 		gravityPull = playerGravity;
 		
@@ -70,7 +68,6 @@ public class PlayerMove : MonoBehaviour
 
 		_PlayerMovementEnabled = true;
 		originalUp = transform.up;
-		originalrot = transform.rotation;
 		gravityPull = playerGravity;
 	}
 
@@ -96,7 +93,7 @@ public class PlayerMove : MonoBehaviour
 		Vector2 inputDir = input.normalized;
 
 		gravityDirection = Physics.gravity;
-		PlayerIsGrounded = CheckIfGrounded(gravityDirection, distanceToGround);
+		PlayerIsGrounded = CheckIfGrounded(gravityDirection, playerYHeight);
 
 		if (gravityDirection != oldGravity)
 		{
@@ -308,27 +305,19 @@ public class PlayerMove : MonoBehaviour
 	void Jump() {
 		if (Input.GetButtonDown("Jump"))
 		{
-			if (GravityRift.useNewGravity)
+			if (CheckIfGrounded(gravityDirection, playerYHeight))
 			{
-				if (CheckIfGrounded(gravityDirection, distanceToGround))
+				animator.SetBool("IsJumping", true);
+				float jumpVelocity;
+				if (GravityRift.useNewGravity)
 				{
-					animator.SetBool("IsJumping", true);
-					float jumpVelocity;
 					jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJump);
-					velocityY = jumpVelocity;
 				}
-			}
-			else
-			{
-				//Debug.Log("Space");
-				if (CheckIfGrounded(gravityDirection, distanceToGround))
+				else
 				{
-					//Debug.Log("Jump");	
-					animator.SetBool("IsJumping", true);
-					float jumpVelocity;
 					jumpVelocity = Mathf.Sqrt(-2 * playerGravity * playerJumpHeight);
-					velocityY = jumpVelocity;
 				}
+				velocityY = jumpVelocity;
 			}
 		}
 	}
