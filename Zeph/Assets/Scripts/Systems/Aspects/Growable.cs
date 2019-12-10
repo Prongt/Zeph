@@ -146,7 +146,7 @@ public class Growable : Aspects
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-        print("IM GROWING");
+//        print("IM GROWING");
         fireflyRate.rateOverTime = 0;
 
         if (growSoundEmitter)

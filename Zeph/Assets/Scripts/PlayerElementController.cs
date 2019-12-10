@@ -22,6 +22,8 @@ public class PlayerElementController : MonoBehaviour
 
     [SerializeField] private VisualEffect fireEffect;
     [SerializeField] private VisualEffect leafEffect;
+
+    [SerializeField] private LayerMask layerMask;
     //private static readonly int usePower = Animator.StringToHash("usePower");
 
     //number of collisions detected for each element
@@ -100,7 +102,7 @@ public class PlayerElementController : MonoBehaviour
                                 Vector3 dir = nearestPoint - position;
 
                                 Physics.Raycast(position, dir, out RaycastHit hitInfo, elementData[i].element.PlayerRange,
-                                    LayerMask.NameToLayer("Player"));
+                                    layerMask);
 
                                 if (hitInfo.collider == collisionObj)
                                 {
