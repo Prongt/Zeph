@@ -18,6 +18,8 @@ public class Growable : Aspects
     [SerializeField] private bool isTree = false;
     [SerializeField] private Colliders colliders;
 
+    [SerializeField] private StudioEventEmitter growSoundEmitter;
+
     private SkinnedMeshRenderer meshRenderer;
     private MeshCollider meshCollider;
     private Mesh mesh;
@@ -139,7 +141,11 @@ public class Growable : Aspects
     {
         base.Promote(source, element);
         print("IM GROWING");
-        
+
+        if (growSoundEmitter)
+        {
+            growSoundEmitter.Play();
+        }
         
         if (isTree)
         {
@@ -155,6 +161,19 @@ public class Growable : Aspects
         {
             if (matX >= 1)
             {
+                if (growSoundEmitter)
+                {
+                    if (groundDistort.GetBool("Distort"))
+                    {
+                        growSoundEmitter.SetParameter("FullGrow", 1.0f);
+                    }
+                    else
+                    {
+                        growSoundEmitter.SetParameter("FullGrow", 0.0f);
+                    }
+                }
+                
+                
                 myAnim.SetBool("Growing", true);
                 StartCoroutine(Appear());
             }
