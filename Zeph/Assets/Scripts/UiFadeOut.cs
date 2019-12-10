@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +6,7 @@ using UnityEngine.UI;
 public class UiFadeOut : MonoBehaviour
 {
     [SerializeField] private List<string> storyText;
-    [SerializeField] private float fadeTime = 2.0f;
+    //[SerializeField] private float fadeTime = 2.0f;
 
     private MaskableGraphic[] guiElements;
     private float[] alphas;
@@ -32,10 +31,10 @@ public class UiFadeOut : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Escape"))
-        {
-            FadeUi();
-        }
+//        if (Input.GetButtonDown("Escape"))
+           //        {
+           //            FadeUi();
+           //        }
         DisplayText();
     }
 
@@ -55,7 +54,7 @@ public class UiFadeOut : MonoBehaviour
     }
 
 
-    public void FadeUi()
+    private void FadeUi()
     {
         //Debug.Log("No");
         gameObject.SetActive(false);
