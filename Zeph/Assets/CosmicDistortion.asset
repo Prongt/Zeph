@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
   m_Name: ColorGrading
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -76,14 +76,14 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   mixerRedOutRedIn:
-    overrideState: 0
-    value: 100
+    overrideState: 1
+    value: 200
   mixerRedOutGreenIn:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: -200
   mixerRedOutBlueIn:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 200
   mixerGreenOutRedIn:
     overrideState: 0
     value: 0
@@ -103,14 +103,14 @@ MonoBehaviour:
     overrideState: 0
     value: 100
   lift:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 0.115005136, y: 1, z: 0.31442958, w: 0}
   gamma:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 1, y: 0, z: 0.8132024, w: 0}
   gain:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 0, y: 1, z: 0.28817677, w: 0}
   masterCurve:
     overrideState: 0
     value:
@@ -1345,10 +1345,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.08
+    value: 0.13
   threshold:
     overrideState: 1
-    value: 1
+    value: 0
   softKnee:
     overrideState: 1
     value: 0.5
@@ -1396,7 +1396,7 @@ MonoBehaviour:
     defaultState: 1
   intensity:
     overrideState: 1
-    value: 0.703
+    value: 0.5
   fastMode:
     overrideState: 1
     value: 0
