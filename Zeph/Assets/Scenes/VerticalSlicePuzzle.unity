@@ -21426,6 +21426,29 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1965438014}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1507275893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507275892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Ivy Bridge Grow
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 50
 --- !u!114 &1507275895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21454,7 +21477,7 @@ MonoBehaviour:
     small: {fileID: 0}
     grown: {fileID: 0}
     distort: {fileID: 0}
-  growSoundEmitter: {fileID: 0}
+  growSoundEmitter: {fileID: 1507275893}
   firefly: {fileID: 1005172939}
 --- !u!114 &1507275896
 MonoBehaviour:
@@ -38162,7 +38185,7 @@ PrefabInstance:
     - target: {fileID: 5777596619545814462, guid: a720873750d2e9742883b18fae16ed9c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.446001
+      value: 10.106001
       objectReference: {fileID: 0}
     - target: {fileID: 5777596619545814462, guid: a720873750d2e9742883b18fae16ed9c,
         type: 3}
@@ -47342,7 +47365,7 @@ PrefabInstance:
     - target: {fileID: 5180751197352987745, guid: 6342e164655632b479fa0fa16f8579c6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.38
+      value: 10.04
       objectReference: {fileID: 0}
     - target: {fileID: 5180751197352987745, guid: 6342e164655632b479fa0fa16f8579c6,
         type: 3}
