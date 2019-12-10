@@ -228,5 +228,11 @@ public class Orbitable : Aspects
                 }
             }
         }
+
+        if (gameObject.CompareTag("Heavy"))
+        {
+            myRB.constraints = RigidbodyConstraints.FreezeRotation;
+            myRB.constraints = RigidbodyConstraints.FreezePosition;
+        }
     }
 }
