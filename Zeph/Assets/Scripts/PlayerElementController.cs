@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using FMODUnity;
-using Unity.Collections;
-using Unity.Jobs;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Experimental.VFX;
-using UnityEngine.Jobs;
+
 
 public class PlayerElementController : MonoBehaviour
 {
@@ -29,12 +25,14 @@ public class PlayerElementController : MonoBehaviour
     //number of collisions detected for each element
     private const int MaxAffectableObjects = 25;
 
+    private PlayerMove playerMove;
    
 
     private void Awake()
     {
         light = GetComponentInChildren<Light>();
         animator = GetComponentInChildren<Animator>();
+        playerMove = GetComponent<PlayerMove>();
         
         for (int i = 0; i < elementData.Length; i++)
         {
@@ -55,12 +53,13 @@ public class PlayerElementController : MonoBehaviour
 
     private void UsePowers()
     {
-        if (PlayerMove.PlayerIsGrounded)
-        {
+//        if (playerMove.IsPlayerGrounded())
+//        {
             for (int i = 0; i < elementData.Length; i++)
             {
                 if (Input.GetButtonDown(elementData[i].element.ButtonName))
                 {
+                    Debug.Log("Button pressed " + elementData[i].element.ButtonName);
                     if (elementData[i].element.ButtonName == "FirePower")
                     {
                         fireEffect.SetInt("Spawn Rate", 1000);
@@ -117,7 +116,7 @@ public class PlayerElementController : MonoBehaviour
                         }
                     }
                 }
-            }
+           // }
         }
     }
     

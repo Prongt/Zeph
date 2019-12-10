@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using FMODUnity;
 using UnityEngine;
 
@@ -395,6 +396,20 @@ public class PlayerMove : MonoBehaviour
 		{
 			return characterController.isGrounded;
 		}
+	}
+
+	public bool IsPlayerGrounded()
+	{
+		if (Physics.Raycast(transform.position, -gravityDirection, playerYHeight) || characterController.isGrounded)
+		{
+			Debug.Log("Player is grounded");
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		return Physics.Raycast(transform.position, -gravityDirection, playerYHeight);
 	}
 	
 	
