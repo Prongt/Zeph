@@ -23,7 +23,7 @@ public class PlayerMove : MonoBehaviour
 	float velocityY;
 	
 	CharacterController characterController;
-	private Transform camera;
+	private new Transform camera;
 	private Animator animator;
 	
 

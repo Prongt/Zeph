@@ -14,11 +14,11 @@ public class PlayerElementController : MonoBehaviour
     public PlayerElementData[] elementData;
     [SerializeField] private float height = 1;
     [SerializeField] private bool drawGizmos = false;
-    [HideIf("drawGizmos", true)][SerializeField] private float gizmoHeight;
+    [HideIf("drawGizmos", true)][SerializeField] private float gizmoHeight = 1.0f;
     private new Light light;
 
     private Animator animator;
-    private bool usedPower = false;
+    //private bool usedPower = false;
 
     [SerializeField] private VisualEffect fireEffect;
     [SerializeField] private VisualEffect leafEffect;
