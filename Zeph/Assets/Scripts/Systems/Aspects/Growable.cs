@@ -14,9 +14,11 @@ public class Growable : Aspects
     [SerializeField] private Animator groundDistort;
     //[SerializeField] private GameObject distortBridge;
 
-    
+
     [SerializeField] private bool isTree = false;
     [SerializeField] private Colliders colliders;
+
+    [SerializeField] private StudioEventEmitter growSoundEmitter;
 
     private SkinnedMeshRenderer meshRenderer;
     private MeshCollider meshCollider;
@@ -26,13 +28,13 @@ public class Growable : Aspects
 
     [SerializeField] private ParticleSystem firefly;
     private ParticleSystem.EmissionModule fireflyRate;
-    
-    
+
+
     public Type[] componentTypes = new Type[]
     {
     };
 
-    
+
     public override Type[] RequiredComponents()
     {
         return componentTypes;
@@ -42,7 +44,7 @@ public class Growable : Aspects
     {
         base.Initialize();
         fireflyRate = firefly.emission;
-        
+
         if (gameObject.CompareTag("Plant"))
         {
             myAnim = GetComponent<Animator>();
@@ -54,17 +56,17 @@ public class Growable : Aspects
             mat = gameObject.GetComponent<SkinnedMeshRenderer>().material;
             matX = mat.GetFloat("Vector1_D0BABF75");
         }
-        
+
         if (isTree)
         {
             myAnim = GetComponent<Animator>();
             meshRenderer = GetComponent<SkinnedMeshRenderer>();
             meshCollider = GetComponent<MeshCollider>();
-            
+
             colliders.small.isTrigger = false;
             colliders.distort.SetActive(false);
             colliders.grown.SetActive(false);
-            
+
             if (meshRenderer == null)
             {
                 Debug.Log("No SkinnedMeshRenderer on " + gameObject.name + " id: " + gameObject.GetInstanceID());
@@ -109,12 +111,12 @@ public class Growable : Aspects
 //
 //           }
        }
-       
-       
+
+
        if (gameObject.CompareTag("Bridge"))
        {
            mat.SetFloat("Vector1_D0BABF75", matX);
-           
+
            if (!groundDistort.GetBool("Distort") && matX <= 1)
            {
                //distortBridge.SetActive(true);
@@ -124,7 +126,7 @@ public class Growable : Aspects
                //distortBridge.SetActive(true);
                //gameObject.SetActive(false);
            }
-           
+
            if (Distortion.isDistorting)
            {
                myAnim.SetBool("Distort", true);
@@ -140,18 +142,18 @@ public class Growable : Aspects
            }
        }
    }
-    
+
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
         print("IM GROWING");
         fireflyRate.rateOverTime = 0;
-        
+
         if (isTree)
         {
             myAnim.SetBool("Grow", true);
         }
-        
+
         if (gameObject.CompareTag("Plant"))
         {
             myAnim.SetBool("Growing", true);
@@ -161,6 +163,19 @@ public class Growable : Aspects
         {
             if (matX >= 1)
             {
+                if (growSoundEmitter)
+                {
+                    if (groundDistort.GetBool("Distort"))
+                    {
+                        growSoundEmitter.SetParameter("Distortion", 1.0f);
+                    }
+                    else
+                    {
+                        growSoundEmitter.SetParameter("Distortion", 0.0f);
+                    }
+                }
+
+
                 myAnim.SetBool("Growing", true);
                 StartCoroutine(Appear());
             }
@@ -187,7 +202,7 @@ public class Growable : Aspects
             {
                 matX -= 5 * Time.deltaTime;
                 StartCoroutine(Appear());
-            } 
+            }
             else
             {
                 hasGrown = true;

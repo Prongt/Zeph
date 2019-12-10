@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using FMODUnity;
 using UnityEngine;
 
 public class Distortion : Aspects
@@ -66,9 +67,12 @@ public class Distortion : Aspects
             return;
         }
         base.Promote(source,element);
-        
-        
-        
+
+        if (distortionEventEmitter)
+        {
+            distortionEventEmitter.Play();
+        }
+
         animating = !animating;
 
         if (gameObject.CompareTag(("Rift")))
@@ -76,18 +80,18 @@ public class Distortion : Aspects
             isDistorting = !isDistorting;
         }
     }
-    
+
     public override void Negate(Transform source = null)
     {
         base.Promote(source);
         //Not pushed
         //Debug.Log("Not being pushed");
     }
-    
-    
+
+
     public Type[] componentTypes = new Type[]
     {
-        
+
     };
 
     public override Type[] RequiredComponents()
