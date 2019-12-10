@@ -9,8 +9,15 @@ public class TriggerMusic : MonoBehaviour
 {
     [SerializeField] private StudioEventEmitter studioEventEmitter;
     [SerializeField] private bool DontDestroyOnLoad = false;
+    public static bool MusicIsActive = false;
     private void Start()
     {
+        if (MusicIsActive == true)
+        {
+            return;
+        }
+
+        MusicIsActive = true;
         GrabComponents();
         studioEventEmitter.Play();
         if (DontDestroyOnLoad)
@@ -18,8 +25,8 @@ public class TriggerMusic : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
     }
-
     
+
 
     private void OnValidate()
     {
