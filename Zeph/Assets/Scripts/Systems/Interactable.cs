@@ -14,7 +14,8 @@ public class Interactable : MonoBehaviour
     private List<AspectType> additionalAspects;
     
     [SerializeField] protected bool onlyActivatedByPlayer = false;
-    
+    [SerializeField] protected bool requireDefaultGravity = false;
+
 
     private List<AspectType> aspectTypesList;
     private List<Aspects> aspectComponentsList;
@@ -222,6 +223,14 @@ public class Interactable : MonoBehaviour
         if (onlyActivatedByPlayer)
         {
             if (isPlayer == false)
+            {
+                return;
+            }
+        }
+
+        if (requireDefaultGravity)
+        {
+            if (GravityRift.useNewGravity)
             {
                 return;
             }

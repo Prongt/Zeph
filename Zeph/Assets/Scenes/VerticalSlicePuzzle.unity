@@ -347,6 +347,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: cc2f4bf24786ab7479a7308d8c875b70, type: 2}
   additionalAspects: 04000000
   onlyActivatedByPlayer: 1
+  requireDefaultGravity: 0
 --- !u!114 &340232823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2196,6 +2197,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 2acb987a995ba514792eb7ece74fef3d, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 1
+  requireDefaultGravity: 0
 --- !u!65 &1507275897
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3375,6 +3377,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 53ef36bdcecb58b4aaec5bef01377d44, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 1
+  requireDefaultGravity: 0
 --- !u!4 &115026727279496835 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7479482813785416144, guid: 345cc7aa09d461849acf5d7499408482,
@@ -5024,6 +5027,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 2acb987a995ba514792eb7ece74fef3d, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 0
+  requireDefaultGravity: 0
 --- !u!64 &675878379257825647
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13209,6 +13213,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 2acb987a995ba514792eb7ece74fef3d, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 0
+  requireDefaultGravity: 0
 --- !u!4 &1678116941129489555
 Transform:
   m_ObjectHideFlags: 0
@@ -16822,6 +16827,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 2acb987a995ba514792eb7ece74fef3d, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 0
+  requireDefaultGravity: 0
 --- !u!114 &3050711280682005973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20451,6 +20457,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 53ef36bdcecb58b4aaec5bef01377d44, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 1
+  requireDefaultGravity: 0
 --- !u!4 &3267178490850799133
 Transform:
   m_ObjectHideFlags: 0
@@ -24260,6 +24267,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 53ef36bdcecb58b4aaec5bef01377d44, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 1
+  requireDefaultGravity: 0
 --- !u!4 &5583490388784070865
 Transform:
   m_ObjectHideFlags: 0
@@ -24370,66 +24378,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8438672649559369552, guid: 30dfc97c5e54fdc4bbace1d3fa94c477,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8438672649559369552, guid: 30dfc97c5e54fdc4bbace1d3fa94c477,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8438672649559369552, guid: 30dfc97c5e54fdc4bbace1d3fa94c477,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4847959833671669059, guid: 30dfc97c5e54fdc4bbace1d3fa94c477,
         type: 3}
       propertyPath: m_Name
       value: story_rune
-      objectReference: {fileID: 0}
-    - target: {fileID: 4847959833671669059, guid: 30dfc97c5e54fdc4bbace1d3fa94c477,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1587168425559190081, guid: 30dfc97c5e54fdc4bbace1d3fa94c477,
-        type: 3}
-      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.size
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1587168425559190081, guid: 30dfc97c5e54fdc4bbace1d3fa94c477,
         type: 3}
       propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1565877411}
-    - target: {fileID: 1587168425559190081, guid: 30dfc97c5e54fdc4bbace1d3fa94c477,
-        type: 3}
-      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 1587168425559190081, guid: 30dfc97c5e54fdc4bbace1d3fa94c477,
-        type: 3}
-      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1587168425559190081, guid: 30dfc97c5e54fdc4bbace1d3fa94c477,
-        type: 3}
-      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1587168425559190081, guid: 30dfc97c5e54fdc4bbace1d3fa94c477,
-        type: 3}
-      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1587168425559190081, guid: 30dfc97c5e54fdc4bbace1d3fa94c477,
-        type: 3}
-      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30dfc97c5e54fdc4bbace1d3fa94c477, type: 3}
 --- !u!23 &5809648994735269368
@@ -26252,6 +26210,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: cc2f4bf24786ab7479a7308d8c875b70, type: 2}
   additionalAspects: 04000000
   onlyActivatedByPlayer: 1
+  requireDefaultGravity: 0
 --- !u!1 &6873560071151800578 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8303744570717293300, guid: eb448211219e19c44b3c43559199fabb,
@@ -26337,6 +26296,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 53ef36bdcecb58b4aaec5bef01377d44, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 1
+  requireDefaultGravity: 0
 --- !u!114 &7078374788585113621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29584,6 +29544,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 53ef36bdcecb58b4aaec5bef01377d44, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 0
+  requireDefaultGravity: 0
 --- !u!33 &8753016679007928773
 MeshFilter:
   m_ObjectHideFlags: 0
