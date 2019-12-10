@@ -149,6 +149,11 @@ public class Growable : Aspects
         print("IM GROWING");
         fireflyRate.rateOverTime = 0;
 
+        if (growSoundEmitter)
+        {
+            growSoundEmitter.Play();
+        }
+
         if (isTree)
         {
             myAnim.SetBool("Grow", true);

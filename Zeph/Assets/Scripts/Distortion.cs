@@ -16,6 +16,7 @@ public class Distortion : Aspects
     [SerializeField] private bool onGround;
     [SerializeField] private GameObject effect;
     [SerializeField] private GameObject distortionEffect;
+    [SerializeField] private StudioEventEmitter distortionEventEmitter;
 
     protected override void Initialize()
     {
