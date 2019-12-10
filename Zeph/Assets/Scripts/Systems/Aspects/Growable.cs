@@ -165,11 +165,11 @@ public class Growable : Aspects
                 {
                     if (groundDistort.GetBool("Distort"))
                     {
-                        growSoundEmitter.SetParameter("FullGrow", 1.0f);
+                        growSoundEmitter.SetParameter("Distortion", 1.0f);
                     }
                     else
                     {
-                        growSoundEmitter.SetParameter("FullGrow", 0.0f);
+                        growSoundEmitter.SetParameter("Distortion", 0.0f);
                     }
                 }
                 

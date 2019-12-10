@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using FMODUnity;
 using UnityEngine;
 
 public class Distortion : Aspects
@@ -13,7 +14,7 @@ public class Distortion : Aspects
     private bool animating = false;
 
     [SerializeField] private bool onGround;
-    
+    [SerializeField] private StudioEventEmitter distortionEventEmitter;
 
     protected override void Initialize()
     {
@@ -53,8 +54,11 @@ public class Distortion : Aspects
             return;
         }
         base.Promote(source,element);
-        
-        
+
+        if (distortionEventEmitter)
+        {
+            distortionEventEmitter.Play();
+        }
         
         animating = !animating;
 
