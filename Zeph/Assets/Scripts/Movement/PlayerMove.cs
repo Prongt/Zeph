@@ -108,7 +108,7 @@ public class PlayerMove : MonoBehaviour
 			oldGravity = Physics.gravity;
 		}
 
-		Debug.Log(coyoteTimeRemaining);
+		//	Debug.Log(coyoteTimeRemaining);
 		if (PlayerIsGrounded)
 		{
 			coyoteTimeRemaining = coyoteTime;
@@ -370,9 +370,15 @@ public class PlayerMove : MonoBehaviour
 		Ray downRay = new Ray(transform.position, -transform.up);
 		if (Physics.Raycast(downRay, out RaycastHit downHit, knockBackDistance, waterLayerMask))
 		{
+			StartCoroutine(PausePlayerMovement(movePauseTime));
 			Vector3 knockBackVector = transform.position + Vector3.right + Vector3.forward;
+			if (downHit.collider.CompareTag("Water"))
+			{
+				knockBackVector = transform.position + Vector3.right;
+			}
+			
 			knockBackVector.Normalize();
-			characterController.Move(knockBackVector * knockBackForce);
+			characterController.Move(knockBackVector * (knockBackForce *2));
 			splashEmitter.Play();
 		}
 	}
