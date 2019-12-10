@@ -35,6 +35,8 @@ public class Orbitable : Aspects
     //[SerializeField] private VisualEffect orbitEffect;
     
     [SerializeField] private StudioEventEmitter collisionSoundEventEmitter;
+    [SerializeField] private ParticleSystem firefly;
+    private ParticleSystem.EmissionModule fireflyRate;
     
 
     public Type[] componentTypes = new Type[]
@@ -52,6 +54,7 @@ public class Orbitable : Aspects
     {
         myRB = GetComponent<Rigidbody>();
 
+        fireflyRate = firefly.emission;
         //TODO find better solution
         centerPoint = GameObject.FindWithTag("OrbitPoint").transform;
         
@@ -94,7 +97,8 @@ public class Orbitable : Aspects
         //centerPoint = source.transform;
         direction = source.transform.position - transform.position;
 
-
+        fireflyRate.rateOverTime = 0;
+        
         //Checks to activate functions
         if (orbiting)
         {

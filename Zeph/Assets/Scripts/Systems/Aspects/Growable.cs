@@ -23,6 +23,10 @@ public class Growable : Aspects
     private Mesh mesh;
 
     private bool hasGrown = false;
+
+    [SerializeField] private ParticleSystem firefly;
+    private ParticleSystem.EmissionModule fireflyRate;
+    
     
     public Type[] componentTypes = new Type[]
     {
@@ -37,6 +41,8 @@ public class Growable : Aspects
    protected override void Initialize()
     {
         base.Initialize();
+        fireflyRate = firefly.emission;
+        
         if (gameObject.CompareTag("Plant"))
         {
             myAnim = GetComponent<Animator>();
@@ -139,7 +145,7 @@ public class Growable : Aspects
     {
         base.Promote(source, element);
         print("IM GROWING");
-        
+        fireflyRate.rateOverTime = 0;
         
         if (isTree)
         {

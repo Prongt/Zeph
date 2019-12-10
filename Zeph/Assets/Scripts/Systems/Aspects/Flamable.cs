@@ -17,8 +17,9 @@ public class Flamable : Aspects
     
     [HideIf("canBeSource", true)] [SerializeField] private bool useBoxCollider = false;
     [HideIf("useBoxCollider", true)] [SerializeField] private Vector3 boxDimensions;
-    
-    
+
+    [SerializeField] private ParticleSystem firefly;
+    private ParticleSystem.EmissionModule fireflyRate;
     
     [HideIf("useBoxCollider", false, true)] [SerializeField] private float fireSpreadRange = 3;
     [Range(0.01f, 5f)] [SerializeField] private float fireSpreadPerSecond = 0.1f;
@@ -63,6 +64,7 @@ public class Flamable : Aspects
         }
 
         myAnim = GetComponent<Animator>();
+        fireflyRate = firefly.emission;
     }
 
 
@@ -70,7 +72,7 @@ public class Flamable : Aspects
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-        
+        fireflyRate.rateOverTime = 0;
         if (!isOnFire)
         {
             var renderer = GetComponent<Renderer>();

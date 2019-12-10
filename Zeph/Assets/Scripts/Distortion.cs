@@ -13,7 +13,8 @@ public class Distortion : Aspects
     private bool animating = false;
 
     [SerializeField] private bool onGround;
-    
+    [SerializeField] private GameObject effect;
+    [SerializeField] private GameObject distortionEffect;
 
     protected override void Initialize()
     {
@@ -27,6 +28,12 @@ public class Distortion : Aspects
         else
         {
             myAnim = null;
+        }
+
+        if (!gameObject.CompareTag("Rift"))
+        {
+            effect = null;
+            distortionEffect = null;
         }
     }
 
@@ -42,6 +49,12 @@ public class Distortion : Aspects
             {
                 myAnim.SetBool("Distort", false);
             }
+        }
+
+        if (gameObject.CompareTag("Rift"))
+        {
+            effect.SetActive(!isDistorting);
+            distortionEffect.SetActive(isDistorting);
         }
     }
 
