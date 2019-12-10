@@ -41,6 +41,8 @@ public class PlayerMove : MonoBehaviour
 	public float gravityFlipTime = 2;
 	private Vector3 newUp;
 	private Vector3 originalUp;
+	[SerializeField] private float coyoteTime = 0.15f;
+	private float coyoteTimeRemaining;
 
 	[Header("Water Knock Back")]
 	public float knockBackDistance = 0.75f;
@@ -104,6 +106,17 @@ public class PlayerMove : MonoBehaviour
 			
 			StartCoroutine(PausePlayerMovement(gravityFlipTime));
 			oldGravity = Physics.gravity;
+		}
+
+		Debug.Log(coyoteTimeRemaining);
+		if (PlayerIsGrounded)
+		{
+			coyoteTimeRemaining = coyoteTime;
+		}
+		else
+		{
+			coyoteTimeRemaining -= Time.deltaTime;
+			
 		}
 		
 		KnockBack();
@@ -305,7 +318,7 @@ public class PlayerMove : MonoBehaviour
 	void Jump() {
 		if (Input.GetButtonDown("Jump"))
 		{
-			if (CheckIfGrounded(gravityDirection, playerYHeight))
+			if (CheckIfGrounded(gravityDirection, playerYHeight) || coyoteTimeRemaining > 0)
 			{
 				animator.SetBool("IsJumping", true);
 				float jumpVelocity;
