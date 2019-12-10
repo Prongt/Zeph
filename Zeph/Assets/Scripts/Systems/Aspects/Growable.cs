@@ -140,6 +140,7 @@ public class Growable : Aspects
         base.Promote(source, element);
         print("IM GROWING");
         
+        
         if (isTree)
         {
             myAnim.SetBool("Grow", true);
@@ -154,6 +155,7 @@ public class Growable : Aspects
         {
             if (matX >= 1)
             {
+                myAnim.SetBool("Growing", true);
                 StartCoroutine(Appear());
             }
         }
