@@ -64,7 +64,14 @@ public class Flamable : Aspects
         }
 
         myAnim = GetComponent<Animator>();
-        fireflyRate = firefly.emission;
+        if (!gameObject.CompareTag("Log"))
+        {
+            fireflyRate = firefly.emission;
+        }
+        else
+        {
+            firefly = null;
+        }
     }
 
 
@@ -72,7 +79,11 @@ public class Flamable : Aspects
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-        fireflyRate.rateOverTime = 0;
+        if (!gameObject.CompareTag("Log"))
+        {
+            fireflyRate.rateOverTime = 0;
+        }
+
         if (!isOnFire)
         {
             var renderer = GetComponent<Renderer>();

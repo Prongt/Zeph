@@ -54,7 +54,15 @@ public class Orbitable : Aspects
     {
         myRB = GetComponent<Rigidbody>();
 
-        fireflyRate = firefly.emission;
+        if (!gameObject.CompareTag("Log"))
+        {
+            fireflyRate = firefly.emission;
+        }
+        else
+        {
+            firefly = null;
+        }
+
         //TODO find better solution
         centerPoint = GameObject.FindWithTag("OrbitPoint").transform;
         
@@ -97,7 +105,10 @@ public class Orbitable : Aspects
         //centerPoint = source.transform;
         direction = source.transform.position - transform.position;
 
-        fireflyRate.rateOverTime = 0;
+        if (firefly != null)
+        {
+            fireflyRate.rateOverTime = 0;
+        }
         
         //Checks to activate functions
         if (orbiting)
@@ -233,7 +244,7 @@ public class Orbitable : Aspects
             }
         }
 
-        if (gameObject.CompareTag("Heavy"))
+        if (gameObject.CompareTag("Heavy") && other.gameObject.CompareTag("Floor"))
         {
             myRB.constraints = RigidbodyConstraints.FreezeRotation;
             myRB.constraints = RigidbodyConstraints.FreezePosition;
