@@ -2,7 +2,7 @@
 using System.Collections;
 using FMODUnity;
 using UnityEngine;
-using UnityEngine.Experimental.VFX;
+using UnityEngine.VFX;
 
 
 public class PlayerElementController : MonoBehaviour
