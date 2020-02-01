@@ -45,7 +45,7 @@ public class PlayerElementController : MonoBehaviour
     {
         if (light.intensity >= 6)
         {
-            light.intensity = Mathf.Lerp(light.intensity, 5, 0.5f * Time.deltaTime);
+            //light.intensity = Mathf.Lerp(light.intensity, 5, 0.5f * Time.deltaTime);
         }
 
         UsePowers();
