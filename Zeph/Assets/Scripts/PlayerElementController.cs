@@ -59,7 +59,7 @@ public class PlayerElementController : MonoBehaviour
             {
                 if (Input.GetButtonDown(elementData[i].element.ButtonName))
                 {
-                    Debug.Log("Button pressed " + elementData[i].element.ButtonName);
+//                    Debug.Log("Button pressed " + elementData[i].element.ButtonName);
                     if (elementData[i].element.ButtonName == "FirePower")
                     {
                         fireEffect.SetInt("Spawn Rate", 1000);

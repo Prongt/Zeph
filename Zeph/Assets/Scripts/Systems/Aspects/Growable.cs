@@ -54,7 +54,7 @@ public class Growable : Aspects
         {
             myAnim = GetComponent<Animator>();
             mat = gameObject.GetComponent<SkinnedMeshRenderer>().material;
-            matX = mat.GetFloat("Vector1_D0BABF75");
+            matX = mat.GetFloat("Vector1_B0F27FFD");
         }
 
         if (isTree)
@@ -115,7 +115,7 @@ public class Growable : Aspects
 
        if (gameObject.CompareTag("Bridge"))
        {
-           mat.SetFloat("Vector1_D0BABF75", matX);
+           mat.SetFloat("Vector1_B0F27FFD", matX);
 
            if (!groundDistort.GetBool("Distort") && matX <= 1)
            {
