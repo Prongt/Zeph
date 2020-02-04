@@ -41,6 +41,8 @@ VisualEffect:
   m_GameObject: {fileID: 6443001729176645858}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 29080cbc3370f9b4bbb95a74bafcf7e0, type: 3}
+  m_InitialEventName: OnPlay
+  m_InitialEventNameOverriden: 0
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
@@ -80,10 +82,10 @@ VFXRenderer:
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -168,6 +170,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 817d2d5844de2ae49931217ee3c7bc33, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 0
+  requireDefaultGravity: 0
 --- !u!114 &-2813188479999887604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,9 +198,11 @@ MonoBehaviour:
   canBeSource: 1
   useBoxCollider: 1
   boxDimensions: {x: 1, y: 3, z: 10}
+  firefly: {fileID: 0}
   fireSpreadRange: 3
   fireSpreadPerSecond: 0.1
   maxNumberOfAffectableObjects: 15
+  fireEventEmitter: {fileID: 0}
 --- !u!95 &5382931524497381895
 Animator:
   serializedVersion: 3
@@ -224,11 +229,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3774394975222681577}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b60b54c40f130e145979a4b8284c5073,
-        type: 3}
-      propertyPath: m_Name
-      value: VinesV1
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b60b54c40f130e145979a4b8284c5073,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -284,6 +284,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b60b54c40f130e145979a4b8284c5073,
+        type: 3}
+      propertyPath: m_Name
+      value: VinesV1
+      objectReference: {fileID: 0}
     - target: {fileID: 7561110372842451503, guid: b60b54c40f130e145979a4b8284c5073,
         type: 3}
       propertyPath: m_BlendShapeWeights.Array.size
@@ -333,7 +338,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 66731aa2271acff4abab0e536d20cefb, type: 2}
+      objectReference: {fileID: 2100000, guid: b5de9537b592c844298cdbfdb01b70a1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b60b54c40f130e145979a4b8284c5073, type: 3}
 --- !u!4 &3929762450572331334 stripped
