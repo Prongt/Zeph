@@ -75,7 +75,6 @@ public class Flamable : Aspects
     }
 
 
-
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);

@@ -23,7 +23,6 @@ public abstract class Aspects : MonoBehaviour
         Enum.TryParse(GetType().Name, out AspectType aspectType);
         //Debug.Log(aspectType);
         AspectType = aspectType;
-        
     }
 
     public abstract Type[] RequiredComponents();
@@ -76,5 +75,6 @@ public enum AspectType
     GravityRift,
     Distortion,
     FadeRift,
-    Story
+    Story,
+    Chargeable,
 }
