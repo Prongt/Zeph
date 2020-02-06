@@ -71,8 +71,8 @@ LightmapSettings:
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-    m_MixedBakeMode: 2
-    m_BakeBackend: 1
+    m_MixedBakeMode: 0
+    m_BakeBackend: 2
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 512
@@ -97,8 +97,9 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_LightingDataAsset: {fileID: 112000000, guid: 56104c58abf1c8142bdf99d64beed05e,
+    type: 2}
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -218,6 +219,76 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 40.000008, z: 0.00010000002}
   m_Center: {x: 0, y: 0, z: 0.00005000001}
+--- !u!1 &230018710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 230018711}
+  m_Layer: 0
+  m_Name: Fire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &230018711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230018710}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8587807132850334575}
+  - {fileID: 5041447496818320702}
+  - {fileID: 8433449482949536690}
+  - {fileID: 4447703371237000899}
+  - {fileID: 3525761879542352910}
+  - {fileID: 8495158969202497063}
+  m_Father: {fileID: 1341464647}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &230591869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 230591870}
+  m_Layer: 0
+  m_Name: Orbit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &230591870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230591869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6821827589914677219}
+  - {fileID: 5781228949975872305}
+  - {fileID: 6803799113654704161}
+  - {fileID: 1540224018078401899}
+  m_Father: {fileID: 1341464647}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &297414150
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +793,55 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
+--- !u!1 &1289789584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1289789585}
+  m_Layer: 0
+  m_Name: Ivy Maze
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1289789585
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289789584}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 9214324926205527796}
+  - {fileID: 6894369714659623676}
+  - {fileID: 9127680571189934542}
+  - {fileID: 6878066230712239546}
+  - {fileID: 6518917963453464579}
+  - {fileID: 281561066105359113}
+  - {fileID: 1001313201619448137}
+  - {fileID: 2204906457767906437}
+  - {fileID: 7044645769168657782}
+  - {fileID: 4034130260017861563}
+  - {fileID: 8335731853201052914}
+  - {fileID: 6775774725139115415}
+  - {fileID: 8921500153281718468}
+  - {fileID: 1092228964591134747}
+  - {fileID: 3832276553973436297}
+  - {fileID: 8659632217607969397}
+  - {fileID: 364182542064354135}
+  - {fileID: 7424419755671600047}
+  - {fileID: 18021321932386310}
+  m_Father: {fileID: 1341464647}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1295182320
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +876,7 @@ Transform:
   - {fileID: 6291959569943952514}
   - {fileID: 1923185761679966562}
   - {fileID: 5125223748887534926}
+  - {fileID: 2257168174361761375}
   m_Father: {fileID: 54075411013749972}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -786,38 +907,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6775774725139115415}
-  - {fileID: 8921500153281718468}
-  - {fileID: 8335731853201052914}
-  - {fileID: 364182542064354135}
-  - {fileID: 7424419755671600047}
-  - {fileID: 8659632217607969397}
-  - {fileID: 9214324926205527796}
-  - {fileID: 6894369714659623676}
-  - {fileID: 9127680571189934542}
-  - {fileID: 6878066230712239546}
-  - {fileID: 6518917963453464579}
-  - {fileID: 18021321932386310}
-  - {fileID: 7044645769168657782}
-  - {fileID: 2204906457767906437}
-  - {fileID: 3832276553973436297}
-  - {fileID: 281561066105359113}
-  - {fileID: 1001313201619448137}
-  - {fileID: 1092228964591134747}
-  - {fileID: 8587807132850334575}
-  - {fileID: 5041447496818320702}
-  - {fileID: 3525761879542352910}
-  - {fileID: 4447703371237000899}
-  - {fileID: 8433449482949536690}
-  - {fileID: 8495158969202497063}
-  - {fileID: 4034130260017861563}
-  - {fileID: 6821827589914677219}
-  - {fileID: 5781228949975872305}
-  - {fileID: 6803799113654704161}
-  - {fileID: 1540224018078401899}
-  - {fileID: 7775786098818925867}
-  - {fileID: 1650591705983915503}
-  - {fileID: 8460045617668897763}
+  - {fileID: 1289789585}
+  - {fileID: 230018711}
+  - {fileID: 1691474984}
+  - {fileID: 230591870}
   m_Father: {fileID: 54075411013749972}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -942,6 +1035,39 @@ Transform:
   m_Father: {fileID: 1980147010}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1691474983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1691474984}
+  m_Layer: 0
+  m_Name: End
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1691474984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691474983}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7775786098818925867}
+  - {fileID: 1650591705983915503}
+  - {fileID: 8460045617668897763}
+  m_Father: {fileID: 1341464647}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1697867123
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,8 +1102,58 @@ Transform:
   - {fileID: 6332931114820437298}
   - {fileID: 6629600993972368576}
   - {fileID: 8304757179972079091}
+  - {fileID: 1841180712204596662}
+  - {fileID: 5528896998853016987}
+  - {fileID: 430010554959031241}
   m_Father: {fileID: 1980147010}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1751513440
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1751513442}
+  - component: {fileID: 1751513441}
+  m_Layer: 0
+  m_Name: StaticLightingSky
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1751513441
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751513440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 441482e8936e35048a1dffac814e3ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Profile: {fileID: 0}
+  m_StaticLightingSkyUniqueID: 0
+  m_SkySettings: {fileID: 0}
+  m_SkySettingsFromProfile: {fileID: 0}
+--- !u!4 &1751513442
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751513440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1810314496
 PrefabInstance:
@@ -1091,8 +1267,8 @@ Transform:
   m_LocalPosition: {x: -7.645628, y: 2.6428223, z: -47.30899}
   m_LocalScale: {x: 0.719431, y: 0.50555, z: 0.419677}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 11
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &27736443189709986
 MeshRenderer:
@@ -1150,12 +1326,8 @@ Transform:
   - {fileID: 1010479703}
   - {fileID: 3908719731508467941}
   - {fileID: 6596745244868970783}
-  - {fileID: 1841180712204596662}
-  - {fileID: 2257168174361761375}
-  - {fileID: 5528896998853016987}
   - {fileID: 6566734359336045880}
   - {fileID: 3030486982222258765}
-  - {fileID: 430010554959031241}
   - {fileID: 7261221430753484462}
   - {fileID: 781792424114578622}
   m_Father: {fileID: 0}
@@ -1217,7 +1389,7 @@ GameObject:
   - component: {fileID: 1217566459364523050}
   - component: {fileID: 4530615694309628371}
   m_Layer: 0
-  m_Name: IvyBarrier035
+  m_Name: 'Ivy Barrier 3 | End '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1234,8 +1406,8 @@ Transform:
   m_LocalPosition: {x: -2.2418823, y: 2.7475586, z: -46.40234}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 15
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &342727583427035852
 MeshFilter:
@@ -1264,8 +1436,8 @@ Transform:
   m_LocalPosition: {x: 9.601074, y: 2.7475586, z: -29.581299}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 3
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &386936620854695414
 GameObject:
@@ -1304,8 +1476,8 @@ Transform:
   m_LocalPosition: {x: 7.650467, y: 5.09732, z: -79.732765}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 54075411013749972}
-  m_RootOrder: 11
+  m_Father: {fileID: 1697867124}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &441851041630466444
 GameObject:
@@ -1404,7 +1576,7 @@ GameObject:
   - component: {fileID: 3463149460585558067}
   - component: {fileID: 2787345269972991496}
   m_Layer: 0
-  m_Name: IvyBarrier019
+  m_Name: Ivy Barrier 15 | Ivy Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1532,7 +1704,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 54075411013749972}
-  m_RootOrder: 13
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &794435823985377555
 Transform:
@@ -1653,11 +1825,11 @@ GameObject:
   - component: {fileID: 8607563425624323457}
   - component: {fileID: 3352295794403858240}
   m_Layer: 0
-  m_Name: DistortionPlatformV1Mesh007
+  m_Name: Rock Barrier | Orbit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1001313201619448137
 Transform:
@@ -1670,8 +1842,8 @@ Transform:
   m_LocalPosition: {x: 2.918518, y: 2.7475586, z: -46.40234}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 16
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1091735844362266341
 MeshRenderer:
@@ -1723,8 +1895,8 @@ Transform:
   m_LocalPosition: {x: 1.0408554, y: 2.7475586, z: -37.178463}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 17
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1112061739360379196
 MeshFilter:
@@ -1754,7 +1926,7 @@ GameObject:
   - component: {fileID: 8954818308135587034}
   - component: {fileID: 7264131894871659608}
   m_Layer: 0
-  m_Name: IvyBarrier036
+  m_Name: 'Ivy Barrier 1 | End '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1798,7 +1970,7 @@ GameObject:
   - component: {fileID: 133828687185861783}
   - component: {fileID: 2359375635906332084}
   m_Layer: 0
-  m_Name: IvyBarrier007
+  m_Name: Ivy Barrier 17 | Ivy Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1872,7 +2044,7 @@ GameObject:
   - component: {fileID: 1525856327781319338}
   - component: {fileID: 1418411209166865545}
   m_Layer: 0
-  m_Name: IvyBarrier033
+  m_Name: 'Ivy Barrier 4 | Orbit '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1890,7 +2062,7 @@ GameObject:
   - component: {fileID: 4519082484261339874}
   - component: {fileID: 3540691064927218214}
   m_Layer: 0
-  m_Name: IvyBarrier022
+  m_Name: Ivy Barrier 14 | Ivy Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2136,8 +2308,8 @@ Transform:
   m_LocalPosition: {x: -9.624405, y: 3.9873047, z: -87.67219}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 28
+  m_Father: {fileID: 230591870}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1552684807868767465
 GameObject:
@@ -2219,10 +2391,10 @@ Transform:
   m_GameObject: {fileID: 265560447451882973}
   m_LocalRotation: {x: -0.47719514, y: -0.47719494, z: -0.5218092, w: 0.5218093}
   m_LocalPosition: {x: 6.310684, y: 4.2580566, z: -91.707344}
-  m_LocalScale: {x: 0.85168004, y: 0.85168, z: 0.85168004}
+  m_LocalScale: {x: 0.8516801, y: 0.85168, z: 0.8516801}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 30
+  m_Father: {fileID: 1691474984}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1662601534487174286
 GameObject:
@@ -2236,7 +2408,7 @@ GameObject:
   - component: {fileID: 4288169162500713295}
   - component: {fileID: 7476899571287732086}
   m_Layer: 0
-  m_Name: SolarOrbitPillar003
+  m_Name: Pillar | Orbit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2399,8 +2571,8 @@ Transform:
   m_LocalPosition: {x: 7.5630326, y: 4.5530276, z: -79.94988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 54075411013749972}
-  m_RootOrder: 6
+  m_Father: {fileID: 1697867124}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1880200672910497559
 MeshFilter:
@@ -2528,8 +2700,8 @@ Transform:
   m_LocalPosition: {x: 0.10549927, y: 2.7475586, z: -50.74463}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 13
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2239632778671160206
 MeshRenderer:
@@ -2616,11 +2788,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4192375058672986258}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -21.26346, y: 4.5721436, z: -80.660164}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 54075411013749972}
+  m_Father: {fileID: 1295182321}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2273904285879972897
@@ -2682,7 +2854,7 @@ GameObject:
   - component: {fileID: 1186339764962543795}
   - component: {fileID: 3502369654416866478}
   m_Layer: 0
-  m_Name: IvyBarrier034
+  m_Name: 'Ivy Barrier 2 | End '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3157,7 +3329,7 @@ GameObject:
   - component: {fileID: 4225964993208870745}
   - component: {fileID: 8254788563354513431}
   m_Layer: 0
-  m_Name: IvyBarrier008
+  m_Name: Ivy Barrier 18 | Ivy Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3230,7 +3402,7 @@ GameObject:
   - component: {fileID: 1880200672910497559}
   - component: {fileID: 1816907949046942454}
   m_Layer: 0
-  m_Name: IvyBarrier025
+  m_Name: 'Ivy Barrier 5 | FIre '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3248,7 +3420,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 54075411013749972}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3039476525324914036
 MeshFilter:
@@ -3299,7 +3471,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!65 &3220121097518043292
 BoxCollider:
@@ -3326,7 +3498,7 @@ GameObject:
   - component: {fileID: 6132689127727087593}
   - component: {fileID: 1306755505281059777}
   m_Layer: 0
-  m_Name: IvyBarrier005
+  m_Name: Ivy Barrier 13 | Ivy Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3383,7 +3555,7 @@ GameObject:
   - component: {fileID: 3065803419005280180}
   - component: {fileID: 2814971732655904214}
   m_Layer: 0
-  m_Name: IvyBarrier023
+  m_Name: 'Ivy Barrier 1 | FIre '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3586,8 +3758,8 @@ Transform:
   m_LocalPosition: {x: 19.045952, y: 4.935547, z: -23.197998}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 20
+  m_Father: {fileID: 230018711}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &3540691064927218214
 MeshRenderer:
@@ -3670,7 +3842,7 @@ GameObject:
   - component: {fileID: 8832702674165998433}
   - component: {fileID: 2245963519548576897}
   m_Layer: 0
-  m_Name: Box128
+  m_Name: Water | Orbit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3687,7 +3859,7 @@ Transform:
   m_LocalPosition: {x: 6.0921936, y: 2.7475586, z: -37.19861}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1341464647}
+  m_Father: {fileID: 1289789585}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3865296903889705176
@@ -3702,7 +3874,7 @@ GameObject:
   - component: {fileID: 342727583427035852}
   - component: {fileID: 1974055882206788259}
   m_Layer: 0
-  m_Name: IvyBarrier017
+  m_Name: Ivy Barrier 9 | Ivy Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3827,8 +3999,8 @@ Transform:
   m_LocalPosition: {x: -4.939209, y: 2.7475586, z: -55.11454}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 24
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4071425767069405324
 GameObject:
@@ -3899,7 +4071,7 @@ GameObject:
   - component: {fileID: 3688929528055573163}
   - component: {fileID: 6322339286696516279}
   m_Layer: 0
-  m_Name: Cylinder049
+  m_Name: Growable Flower | Orbit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3917,7 +4089,7 @@ GameObject:
   - component: {fileID: 4638891845379220815}
   - component: {fileID: 8075169017743949012}
   m_Layer: 0
-  m_Name: IvyBarrier018
+  m_Name: Ivy Barrier 8 | Ivy Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4035,8 +4207,8 @@ Transform:
   m_LocalPosition: {x: 19.045952, y: 4.935547, z: -28.152466}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 21
+  m_Father: {fileID: 230018711}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4509076953309365504
 GameObject:
@@ -4344,7 +4516,7 @@ GameObject:
   - component: {fileID: 8243636882484986819}
   - component: {fileID: 4707363960138230973}
   m_Layer: 0
-  m_Name: IvyBarrier031
+  m_Name: 'Ivy Barrier 2 | Orbit '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4362,7 +4534,7 @@ GameObject:
   - component: {fileID: 6499244285012540057}
   - component: {fileID: 2832465278316990904}
   m_Layer: 0
-  m_Name: SolarOrbitPillar005
+  m_Name: Pillar | End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4553,8 +4725,8 @@ Transform:
   m_LocalPosition: {x: 14.307945, y: 4.935547, z: -36.660522}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 19
+  m_Father: {fileID: 230018711}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5092087521660789990
 MeshFilter:
@@ -4590,7 +4762,7 @@ GameObject:
   - component: {fileID: 3137688332257854190}
   - component: {fileID: 664152559825010314}
   m_Layer: 0
-  m_Name: IvyBarrier004
+  m_Name: Ivy Barrier 12 | Ivy Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4608,7 +4780,7 @@ GameObject:
   - component: {fileID: 208728740666838747}
   - component: {fileID: 4721798402161995894}
   m_Layer: 0
-  m_Name: Water River
+  m_Name: Water| End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4626,7 +4798,7 @@ GameObject:
   - component: {fileID: 6411712316985801565}
   - component: {fileID: 8142837269877553036}
   m_Layer: 0
-  m_Name: IvyBarrier009
+  m_Name: Ivy Barrier 16 | Ivy Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4667,9 +4839,9 @@ Transform:
   m_GameObject: {fileID: 957239917048262105}
   m_LocalRotation: {x: -0.70710266, y: 0.0024240552, z: 0.0024240552, w: 0.70710266}
   m_LocalPosition: {x: -23.610022, y: 4.5967274, z: -81.91604}
-  m_LocalScale: {x: 1, y: 0.350282, z: 1}
+  m_LocalScale: {x: 1, y: 0.35028207, z: 1}
   m_Children: []
-  m_Father: {fileID: 54075411013749972}
+  m_Father: {fileID: 1697867124}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &5582123773432882499
@@ -4846,8 +5018,8 @@ Transform:
   m_LocalPosition: {x: -9.624405, y: 3.9873047, z: -78.54743}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 26
+  m_Father: {fileID: 230591870}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5801527223315994021
 MeshFilter:
@@ -4869,7 +5041,7 @@ GameObject:
   - component: {fileID: 2910510602630652287}
   - component: {fileID: 4022643178240216412}
   m_Layer: 0
-  m_Name: IvyBarrier029
+  m_Name: Ivy Barrier 10 | Ivy Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4926,7 +5098,7 @@ GameObject:
   - component: {fileID: 3039476525324914036}
   - component: {fileID: 4883164817090974981}
   m_Layer: 0
-  m_Name: Log004
+  m_Name: Log | Log Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5041,7 +5213,7 @@ GameObject:
   - component: {fileID: 7083972828113426615}
   - component: {fileID: 1540006466691129717}
   m_Layer: 0
-  m_Name: IvyBarrier030
+  m_Name: 'Ivy Barrier 1 | Orbit '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5101,7 +5273,7 @@ GameObject:
   - component: {fileID: 2273904285879972897}
   - component: {fileID: 2570034909980812760}
   m_Layer: 0
-  m_Name: IvyBarrier006
+  m_Name: Ivy Barrier 11 | Ivy Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5126,8 +5298,8 @@ Transform:
   m_LocalPosition: {x: -5.4819336, y: 2.7475586, z: -44.920967}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 10
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6566734359336045880
 Transform:
@@ -5141,7 +5313,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 54075411013749972}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &6573977306161332803
 MeshRenderer:
@@ -5292,8 +5464,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 2.7475586, z: -58.91797}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 0
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6803799113654704161
 Transform:
@@ -5306,8 +5478,8 @@ Transform:
   m_LocalPosition: {x: -9.624405, y: 3.9873047, z: -84.27021}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 27
+  m_Father: {fileID: 230591870}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6821827589914677219
 Transform:
@@ -5320,8 +5492,8 @@ Transform:
   m_LocalPosition: {x: -9.624405, y: 3.9873047, z: -73.1258}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 25
+  m_Father: {fileID: 230591870}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6872892620633042089
 Transform:
@@ -5348,8 +5520,8 @@ Transform:
   m_LocalPosition: {x: -5.4819336, y: 2.7475586, z: -40.100708}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 9
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6894369714659623676
 Transform:
@@ -5362,8 +5534,8 @@ Transform:
   m_LocalPosition: {x: -5.4819336, y: 2.7475586, z: -29.581299}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 7
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &6897403021801594671
 MeshRenderer:
@@ -5416,7 +5588,7 @@ GameObject:
   - component: {fileID: 9181553337892209088}
   - component: {fileID: 3250466363738369007}
   m_Layer: 0
-  m_Name: IvyBarrier028
+  m_Name: 'Ivy Barrier 6 | FIre '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5511,8 +5683,8 @@ Transform:
   m_LocalPosition: {x: -5.9935913, y: 2.7475586, z: -50.74463}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 12
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &7063644862482819709
 MeshRenderer:
@@ -5599,7 +5771,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 54075411013749972}
-  m_RootOrder: 12
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &7264131894871659608
 MeshRenderer:
@@ -5683,8 +5855,8 @@ Transform:
   m_LocalPosition: {x: 9.601074, y: 2.7475586, z: -23.941528}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 4
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7427196083520494198
 MeshFilter:
@@ -5862,7 +6034,7 @@ GameObject:
   - component: {fileID: 8077628121587771448}
   - component: {fileID: 2239632778671160206}
   m_Layer: 0
-  m_Name: IvyBarrier024
+  m_Name: 'Ivy Barrier 2 | FIre '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5893,10 +6065,10 @@ Transform:
   m_GameObject: {fileID: 2362516145293120682}
   m_LocalRotation: {x: -0.47719514, y: -0.47719494, z: -0.5218092, w: 0.5218093}
   m_LocalPosition: {x: -0.11412048, y: 4.2580566, z: -91.707344}
-  m_LocalScale: {x: 0.85168004, y: 0.85168, z: 0.85168004}
+  m_LocalScale: {x: 0.8516801, y: 0.85168, z: 0.8516801}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 29
+  m_Father: {fileID: 1691474984}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7803152335919333818
 MeshFilter:
@@ -6167,11 +6339,11 @@ GameObject:
   - component: {fileID: 7758792901659676422}
   - component: {fileID: 7457379964541074460}
   m_Layer: 0
-  m_Name: SolarOrbitPillar004
+  m_Name: Step | Log Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!33 &8243636882484986819
 MeshFilter:
@@ -6245,8 +6417,8 @@ Transform:
   m_LocalPosition: {x: -5.9935913, y: 2.7475586, z: -58.91797}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 2
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8395933768786608422
 GameObject:
@@ -6277,8 +6449,8 @@ Transform:
   m_LocalPosition: {x: 19.045952, y: 4.935547, z: -33.379517}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 22
+  m_Father: {fileID: 230018711}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &8460045617668897763
 Transform:
@@ -6289,10 +6461,10 @@ Transform:
   m_GameObject: {fileID: 1141559374513665123}
   m_LocalRotation: {x: -0.47719514, y: -0.47719494, z: -0.5218092, w: 0.5218093}
   m_LocalPosition: {x: -6.7152405, y: 4.2580566, z: -91.707344}
-  m_LocalScale: {x: 0.85168004, y: 0.85168, z: 0.85168004}
+  m_LocalScale: {x: 0.8516801, y: 0.85168, z: 0.8516801}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 31
+  m_Father: {fileID: 1691474984}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &8495158969202497063
 Transform:
@@ -6305,8 +6477,8 @@ Transform:
   m_LocalPosition: {x: 24.314537, y: 4.935547, z: -36.660522}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 23
+  m_Father: {fileID: 230018711}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &8587807132850334575
 Transform:
@@ -6319,8 +6491,8 @@ Transform:
   m_LocalPosition: {x: 14.307945, y: 4.935547, z: -31.706055}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 18
+  m_Father: {fileID: 230018711}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8607563425624323457
 MeshFilter:
@@ -6341,8 +6513,8 @@ Transform:
   m_LocalPosition: {x: 9.601074, y: 2.7475586, z: -39.539062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 5
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8699512660628780038
 MeshFilter:
@@ -6364,7 +6536,7 @@ GameObject:
   - component: {fileID: 5801527223315994021}
   - component: {fileID: 7442520363791398389}
   m_Layer: 0
-  m_Name: IvyBarrier032
+  m_Name: 'Ivy Barrier 3 | Orbit '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6390,7 +6562,7 @@ GameObject:
   - component: {fileID: 3482544964136642411}
   - component: {fileID: 3233332050101490657}
   m_Layer: 0
-  m_Name: IvyBarrier027
+  m_Name: 'Ivy Barrier 3 | FIre '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6438,11 +6610,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3233030519796021134}
   m_LocalRotation: {x: -0.50000006, y: -0.4999999, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 6.136841, y: 2.7475586, z: -58.91797}
+  m_LocalPosition: {x: 6.1368403, y: 2.7475593, z: -58.91797}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 1
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8931841149585985117
 GameObject:
@@ -6456,11 +6628,11 @@ GameObject:
   - component: {fileID: 2613234059446174032}
   - component: {fileID: 652335634670557014}
   m_Layer: 0
-  m_Name: Box129
+  m_Name: Platform | Log Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &8948947747896372167
 MeshRenderer:
@@ -6521,7 +6693,7 @@ GameObject:
   - component: {fileID: 2383699934154257883}
   - component: {fileID: 7916344681509492002}
   m_Layer: 0
-  m_Name: IvyBarrier026
+  m_Name: 'Ivy Barrier 4 | FIre '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6585,8 +6757,8 @@ Transform:
   m_LocalPosition: {x: -5.4819336, y: 2.7475586, z: -34.535767}
   m_LocalScale: {x: 0.85168, y: 0.85168, z: 0.85168}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 8
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9137539312482614161 stripped
 GameObject:
@@ -6626,6 +6798,6 @@ Transform:
   m_LocalPosition: {x: -3.4360542, y: 2.7475586, z: -26.569092}
   m_LocalScale: {x: 0.799009, y: 0.799009, z: 0.799009}
   m_Children: []
-  m_Father: {fileID: 1341464647}
-  m_RootOrder: 6
+  m_Father: {fileID: 1289789585}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
