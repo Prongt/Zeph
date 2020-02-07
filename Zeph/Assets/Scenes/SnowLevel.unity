@@ -1,0 +1,862 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 11
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 1
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 512
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 256
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
+  m_LightingDataAsset: {fileID: 0}
+  m_UseShadowmask: 1
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 2
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &991642589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 991642592}
+  - component: {fileID: 991642591}
+  - component: {fileID: 991642590}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!81 &991642590
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991642589}
+  m_Enabled: 1
+--- !u!20 &991642591
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991642589}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &991642592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991642589}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1008544302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1008544304}
+  - component: {fileID: 1008544303}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &1008544303
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008544302}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1008544304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008544302}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &1013383510
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -9045113318939105020, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Distort Ground2_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: -8760150461343128067, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Growable 2m Flower1_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: -8743675469522636747, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d76cb6d7f52272046ac96e6748a826b3, type: 2}
+    - target: {fileID: -8238807436639231359, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Standing Box Placement1_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: -8212401474600466587, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Distort Bridge1_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: -7842734417622462496, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Distort Platform1_End
+      objectReference: {fileID: 0}
+    - target: {fileID: -7707003849694430315, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: -7605554475876668204, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: -7504353624829583745, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Growable 3m Flower1_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: -7244700391767629595, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c4d25b1dbe77f24d8d2b9232066e5ff, type: 2}
+    - target: {fileID: -7170941753690581224, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: UpperGround3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7158900889805383527, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d76cb6d7f52272046ac96e6748a826b3, type: 2}
+    - target: {fileID: -7101865331574465757, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d76cb6d7f52272046ac96e6748a826b3, type: 2}
+    - target: {fileID: -7070498351634541091, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Torch1_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: -6944395135068398196, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d76cb6d7f52272046ac96e6748a826b3, type: 2}
+    - target: {fileID: -6863946337920048306, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6742611881080919779, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Conductor1_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: -6608973852360164240, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d76cb6d7f52272046ac96e6748a826b3, type: 2}
+    - target: {fileID: -6268333083381108745, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Undistort Pillar1_End
+      objectReference: {fileID: 0}
+    - target: {fileID: -5756048314717550174, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Distort Bridge2_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: -5356060782096180672, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Undistort Bridge3_End
+      objectReference: {fileID: 0}
+    - target: {fileID: -5283849347669530619, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: UpperGround7
+      objectReference: {fileID: 0}
+    - target: {fileID: -5067587807871789364, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Conductor Range1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5043642280563627570, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d76cb6d7f52272046ac96e6748a826b3, type: 2}
+    - target: {fileID: -4954913189935716905, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: -4902051553248947576, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: -4683645499507049546, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7bbf805bc843a0b49be9efb80973e8e1, type: 2}
+    - target: {fileID: -4584566000528977428, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d76cb6d7f52272046ac96e6748a826b3, type: 2}
+    - target: {fileID: -4549086211073770479, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Growable 2m Flower2_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: -4328280647733248563, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5b65d7487d3e2524e88b2ad8063071dc, type: 2}
+    - target: {fileID: -4216859302048453862, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3864764273260436683, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c4d25b1dbe77f24d8d2b9232066e5ff, type: 2}
+    - target: {fileID: -3687928389632908350, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c4d25b1dbe77f24d8d2b9232066e5ff, type: 2}
+    - target: {fileID: -3399169661183006411, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Standing Box1_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: -3279591535161651848, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 85601d4501ca63841948f510e24dff08, type: 2}
+    - target: {fileID: -3137327060519794135, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 85601d4501ca63841948f510e24dff08, type: 2}
+    - target: {fileID: -3072284215943797144, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 469a78ece0dc9f743a685cbf50b3dac8, type: 2}
+    - target: {fileID: -3019525847318696760, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5b65d7487d3e2524e88b2ad8063071dc, type: 2}
+    - target: {fileID: -2832589837313211051, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Cliff Walk2
+      objectReference: {fileID: 0}
+    - target: {fileID: -2745791542965058143, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Undistort Tree1_End
+      objectReference: {fileID: 0}
+    - target: {fileID: -2216248671472075665, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Conductor Range3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2046481905032043897, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c4d25b1dbe77f24d8d2b9232066e5ff, type: 2}
+    - target: {fileID: -1707484462483361064, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Condutor5 Distort_End
+      objectReference: {fileID: 0}
+    - target: {fileID: -1676930420757172558, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Distort Ground1_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: -1093787183679089296, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Growable 4m Flower1_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: -992485496853269817, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c4d25b1dbe77f24d8d2b9232066e5ff, type: 2}
+    - target: {fileID: -979331046230342902, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: -961392285242804991, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Conductor5_End
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: SnowLevel1
+      objectReference: {fileID: 0}
+    - target: {fileID: -779304399174641909, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: -715534570738146715, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 58d2adffd4db8e746987ed3e07b53bc1, type: 2}
+    - target: {fileID: -656905639162359437, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7bbf805bc843a0b49be9efb80973e8e1, type: 2}
+    - target: {fileID: -326845986439519322, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 58d2adffd4db8e746987ed3e07b53bc1, type: 2}
+    - target: {fileID: -111317336391852388, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: 34501285238852824, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: 84083674378972501, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: 693848837588032034, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Conductor Range2
+      objectReference: {fileID: 0}
+    - target: {fileID: 780822842463141672, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d76cb6d7f52272046ac96e6748a826b3, type: 2}
+    - target: {fileID: 817675824327360230, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Cliff Walk4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1013215406046287066, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: 1034937600596239273, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Orbit Pillar1_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474036758615430619, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: 1960029338084220978, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Ivy Bridge2_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321896201432170432, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d76cb6d7f52272046ac96e6748a826b3, type: 2}
+    - target: {fileID: 2383809691369238866, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: 2547975115406965152, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c4d25b1dbe77f24d8d2b9232066e5ff, type: 2}
+    - target: {fileID: 2760051078981337670, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Distortion Rift1_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160792033835979120, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: UpperGround6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228679394725682471, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: 3853988429367263137, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5b65d7487d3e2524e88b2ad8063071dc, type: 2}
+    - target: {fileID: 3984204857173484332, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Cliff Walk3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4103209266314237897, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7bbf805bc843a0b49be9efb80973e8e1, type: 2}
+    - target: {fileID: 4299707313573060905, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 469a78ece0dc9f743a685cbf50b3dac8, type: 2}
+    - target: {fileID: 4333143191370863105, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Conductor2_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519550498786505556, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Platform3_End
+      objectReference: {fileID: 0}
+    - target: {fileID: 4529852614367068877, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d76cb6d7f52272046ac96e6748a826b3, type: 2}
+    - target: {fileID: 4638532389739872193, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Growable 1m Flower1_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664987253647690179, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Distort Bridge3_End
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000473116521747109, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Platform1_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068610953893272881, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 58d2adffd4db8e746987ed3e07b53bc1, type: 2}
+    - target: {fileID: 5079203796576632007, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7bbf805bc843a0b49be9efb80973e8e1, type: 2}
+    - target: {fileID: 5163213281071104264, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Cliff Walk1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251976681136422585, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Undistort Bridge1_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300692351599691644, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Ivy Bridge1_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703477998984212372, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Platform2_Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 5755067883376070207, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Distort Tree1_End
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945163136888468433, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: 6026852787001405800, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: UpperGround4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6273606906023830930, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Conductor3_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935539866837637383, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Distortion Rift3_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198271959827919162, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 469a78ece0dc9f743a685cbf50b3dac8, type: 2}
+    - target: {fileID: 7220543480750284182, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d76cb6d7f52272046ac96e6748a826b3, type: 2}
+    - target: {fileID: 7290106630825086138, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ba434ad3f0609f4183ef5b4b50a3b19, type: 2}
+    - target: {fileID: 7435939865028077072, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: UpperGround5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436364852576975018, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Conductor4_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: 7820209652836685005, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Distortion Rift2_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267123323279202539, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7bbf805bc843a0b49be9efb80973e8e1, type: 2}
+    - target: {fileID: 8375709530186071626, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7bbf805bc843a0b49be9efb80973e8e1, type: 2}
+    - target: {fileID: 8608339523147226957, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c4d25b1dbe77f24d8d2b9232066e5ff, type: 2}
+    - target: {fileID: 8667322599763076626, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d76cb6d7f52272046ac96e6748a826b3, type: 2}
+    - target: {fileID: 8966945469723609610, guid: 906fc0e608f841946bbc4e65c36ea67b,
+        type: 3}
+      propertyPath: m_Name
+      value: Undistort Bridge2_Mid
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 906fc0e608f841946bbc4e65c36ea67b, type: 3}
