@@ -1,61 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 public class GameObjectReplacer : ScriptableWizard
 {
-    public bool copyValues = true;
-    public GameObject useGameObject;
-    public GameObject[] Replace;
+    public bool copyName = true;
+    public List<GameObject> objectsToReplace;
+    public GameObject prefab;
 
-    [MenuItem ("Custom/Replace GameObjects")]
-
-
-    static void CreateWizard ()
+    [MenuItem("Custom/Replace GameObjects %q")]
+    private static void CreateWizard()
     {
-        ScriptableWizard.DisplayWizard("Replace GameObjects", typeof(GameObjectReplacer), "Replace");
+        DisplayWizard("Replace GameObjects", typeof(GameObjectReplacer), "Replace");
     }
 
-    void OnWizardCreate ()
+    private void OnWizardCreate()
     {
-        List<Transform> ObjectsToReplace = new List<Transform>();
-        foreach (var obj in Replace)
-        {
-            ObjectsToReplace.Add(obj.transform);
-        }
-        //Transform[] ObjectsToReplace;
-        //ObjectsToReplace = Replace.GetComponentsInChildren<Transform>();
+        var transformsToReplace = new List<Transform>();
+        // objectsToReplace.AddRange(Selection.transforms);
 
-        foreach (Transform t in ObjectsToReplace)
+        foreach (var obj in objectsToReplace) transformsToReplace.Add(obj.transform);
+
+        foreach (var t in transformsToReplace)
         {
-            GameObject newObject;
-            newObject = (GameObject) PrefabUtility.InstantiatePrefab(useGameObject);
-            //newObject = (GameObject)EditorUtility.InstantiatePrefab(useGameObject);
-            newObject.transform.position = t.position;
-            newObject.transform.rotation = t.rotation;
-            newObject.transform.parent = t.parent;
-            newObject.name = t.name;
+            var instantiatePrefab = (GameObject) PrefabUtility.InstantiatePrefab(prefab);
+
+            instantiatePrefab.transform.position = t.position;
+            instantiatePrefab.transform.rotation = t.rotation;
+            instantiatePrefab.transform.parent = t.parent;
+
+            if (copyName) instantiatePrefab.name = t.name;
+
 
             DestroyImmediate(t.gameObject);
-
         }
-// Transform[] Replaces;
-//         Replaces = Replace.GetComponentsInChildren<Transform>();
-//
-//         foreach (Transform t in Replaces)
-//         {
-//             GameObject newObject;
-//             newObject = (GameObject) PrefabUtility.InstantiatePrefab(useGameObject);
-//             //newObject = (GameObject)EditorUtility.InstantiatePrefab(useGameObject);
-//             newObject.transform.position = t.position;
-//             newObject.transform.rotation = t.rotation;
-//             newObject.transform.parent = t.parent;
-//             newObject.name = t.name;
-//
-//             DestroyImmediate(t.gameObject);
-//
-//         }
-
     }
 }
