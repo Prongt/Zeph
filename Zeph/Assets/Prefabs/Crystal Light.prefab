@@ -199,6 +199,19 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
+--- !u!65 &687964777
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4466059937932370206}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3592912, y: 0.74506617, z: 0.4158036}
+  m_Center: {x: 0.019442618, y: 3.615089, z: 1.1490731}
 --- !u!1 &6369144856551659922
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,9 +221,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7884992959445521131}
+  - component: {fileID: 82657114}
+  - component: {fileID: 82657115}
+  - component: {fileID: 82657117}
   m_Layer: 0
-  m_Name: CrystalLight
-  m_TagString: Untagged
+  m_Name: Crystal Light
+  m_TagString: Crystal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -231,6 +247,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &82657114
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6369144856551659922}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.292674, y: 3.131209, z: 2.299891}
+  m_Center: {x: 0.1246686, y: 0.2513069, z: 0.0927822}
+--- !u!114 &82657115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6369144856551659922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f31844a59e598a0439a841a1b5d77691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  coolDownTime: 0
+  emissiveCrystal: {fileID: 2100000, guid: 9fd2db14b836a5047b476857b07de444, type: 2}
+  myRend: {fileID: 2721994782705309122}
+--- !u!114 &82657117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6369144856551659922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectMaterial: {fileID: 11400000, guid: 279da8824a6eaa441b12cf45dff3a89e, type: 2}
+  additionalAspects: 
+  onlyActivatedByPlayer: 0
+  requireDefaultGravity: 0
 --- !u!1001 &5682219809417246743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -320,9 +387,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48476c5c80e63b94299818d4dc298199, type: 3}
+--- !u!1 &4466059937932370206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 48476c5c80e63b94299818d4dc298199,
+    type: 3}
+  m_PrefabInstance: {fileID: 5682219809417246743}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &838223689342849805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 48476c5c80e63b94299818d4dc298199,
+    type: 3}
+  m_PrefabInstance: {fileID: 5682219809417246743}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2721994782705309122 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 48476c5c80e63b94299818d4dc298199,
     type: 3}
   m_PrefabInstance: {fileID: 5682219809417246743}
   m_PrefabAsset: {fileID: 0}
