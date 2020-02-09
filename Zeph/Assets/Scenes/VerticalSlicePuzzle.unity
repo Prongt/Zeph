@@ -14700,50 +14700,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 995578912}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1001689328 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7859120943577764186, guid: c1d0ded682ee9824a90c743295c336be,
-    type: 3}
-  m_PrefabInstance: {fileID: 5414478914160206425}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1001689329 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3774394975222681577, guid: c1d0ded682ee9824a90c743295c336be,
     type: 3}
   m_PrefabInstance: {fileID: 5414478914160206425}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1001689330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1001689328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1333fddadc0d148468c56d6d07dfed75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AspectType: 0
-  onPromote:
-    m_PersistentCalls:
-      m_Calls: []
-  onNegate:
-    m_PersistentCalls:
-      m_Calls: []
-  coolDownTime: 0
-  burnedMaterial: {fileID: 0}
-  burningParticleEffect: {fileID: 1434700673}
-  destroyable: 1
-  destroyTime: 4
-  canBeSource: 1
-  useBoxCollider: 0
-  boxDimensions: {x: 0, y: 0, z: 0}
-  firefly: {fileID: 1966848506}
-  fireSpreadRange: 3
-  fireSpreadPerSecond: 0.1
-  maxNumberOfAffectableObjects: 15
-  fireEventEmitter: {fileID: 0}
 --- !u!1001 &1003035204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21656,12 +21618,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1d0ded682ee9824a90c743295c336be, type: 3}
---- !u!2083052967 &1434700673 stripped
-VisualEffect:
-  m_CorrespondingSourceObject: {fileID: 7300065972751596856, guid: c1d0ded682ee9824a90c743295c336be,
-    type: 3}
-  m_PrefabInstance: {fileID: 5414478914160206425}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1435673089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53630,26 +53586,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 506575779}
     m_Modifications:
-    - target: {fileID: 650840881811826769, guid: c1d0ded682ee9824a90c743295c336be,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 650840881811826769, guid: c1d0ded682ee9824a90c743295c336be,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.71
-      objectReference: {fileID: 0}
-    - target: {fileID: 650840881811826769, guid: c1d0ded682ee9824a90c743295c336be,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 650840881811826769, guid: c1d0ded682ee9824a90c743295c336be,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
+    - target: {fileID: 1001689330, guid: c1d0ded682ee9824a90c743295c336be, type: 3}
+      propertyPath: firefly
+      value: 
+      objectReference: {fileID: 1966848506}
     - target: {fileID: 3774394975222681577, guid: c1d0ded682ee9824a90c743295c336be,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -53705,41 +53645,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3774394975222681577, guid: c1d0ded682ee9824a90c743295c336be,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3774394975222681577, guid: c1d0ded682ee9824a90c743295c336be,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3774394975222681577, guid: c1d0ded682ee9824a90c743295c336be,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6852253022996032861, guid: c1d0ded682ee9824a90c743295c336be,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 6.0114794
-      objectReference: {fileID: 0}
-    - target: {fileID: 6852253022996032861, guid: c1d0ded682ee9824a90c743295c336be,
-        type: 3}
-      propertyPath: m_Center.x
-      value: 2.8401816
-      objectReference: {fileID: 0}
-    - target: {fileID: 6852253022996032861, guid: c1d0ded682ee9824a90c743295c336be,
-        type: 3}
-      propertyPath: m_Center.z
-      value: 0.026788123
-      objectReference: {fileID: 0}
-    - target: {fileID: 7856418898991371788, guid: c1d0ded682ee9824a90c743295c336be,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7856418898991371788, guid: c1d0ded682ee9824a90c743295c336be,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -53750,8 +53655,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall Vines
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -2813188479999887604, guid: c1d0ded682ee9824a90c743295c336be, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1d0ded682ee9824a90c743295c336be, type: 3}
 --- !u!1001 &5415634249383843238
 PrefabInstance:

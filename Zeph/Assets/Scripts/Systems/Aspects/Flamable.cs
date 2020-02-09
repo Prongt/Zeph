@@ -78,7 +78,7 @@ public class Flamable : Aspects
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-        if (!gameObject.CompareTag("Log"))
+        if (!gameObject.CompareTag("Log") && firefly)
         {
             fireflyRate.rateOverTime = 0;
         }
@@ -92,7 +92,11 @@ public class Flamable : Aspects
             }
             
             //Instantiate(burningParticleEffect.gameObject, gameObject.transform);
-            burningParticleEffect.Play();
+            if (burningParticleEffect)
+            {
+                burningParticleEffect.Play();
+            }
+            
         }
         
         if (canBeSource && !isOnFire)

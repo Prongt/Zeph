@@ -147,7 +147,12 @@ public class Growable : Aspects
     {
         base.Promote(source, element);
 //        print("IM GROWING");
-        fireflyRate.rateOverTime = 0;
+
+        if (firefly)
+        {
+            fireflyRate.rateOverTime = 0;
+        }
+        
 
         if (growSoundEmitter)
         {

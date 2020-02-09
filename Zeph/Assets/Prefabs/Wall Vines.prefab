@@ -85,7 +85,8 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117,8 +118,8 @@ GameObject:
   - component: {fileID: 3774394975222681577}
   - component: {fileID: 6852253022996032861}
   - component: {fileID: 782515183076848808}
-  - component: {fileID: -2813188479999887604}
   - component: {fileID: 5382931524497381895}
+  - component: {fileID: 1001689330}
   m_Layer: 0
   m_Name: Wall Vines
   m_TagString: Untagged
@@ -135,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 7859120943577764186}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 6.59, y: 11.42, z: -25.03}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 3929762450572331334}
   - {fileID: 650840881811826769}
@@ -171,7 +172,26 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
---- !u!114 &-2813188479999887604
+--- !u!95 &5382931524497381895
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859120943577764186}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: b60b54c40f130e145979a4b8284c5073, type: 3}
+  m_Controller: {fileID: 9100000, guid: 8373c58ba19c6b44a8fe29ed0919e1c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1001689330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,32 +216,13 @@ MonoBehaviour:
   destroyable: 1
   destroyTime: 4
   canBeSource: 1
-  useBoxCollider: 1
-  boxDimensions: {x: 1, y: 3, z: 10}
+  useBoxCollider: 0
+  boxDimensions: {x: 0, y: 0, z: 0}
   firefly: {fileID: 0}
   fireSpreadRange: 3
   fireSpreadPerSecond: 0.1
   maxNumberOfAffectableObjects: 15
   fireEventEmitter: {fileID: 0}
---- !u!95 &5382931524497381895
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7859120943577764186}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: b60b54c40f130e145979a4b8284c5073, type: 3}
-  m_Controller: {fileID: 9100000, guid: 8373c58ba19c6b44a8fe29ed0919e1c2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8355275644779749980
 PrefabInstance:
   m_ObjectHideFlags: 0
