@@ -23,9 +23,7 @@ public class Elevator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        print(Vector3.Lerp(transform.position, endPos, 1 * Time.deltaTime));
-        
+
         if (transform.position.y > endPos.y-0.5f)
         {
             rising = false;
