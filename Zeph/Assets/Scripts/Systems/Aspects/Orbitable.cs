@@ -190,7 +190,12 @@ public class Orbitable : Aspects
     void Throw()
     {
         //unparents the object, turns off the particles and undoes the constraints
-        gameObject.transform.SetParent(GameObject.Find("Interactables").transform);
+        var parent = GameObject.Find("Interactables").transform;
+        if (parent)
+        {
+            gameObject.transform.SetParent(parent);
+        }
+        
         //orbitEffect.SetInt("Spawn Rate", 0);
         myRB.constraints = RigidbodyConstraints.None;
         myRB.useGravity = true;
