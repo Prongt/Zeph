@@ -13,10 +13,17 @@ public class Element : ScriptableObject
     [Tooltip("Only used by the player")][SerializeField] private float playerRange;
     [SerializeField] private Color debugColor;
     [SerializeField] private string buttonName;
+    [SerializeField] private bool powerIsEnabled;
     [HideInInspector] public Collider[] colliders;
     public List<AspectType> Promotes => promotes;
 
     public List<AspectType> Negates => negates;
+
+    public bool PowerIsEnabled
+    {
+        get => powerIsEnabled;
+        set => powerIsEnabled = value;
+    }
 
     public Color DebugColor
     {

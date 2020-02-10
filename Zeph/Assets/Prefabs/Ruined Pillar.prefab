@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!54 &-8270106370554003818
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203314150654975084}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &5686971984042710406
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63,6 +79,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 8cce4da513af75744bf08ed16b0b525d, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 0
+  requireDefaultGravity: 0
 --- !u!114 &8525320636313761439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +99,7 @@ MonoBehaviour:
   onNegate:
     m_PersistentCalls:
       m_Calls: []
+  coolDownTime: 0
   pullForce:
     UseConstant: 1
     ConstantValue: 100
@@ -96,23 +114,8 @@ MonoBehaviour:
   orbiting: 0
   throwable: 0
   radiusSpeed: 10
-  orbitEffect: {fileID: 0}
---- !u!54 &-8270106370554003818
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2203314150654975084}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  collisionSoundEventEmitter: {fileID: 0}
+  firefly: {fileID: 0}
 --- !u!1 &4124796863402226357
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +127,7 @@ GameObject:
   - component: {fileID: 5777596619545814462}
   m_Layer: 0
   m_Name: Ruined Pillar
-  m_TagString: Untagged
+  m_TagString: Heavy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,6 +183,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5777596619545814462}
     m_Modifications:
+    - target: {fileID: -6287836789983732601, guid: a6bf27d28d2d51c4398cf099a22309bd,
+        type: 3}
+      propertyPath: m_Name
+      value: Pillar
+      objectReference: {fileID: 0}
+    - target: {fileID: -6287836789983732601, guid: a6bf27d28d2d51c4398cf099a22309bd,
+        type: 3}
+      propertyPath: m_TagString
+      value: Heavy
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a6bf27d28d2d51c4398cf099a22309bd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -240,15 +253,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: RuinedPillarV1
       objectReference: {fileID: 0}
-    - target: {fileID: -6287836789983732601, guid: a6bf27d28d2d51c4398cf099a22309bd,
+    - target: {fileID: -927199367670048503, guid: a6bf27d28d2d51c4398cf099a22309bd,
         type: 3}
-      propertyPath: m_Name
-      value: Pillar
+      propertyPath: m_TagString
+      value: Heavy
       objectReference: {fileID: 0}
     - target: {fileID: 721056895991426811, guid: a6bf27d28d2d51c4398cf099a22309bd,
         type: 3}
       propertyPath: m_Name
       value: Base
+      objectReference: {fileID: 0}
+    - target: {fileID: 721056895991426811, guid: a6bf27d28d2d51c4398cf099a22309bd,
+        type: 3}
+      propertyPath: m_TagString
+      value: Heavy
       objectReference: {fileID: 0}
     - target: {fileID: 2102159042361312085, guid: a6bf27d28d2d51c4398cf099a22309bd,
         type: 3}

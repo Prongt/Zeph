@@ -53,71 +53,68 @@ public class PlayerElementController : MonoBehaviour
 
     private void UsePowers()
     {
-//        if (playerMove.IsPlayerGrounded())
-//        {
-            for (int i = 0; i < elementData.Length; i++)
+        for (int i = 0; i < elementData.Length; i++)
             {
-                if (Input.GetButtonDown(elementData[i].element.ButtonName))
+                if (!elementData[i].element.PowerIsEnabled) continue;
+                if (!Input.GetButtonDown(elementData[i].element.ButtonName)) continue;
+                switch (elementData[i].element.ButtonName)
                 {
-//                    Debug.Log("Button pressed " + elementData[i].element.ButtonName);
-                    if (elementData[i].element.ButtonName == "FirePower")
-                    {
+                    case "FirePower":
                         fireEffect.SetInt("Spawn Rate", 1000);
-                    } else if (elementData[i].element.ButtonName == "OrbitPower")
-                    {
+                        break;
+                    case "OrbitPower":
                         leafEffect.SetInt("Spawn Rate", 30);
-                    } else if (elementData[i].element.ButtonName == "LightPower")
-                    {
+                        break;
+                    case "LightPower":
                         light.intensity = 100f;
-                    }
-                    //Trigger Audio Effect
-                    var audioEmitter = elementData[i].audioEmitter;
-                    if (audioEmitter)
+                        break;
+                }
+
+                //Trigger Audio Effect
+                var audioEmitter = elementData[i].audioEmitter;
+                if (audioEmitter)
+                {
+                    if (audioEmitter.IsPlaying())
                     {
-                        if (audioEmitter.IsPlaying())
-                        {
-                            audioEmitter.Stop();
-                        }
-                        audioEmitter.Play();
+                        audioEmitter.Stop();
                     }
+
+                    audioEmitter.Play();
+                }
+
+
+                StartCoroutine(UsePowerAnimation());
+                elementData[i].element.colliders = new Collider[MaxAffectableObjects];
+                Physics.OverlapSphereNonAlloc(transform.position, elementData[i].element.PlayerRange,
+                    elementData[i].element.colliders);
+                for (var j = 0; j < elementData[i].element.colliders.Length; j++)
+                {
+                    var collisionObj = elementData[i].element.colliders[j];
+
+                    if (!collisionObj) continue;
                     
+                    var obj = collisionObj.GetComponent<Interactable>();
+
+                    if (!obj) continue;
                     
-                    StartCoroutine(UsePowerAnimation());
-                    elementData[i].element.colliders = new Collider[MaxAffectableObjects];
-                    Physics.OverlapSphereNonAlloc(transform.position, elementData[i].element.PlayerRange,
-                        elementData[i].element.colliders);
-                    for (int j = 0; j < elementData[i].element.colliders.Length; j++)
+                    var position = transform.position;
+                    var nearestPoint = collisionObj.ClosestPoint(position);
+                    Vector3 dir = nearestPoint - position;
+
+                    Physics.Raycast(position, dir, out RaycastHit hitInfo,
+                        elementData[i].element.PlayerRange,
+                        layerMask);
+
+                    if (hitInfo.collider != collisionObj) continue;
+                    
+                    var playerY = transform.position.y;
+
+                    if (Mathf.Abs(nearestPoint.y - playerY) < height)
                     {
-                        var collisionObj = elementData[i].element.colliders[j];
-
-                        if (collisionObj)
-                        {
-                            var obj = collisionObj.GetComponent<Interactable>();
-
-                            if (obj)
-                            {
-                                var position = transform.position;
-                                var nearestPoint = collisionObj.ClosestPoint(position);
-                                Vector3 dir = nearestPoint - position;
-
-                                Physics.Raycast(position, dir, out RaycastHit hitInfo, elementData[i].element.PlayerRange,
-                                    layerMask);
-
-                                if (hitInfo.collider == collisionObj)
-                                {
-                                    float playerY = transform.position.y;
-
-                                    if (Mathf.Abs(nearestPoint.y - playerY) < height)
-                                    {
-                                        obj.ApplyElement(elementData[i].element, gameObject.transform, true);
-                                    }
-                                }
-                            }
-                        }
+                        obj.ApplyElement(elementData[i].element, gameObject.transform, true);
                     }
                 }
-           // }
-        }
+            }
     }
     
     
