@@ -58,6 +58,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -114,8 +115,12 @@ MonoBehaviour:
   onNegate:
     m_PersistentCalls:
       m_Calls: []
+  coolDownTime: 0
   myAnim: {fileID: 0}
   onGround: 0
+  effect: {fileID: 0}
+  distortionEffect: {fileID: 0}
+  distortionEventEmitter: {fileID: 0}
 --- !u!114 &7312836316527053380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +136,7 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 0b0ffe6f8e2b0464ab8fddec3d12384f, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 1
+  requireDefaultGravity: 0
 --- !u!1001 &7871316478110514786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,16 +144,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 94891979401177775}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 4baf73d2b36f0c44bb88a18dcc28a704,
-        type: 3}
-      propertyPath: m_Name
-      value: DistortionRiftPlaneV1
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 4baf73d2b36f0c44bb88a18dcc28a704,
-        type: 3}
-      propertyPath: m_TagString
-      value: Rift
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4baf73d2b36f0c44bb88a18dcc28a704,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -208,6 +204,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e5447692ae2d3a742838494547e539a3, type: 2}
+    - target: {fileID: -927199367670048503, guid: 4baf73d2b36f0c44bb88a18dcc28a704,
+        type: 3}
+      propertyPath: m_Name
+      value: DistortionRiftPlaneV1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4baf73d2b36f0c44bb88a18dcc28a704,
+        type: 3}
+      propertyPath: m_TagString
+      value: Rift
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4baf73d2b36f0c44bb88a18dcc28a704, type: 3}
 --- !u!4 &2902073446620796280 stripped
