@@ -4349,6 +4349,7 @@ GameObject:
   - component: {fileID: 948776402}
   - component: {fileID: 948776401}
   - component: {fileID: 948776400}
+  - component: {fileID: 948776403}
   m_Layer: 5
   m_Name: Button (3)
   m_TagString: Untagged
@@ -4418,7 +4419,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 948776401}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 948776403}
+        m_MethodName: SceneLoad
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Tutorial
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &948776401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4455,6 +4467,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948776398}
   m_CullTransparentMesh: 0
+--- !u!114 &948776403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948776398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f966f2608315dd4cad8be6f5c76d039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &963383468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5247,6 +5271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 4597b336e8f6dab4d8864df2a8ba6c59, type: 3}
 --- !u!1 &1090728585 stripped
 GameObject:
@@ -5437,6 +5462,7 @@ GameObject:
   - component: {fileID: 1137301347}
   - component: {fileID: 1137301346}
   - component: {fileID: 1137301345}
+  - component: {fileID: 1137301348}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -5506,7 +5532,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1137301346}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1137301348}
+        m_MethodName: SceneLoad
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SnowLevel
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1137301346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5543,6 +5580,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137301343}
   m_CullTransparentMesh: 0
+--- !u!114 &1137301348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137301343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f966f2608315dd4cad8be6f5c76d039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1177113154 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2448277092612821705, guid: 922fe61700b92ac42b2df41bfc67f0bd,
@@ -7086,6 +7135,7 @@ GameObject:
   - component: {fileID: 1574674369}
   - component: {fileID: 1574674368}
   - component: {fileID: 1574674367}
+  - component: {fileID: 1574674370}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -7155,7 +7205,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1574674368}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1574674370}
+        m_MethodName: SceneLoad
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: VerticalSlicePuzzle
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1574674368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7192,6 +7253,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1574674365}
   m_CullTransparentMesh: 0
+--- !u!114 &1574674370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574674365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f966f2608315dd4cad8be6f5c76d039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1597832753
 GameObject:
   m_ObjectHideFlags: 0
@@ -7506,6 +7579,7 @@ GameObject:
   - component: {fileID: 1684828806}
   - component: {fileID: 1684828805}
   - component: {fileID: 1684828804}
+  - component: {fileID: 1684828807}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -7575,7 +7649,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1684828805}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1684828807}
+        m_MethodName: SceneLoad
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CavePuzzle
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1684828805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7612,6 +7697,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684828802}
   m_CullTransparentMesh: 0
+--- !u!114 &1684828807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684828802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f966f2608315dd4cad8be6f5c76d039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1687678697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5777596619545814462, guid: a720873750d2e9742883b18fae16ed9c,
@@ -10680,6 +10777,42 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 17.829945, y: 3.0000007, z: 0.60000014}
   m_Center: {x: 0, y: 0, z: 0.30000007}
+--- !u!1 &2054848621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5779849489750596456, guid: 4597b336e8f6dab4d8864df2a8ba6c59,
+    type: 3}
+  m_PrefabInstance: {fileID: 1057814699}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2054848622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054848621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cc1a007d369be948bdad9d08ceac61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  coolDownTime: 0
+  myAnim: {fileID: 0}
+  mat: {fileID: 0}
+  groundDistort: {fileID: 0}
+  isTree: 0
+  colliders:
+    small: {fileID: 0}
+    grown: {fileID: 0}
+    distort: {fileID: 0}
+  growSoundEmitter: {fileID: 0}
+  firefly: {fileID: 0}
 --- !u!1 &2097619322 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5590770835228431425, guid: 922fe61700b92ac42b2df41bfc67f0bd,
