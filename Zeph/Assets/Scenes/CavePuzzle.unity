@@ -3465,7 +3465,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 193507634, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
       propertyPath: m_Intensity
-      value: 95.492966
+      value: 47.746483
       objectReference: {fileID: 0}
     - target: {fileID: 193507634, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
       propertyPath: m_LightShadowCasterMode
@@ -5733,6 +5733,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0fa9709b3579714aac745890da4d762, type: 3}
+--- !u!95 &1959882079 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5002115044232255065, guid: a0fa9709b3579714aac745890da4d762,
+    type: 3}
+  m_PrefabInstance: {fileID: 1959882078}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1995215630
 GameObject:
   m_ObjectHideFlags: 0
@@ -5952,7 +5958,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onActivate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1959882079}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Growing
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &2024960944
 PrefabInstance:
   m_ObjectHideFlags: 0
