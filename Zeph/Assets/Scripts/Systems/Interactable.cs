@@ -16,6 +16,7 @@ public class Interactable : MonoBehaviour
     [SerializeField] protected bool onlyActivatedByPlayer = false;
     [SerializeField] protected bool requireDefaultGravity = false;
 
+    public bool IsEnabled = true;
 
     private List<AspectType> aspectTypesList;
     private List<Aspects> aspectComponentsList;
@@ -237,7 +238,11 @@ public class Interactable : MonoBehaviour
                 return;
             }
         }
-        
+
+        if (IsEnabled == false)
+        {
+            return;
+        }
         
         for (int i = 0; i < aspectComponentsList.Count; i++)
         {
