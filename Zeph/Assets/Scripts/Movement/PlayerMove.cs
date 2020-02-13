@@ -120,7 +120,7 @@ public class PlayerMove : MonoBehaviour
 			
 		}
 		
-		KnockBack();
+		//KnockBack();
 		
 		if (_PlayerMovementEnabled)
 		{
@@ -348,7 +348,7 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	
-	public void KnockBack()
+	/*public void KnockBack()
 	{
 		//Forward
 		//Debug.DrawRay(transform.position, zephModel.forward * dist);
@@ -382,7 +382,7 @@ public class PlayerMove : MonoBehaviour
 			characterController.Move(knockBackVector * (knockBackForce *2));
 			splashEmitter.Play();
 		}
-	}
+	}*/
 
 	
 
