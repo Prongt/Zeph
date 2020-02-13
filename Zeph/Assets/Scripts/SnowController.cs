@@ -44,7 +44,7 @@ public class SnowController : MonoBehaviour
     public void Melt()
     {
         SetSnowSizeOverTime(1, meltTime);
-        Debug.Log("Melt");
+        //Debug.Log("Melt");
     }
 
     [ContextMenu("Freeze")]
