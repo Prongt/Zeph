@@ -44,6 +44,9 @@ public class PlayerMove : MonoBehaviour
 	private Vector3 originalUp;
 	[SerializeField] private float coyoteTime = 0.15f;
 	private float coyoteTimeRemaining;
+	
+	[Header("Tick if movement is janky")]
+	public bool flipMovementInput = false;
 
 	[Header("Water Knock Back")]
 	public float knockBackDistance = 0.75f;
@@ -91,8 +94,18 @@ public class PlayerMove : MonoBehaviour
 		zephAnimator = GetComponentInChildren<Animator>();
 	}
 
-	void Update () {
+	void Update ()
+	{
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
+		// if (flipMovementInput)
+		// {
+		// 	input= new Vector2 (-Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Horizontal"));
+		// }
+		// else
+		// {
+		// 	input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
+		// }
+		
 		Vector2 inputDir = input.normalized;
 
 		gravityDirection = Physics.gravity;
@@ -262,8 +275,17 @@ public class PlayerMove : MonoBehaviour
 
 		
 		velocityY += Time.deltaTime * gravityPull;
+
+		if (flipMovementInput)
+		{
+			velocity = new Vector3(inputDir.y, 0, -inputDir.x);
+		}
+		else
+		{
+			velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
+		}
 		
-		velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
+		
 		velocity.Normalize();
 		velocity *= currentSpeed;
 
