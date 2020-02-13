@@ -91,7 +91,7 @@ public class Interactable : MonoBehaviour
         
         aspectComponentsList = GetComponents<Aspects>().ToList();
         //Method call is delayed due to unity delay when destroying components
-        Invoke("UpdateRequiredComponents", 0.5f);
+        Invoke("UpdateRequiredComponents", 1.5f);
     }
 
     private void RemoveComponentByType(Type type)

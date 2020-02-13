@@ -827,6 +827,8 @@ GameObject:
   - component: {fileID: 395545493}
   - component: {fileID: 395545492}
   - component: {fileID: 395545495}
+  - component: {fileID: 395545496}
+  - component: {fileID: 395545497}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1003,6 +1005,32 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
+--- !u!114 &395545496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395545491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01170ec73f604f4ea53336345b1ded3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothFactor: 300
+--- !u!114 &395545497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395545491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: -1
 --- !u!1001 &404235882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3482,6 +3510,34 @@ PrefabInstance:
       propertyPath: m_BounceIntensity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 543090848, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.23049729
+      objectReference: {fileID: 0}
+    - target: {fileID: 543090848, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6665312
+      objectReference: {fileID: 0}
+    - target: {fileID: 543090848, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.22898293
+      objectReference: {fileID: 0}
+    - target: {fileID: 543090848, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6709502
+      objectReference: {fileID: 0}
+    - target: {fileID: 543090848, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.962764
+      objectReference: {fileID: 0}
+    - target: {fileID: 543090848, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.200792
+      objectReference: {fileID: 0}
+    - target: {fileID: 543090848, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5372944
+      objectReference: {fileID: 0}
     - target: {fileID: 1041451876, guid: 5c0917fafcb61764aa309728126c3964, type: 3}
       propertyPath: m_Intensity
       value: 9.577323
@@ -3563,6 +3619,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zeph
       objectReference: {fileID: 0}
+    - target: {fileID: 4890117515526024235, guid: 5c0917fafcb61764aa309728126c3964,
+        type: 3}
+      propertyPath: flipMovementInput
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5048264981524812767, guid: 5c0917fafcb61764aa309728126c3964,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3592,6 +3653,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037957394979472426, guid: 5c0917fafcb61764aa309728126c3964,
+        type: 3}
+      propertyPath: m_TagString
+      value: OrbitPoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c0917fafcb61764aa309728126c3964, type: 3}

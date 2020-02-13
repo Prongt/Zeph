@@ -117,15 +117,17 @@ public class Growable : Aspects
        {
            mat.SetFloat("Vector1_B0F27FFD", matX);
 
-           if (!groundDistort.GetBool("Distort") && matX <= 1)
-           {
-               //distortBridge.SetActive(true);
-               //gameObject.SetActive(false);
-           } else if (groundDistort.GetBool("Distort") && matX <= -13)
-           {
-               //distortBridge.SetActive(true);
-               //gameObject.SetActive(false);
-           }
+        
+
+           // if (!groundDistort.GetBool("Distort") && matX <= 1)
+           // {
+           //     //distortBridge.SetActive(true);
+           //     //gameObject.SetActive(false);
+           // } else if (groundDistort.GetBool("Distort") && matX <= -13)
+           // {
+           //     //distortBridge.SetActive(true);
+           //     //gameObject.SetActive(false);
+           // }
 
            if (Distortion.isDistorting)
            {
