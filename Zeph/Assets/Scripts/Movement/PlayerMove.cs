@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using FMODUnity;
 using UnityEngine;
 
@@ -114,6 +113,7 @@ public class PlayerMove : MonoBehaviour
 
 		if (gravityDirection != oldGravity)
 		{
+			Debug.Log("Change");
 			if (GravityRift.useNewGravity)
 			{
 				newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
@@ -251,6 +251,19 @@ public class PlayerMove : MonoBehaviour
 			{
 				velocity.z += velocityY;
 			}
+		}else if (gravityDirection.y > 9f)
+		{
+//			Debug.Log("Up Move");
+			// velocityY += Time.deltaTime * gravityPull;
+			// //velocity = transform.forward * currentSpeed + upAxis * velocityY;
+			// velocity = transform.forward * currentSpeed + upAxis;
+			// velocity.y = velocityY;
+			//velocity = transform.forward;
+			
+			velocity.x = -inputDir.x * playerMoveSpeed;
+			velocity.y = velocityY;
+			velocity.z = -inputDir.y * playerMoveSpeed;
+			zephAnimator.SetFloat("moveSpeed", velocity.magnitude);
 		}
 		else
 		{
@@ -321,13 +334,14 @@ public class PlayerMove : MonoBehaviour
 			if (GravityRift.useNewGravity)
 			{
 				float targetRotation = Mathf.Atan2(-inputDir.x, -inputDir.y) * Mathf.Rad2Deg;
+				
+					float angle = Mathf.SmoothDampAngle(zephModel.localEulerAngles.y, targetRotation, ref turnVelocity,
+						GetModifiedSmoothTime(playerTurnSpeed));
 
-				float angle = Mathf.SmoothDampAngle(zephModel.localEulerAngles.y, targetRotation, ref turnVelocity,
-					GetModifiedSmoothTime(playerTurnSpeed));
-
-				var rot = zephModel.localEulerAngles;
-				rot.y = angle;
-				zephModel.localEulerAngles = rot;
+					var rot = zephModel.localEulerAngles;
+					rot.y = angle;
+					zephModel.localEulerAngles = rot;
+				
 			}
 			else
 			{

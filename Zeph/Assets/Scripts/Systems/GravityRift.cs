@@ -5,7 +5,7 @@ using UnityEngine;
 public class GravityRift : Aspects
 {
     [SerializeField] private Vector3 newGravity;
-    private static Vector3 ogGravity = new Vector3(0, -9.81f, 0);
+    public static Vector3 ogGravity = new Vector3(0, -9.81f, 0);
 
     public static bool useNewGravity = false;
 
@@ -28,6 +28,7 @@ public class GravityRift : Aspects
         return componentTypes;
     }
 
+    
     public override void Promote(Transform source = null, Element element = null)
     {
         //Debug.Log("Here " + gameObject.name);
@@ -38,6 +39,11 @@ public class GravityRift : Aspects
         }
         base.Promote(source, element);
         
+        ChangeGravity();
+    }
+    
+    private void ChangeGravity()
+    {
         if (!resetGravity)
         {
             Physics.gravity = newGravity;
@@ -56,7 +62,7 @@ public class GravityRift : Aspects
             }
         }
     }
-    
+
     public override void Negate(Transform source = null)
     {
         base.Promote(source);
