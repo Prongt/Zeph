@@ -27,7 +27,7 @@ public class Conductor : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Grow();
+           // Grow();
         }
     }
 
