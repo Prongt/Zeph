@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1515730146842692728}
   - component: {fileID: 731482882}
-  - component: {fileID: 731482883}
+  - component: {fileID: 5410403822234805304}
   - component: {fileID: 731482884}
+  - component: {fileID: 731482886}
   m_Layer: 0
   m_Name: Conductor1_Start
   m_TagString: Untagged
@@ -49,7 +50,38 @@ CapsuleCollider:
   m_Height: 7.61
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &731482883
+--- !u!136 &5410403822234805304
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515730146842692735}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.25
+  m_Height: 7.61
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &731482884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515730146842692735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectMaterial: {fileID: 11400000, guid: f2d9ef66789d7b74d8a8f02ba0b5e6fe, type: 2}
+  additionalAspects: 
+  onlyActivatedByPlayer: 0
+  requireDefaultGravity: 0
+  IsEnabled: 1
+--- !u!114 &731482886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,23 +124,6 @@ MonoBehaviour:
   fireSpreadPerSecond: 0.1
   maxNumberOfAffectableObjects: 15
   fireEventEmitter: {fileID: 0}
---- !u!114 &731482884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1515730146842692735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aspectMaterial: {fileID: 11400000, guid: f2d9ef66789d7b74d8a8f02ba0b5e6fe, type: 2}
-  additionalAspects: 
-  onlyActivatedByPlayer: 0
-  requireDefaultGravity: 0
-  IsEnabled: 1
 --- !u!1 &1515730147740214258
 GameObject:
   m_ObjectHideFlags: 0

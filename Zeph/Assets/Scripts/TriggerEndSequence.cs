@@ -11,7 +11,7 @@ public class TriggerEndSequence : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerMove._PlayerMovementEnabled = false;
+            PlayerMove.PlayerMovementEnabled = false;
             OnPlayerEnter.Invoke();
         }
     }

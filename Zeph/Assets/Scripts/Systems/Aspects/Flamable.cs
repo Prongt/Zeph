@@ -55,7 +55,7 @@ public class Flamable : Aspects
             baseMaterial = renderer.material;
         }
         
-        //if (burningParticleEffect)
+        if (burningParticleEffect)
         burningParticleEffect.Stop();
 
         if (fireSpreadPerSecond < 0.01f)

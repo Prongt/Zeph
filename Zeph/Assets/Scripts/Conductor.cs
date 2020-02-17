@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class Conductor : MonoBehaviour
@@ -14,13 +13,13 @@ public class Conductor : MonoBehaviour
     
     
     private float currentTarget;
-    private List<GameObject> _objectsInRadius;
-    private List<SnowController> _snowControllersInRadius;
+    private List<GameObject> objectsInRadius;
+    private List<SnowController> snowControllersInRadius;
 
     private void Awake()
     {
-        _objectsInRadius = new List<GameObject>();
-        _snowControllersInRadius = new List<SnowController>();
+        objectsInRadius = new List<GameObject>();
+        snowControllersInRadius = new List<SnowController>();
     }
 
     private void Update()
@@ -61,7 +60,7 @@ public class Conductor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_objectsInRadius.Contains(other.gameObject)) return;
+        if (objectsInRadius.Contains(other.gameObject)) return;
 
         var snowController = other.GetComponent<SnowController>();
         
@@ -69,8 +68,8 @@ public class Conductor : MonoBehaviour
         if (!snowController) return;
         
         
-        _objectsInRadius.Add(other.gameObject);
-        _snowControllersInRadius.Add(snowController);
+        objectsInRadius.Add(other.gameObject);
+        snowControllersInRadius.Add(snowController);
         snowController.Melt();
         
         var interactable = other.GetComponent<Interactable>();
@@ -82,13 +81,13 @@ public class Conductor : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!_objectsInRadius.Contains(other.gameObject)) return;
+        if (!objectsInRadius.Contains(other.gameObject)) return;
         
         
-        var index = _objectsInRadius.IndexOf(other.gameObject);
-        _snowControllersInRadius[index].Freeze();
-        _snowControllersInRadius.RemoveAt(index);
-        _objectsInRadius.Remove(other.gameObject);
+        var index = objectsInRadius.IndexOf(other.gameObject);
+        snowControllersInRadius[index].Freeze();
+        snowControllersInRadius.RemoveAt(index);
+        objectsInRadius.Remove(other.gameObject);
         
         var interactable = other.GetComponent<Interactable>();
         if (interactable)

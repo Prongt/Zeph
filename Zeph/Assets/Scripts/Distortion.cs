@@ -55,8 +55,8 @@ public class Distortion : Aspects
 
         if (gameObject.CompareTag("Rift"))
         {
-            effect.SetActive(!isDistorting);
-            distortionEffect.SetActive(isDistorting);
+            if (effect) effect.SetActive(!isDistorting);
+            if (distortionEffect) distortionEffect.SetActive(isDistorting);
         }
     }
 
