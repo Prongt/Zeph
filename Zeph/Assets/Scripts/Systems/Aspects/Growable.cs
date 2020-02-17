@@ -29,6 +29,8 @@ public class Growable : Aspects
     [SerializeField] private ParticleSystem firefly;
     private ParticleSystem.EmissionModule fireflyRate;
 
+    private bool lightShining;
+
 
     public Type[] componentTypes = new Type[]
     {
@@ -74,6 +76,11 @@ public class Growable : Aspects
         }
     }
 
+   public void LightShine()
+   {
+       lightShining = true;
+   }
+
    void Update()
    {
        if (isTree)
@@ -117,7 +124,10 @@ public class Growable : Aspects
        {
            mat.SetFloat("Vector1_B0F27FFD", matX);
 
-        
+           if (lightShining)
+           {
+               StartCoroutine(Appear());
+           }
 
            // if (!groundDistort.GetBool("Distort") && matX <= 1)
            // {
@@ -204,11 +214,47 @@ public class Growable : Aspects
     IEnumerator Appear()
     {
         yield return new WaitForSeconds(0f);
-        if (groundDistort.GetBool("Distort") && hasGrown)
+        if (groundDistort != null)
         {
-            matX = -14;
+            if (groundDistort.GetBool("Distort") && hasGrown)
+            {
+                matX = -14;
+            }
+
+            if (!groundDistort.GetBool("Distort"))
+            {
+                if (matX >= 1)
+                {
+                    matX -= 5 * Time.deltaTime;
+                    StartCoroutine(Appear());
+                }
+                else
+                {
+                    hasGrown = true;
+                    /*gameObject.GetComponent<BoxCollider>().center = new Vector3(-6.721177f,-3.552706e-16f, 0.1f);
+                    gameObject.GetComponent<BoxCollider>().size = new Vector3(18.35765f,3,0.2f);
+                    gameObject.GetComponent<BoxCollider>().isTrigger = false;*/
+                    StopCoroutine(Appear());
+                }
+            }
+            else if (groundDistort.GetBool("Distort"))
+            {
+                if (matX >= -13)
+                {
+                    matX -= 5 * Time.deltaTime;
+                    StartCoroutine(Appear());
+                }
+                else
+                {
+                    hasGrown = true;
+                    /*gameObject.GetComponent<BoxCollider>().center = new Vector3(0,2.384186e-08f, 0.1f);
+                    gameObject.GetComponent<BoxCollider>().size = new Vector3(31.76197f,3,0.2f);
+                    gameObject.GetComponent<BoxCollider>().isTrigger = false;*/
+                    StopCoroutine(Appear());
+                }
+            }
         }
-        if (!groundDistort.GetBool("Distort"))
+        else
         {
             if (matX >= 1)
             {
@@ -220,21 +266,6 @@ public class Growable : Aspects
                 hasGrown = true;
                 /*gameObject.GetComponent<BoxCollider>().center = new Vector3(-6.721177f,-3.552706e-16f, 0.1f);
                 gameObject.GetComponent<BoxCollider>().size = new Vector3(18.35765f,3,0.2f);
-                gameObject.GetComponent<BoxCollider>().isTrigger = false;*/
-                StopCoroutine(Appear());
-            }
-        } else if (groundDistort.GetBool("Distort"))
-        {
-            if (matX >= -13)
-            {
-                matX -= 5 * Time.deltaTime;
-                StartCoroutine(Appear());
-            }
-            else
-            {
-                hasGrown = true;
-                /*gameObject.GetComponent<BoxCollider>().center = new Vector3(0,2.384186e-08f, 0.1f);
-                gameObject.GetComponent<BoxCollider>().size = new Vector3(31.76197f,3,0.2f);
                 gameObject.GetComponent<BoxCollider>().isTrigger = false;*/
                 StopCoroutine(Appear());
             }
