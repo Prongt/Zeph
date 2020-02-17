@@ -10,9 +10,13 @@ public class Orbitable : Aspects
     private Vector3 direction;
     
     //Everything controlling orbit and throw values
+    [Header("Pull/Push")]
     [SerializeField] private FloatReference pullForce;
     [SerializeField] private FloatReference maxThrowForce;
     public float throwForce = 0.5f;
+    private Transform throwParent;
+    
+    [Header("Orbit Vars")]
     [SerializeField] public float orbitSize = 3;
     private bool orbitDirection = true;
     private Transform centerPoint = null;
@@ -25,15 +29,16 @@ public class Orbitable : Aspects
     private bool delay = false;
 
     //Bools controlling if the object orbits or is thrown
-    public bool orbiting;
-    public bool throwable;
+    private bool orbiting;
+    private bool throwable;
 
     //Time the object takes to reach the desired position on the radius
-    public float radiusSpeed =  10f;
+    private float radiusSpeed =  10f;
     
     //VFX of the orbiting affect
     //[SerializeField] private VisualEffect orbitEffect;
     
+    [Header("Extras")]
     [SerializeField] private StudioEventEmitter collisionSoundEventEmitter;
     [SerializeField] private ParticleSystem firefly;
     private ParticleSystem.EmissionModule fireflyRate;
@@ -56,7 +61,10 @@ public class Orbitable : Aspects
 
         if (!gameObject.CompareTag("Log"))
         {
-            fireflyRate = firefly.emission;
+            if (firefly != null)
+            {
+                fireflyRate = firefly.emission;
+            }
         }
         else
         {
@@ -70,6 +78,13 @@ public class Orbitable : Aspects
         {
             collisionSoundEventEmitter = GetComponent<StudioEventEmitter>();
         }
+
+        if (!GameObject.Find("Throw Parents"))
+        {
+            GameObject parent = new GameObject("Throw Parents");
+        }
+
+        throwParent = GameObject.Find("Throw Parents").transform;
     }
 
     void Update()
@@ -99,10 +114,7 @@ public class Orbitable : Aspects
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-        //Being pushed
-        //Debug.Log("Being pushed");
         //Initial pull to center
-        //centerPoint = source.transform;
         direction = source.transform.position - transform.position;
 
         if (firefly != null)
@@ -136,51 +148,42 @@ public class Orbitable : Aspects
     public override void Negate(Transform source = null)
     {
         base.Promote(source);
-        //Not pushed
-        //Debug.Log("Not being pushed");
     }
 
     void Orbit()
     {
         //Setting parent means the object does trail behind the player.
         gameObject.transform.SetParent(GameObject.Find("Zeph").transform);
-        //Affecting the spawn rate of the vfx to have it start "playing".
-       // orbitEffect.SetInt("Spawn Rate", 80);
+        
         //Sake of ease constraints added
         myRB.constraints = RigidbodyConstraints.FreezeRotation;
         myRB.useGravity = false;
         
-        
-
-
         //The orbiting code. Rotates around a point, gets a desired position, moves towards that desired position. forces the object to be on the right y level
         if (orbitDirection)
         {
             transform.RotateAround(centerPoint.position, Vector3.up, rotSpeed * Time.deltaTime);
-            var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize +
-                                  centerPoint.position;
             
-            //desiredPosition = new Vector3(desiredPosition.x, centerPoint.position.y, desiredPosition.z);
-//            print("Desired Pos: " + desiredPosition);
-
+            var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize + centerPoint.position;
+            
             transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
-            transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
+            
+            //Might not need this anymore
+            //transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
         }
         else
         {
             transform.RotateAround(centerPoint.position, Vector3.up, -rotSpeed * Time.deltaTime);
-            var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize +
-                                  centerPoint.position;
             
-            //desiredPosition = new Vector3(desiredPosition.x, centerPoint.position.y, desiredPosition.z);
-           // print("Desired Pos: " + desiredPosition);
-           
+            var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize + centerPoint.position;
+            
             transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
-           transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
+            
+            //Might not need this anymore
+            //transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
         }
 
         //This speeds up the orbit
-        
         if (throwForce <= maxThrowForce.Value)
         {
             throwForce += 1 * Time.deltaTime;
@@ -189,14 +192,11 @@ public class Orbitable : Aspects
 
     void Throw()
     {
-        //unparents the object, turns off the particles and undoes the constraints
-        var parent = GameObject.Find("Interactables").transform;
-        if (parent)
+        if (throwParent)
         {
-            gameObject.transform.SetParent(parent);
+            gameObject.transform.SetParent(throwParent);
         }
         
-        //orbitEffect.SetInt("Spawn Rate", 0);
         myRB.constraints = RigidbodyConstraints.None;
         myRB.useGravity = true;
         
@@ -207,7 +207,6 @@ public class Orbitable : Aspects
         direction = centerPoint.forward + transform.forward;
         myRB.AddForce(centerPoint.forward * throwForce, ForceMode.Impulse);
         throwForce = 0.5f;
-        
     }
 
     IEnumerator Delay()
@@ -249,6 +248,8 @@ public class Orbitable : Aspects
             }
         }
 
+        
+        //This Part is for the pillar. If object is heavy and hits the floor it comes to a dead stop.
         if (gameObject.CompareTag("Heavy") && other.gameObject.CompareTag("Floor"))
         {
             myRB.constraints = RigidbodyConstraints.FreezeRotation;
