@@ -46,7 +46,8 @@ public class PlayerMove : MonoBehaviour
 	private float coyoteTimeRemaining;
 	
 	[Header("Tick if movement is janky")]
-	public bool flipMovementInput = false;
+	public bool ReverseMovementDirections = false;
+	public bool FlipMovement = false;
 
 	[Header("Water Knock Back")]
 	public float knockBackDistance = 0.75f;
@@ -276,13 +277,17 @@ public class PlayerMove : MonoBehaviour
 		
 		velocityY += Time.deltaTime * gravityPull;
 
-		if (flipMovementInput)
+		if (ReverseMovementDirections)
 		{
 			velocity = new Vector3(inputDir.y, 0, -inputDir.x);
-		}
-		else
+		}else
 		{
 			velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
+		}
+
+		if (FlipMovement)
+		{
+			velocity = new Vector3(-velocity.x, 0, -velocity.z);
 		}
 		
 		
