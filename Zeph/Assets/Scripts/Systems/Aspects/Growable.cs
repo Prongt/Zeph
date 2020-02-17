@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
 using FMODUnity;
 using UnityEngine;
 
 public class Growable : Aspects
 {
-    //[SerializeField] private Material GrowingMaterial;
-    //[SerializeField] private GameObject GrowingParticleEffect;
     public Animator myAnim;
     [SerializeField] private Material mat;
     private float matX;
     [SerializeField] private Animator groundDistort;
-    //[SerializeField] private GameObject distortBridge;
 
 
     [SerializeField] private bool isTree = false;
@@ -21,7 +17,6 @@ public class Growable : Aspects
     [SerializeField] private StudioEventEmitter growSoundEmitter;
 
     private SkinnedMeshRenderer meshRenderer;
-    private MeshCollider meshCollider;
     private Mesh mesh;
 
     private bool hasGrown = false;
@@ -63,15 +58,14 @@ public class Growable : Aspects
         {
             myAnim = GetComponent<Animator>();
             meshRenderer = GetComponent<SkinnedMeshRenderer>();
-            meshCollider = GetComponent<MeshCollider>();
 
             colliders.small.isTrigger = false;
-            colliders.distort.SetActive(false);
-            colliders.grown.SetActive(false);
+            colliders.distort.enabled = false;
+            colliders.grown.enabled = false;
 
             if (meshRenderer == null)
             {
-                Debug.Log("No SkinnedMeshRenderer on " + gameObject.name + " id: " + gameObject.GetInstanceID());
+               //Debug.Log("No SkinnedMeshRenderer on " + gameObject.name + " id: " + gameObject.GetInstanceID());
             }
         }
     }
@@ -87,18 +81,16 @@ public class Growable : Aspects
        {
            if (myAnim.GetBool("Distort") && myAnim.GetBool("Grow"))
            {
-               //meshCollider.sharedMesh = colliders.distort;
                colliders.small.isTrigger = true;
-               colliders.distort.SetActive(true);
-               colliders.grown.SetActive(false);
+               colliders.distort.enabled = true;
+               colliders.grown.enabled = false;
            }
 
            if (myAnim.GetBool("Distort") == false && myAnim.GetBool("Grow"))
            {
-               //meshCollider.sharedMesh = colliders.grown;
                colliders.small.isTrigger = true;
-               colliders.distort.SetActive(false);
-               colliders.grown.SetActive(true);
+               colliders.distort.enabled = false;
+               colliders.grown.enabled = true;
            }
 
            if (Distortion.isDistorting)
@@ -109,14 +101,6 @@ public class Growable : Aspects
            {
                myAnim.SetBool("Distort", false);
            }
-
-//           if (useDynamicMeshCollider)
-//           {
-//               //meshRenderer.sharedMesh.MarkDynamic();
-//               meshRenderer.BakeMesh(meshRenderer.sharedMesh);
-//               meshCollider.sharedMesh = meshRenderer.sharedMesh;
-//
-//           }
        }
 
 
@@ -128,17 +112,7 @@ public class Growable : Aspects
            {
                StartCoroutine(Appear());
            }
-
-           // if (!groundDistort.GetBool("Distort") && matX <= 1)
-           // {
-           //     //distortBridge.SetActive(true);
-           //     //gameObject.SetActive(false);
-           // } else if (groundDistort.GetBool("Distort") && matX <= -13)
-           // {
-           //     //distortBridge.SetActive(true);
-           //     //gameObject.SetActive(false);
-           // }
-
+           
            if (Distortion.isDistorting)
            {
                myAnim.SetBool("Distort", true);
@@ -158,7 +132,6 @@ public class Growable : Aspects
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-//        print("IM GROWING");
 
         if (firefly)
         {
@@ -179,6 +152,7 @@ public class Growable : Aspects
         if (gameObject.CompareTag("Plant"))
         {
             myAnim.SetBool("Growing", true);
+            colliders.grown.enabled = true;
         }
         //gameObject.GetComponent<Renderer>().material = GrowingMaterial;
         if (gameObject.CompareTag("Bridge"))
@@ -231,9 +205,7 @@ public class Growable : Aspects
                 else
                 {
                     hasGrown = true;
-                    /*gameObject.GetComponent<BoxCollider>().center = new Vector3(-6.721177f,-3.552706e-16f, 0.1f);
-                    gameObject.GetComponent<BoxCollider>().size = new Vector3(18.35765f,3,0.2f);
-                    gameObject.GetComponent<BoxCollider>().isTrigger = false;*/
+
                     StopCoroutine(Appear());
                 }
             }
@@ -247,9 +219,6 @@ public class Growable : Aspects
                 else
                 {
                     hasGrown = true;
-                    /*gameObject.GetComponent<BoxCollider>().center = new Vector3(0,2.384186e-08f, 0.1f);
-                    gameObject.GetComponent<BoxCollider>().size = new Vector3(31.76197f,3,0.2f);
-                    gameObject.GetComponent<BoxCollider>().isTrigger = false;*/
                     StopCoroutine(Appear());
                 }
             }
@@ -264,9 +233,6 @@ public class Growable : Aspects
             else
             {
                 hasGrown = true;
-                /*gameObject.GetComponent<BoxCollider>().center = new Vector3(-6.721177f,-3.552706e-16f, 0.1f);
-                gameObject.GetComponent<BoxCollider>().size = new Vector3(18.35765f,3,0.2f);
-                gameObject.GetComponent<BoxCollider>().isTrigger = false;*/
                 StopCoroutine(Appear());
             }
         }
@@ -276,7 +242,7 @@ public class Growable : Aspects
     private struct Colliders
     {
         public Collider small;
-        public GameObject grown;
-        public GameObject distort;
+        public Collider grown;
+        public Collider distort;
     }
 }

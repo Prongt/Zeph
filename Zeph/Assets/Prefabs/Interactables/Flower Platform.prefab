@@ -60,6 +60,7 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
+  IsEnabled: 1
 --- !u!114 &3012356749954881005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,8 +86,8 @@ MonoBehaviour:
   groundDistort: {fileID: 0}
   isTree: 0
   colliders:
-    small: {fileID: 0}
-    grown: {fileID: 0}
+    small: {fileID: 2735676899887773354}
+    grown: {fileID: 7888268214674290878}
     distort: {fileID: 0}
   growSoundEmitter: {fileID: 5123381520695766061}
   firefly: {fileID: 0}
@@ -113,6 +114,50 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 50
+--- !u!1 &8006777815575149206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4315851694963496842}
+  - component: {fileID: 7888268214674290878}
+  m_Layer: 0
+  m_Name: Grown Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4315851694963496842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8006777815575149206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.75}
+  m_LocalScale: {x: 2.0822, y: 2.0822, z: 0.8317556}
+  m_Children: []
+  m_Father: {fileID: 6607727308576359860}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7888268214674290878
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8006777815575149206}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8338567731732180227
 PrefabInstance:
   m_ObjectHideFlags: 0
