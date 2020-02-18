@@ -13,7 +13,7 @@ public class GravityRift : Aspects
     // Start is called before the first frame update
     void Awake()
     {
-        Debug.LogWarning("Hard setting gravity to default gravity");
+        //Debug.LogWarning("Hard setting gravity to default gravity");
         Physics.gravity = new Vector3(0, -9.81f, 0);
         ogGravity = Physics.gravity;
     }

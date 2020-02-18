@@ -118,10 +118,11 @@ public class PlayerMove : MonoBehaviour
 		if (gravityDirection != oldGravity)
 		{
 			//Debug.Log("Change");
-			if (GravityRift.useNewGravity)
-			{
+			// if (GravityRift.useNewGravity)
+			// {
 				newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
-			}
+			//}
+			
 			
 			StartCoroutine(PausePlayerMovement(gravityFlipTime));
 			oldGravity = Physics.gravity;
@@ -164,11 +165,18 @@ public class PlayerMove : MonoBehaviour
 			}
 			else
 			{
+				if (gravityDirection.y > 9f)
+				{
+					newUp = new Vector3(0,-1, 0);
+				}
 				transform.up = Vector3.Lerp(transform.up, newUp, (gravityFlipTime * 1.5f)  * Time.deltaTime);
 			}
 		}
+		
+		up = transform.up;
 	}
 
+	private Vector3 up;
 	IEnumerator PausePlayerMovement(float pauseTime)
 	{
 		PlayerMovementEnabled = false;
@@ -247,14 +255,14 @@ public class PlayerMove : MonoBehaviour
 		}else if (gravityDirection.y > 9f)
 		{
 //			Debug.Log("Up Move");
-			// velocityY += Time.deltaTime * gravityPull;
+			velocityY += Time.deltaTime * gravityPull;
 			// //velocity = transform.forward * currentSpeed + upAxis * velocityY;
 			// velocity = transform.forward * currentSpeed + upAxis;
 			// velocity.y = velocityY;
 			//velocity = transform.forward;
 			
 			velocity.x = -inputDir.x * playerMoveSpeed;
-			velocity.y = velocityY;
+			velocity.y -= velocityY;
 			velocity.z = -inputDir.y * playerMoveSpeed;
 			zephAnimator.SetFloat(moveSpeed, velocity.magnitude);
 		}
@@ -267,7 +275,8 @@ public class PlayerMove : MonoBehaviour
 		characterController.Move (velocity * Time.deltaTime);
 		currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.y).magnitude;
 
-		if (characterController.isGrounded) {
+		//if (CheckIfGrounded(Physics.gravity, 5f))
+		if (CheckIfGrounded(Physics.gravity, 5f)) {
 			velocityY = 0;
 			animator.SetBool(isJumping, false);
 		}
