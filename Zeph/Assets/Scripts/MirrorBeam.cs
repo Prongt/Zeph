@@ -9,12 +9,12 @@ public class MirrorBeam : MonoBehaviour
 {
     [SerializeField] private UnityEvent onActivate;
 
-    private GameObject crystal;
+    public GameObject crystal;
     
     // Start is called before the first frame update
     void Start()
     {
-        crystal = gameObject.transform.Find("Crystal Light").gameObject;
+        //crystal = gameObject.transform.Find("Crystal Light").gameObject;
         if (crystal != null)
         {
             Debug.Log("Crystal Found");

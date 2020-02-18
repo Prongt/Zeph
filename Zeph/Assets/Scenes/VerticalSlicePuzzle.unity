@@ -14172,6 +14172,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gravity Rift 1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8303744570717293300, guid: eb448211219e19c44b3c43559199fabb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8420017243178866023, guid: eb448211219e19c44b3c43559199fabb,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -31159,8 +31164,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0}
-  m_Center: {x: 0, y: 0, z: -0.17847443}
+  m_Size: {x: 1, y: 1, z: 0.029895782}
+  m_Center: {x: 0, y: 0, z: -0.1486044}
 --- !u!33 &229038560529395500
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -32914,7 +32919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 2acb987a995ba514792eb7ece74fef3d, type: 2}
-  additionalAspects: 
+  additionalAspects: 04000000
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
   IsEnabled: 1
@@ -49242,7 +49247,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gravity Rift 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2524069434887197792, guid: eb448211219e19c44b3c43559199fabb, type: 3}
+    - {fileID: 2780225050631537860, guid: eb448211219e19c44b3c43559199fabb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eb448211219e19c44b3c43559199fabb, type: 3}
 --- !u!64 &3318693038537121097
 MeshCollider:
@@ -50158,7 +50165,7 @@ PrefabInstance:
     - target: {fileID: 1490334855978474052, guid: 5242db45d41d9144b9fa70488b94f8b1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.062
+      value: -12.21
       objectReference: {fileID: 0}
     - target: {fileID: 1490334855978474052, guid: 5242db45d41d9144b9fa70488b94f8b1,
         type: 3}
@@ -53390,6 +53397,31 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3050711280325073783}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5132235791136268505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5132235791136268502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92de12aee320a8e479171bf04c82fb16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  coolDownTime: 0
+  myAnim: {fileID: 0}
+  onGround: 0
+  effect: {fileID: 0}
+  distortionEffect: {fileID: 0}
+  distortionEventEmitter: {fileID: 0}
 --- !u!1 &5132235791513149595 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 76439bc87b766cd4aae2539bb8a8a49e,
@@ -55905,7 +55937,7 @@ PrefabInstance:
     - target: {fileID: 2579684456230570943, guid: 2e8776903bc0b95479bc8c972cdd0d1a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.61
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 2579684456230570943, guid: 2e8776903bc0b95479bc8c972cdd0d1a,
         type: 3}
@@ -58782,7 +58814,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gravity Rift 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2524069434887197792, guid: eb448211219e19c44b3c43559199fabb, type: 3}
+    - {fileID: 2780225050631537860, guid: eb448211219e19c44b3c43559199fabb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eb448211219e19c44b3c43559199fabb, type: 3}
 --- !u!4 &7540032825098141798
 Transform:
@@ -60004,6 +60038,11 @@ PrefabInstance:
       propertyPath: firefly
       value: 
       objectReference: {fileID: 1005172939}
+    - target: {fileID: 7970142285665259632, guid: a0fa9709b3579714aac745890da4d762,
+        type: 3}
+      propertyPath: mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 735909711e2099b4291a37e9d6ea49e6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0fa9709b3579714aac745890da4d762, type: 3}
 --- !u!1 &7993628709522342682
@@ -60345,8 +60384,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0}
-  m_Center: {x: 0, y: 0, z: -0.17847443}
+  m_Size: {x: 1, y: 1, z: 0.093361855}
+  m_Center: {x: 0, y: 0, z: -0.051312923}
 --- !u!23 &8118673108873463200
 MeshRenderer:
   m_ObjectHideFlags: 0
