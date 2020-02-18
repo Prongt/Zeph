@@ -169,7 +169,7 @@ public class Orbitable : Aspects
             transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
             
             //Might not need this anymore
-            //transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
         }
         else
         {
@@ -180,7 +180,7 @@ public class Orbitable : Aspects
             transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
             
             //Might not need this anymore
-            //transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
         }
 
         //This speeds up the orbit
