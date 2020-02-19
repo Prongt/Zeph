@@ -96,10 +96,16 @@ public class Growable : Aspects
            if (Distortion.isDistorting)
            {
                myAnim.SetBool("Distort", true);
+               colliders.small.isTrigger = true;
+               colliders.distort.enabled = true;
+               colliders.grown.enabled = false;
            }
            else
            {
                myAnim.SetBool("Distort", false);
+               colliders.small.isTrigger = true;
+               colliders.distort.enabled = false;
+               colliders.grown.enabled = true;
            }
        }
 
