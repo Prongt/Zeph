@@ -101,15 +101,7 @@ public class PlayerMove : MonoBehaviour
 	void Update ()
 	{
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
-		// if (flipMovementInput)
-		// {
-		// 	input= new Vector2 (-Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Horizontal"));
-		// }
-		// else
-		// {
-		// 	input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
-		// }
-		
+
 		Vector2 inputDir = input.normalized;
 
 		gravityDirection = Physics.gravity;
@@ -117,18 +109,12 @@ public class PlayerMove : MonoBehaviour
 
 		if (gravityDirection != oldGravity)
 		{
-			//Debug.Log("Change");
-			// if (GravityRift.useNewGravity)
-			// {
-				newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
-			//}
-			
-			
+			newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
+
 			StartCoroutine(PausePlayerMovement(gravityFlipTime, inputDir));
 			oldGravity = Physics.gravity;
 		}
-
-		//	Debug.Log(coyoteTimeRemaining);
+		
 		if (PlayerIsGrounded)
 		{
 			coyoteTimeRemaining = coyoteTime;
@@ -257,7 +243,15 @@ public class PlayerMove : MonoBehaviour
 			//Movement
 			if (reverseMovementDirections)
 			{
-				velocity.y = inputDir.x * playerMoveSpeed;
+				if (gravityDirection.z > 0)
+				{
+					velocity.y = -inputDir.x * playerMoveSpeed;
+				}
+				else
+				{
+					velocity.y = inputDir.x * playerMoveSpeed;
+				}
+				
 				velocity.x = inputDir.y * playerMoveSpeed;
 			}
 			else
@@ -383,8 +377,17 @@ public class PlayerMove : MonoBehaviour
 			if (GravityRift.useNewGravity)
 			{
 				float targetRotation = Mathf.Atan2(-inputDir.x, -inputDir.y) * Mathf.Rad2Deg;
-				
-					float angle = Mathf.SmoothDampAngle(zephModel.localEulerAngles.y, targetRotation, ref turnVelocity,
+				if (gravityDirection.z > 0 || gravityDirection.z < 0)
+				{
+					
+				}
+				if (reverseMovementDirections)
+				{
+					targetRotation = Mathf.Atan2(inputDir.y, -inputDir.x) * Mathf.Rad2Deg;
+				}
+
+
+				float angle = Mathf.SmoothDampAngle(zephModel.localEulerAngles.y, targetRotation, ref turnVelocity,
 						GetModifiedSmoothTime(playerTurnSpeed));
 
 					var rot = zephModel.localEulerAngles;
