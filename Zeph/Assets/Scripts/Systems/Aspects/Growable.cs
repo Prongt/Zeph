@@ -138,7 +138,8 @@ public class Growable : Aspects
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-
+        //Debug.Log("Grow Bitch!");
+        
         if (firefly)
         {
             fireflyRate.rateOverTime = 0;
@@ -167,6 +168,7 @@ public class Growable : Aspects
             {
                 if (growSoundEmitter)
                 {
+                    if (groundDistort)
                     if (groundDistort.GetBool("Distort"))
                     {
                         growSoundEmitter.SetParameter("Distortion", 1.0f);
