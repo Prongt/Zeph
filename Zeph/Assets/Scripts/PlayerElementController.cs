@@ -9,23 +9,20 @@ public class PlayerElementController : MonoBehaviour
 {
     public PlayerElementData[] elementData;
     [SerializeField] private float height = 1;
-    [SerializeField] private bool drawGizmos = false;
+    [SerializeField] private bool drawGizmos;
     [HideIf("drawGizmos", true)][SerializeField] private float gizmoHeight = 1.0f;
     private new Light light;
 
     private Animator animator;
-    //private bool usedPower = false;
 
     [SerializeField] private VisualEffect fireEffect;
     [SerializeField] private VisualEffect leafEffect;
 
     [SerializeField] private LayerMask layerMask;
-    //private static readonly int usePower = Animator.StringToHash("usePower");
 
     //number of collisions detected for each element
     private const int MaxAffectableObjects = 25;
 
-    private PlayerMove playerMove;
     private static readonly int usePower = Animator.StringToHash("usePower");
 
 
@@ -33,9 +30,8 @@ public class PlayerElementController : MonoBehaviour
     {
         light = GetComponentInChildren<Light>();
         animator = GetComponentInChildren<Animator>();
-        playerMove = GetComponent<PlayerMove>();
-        
-        for (int i = 0; i < elementData.Length; i++)
+
+        for (var i = 0; i < elementData.Length; i++)
         {
             elementData[i].element.colliders = new Collider[25];
         }
@@ -54,68 +50,69 @@ public class PlayerElementController : MonoBehaviour
 
     private void UsePowers()
     {
-        for (int i = 0; i < elementData.Length; i++)
+        for (var i = 0; i < elementData.Length; i++)
+        {
+            if (!Input.GetButtonDown(elementData[i].element.ButtonName)) continue;
+            if (!elementData[i].element.PowerIsEnabled) continue;
+            switch (elementData[i].element.ButtonName)
             {
-                if (!Input.GetButtonDown(elementData[i].element.ButtonName)) continue;
-                if (!elementData[i].element.PowerIsEnabled) continue;
-                switch (elementData[i].element.ButtonName)
+                case "FirePower":
+                    fireEffect.SetInt("Spawn Rate", 1000);
+                    break;
+                case "OrbitPower":
+                    leafEffect.SetInt("Spawn Rate", 30);
+                    break;
+                case "LightPower":
+                    light.intensity = 1200f;
+                    break;
+            }
+
+            //Trigger Audio Effect
+            var audioEmitter = elementData[i].audioEmitter;
+            if (audioEmitter)
+            {
+                if (audioEmitter.IsPlaying())
                 {
-                    case "FirePower":
-                        fireEffect.SetInt("Spawn Rate", 1000);
-                        break;
-                    case "OrbitPower":
-                        leafEffect.SetInt("Spawn Rate", 30);
-                        break;
-                    case "LightPower":
-                        light.intensity = 1200f;
-                        break;
+                    audioEmitter.Stop();
                 }
 
-                //Trigger Audio Effect
-                var audioEmitter = elementData[i].audioEmitter;
-                if (audioEmitter)
+                audioEmitter.Play();
+            }
+
+
+            StartCoroutine(UsePowerAnimation());
+            elementData[i].element.colliders = new Collider[MaxAffectableObjects];
+            Physics.OverlapSphereNonAlloc(transform.position, elementData[i].element.PlayerRange,
+                elementData[i].element.colliders);
+            // ReSharper disable once ForCanBeConvertedToForeach
+            for (var j = 0; j < elementData[i].element.colliders.Length; j++)
+            {
+                var collisionObj = elementData[i].element.colliders[j];
+
+                if (!collisionObj) continue;
+                    
+                var obj = collisionObj.GetComponent<Interactable>();
+
+                if (!obj) continue;
+                    
+                var position = transform.position;
+                var nearestPoint = collisionObj.ClosestPoint(position);
+                var dir = nearestPoint - position;
+
+                Physics.Raycast(position, dir, out RaycastHit hitInfo,
+                    elementData[i].element.PlayerRange,
+                    layerMask);
+
+                if (hitInfo.collider != collisionObj) continue;
+                    
+                var playerY = transform.position.y;
+
+                if (Mathf.Abs(nearestPoint.y - playerY) < height)
                 {
-                    if (audioEmitter.IsPlaying())
-                    {
-                        audioEmitter.Stop();
-                    }
-
-                    audioEmitter.Play();
-                }
-
-
-                StartCoroutine(UsePowerAnimation());
-                elementData[i].element.colliders = new Collider[MaxAffectableObjects];
-                Physics.OverlapSphereNonAlloc(transform.position, elementData[i].element.PlayerRange,
-                    elementData[i].element.colliders);
-                for (var j = 0; j < elementData[i].element.colliders.Length; j++)
-                {
-                    var collisionObj = elementData[i].element.colliders[j];
-
-                    if (!collisionObj) continue;
-                    
-                    var obj = collisionObj.GetComponent<Interactable>();
-
-                    if (!obj) continue;
-                    
-                    var position = transform.position;
-                    var nearestPoint = collisionObj.ClosestPoint(position);
-                    Vector3 dir = nearestPoint - position;
-
-                    Physics.Raycast(position, dir, out RaycastHit hitInfo,
-                        elementData[i].element.PlayerRange,
-                        layerMask);
-
-                    if (hitInfo.collider != collisionObj) continue;
-                    
-                    var playerY = transform.position.y;
-
-                    if (Mathf.Abs(nearestPoint.y - playerY) < height)
-                    {
-                        obj.ApplyElement(elementData[i].element, gameObject.transform, true);
-                    }
+                    obj.ApplyElement(elementData[i].element, gameObject.transform, true);
                 }
             }
+        }
     }
     
     
@@ -138,10 +135,10 @@ public class PlayerElementController : MonoBehaviour
         }
 
         var position = transform.position;
-        Vector3 topGizmo = position;
+        var topGizmo = position;
         topGizmo.y += height;
 
-        Vector3 bottomGizmo = position;
+        var bottomGizmo = position;
         bottomGizmo.y -= height;
 
         DrawGizmosAtHeight(topGizmo);
@@ -154,11 +151,11 @@ public class PlayerElementController : MonoBehaviour
         {
             Gizmos.color = elementData[i].element.DebugColor;
             const float theta = 0;
-            float x = elementData[i].element.PlayerRange * Mathf.Cos(theta);
-            float y = elementData[i].element.PlayerRange * Mathf.Sin(theta);
-            Vector3 pos = position + new Vector3(x, gizmoHeight, y);
-            Vector3 lastPos = pos;
-            for (float thetaLoop = 0.1f; thetaLoop < Mathf.PI * 2; thetaLoop += 0.1f)
+            var x = elementData[i].element.PlayerRange * Mathf.Cos(theta);
+            var y = elementData[i].element.PlayerRange * Mathf.Sin(theta);
+            var pos = position + new Vector3(x, gizmoHeight, y);
+            var lastPos = pos;
+            for (var thetaLoop = 0.1f; thetaLoop < Mathf.PI * 2; thetaLoop += 0.1f)
             {
                 x = elementData[i].element.PlayerRange * Mathf.Cos(thetaLoop);
                 y = elementData[i].element.PlayerRange * Mathf.Sin(thetaLoop);

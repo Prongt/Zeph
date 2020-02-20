@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class Pullable : Aspects
 {
-    [SerializeField] private float moveTime;
-    [SerializeField] private Transform movePosition;
-    private bool canStartMoving = false;
-    
-    public Type[] componentTypes = new Type[]
+    public Type[] componentTypes =
     {
     };
+
+    [SerializeField] private Transform movePosition;
+    [SerializeField] private float moveTime;
 
     public override Type[] RequiredComponents()
     {
@@ -28,25 +27,17 @@ public class Pullable : Aspects
     }
 
     [ContextMenu("Move")]
-    void Move()
+    private void StartMovement()
     {
         StopCoroutine(MoveRoutine());
         StartCoroutine(MoveRoutine());
     }
-    
 
 
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-        
-        Move();
-        
 
-    }
-
-    public override void Negate(Transform source = null)
-    {
-        base.Negate(source);
+        StartMovement();
     }
 }

@@ -45,8 +45,8 @@ public class PlayerMove : MonoBehaviour
 	private float coyoteTimeRemaining;
 	
 	[Header("Tick if movement is janky")]
-	public bool reverseMovementDirections = false;
-	public bool flipMovement = false;
+	public bool reverseMovementDirections;
+	public bool flipMovement;
 
 	[Header("Water Knock Back")]
 	public float knockBackDistance = 0.75f;
@@ -428,12 +428,12 @@ public class PlayerMove : MonoBehaviour
 		upVelocity = jumpVelocity;
 	}
 
-	float GetModifiedSmoothTime(float smoothTime) {
+	private float GetModifiedSmoothTime(float smoothTime) {
 		if (characterController.isGrounded) {
 			return smoothTime;
 		}
 
-		if (airControlPercent == 0) {
+		if (airControlPercent <= 0.01f) {
 			return float.MaxValue;
 		}
 		return smoothTime / airControlPercent;
@@ -442,8 +442,6 @@ public class PlayerMove : MonoBehaviour
 
 	private void KnockBack()
 	{
-		//Forward
-		//Debug.DrawRay(transform.position, zephModel.forward * dist);
 		var forwardRay = new Ray(transform.position, zephModel.forward);
 		
 		if (Physics.Raycast(forwardRay, out var hit, knockBackDistance, waterLayerMask))
@@ -451,18 +449,17 @@ public class PlayerMove : MonoBehaviour
 			StartCoroutine(PausePlayerMovement(movePauseTime));
 
 			var knockBackVector = transform.position - hit.point;
-			//Debug.Log(knockBackVector);
 			knockBackVector.Normalize();
 			characterController.Move(knockBackVector * knockBackForce);
 			splashEmitter.Play();
 			
 		}
 
-		var downRay = new Ray(transform.position, -transform.up);
-		if (Physics.Raycast(downRay, out RaycastHit downHit, knockBackDistance, waterLayerMask))
+		var groundRay = new Ray(transform.position, -transform.up);
+		if (Physics.Raycast(groundRay, out var downHit, knockBackDistance, waterLayerMask))
 		{
 			StartCoroutine(PausePlayerMovement(movePauseTime));
-			Vector3 knockBackVector = transform.position + Vector3.right + Vector3.forward;
+			var knockBackVector = transform.position + Vector3.right + Vector3.forward;
 			if (downHit.collider.CompareTag("Water"))
 			{
 				knockBackVector = transform.position + Vector3.right;
@@ -476,13 +473,6 @@ public class PlayerMove : MonoBehaviour
 
 	private bool CheckIfGrounded(Vector3 direction, float distance)
 	{
-		if (GravityRift.useNewGravity)
-		{
-			return Physics.Raycast(transform.position, direction, distance);
-		}
-		else
-		{
-			return characterController.isGrounded;
-		}
+		return GravityRift.useNewGravity ? Physics.Raycast(transform.position, direction, distance) : characterController.isGrounded;
 	}
 }

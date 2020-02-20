@@ -11,7 +11,7 @@ public class Growable : Aspects
     [SerializeField] private Animator groundDistort;
 
 
-    [SerializeField] private bool isTree = false;
+    [SerializeField] private bool isTree;
     [SerializeField] private Colliders colliders;
 
     [SerializeField] private StudioEventEmitter growSoundEmitter;
@@ -19,7 +19,7 @@ public class Growable : Aspects
     private SkinnedMeshRenderer meshRenderer;
     private Mesh mesh;
 
-    private bool hasGrown = false;
+    private bool hasGrown;
 
     [SerializeField] private ParticleSystem firefly;
     private ParticleSystem.EmissionModule fireflyRate;
@@ -30,6 +30,11 @@ public class Growable : Aspects
     public Type[] componentTypes = new Type[]
     {
     };
+
+    private static readonly int vector1B0F27Ffd = Shader.PropertyToID("Vector1_B0F27FFD");
+    private static readonly int distort = Animator.StringToHash("Distort");
+    private static readonly int grow = Animator.StringToHash("Grow");
+    private static readonly int growing = Animator.StringToHash("Growing");
 
 
     public override Type[] RequiredComponents()
@@ -51,7 +56,7 @@ public class Growable : Aspects
         {
             myAnim = GetComponent<Animator>();
             mat = gameObject.GetComponent<SkinnedMeshRenderer>().material;
-            matX = mat.GetFloat("Vector1_B0F27FFD");
+            matX = mat.GetFloat(vector1B0F27Ffd);
         }
 
         if (isTree)
@@ -79,14 +84,14 @@ public class Growable : Aspects
    {
        if (isTree)
        {
-           if (myAnim.GetBool("Distort") && myAnim.GetBool("Grow"))
+           if (myAnim.GetBool(distort) && myAnim.GetBool(grow))
            {
                colliders.small.isTrigger = true;
                colliders.distort.enabled = true;
                colliders.grown.enabled = false;
            }
 
-           if (myAnim.GetBool("Distort") == false && myAnim.GetBool("Grow"))
+           if (myAnim.GetBool(distort) == false && myAnim.GetBool(grow))
            {
                colliders.small.isTrigger = true;
                colliders.distort.enabled = false;
@@ -95,14 +100,14 @@ public class Growable : Aspects
 
            if (Distortion.isDistorting)
            {
-               myAnim.SetBool("Distort", true);
+               myAnim.SetBool(distort, true);
                colliders.small.isTrigger = true;
                colliders.distort.enabled = true;
                colliders.grown.enabled = false;
            }
            else
            {
-               myAnim.SetBool("Distort", false);
+               myAnim.SetBool(distort, false);
                colliders.small.isTrigger = true;
                colliders.distort.enabled = false;
                colliders.grown.enabled = true;
@@ -112,7 +117,7 @@ public class Growable : Aspects
 
        if (gameObject.CompareTag("Bridge"))
        {
-           mat.SetFloat("Vector1_B0F27FFD", matX);
+           mat.SetFloat(vector1B0F27Ffd, matX);
 
            if (lightShining)
            {
@@ -121,14 +126,14 @@ public class Growable : Aspects
            
            if (Distortion.isDistorting)
            {
-               myAnim.SetBool("Distort", true);
+               myAnim.SetBool(distort, true);
            }
            else
            {
-               myAnim.SetBool("Distort", false);
+               myAnim.SetBool(distort, false);
            }
 
-           if (myAnim.GetBool("Distort") && matX < 1 && matX > -13)
+           if (myAnim.GetBool(distort) && matX < 1 && matX > -13)
            {
                matX -= 5 * Time.deltaTime;
            }
@@ -153,12 +158,12 @@ public class Growable : Aspects
 
         if (isTree)
         {
-            myAnim.SetBool("Grow", true);
+            myAnim.SetBool(grow, true);
         }
 
         if (gameObject.CompareTag("Plant"))
         {
-            myAnim.SetBool("Growing", true);
+            myAnim.SetBool(growing, true);
             colliders.grown.enabled = true;
         }
         //gameObject.GetComponent<Renderer>().material = GrowingMaterial;
@@ -169,7 +174,7 @@ public class Growable : Aspects
                 if (growSoundEmitter)
                 {
                     if (groundDistort)
-                    if (groundDistort.GetBool("Distort"))
+                        if (groundDistort.GetBool(distort))
                     {
                         growSoundEmitter.SetParameter("Distortion", 1.0f);
                     }
@@ -180,7 +185,7 @@ public class Growable : Aspects
                 }
 
 
-                myAnim.SetBool("Growing", true);
+                myAnim.SetBool(growing, true);
                 StartCoroutine(Appear());
             }
         }
@@ -198,12 +203,12 @@ public class Growable : Aspects
         yield return new WaitForSeconds(0f);
         if (groundDistort != null)
         {
-            if (groundDistort.GetBool("Distort") && hasGrown)
+            if (groundDistort.GetBool(distort) && hasGrown)
             {
                 matX = -14;
             }
 
-            if (!groundDistort.GetBool("Distort"))
+            if (!groundDistort.GetBool(distort))
             {
                 if (matX >= 1)
                 {
@@ -217,7 +222,7 @@ public class Growable : Aspects
                     StopCoroutine(Appear());
                 }
             }
-            else if (groundDistort.GetBool("Distort"))
+            else if (groundDistort.GetBool(distort))
             {
                 if (matX >= -13)
                 {
