@@ -2314,6 +2314,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5fd71db83513064d83b4510b0d6a998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myProg: {fileID: 0}
+--- !u!54 &589973247
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589973245}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!65 &589973248
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589973245}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.71666324, y: 0.85492194, z: 0.07}
+  m_Center: {x: 0.04352586, y: 0.023470327, z: 0.035}
 --- !u!1001 &620759458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3408,8 +3438,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.4580884, y: 2.0098007, z: 5.7210264}
-  m_Center: {x: -1.9491615, y: 0.010943764, z: 1.5768443}
+  m_Size: {x: 6.5963116, y: 2.009799, z: 5.721026}
+  m_Center: {x: -2.5182717, y: 0.01094369, z: 1.5768447}
 --- !u!114 &958047002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5172,7 +5202,7 @@ PrefabInstance:
     - target: {fileID: 3099318536608203710, guid: a720873750d2e9742883b18fae16ed9c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.127
+      value: -0.198
       objectReference: {fileID: 0}
     - target: {fileID: 3099318536608203710, guid: a720873750d2e9742883b18fae16ed9c,
         type: 3}
@@ -5182,7 +5212,7 @@ PrefabInstance:
     - target: {fileID: 3099318536608203710, guid: a720873750d2e9742883b18fae16ed9c,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.223
+      value: 1.344077
       objectReference: {fileID: 0}
     - target: {fileID: 4124796863402226357, guid: a720873750d2e9742883b18fae16ed9c,
         type: 3}
@@ -9594,7 +9624,7 @@ Transform:
   m_GameObject: {fileID: 2648397617515238544}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 4.099975, z: -109.65543}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0.833}
   m_Children: []
   m_Father: {fileID: 1432153075}
   m_RootOrder: 6
