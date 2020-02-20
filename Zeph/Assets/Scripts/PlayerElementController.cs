@@ -26,7 +26,8 @@ public class PlayerElementController : MonoBehaviour
     private const int MaxAffectableObjects = 25;
 
     private PlayerMove playerMove;
-   
+    private static readonly int usePower = Animator.StringToHash("usePower");
+
 
     private void Awake()
     {
@@ -43,9 +44,9 @@ public class PlayerElementController : MonoBehaviour
 
     private void Update()
     {
-        if (light.intensity >= 6)
+        if (light.intensity >= 1200f)
         {
-            //light.intensity = Mathf.Lerp(light.intensity, 5, 0.5f * Time.deltaTime);
+            light.intensity = Mathf.Lerp(light.intensity, 3000f, 0.5f * Time.deltaTime);
         }
 
         UsePowers();
@@ -55,8 +56,8 @@ public class PlayerElementController : MonoBehaviour
     {
         for (int i = 0; i < elementData.Length; i++)
             {
-                if (!elementData[i].element.PowerIsEnabled) continue;
                 if (!Input.GetButtonDown(elementData[i].element.ButtonName)) continue;
+                if (!elementData[i].element.PowerIsEnabled) continue;
                 switch (elementData[i].element.ButtonName)
                 {
                     case "FirePower":
@@ -66,7 +67,7 @@ public class PlayerElementController : MonoBehaviour
                         leafEffect.SetInt("Spawn Rate", 30);
                         break;
                     case "LightPower":
-                        light.intensity = 100f;
+                        light.intensity = 1200f;
                         break;
                 }
 
@@ -120,9 +121,9 @@ public class PlayerElementController : MonoBehaviour
     
     IEnumerator UsePowerAnimation()
     {
-        animator.SetBool("usePower", true);
+        animator.SetBool(usePower, true);
         yield return new WaitForSeconds(1f);
-        animator.SetBool("usePower", false);
+        animator.SetBool(usePower, false);
         fireEffect.SetInt("Spawn Rate", 0);
         leafEffect.SetInt("Spawn Rate",0);
     }

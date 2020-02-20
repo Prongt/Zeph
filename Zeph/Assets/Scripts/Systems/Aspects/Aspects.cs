@@ -77,5 +77,6 @@ public enum AspectType
     FadeRift,
     Story,
     Chargeable,
-    Map
+    Map,
+    Pullable
 }
