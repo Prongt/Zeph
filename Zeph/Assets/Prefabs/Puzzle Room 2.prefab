@@ -7694,6 +7694,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
+  chromaticAberration: {fileID: 0}
 --- !u!1 &121033511659787782
 GameObject:
   m_ObjectHideFlags: 0
@@ -8617,6 +8618,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
+  chromaticAberration: {fileID: 0}
 --- !u!1 &1178018314689883599
 GameObject:
   m_ObjectHideFlags: 0
@@ -8877,6 +8879,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
+  chromaticAberration: {fileID: 0}
 --- !u!1 &1301305616442346605
 GameObject:
   m_ObjectHideFlags: 0
@@ -9259,6 +9262,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
+  chromaticAberration: {fileID: 0}
 --- !u!114 &2537635940157240955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9395,6 +9399,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
+  chromaticAberration: {fileID: 0}
 --- !u!1 &1974916540553880337
 GameObject:
   m_ObjectHideFlags: 0
@@ -9489,6 +9494,39 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &-8923385102031203365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016014494131214288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67758dcb4870a3843b9a0e696a3eab98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  coolDownTime: 0
+  pullForce:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  maxThrowForce:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  throwForce: 0.5
+  orbitSize: 3
+  rotSpeed: 0
+  collisionSoundEventEmitter: {fileID: 0}
+  firefly: {fileID: 0}
 --- !u!1 &2021507912072879752
 GameObject:
   m_ObjectHideFlags: 0
@@ -12061,6 +12099,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
+  chromaticAberration: {fileID: 0}
 --- !u!114 &1660530058908619951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13900,6 +13939,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
+  chromaticAberration: {fileID: 0}
 --- !u!64 &2537635940623157876
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13966,6 +14006,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
+  chromaticAberration: {fileID: 0}
 --- !u!64 &2537635940818332181
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14047,6 +14088,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
+  chromaticAberration: {fileID: 0}
 --- !u!64 &460839088
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14345,36 +14387,6 @@ MonoBehaviour:
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
   IsEnabled: 1
---- !u!114 &1057874843028909769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5779849489750596456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cc1a007d369be948bdad9d08ceac61a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AspectType: 0
-  onPromote:
-    m_PersistentCalls:
-      m_Calls: []
-  onNegate:
-    m_PersistentCalls:
-      m_Calls: []
-  coolDownTime: 0
-  myAnim: {fileID: 0}
-  mat: {fileID: 0}
-  groundDistort: {fileID: 0}
-  isTree: 0
-  colliders:
-    small: {fileID: 0}
-    grown: {fileID: 0}
-    distort: {fileID: 0}
-  growSoundEmitter: {fileID: 0}
-  firefly: {fileID: 0}
 --- !u!1 &5869280008849898338
 GameObject:
   m_ObjectHideFlags: 0
@@ -15058,6 +15070,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
+  chromaticAberration: {fileID: 0}
 --- !u!1 &6954746210597488746
 GameObject:
   m_ObjectHideFlags: 0
@@ -15364,6 +15377,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
+  chromaticAberration: {fileID: 0}
 --- !u!1 &7328374580931504077
 GameObject:
   m_ObjectHideFlags: 0
@@ -17575,6 +17589,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ruined Pillar
       objectReference: {fileID: 0}
+    - target: {fileID: 4604569719269804469, guid: a720873750d2e9742883b18fae16ed9c,
+        type: 3}
+      propertyPath: aspectMaterial
+      value: 
+      objectReference: {fileID: 11400000, guid: 8cce4da513af75744bf08ed16b0b525d,
+        type: 2}
+    - target: {fileID: 4604569719269804469, guid: a720873750d2e9742883b18fae16ed9c,
+        type: 3}
+      propertyPath: onlyActivatedByPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604569719269804469, guid: a720873750d2e9742883b18fae16ed9c,
+        type: 3}
+      propertyPath: requireDefaultGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604569719269804469, guid: a720873750d2e9742883b18fae16ed9c,
+        type: 3}
+      propertyPath: IsEnabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5777596619545814462, guid: a720873750d2e9742883b18fae16ed9c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17632,6 +17667,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a720873750d2e9742883b18fae16ed9c, type: 3}
+--- !u!1 &2016014494131214288 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2203314150654975084, guid: a720873750d2e9742883b18fae16ed9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 390102377264008124}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6145101803149979138 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5777596619545814462, guid: a720873750d2e9742883b18fae16ed9c,
