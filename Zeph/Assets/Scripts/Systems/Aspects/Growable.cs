@@ -67,11 +67,6 @@ public class Growable : Aspects
             colliders.small.isTrigger = false;
             colliders.distort.enabled = false;
             colliders.grown.enabled = false;
-
-            if (meshRenderer == null)
-            {
-               //Debug.Log("No SkinnedMeshRenderer on " + gameObject.name + " id: " + gameObject.GetInstanceID());
-            }
         }
     }
 
@@ -198,6 +193,7 @@ public class Growable : Aspects
         base.Promote(source);
     }
 
+//TODO implement a while loop rather than using recursive calls
     IEnumerator Appear()
     {
         yield return new WaitForSeconds(0f);
