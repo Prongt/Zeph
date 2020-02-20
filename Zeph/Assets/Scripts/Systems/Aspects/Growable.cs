@@ -93,7 +93,7 @@ public class Growable : Aspects
                colliders.grown.enabled = true;
            }
 
-           if (Distortion.isDistorting)
+           if (Distortion.IsDistorting)
            {
                myAnim.SetBool(distort, true);
                colliders.small.isTrigger = true;
@@ -119,7 +119,7 @@ public class Growable : Aspects
                StartCoroutine(Appear());
            }
            
-           if (Distortion.isDistorting)
+           if (Distortion.IsDistorting)
            {
                myAnim.SetBool(distort, true);
            }

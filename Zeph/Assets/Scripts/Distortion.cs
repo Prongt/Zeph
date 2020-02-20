@@ -4,33 +4,31 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using FMODUnity;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 
 public class Distortion : Aspects
 {
     [SerializeField] private Animator myAnim;
 
 
-    public static bool isDistorting = false;
-    private bool animating = false;
+    public static bool IsDistorting;
+    private bool animating;
 
     [SerializeField] private bool onGround;
     [SerializeField] private GameObject effect;
     [SerializeField] private GameObject distortionEffect;
     [SerializeField] private StudioEventEmitter distortionEventEmitter;
+    [SerializeField] private GameObject chromaticAberration;
 
     protected override void Initialize()
     {
         base.Initialize();
-        isDistorting = false;
+        IsDistorting = false;
 
-        if (!gameObject.CompareTag("Rift"))
-        {
-            myAnim = GetComponent<Animator>();
-        }
-        else
-        {
-            myAnim = null;
-        }
+        myAnim = !gameObject.CompareTag("Rift") ? GetComponent<Animator>() : null;
+
+        CheckIfChromaticAberrationAttached();
 
         if (!gameObject.CompareTag("Rift"))
         {
@@ -39,24 +37,17 @@ public class Distortion : Aspects
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (!gameObject.CompareTag("Rift"))
         {
-            if (isDistorting)
-            {
-                myAnim.SetBool("Distort", true);
-            }
-            else
-            {
-                myAnim.SetBool("Distort", false);
-            }
+            myAnim.SetBool(distort, IsDistorting);
         }
 
         if (gameObject.CompareTag("Rift"))
         {
-            if (effect) effect.SetActive(!isDistorting);
-            if (distortionEffect) distortionEffect.SetActive(isDistorting);
+            if (effect) effect.SetActive(!IsDistorting);
+            if (distortionEffect) distortionEffect.SetActive(IsDistorting);
         }
     }
 
@@ -78,7 +69,26 @@ public class Distortion : Aspects
 
         if (gameObject.CompareTag(("Rift")))
         {
-            isDistorting = !isDistorting;
+            IsDistorting = !IsDistorting;
+
+            if (CheckIfChromaticAberrationAttached())
+            {
+                chromaticAberration.SetActive(IsDistorting);
+            }
+            
+        }
+    }
+
+    private bool CheckIfChromaticAberrationAttached()
+    {
+        if (chromaticAberration)
+        {
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning("no Chromatic Aberration object found");
+            return false;
         }
     }
 
@@ -94,6 +104,8 @@ public class Distortion : Aspects
     {
 
     };
+
+    private static readonly int distort = Animator.StringToHash("Distort");
 
     public override Type[] RequiredComponents()
     {

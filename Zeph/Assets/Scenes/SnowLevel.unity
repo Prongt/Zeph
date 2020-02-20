@@ -521,6 +521,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Distortion Rift2_Mid
       objectReference: {fileID: 0}
+    - target: {fileID: 7134668082210917720, guid: 271f14a27fb01134e803fc208146b913,
+        type: 3}
+      propertyPath: chromaticAberration
+      value: 
+      objectReference: {fileID: 660399729}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 271f14a27fb01134e803fc208146b913, type: 3}
 --- !u!4 &339815212 stripped
@@ -596,6 +601,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Distortion Rift3_Mid
       objectReference: {fileID: 0}
+    - target: {fileID: 7134668082210917720, guid: 271f14a27fb01134e803fc208146b913,
+        type: 3}
+      propertyPath: chromaticAberration
+      value: 
+      objectReference: {fileID: 660399729}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 271f14a27fb01134e803fc208146b913, type: 3}
 --- !u!4 &344818890 stripped
@@ -855,6 +865,54 @@ Transform:
   - {fileID: 5091031725937255761}
   m_Father: {fileID: 633333089}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &660399729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 660399731}
+  - component: {fileID: 660399730}
+  m_Layer: 0
+  m_Name: Chromatic Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &660399730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660399729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 150.89
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: aee1f95d8f961da4da4a578a68a0953d, type: 2}
+--- !u!4 &660399731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660399729}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.687088, y: 4.01048, z: 11.570483}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &666457332 stripped
 GameObject:
@@ -2214,7 +2272,7 @@ PrefabInstance:
     - target: {fileID: 94891979401177775, guid: 271f14a27fb01134e803fc208146b913,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.774986
+      value: 12.81
       objectReference: {fileID: 0}
     - target: {fileID: 94891979401177775, guid: 271f14a27fb01134e803fc208146b913,
         type: 3}
@@ -2224,7 +2282,7 @@ PrefabInstance:
     - target: {fileID: 94891979401177775, guid: 271f14a27fb01134e803fc208146b913,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.352539
+      value: 11.55
       objectReference: {fileID: 0}
     - target: {fileID: 94891979401177775, guid: 271f14a27fb01134e803fc208146b913,
         type: 3}
@@ -2266,11 +2324,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3402064988363910240, guid: 271f14a27fb01134e803fc208146b913,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3966059492015823036, guid: 271f14a27fb01134e803fc208146b913,
         type: 3}
       propertyPath: m_Name
       value: Distortion Rift1_Start
       objectReference: {fileID: 0}
+    - target: {fileID: 7134668082210917720, guid: 271f14a27fb01134e803fc208146b913,
+        type: 3}
+      propertyPath: chromaticAberration
+      value: 
+      objectReference: {fileID: 660399729}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 271f14a27fb01134e803fc208146b913, type: 3}
 --- !u!4 &1369775600 stripped
