@@ -27,11 +27,15 @@ public class PlayerMove : MonoBehaviour
 	private Animator animator;
 	
 
-	private float gravityJump = 0.5f;
+	[SerializeField]private float gravityJumpMultiplier = 3f;
+	[SerializeField]private float ceilingGravityModifier = 1f;
+	
 	private Vector3 oldGravity;
 	private Vector3 gravityDirection;
 	private float playerYHeight;
 	private float characterWidth;
+
+	private Transform rayPoint;
 
 
 	
@@ -64,12 +68,13 @@ public class PlayerMove : MonoBehaviour
 	{
 		if (Camera.main != null) camera = Camera.main.transform;
 
+		rayPoint = GameObject.FindWithTag("RayPoint").transform;
 		GrabComponents();
 		
 		gravityDirection = Physics.gravity;
 		oldGravity = gravityDirection;
 
-		gravityJump = gravityJump + playerJumpHeight;
+		gravityJumpMultiplier = gravityJumpMultiplier * playerJumpHeight;
 		playerYHeight = GetComponent<Collider>().bounds.extents.y + 0.1f;
 		characterWidth = GetComponent<Collider>().bounds.extents.x + 0.15f;
 		gravityPull = playerGravity;
@@ -169,7 +174,7 @@ public class PlayerMove : MonoBehaviour
 		
 			if (GravityRift.useNewGravity)
 			{
-				jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJump);
+				jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJumpMultiplier);
 				upVelocity = jumpVelocity;
 				AltMove(inputDir, -Physics.gravity);
 			}
@@ -203,25 +208,25 @@ public class PlayerMove : MonoBehaviour
 			velocity.y = inputDir.y * playerMoveSpeed;
 
 			//Stops player from getting stuck in the ground/wall when the player is in the air and is movinging in the direction of the ground/wall
-			if (!PlayerIsGrounded)
-			{
-				if (CheckIfGrounded(Vector3.down, characterWidth))
-				{
-					inputDir.y = -inputDir.y;
-				}
-				if (CheckIfGrounded(Vector3.up, characterWidth))
-				{
-					inputDir.y = -inputDir.y;
-				}
-				if (CheckIfGrounded(Vector3.left, characterWidth))
-				{
-					inputDir.x = -inputDir.x;
-				}
-				if (CheckIfGrounded(Vector3.right, characterWidth))
-				{
-					inputDir.x = -inputDir.x;
-				}
-			}
+			// if (!PlayerIsGrounded)
+			// {
+			// 	if (CheckIfGrounded(Vector3.down, characterWidth))
+			// 	{
+			// 		inputDir.y = -inputDir.y;
+			// 	}
+			// 	if (CheckIfGrounded(Vector3.up, characterWidth))
+			// 	{
+			// 		inputDir.y = -inputDir.y;
+			// 	}
+			// 	if (CheckIfGrounded(Vector3.left, characterWidth))
+			// 	{
+			// 		inputDir.x = -inputDir.x;
+			// 	}
+			// 	if (CheckIfGrounded(Vector3.right, characterWidth))
+			// 	{
+			// 		inputDir.x = -inputDir.x;
+			// 	}
+			// }
 			
 			velocity.y = inputDir.y * playerMoveSpeed;
 			velocity.z = -inputDir.x * playerMoveSpeed;
@@ -239,6 +244,23 @@ public class PlayerMove : MonoBehaviour
 		}
 		else if (gravityDirection.z > 0 || gravityDirection.z < 0)
 		{
+			if (gravityDirection.z > 0)
+			{
+				if (CheckIfGrounded(Vector3.right, 1f)) {
+					//Debug.Log("Grounded");
+					upVelocity = 0;
+					animator.SetBool(isJumping, false);
+				}
+			}
+			else
+			{
+				if (CheckIfGrounded(Vector3.left, 1f)) {
+					//Debug.Log("Grounded");
+					upVelocity = 0;
+					animator.SetBool(isJumping, false);
+				}
+			}
+			
 			upVelocity += Time.deltaTime * gravityPull;
 			//Movement
 			if (reverseMovementDirections)
@@ -273,6 +295,12 @@ public class PlayerMove : MonoBehaviour
 			}
 		}else if (gravityDirection.y > 9f)
 		{
+			
+			if (CheckIfGrounded(Vector3.down, 1f)) {
+				//Debug.Log("Grounded");
+				upVelocity = 0;
+				animator.SetBool(isJumping, false);
+			}
 //			Debug.Log("Up Move");
 			upVelocity += Time.deltaTime * gravityPull;
 			// //velocity = transform.forward * currentSpeed + upAxis * velocityY;
@@ -297,7 +325,8 @@ public class PlayerMove : MonoBehaviour
 				velocity.z = -tempInput.y * playerMoveSpeed;
 			}
 			
-			velocity.y -= upVelocity;
+			velocity.y += -upVelocity*3;
+			
 			
 			zephAnimator.SetFloat(moveSpeed, velocity.magnitude);
 		}
@@ -324,10 +353,13 @@ public class PlayerMove : MonoBehaviour
 		currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.y).magnitude;
 
 		//if (CheckIfGrounded(Physics.gravity, 5f))
-		if (CheckIfGrounded(Physics.gravity, 5f)) {
-			upVelocity = 0;
-			animator.SetBool(isJumping, false);
-		}
+		// if (Physics.Raycast(transform.position, -transform.up, 5f, LayerMask.NameToLayer("NoPlayer")))
+		// {
+		// 	Debug.Log("Grounded");
+		// 	upVelocity = 0;
+		// }
+		
+		
 	}
 
 	void Move(Vector2 inputDir, Vector3 upAxis) {
@@ -438,7 +470,7 @@ public class PlayerMove : MonoBehaviour
 		
 		if (GravityRift.useNewGravity)
 		{
-			jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJump);
+			jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJumpMultiplier);
 		}
 		else
 		{
@@ -492,6 +524,23 @@ public class PlayerMove : MonoBehaviour
 
 	private bool CheckIfGrounded(Vector3 direction, float distance)
 	{
-		return GravityRift.useNewGravity ? Physics.Raycast(transform.position, direction, distance) : characterController.isGrounded;
+		if (GravityRift.useNewGravity)
+		{
+			Ray ray = new Ray(rayPoint.position, direction);
+			if (Physics.Raycast(ray, out var hit, distance))
+			{
+				//Debug.DrawRay(rayPoint.position, hit.point, Color.red, distance);
+				//Debug.Log(hit.collider.name);
+				return true;
+			}
+
+			return false;
+
+		}
+		else
+		{
+			return characterController.isGrounded;
+		}
+		//return GravityRift.useNewGravity ?  : characterController.isGrounded;
 	}
 }

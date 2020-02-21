@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &31494216
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 31494217}
-  m_Layer: 9
-  m_Name: Orbit Point
-  m_TagString: OrbitPoint
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &31494217
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31494216}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5419553859713054265}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &193507632
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +420,7 @@ GameObject:
   - component: {fileID: 2408870523393289901}
   - component: {fileID: 516347797060133683}
   - component: {fileID: 2403710633435156949}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ZephFireEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -574,7 +544,7 @@ GameObject:
   - component: {fileID: 4871547756568620857}
   - component: {fileID: 1281003617821192918}
   - component: {fileID: 5048264981524812767}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ZephOrbitLeavesEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -676,6 +646,36 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &4770025758521181375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6535318197949879248}
+  m_Layer: 2
+  m_Name: Raypoint
+  m_TagString: RayPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6535318197949879248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4770025758521181375}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.077, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5419553859713054265}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4890117515526024213
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,6 +736,8 @@ MonoBehaviour:
   airControlPercent: 1
   playerTurnSpeed: 0.1
   velocitySmoothing: 0.1
+  gravityJumpMultiplier: 3
+  ceilingGravityModifier: 3
   gravityFlipTime: 2
   coyoteTime: 0.15
   reverseMovementDirections: 0
@@ -803,7 +805,7 @@ GameObject:
   - component: {fileID: 8829680332137081097}
   - component: {fileID: 6608159784179967517}
   - component: {fileID: 6571643037947777032}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ZephOrbitEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
