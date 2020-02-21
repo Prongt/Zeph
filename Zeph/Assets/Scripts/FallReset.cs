@@ -10,6 +10,7 @@ public class FallReset : MonoBehaviour
         {
             other.GetComponent<PlayerMove>().enabled = false;
             Physics.gravity = new Vector3(0,-9.81f,0);
+            GravityRift.useNewGravity = false;
             other.transform.position = CheckpointManager.curCheckpoint.transform.position;
             other.transform.rotation = CheckpointManager.curCheckpoint.transform.rotation;
             StartCoroutine(Delay());
