@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        player = FindObjectOfType<PlayerMove>().transform;
+        player = FindObjectOfType<PlayerMoveRigidbody>().transform;
         for (int i = 0; i < player.childCount; i++)
         {
             if (player.GetChild(i).CompareTag("Cam/Main"))
