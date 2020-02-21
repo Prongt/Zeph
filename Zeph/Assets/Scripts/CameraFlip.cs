@@ -6,7 +6,7 @@ using Cinemachine;
 public class CameraFlip : MonoBehaviour
 {
    public CinemachineVirtualCamera myCam;
-
+   
 
    void Start()
    {
@@ -24,5 +24,7 @@ public class CameraFlip : MonoBehaviour
       Vector3 t = myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
       t.z = -t.z;
       myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = t;
+
+      GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = true;
    }
 }
