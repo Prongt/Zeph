@@ -279,17 +279,24 @@ public class PlayerMove : MonoBehaviour
 			// velocity = transform.forward * currentSpeed + upAxis;
 			// velocity.y = velocityY;
 			//velocity = transform.forward;
+			var tempInput = inputDir;
+			if (flipMovement)
+			{
+				tempInput.x = -tempInput.x;
+				tempInput.y = -tempInput.y;
+			}
 			
 			if (reverseMovementDirections)
 			{
-				velocity.x = inputDir.y * playerMoveSpeed;
-				velocity.z = inputDir.x * playerMoveSpeed;
+				velocity.x = tempInput.y * playerMoveSpeed;
+				velocity.z = tempInput.x * playerMoveSpeed;
 			}
 			else
 			{
-				velocity.x = -inputDir.x * playerMoveSpeed;
-				velocity.z = -inputDir.y * playerMoveSpeed;
+				velocity.x = -tempInput.x * playerMoveSpeed;
+				velocity.z = -tempInput.y * playerMoveSpeed;
 			}
+			
 			velocity.y -= upVelocity;
 			
 			zephAnimator.SetFloat(moveSpeed, velocity.magnitude);
@@ -370,6 +377,11 @@ public class PlayerMove : MonoBehaviour
 		animator.SetBool(isDancing, false);
 	}
 
+	public void FlipMovement()
+	{
+		flipMovement = !flipMovement;
+	}
+
 	private void Rotate(Vector2 inputDir)
 	{
 		if (inputDir != Vector2.zero)
@@ -381,6 +393,13 @@ public class PlayerMove : MonoBehaviour
 				{
 					
 				}
+
+				if (flipMovement)
+				{
+					inputDir.x = -inputDir.x;
+					inputDir.y = -inputDir.y;
+				}
+				
 				if (reverseMovementDirections)
 				{
 					targetRotation = Mathf.Atan2(inputDir.y, -inputDir.x) * Mathf.Rad2Deg;
