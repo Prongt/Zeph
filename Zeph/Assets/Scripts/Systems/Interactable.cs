@@ -10,7 +10,7 @@ public class Interactable : MonoBehaviour
     [Tooltip("Aspect material used by this object")] [Header("Aspects")] [SerializeField]
     private AspectMaterial aspectMaterial;
 
-    [Tooltip("Any additional aspects this object requires")] [SerializeField]
+    [Tooltip("Any additional aspects this object requires")] //[SerializeField]
     private List<AspectType> additionalAspects;
     
     [SerializeField] protected bool onlyActivatedByPlayer = false;
