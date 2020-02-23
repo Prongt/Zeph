@@ -13,12 +13,14 @@ public class Conductor : MonoBehaviour
     private List<GameObject> objectsInRadius;
     [SerializeField] private float shrinkSpeed;
     private List<SnowController> snowControllersInRadius;
+    private List<IceController> iceControllersInRadius;
     [SerializeField] private float waitTime;
 
     private void Awake()
     {
         objectsInRadius = new List<GameObject>();
         snowControllersInRadius = new List<SnowController>();
+        iceControllersInRadius = new List<IceController>();
     }
 
     [ContextMenu("Grow")]
@@ -55,12 +57,21 @@ public class Conductor : MonoBehaviour
         if (objectsInRadius.Contains(other.gameObject)) return;
 
         var snowController = other.GetComponent<SnowController>();
-        if (!snowController) return;
+        if (snowController)
+        {
+            snowControllersInRadius.Add(snowController);
+            snowController.Melt();
+        }
+
+        var iceController = other.GetComponent<IceController>();
+        if (iceController)
+        {
+            iceControllersInRadius.Add(iceController);
+            iceController.Melt();
+        }
         
         objectsInRadius.Add(other.gameObject);
-        snowControllersInRadius.Add(snowController);
         
-        snowController.Melt();
 
         var interactable = other.GetComponent<Interactable>();
         if (interactable)
@@ -77,6 +88,8 @@ public class Conductor : MonoBehaviour
         var index = objectsInRadius.IndexOf(other.gameObject);
         snowControllersInRadius[index].Freeze();
         snowControllersInRadius.RemoveAt(index);
+        iceControllersInRadius[index].Freeze();
+        iceControllersInRadius.RemoveAt(index);
         objectsInRadius.Remove(other.gameObject);
 
         var interactable = other.GetComponent<Interactable>();
