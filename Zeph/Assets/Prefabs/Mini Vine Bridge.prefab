@@ -23,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328717128920840757}
-  m_LocalRotation: {x: -0.08638273, y: 0.9962621, z: -0, w: 0}
+  m_LocalRotation: {x: -0.08638199, y: 0.99626213, z: 0.00000001617533, w: -0.00000018655358}
   m_LocalPosition: {x: -28.71, y: 5.25, z: 5.7909174}
   m_LocalScale: {x: 0.28791, y: 1, z: 1}
   m_Children:
@@ -58,8 +58,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5711165445079965969}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.12, z: -0}
-  m_LocalScale: {x: 31, y: 3.254883, z: 1}
+  m_LocalPosition: {x: -7.297, y: 0.12, z: 0.367}
+  m_LocalScale: {x: 16.244, y: 3.254883, z: 1}
   m_Children: []
   m_Father: {fileID: 4752813499413389081}
   m_RootOrder: 0
@@ -120,7 +120,7 @@ BoxCollider:
   m_GameObject: {fileID: 5711165445079965969}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.0000005, y: 1.0000002, z: 1.000001}
   m_Center: {x: 0.000008077469, y: 0.000003632886, z: -0.0000028610252}
@@ -192,7 +192,18 @@ MonoBehaviour:
   AspectType: 0
   onPromote:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7083383552256830245}
+        m_MethodName: Grow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onNegate:
     m_PersistentCalls:
       m_Calls: []
@@ -207,6 +218,22 @@ MonoBehaviour:
     distort: {fileID: 0}
   growSoundEmitter: {fileID: 328717128324609096}
   firefly: {fileID: 0}
+  StopFuckingWithMyShaderValues: 0
+--- !u!114 &7083383552256830245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8623895666464238858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bda2e19b62f1a24cbdc4e0a90095aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unGrownXValue: 11.45
+  growSpeed: 0.5
+  grownXValue: -1
 --- !u!1001 &328717129067983875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -282,7 +309,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 8c08c4aa4425d3f449a7c234b118a0e8,
         type: 3}
       propertyPath: m_TagString
-      value: Bridge
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7561110372842451503, guid: 8c08c4aa4425d3f449a7c234b118a0e8,
         type: 3}
@@ -334,7 +361,8 @@ PrefabInstance:
       propertyPath: m_BlendShapeWeights.Array.data[0]
       value: 100
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -6057140222963153312, guid: 8c08c4aa4425d3f449a7c234b118a0e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8c08c4aa4425d3f449a7c234b118a0e8, type: 3}
 --- !u!1 &8623895666464238858 stripped
 GameObject:

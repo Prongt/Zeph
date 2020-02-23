@@ -76,7 +76,7 @@ public class Conductor : MonoBehaviour
         var interactable = other.GetComponent<Interactable>();
         if (interactable)
         {
-            Debug.Log(other.name);
+//            Debug.Log(other.name);
             interactable.IsEnabled = true;
         }
     }

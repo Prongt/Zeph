@@ -23,6 +23,7 @@ public class Growable : Aspects
 
     [SerializeField] private ParticleSystem firefly;
     private ParticleSystem.EmissionModule fireflyRate;
+    public bool StopFuckingWithMyShaderValues = false;
 
     private bool lightShining;
 
@@ -112,6 +113,7 @@ public class Growable : Aspects
 
        if (gameObject.CompareTag("Bridge"))
        {
+          // Debug.Log("Why you do this!");
            mat.SetFloat(vector1B0F27Ffd, matX);
 
            if (lightShining)
@@ -179,9 +181,13 @@ public class Growable : Aspects
                     }
                 }
 
+                if (!StopFuckingWithMyShaderValues)
+                {
+                    myAnim.SetBool(growing, true);
+                    StartCoroutine(Appear());
+                }
 
-                myAnim.SetBool(growing, true);
-                StartCoroutine(Appear());
+                
             }
         }
     }
