@@ -63,7 +63,11 @@ public class Conductor : MonoBehaviour
         snowController.Melt();
 
         var interactable = other.GetComponent<Interactable>();
-        if (interactable) interactable.IsEnabled = true;
+        if (interactable)
+        {
+            Debug.Log(other.name);
+            interactable.IsEnabled = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)

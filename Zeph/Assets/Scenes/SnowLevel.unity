@@ -961,7 +961,7 @@ MonoBehaviour:
   onPromote:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 591791864}
         m_MethodName: Grow
         m_Mode: 1
         m_Arguments:
@@ -1082,6 +1082,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 564369857}
   m_Mesh: {fileID: -1315153294634656225, guid: 906fc0e608f841946bbc4e65c36ea67b, type: 3}
+--- !u!114 &591791864 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3405558585916758156, guid: b872e7d6b6e39564090851c50ed6b907,
+    type: 3}
+  m_PrefabInstance: {fileID: 552902300}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c60ae876eaa4f44490714f4e3732218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &602219203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,7 +1807,7 @@ MonoBehaviour:
   onPromote:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1808652874}
         m_MethodName: Grow
         m_Mode: 1
         m_Arguments:
@@ -3374,6 +3386,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -336498665727648927, guid: 0057732069e18194db8059f7b77a6692, type: 3}
+--- !u!114 &1247037457 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3405558585916758156, guid: b872e7d6b6e39564090851c50ed6b907,
+    type: 3}
+  m_PrefabInstance: {fileID: 1628406345}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c60ae876eaa4f44490714f4e3732218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1285829762
 GameObject:
   m_ObjectHideFlags: 0
@@ -4426,7 +4450,7 @@ MonoBehaviour:
   onPromote:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1247037457}
         m_MethodName: Grow
         m_Mode: 1
         m_Arguments:
@@ -4835,6 +4859,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1753217004}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1808652874 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3405558585916758156, guid: b872e7d6b6e39564090851c50ed6b907,
+    type: 3}
+  m_PrefabInstance: {fileID: 953127089}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c60ae876eaa4f44490714f4e3732218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1808945531
 GameObject:
   m_ObjectHideFlags: 0
@@ -6710,10 +6746,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1050689304}
     m_Modifications:
+    - target: {fileID: 328717128324609092, guid: b5c80e450274e0d47a26b6f51e91bc1f,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 328717128324609093, guid: b5c80e450274e0d47a26b6f51e91bc1f,
         type: 3}
       propertyPath: IsEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 328717128920840756, guid: b5c80e450274e0d47a26b6f51e91bc1f,
         type: 3}
@@ -6774,6 +6815,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ivy Bridge1_Mid
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882311090200405943, guid: b5c80e450274e0d47a26b6f51e91bc1f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.297
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882311090200405943, guid: b5c80e450274e0d47a26b6f51e91bc1f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.367
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882311090200405943, guid: b5c80e450274e0d47a26b6f51e91bc1f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 16.244
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5c80e450274e0d47a26b6f51e91bc1f, type: 3}
