@@ -67,8 +67,12 @@ public class PlayerMove : MonoBehaviour
 	void Start ()
 	{
 		if (Camera.main != null) camera = Camera.main.transform;
-
-		rayPoint = GameObject.FindWithTag("RayPoint").transform;
+		
+		if (GameObject.FindWithTag("RayPoint").transform)
+		{
+			rayPoint = GameObject.FindWithTag("RayPoint").transform;
+		}
+		
 		GrabComponents();
 		
 		gravityDirection = Physics.gravity;
