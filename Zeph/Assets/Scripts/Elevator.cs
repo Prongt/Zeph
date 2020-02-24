@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Configuration;
-using UnityEditor.Tilemaps;
-using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
+﻿using UnityEngine;
+
 
 public class Elevator : MonoBehaviour
 {
