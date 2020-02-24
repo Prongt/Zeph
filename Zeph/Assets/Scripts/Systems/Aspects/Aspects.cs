@@ -20,9 +20,10 @@ public abstract class Aspects : MonoBehaviour
 
     protected virtual void Initialize()
     {
-        Enum.TryParse(GetType().Name, out AspectType aspectType);
-        //Debug.Log(aspectType);
-        AspectType = aspectType;
+        // Enum.TryParse(GetType().Name, out AspectType aspectType);
+        // //Debug.Log(aspectType);
+        // AspectType = aspectType;
+        // Debug.Log(AspectType);
     }
 
     public abstract Type[] RequiredComponents();

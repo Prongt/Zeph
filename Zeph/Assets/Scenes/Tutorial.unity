@@ -4247,6 +4247,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2694641672744192829, guid: 38cc0d989a707a64b91cc6f334ae3af6,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38cc0d989a707a64b91cc6f334ae3af6, type: 3}
 --- !u!4 &1108567961 stripped
@@ -5383,6 +5388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8525320636313761439, guid: a720873750d2e9742883b18fae16ed9c, type: 3}
+    - {fileID: 988760978, guid: a720873750d2e9742883b18fae16ed9c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a720873750d2e9742883b18fae16ed9c, type: 3}
 --- !u!4 &1371032855 stripped
 Transform:
@@ -5600,6 +5606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8525320636313761439, guid: a720873750d2e9742883b18fae16ed9c, type: 3}
+    - {fileID: 988760978, guid: a720873750d2e9742883b18fae16ed9c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a720873750d2e9742883b18fae16ed9c, type: 3}
 --- !u!4 &1379966987 stripped
 Transform:
@@ -9104,6 +9111,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Power Disabler
       objectReference: {fileID: 0}
+    - target: {fileID: 3276391809687439257, guid: 5d087a84aaec8bc4c9eaf8af32241993,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d087a84aaec8bc4c9eaf8af32241993, type: 3}
 --- !u!23 &3352295794403858240
@@ -10166,6 +10178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 0e4bb13be48682e498663b2d1635223d, type: 2}
+  additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
   IsEnabled: 1

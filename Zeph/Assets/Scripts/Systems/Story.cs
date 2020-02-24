@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class Story : Aspects
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Initialize()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        base.Initialize();
+        AspectType = AspectType.Story;
         
     }
 

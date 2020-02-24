@@ -24,6 +24,7 @@ public class Distortion : Aspects
     protected override void Initialize()
     {
         base.Initialize();
+        AspectType = AspectType.Distortion;
         IsDistorting = false;
 
         myAnim = !gameObject.CompareTag("Rift") ? GetComponent<Animator>() : null;

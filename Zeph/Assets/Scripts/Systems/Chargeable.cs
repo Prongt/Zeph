@@ -29,6 +29,7 @@ public class Chargeable : Aspects
     protected override void Initialize()
     {
         base.Initialize();
+        AspectType = AspectType.Chargeable;
 
     }
 

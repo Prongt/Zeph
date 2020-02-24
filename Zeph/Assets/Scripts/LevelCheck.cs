@@ -22,7 +22,7 @@ public class LevelCheck : MonoBehaviour
     void Update()
     {
         levelNum = GameObject.Find("Player Progress").GetComponent<LevelProgress>().playerProgress;
-        print(levelNum);
+//        print(levelNum);
         if (levelNum >= 0)
         {
             tutorialButton.SetActive(true);

@@ -49,6 +49,7 @@ public class Flamable : Aspects
     protected override void Initialize()
     {
         base.Initialize();
+        AspectType = AspectType.Flamable;
         var renderer = GetComponent<Renderer>();
         if (renderer != null)
         {
@@ -68,13 +69,16 @@ public class Flamable : Aspects
         }
 
         myAnim = GetComponent<Animator>();
-        if (!gameObject.CompareTag("Log"))
+        if (firefly)
         {
-            fireflyRate = firefly.emission;
-        }
-        else
-        {
-            firefly = null;
+            if (!gameObject.CompareTag("Log"))
+            {
+                fireflyRate = firefly.emission;
+            }
+            else
+            {
+                firefly = null;
+            }
         }
     }
 

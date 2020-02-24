@@ -17,6 +17,12 @@ public class Pullable : Aspects
         return componentTypes;
     }
 
+    protected override void Initialize()
+    {
+        base.Initialize();
+        AspectType = AspectType.Pullable;
+    }
+
     private IEnumerator MoveRoutine()
     {
         while (math.distance(transform.position, movePosition.position) > 0.25f)

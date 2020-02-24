@@ -55,6 +55,12 @@ public class Orbitable : Aspects
         return componentTypes;
     }
 
+    protected override void Initialize()
+    {
+        base.Initialize();
+        AspectType = AspectType.Orbitable;
+    }
+
     void Start()
     {
         myRB = GetComponent<Rigidbody>();
