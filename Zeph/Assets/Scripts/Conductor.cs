@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -12,15 +11,11 @@ public class Conductor : MonoBehaviour
     [SerializeField] private float minRadius;
     private List<GameObject> objectsInRadius;
     [SerializeField] private float shrinkSpeed;
-    private List<SnowController> snowControllersInRadius;
-    private List<IceController> iceControllersInRadius;
     [SerializeField] private float waitTime;
 
     private void Awake()
     {
         objectsInRadius = new List<GameObject>();
-        snowControllersInRadius = new List<SnowController>();
-        iceControllersInRadius = new List<IceController>();
     }
 
     [ContextMenu("Grow")]
@@ -59,24 +54,21 @@ public class Conductor : MonoBehaviour
         var snowController = other.GetComponent<SnowController>();
         if (snowController)
         {
-            snowControllersInRadius.Add(snowController);
             snowController.Melt();
         }
 
         var iceController = other.GetComponent<IceController>();
         if (iceController)
         {
-            iceControllersInRadius.Add(iceController);
             iceController.Melt();
         }
         
         objectsInRadius.Add(other.gameObject);
-        
+            
 
         var interactable = other.GetComponent<Interactable>();
         if (interactable)
         {
-//            Debug.Log(other.name);
             interactable.IsEnabled = true;
         }
     }
@@ -84,12 +76,18 @@ public class Conductor : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!objectsInRadius.Contains(other.gameObject)) return;
-        
-        var index = objectsInRadius.IndexOf(other.gameObject);
-        snowControllersInRadius[index].Freeze();
-        snowControllersInRadius.RemoveAt(index);
-        iceControllersInRadius[index].Freeze();
-        iceControllersInRadius.RemoveAt(index);
+
+        var snowController = other.GetComponent<SnowController>();
+        if (snowController)
+        {
+            snowController.Freeze();
+        }
+
+        var iceController = other.GetComponent<IceController>();
+        if (iceController)
+        {
+            iceController.Freeze();
+        }
         objectsInRadius.Remove(other.gameObject);
 
         var interactable = other.GetComponent<Interactable>();
