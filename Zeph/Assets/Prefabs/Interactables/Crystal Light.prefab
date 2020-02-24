@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7884992959445521131}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!108 &1790125297
 Light:
@@ -44,7 +44,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.38099718, b: 1, a: 1}
-  m_Intensity: 1389.1625
+  m_Intensity: 18.379171
   m_Range: 100
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 13.44
+  m_Intensity: 7.2
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 82657114}
   - component: {fileID: 82657115}
   - component: {fileID: 82657117}
+  - component: {fileID: 3498635496596830492}
   m_Layer: 0
   m_Name: Crystal Light
   m_TagString: Crystal
@@ -243,6 +244,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 838223689342849805}
+  - {fileID: 4068751419910562640}
   - {fileID: 1790125295}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -281,7 +283,9 @@ MonoBehaviour:
       m_Calls: []
   coolDownTime: 0
   emissiveCrystal: {fileID: 2100000, guid: 9fd2db14b836a5047b476857b07de444, type: 2}
-  myRend: {fileID: 2721994782705309122}
+  myRend: {fileID: 1589933463512180127}
+  charged: 0
+  attached: 0
 --- !u!114 &82657117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +302,20 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
+  IsEnabled: 1
+--- !u!65 &3498635496596830492
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6369144856551659922}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.2452626, z: 2.2297528}
+  m_Center: {x: 0, y: -0.092705965, z: -0.023182273}
 --- !u!1001 &5682219809417246743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -385,6 +403,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: crystal
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 48476c5c80e63b94299818d4dc298199,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48476c5c80e63b94299818d4dc298199, type: 3}
 --- !u!1 &4466059937932370206 stripped
@@ -399,9 +422,89 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5682219809417246743}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &2721994782705309122 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 48476c5c80e63b94299818d4dc298199,
+--- !u!1001 &9011050936159373386
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7884992959445521131}
+    m_Modifications:
+    - target: {fileID: -4216859302048453862, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00000001545431
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.000000015454308
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bf818ae226c7da9469a16d7af57891d9, type: 2}
+    - target: {fileID: -927199367670048503, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+        type: 3}
+      propertyPath: m_Name
+      value: mirror crystal
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 99aa86e96cac62d46baa4f8df26c9abe, type: 3}
+--- !u!4 &4068751419910562640 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 99aa86e96cac62d46baa4f8df26c9abe,
     type: 3}
-  m_PrefabInstance: {fileID: 5682219809417246743}
+  m_PrefabInstance: {fileID: 9011050936159373386}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1589933463512180127 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 99aa86e96cac62d46baa4f8df26c9abe,
+    type: 3}
+  m_PrefabInstance: {fileID: 9011050936159373386}
   m_PrefabAsset: {fileID: 0}
