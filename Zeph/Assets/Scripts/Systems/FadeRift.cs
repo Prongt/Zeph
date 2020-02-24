@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class FadeRift : Aspects
 {
+    protected override void Initialize()
+    {
+        base.Initialize();
+        AspectType = AspectType.FadeRift;
+    }
 
     public override void Promote(Transform source = null, Element element = null)
     {

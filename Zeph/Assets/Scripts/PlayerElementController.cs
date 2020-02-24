@@ -57,12 +57,15 @@ public class PlayerElementController : MonoBehaviour
             switch (elementData[i].element.ButtonName)
             {
                 case "FirePower":
+                    //Debug.Log("Fire power used");
                     fireEffect.SetInt("Spawn Rate", 1000);
                     break;
                 case "OrbitPower":
+                    //Debug.Log("Orbit power used");
                     leafEffect.SetInt("Spawn Rate", 30);
                     break;
                 case "LightPower":
+                    //Debug.Log("Light power used");
                     light.intensity = 1200f;
                     break;
             }

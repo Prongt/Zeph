@@ -46,7 +46,13 @@ public class Growable : Aspects
    protected override void Initialize()
     {
         base.Initialize();
-        fireflyRate = firefly.emission;
+        AspectType = AspectType.Growable;
+
+        if (firefly)
+        {
+            fireflyRate = firefly.emission;
+        }
+        
 
         if (gameObject.CompareTag("Plant"))
         {

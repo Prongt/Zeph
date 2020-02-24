@@ -17,6 +17,12 @@ public class Map : Aspects
         
     }
 
+    protected override void Initialize()
+    {
+        base.Initialize();
+        AspectType = AspectType.Map;
+    }
+
     public Type[] componentTypes = new Type[]
     {
         

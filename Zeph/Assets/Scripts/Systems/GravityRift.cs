@@ -17,7 +17,13 @@ public class GravityRift : Aspects
         Physics.gravity = new Vector3(0, -9.81f, 0);
         ogGravity = Physics.gravity;
     }
-    
+
+    protected override void Initialize()
+    {
+        base.Initialize();
+        AspectType = AspectType.GravityRift;
+    }
+
     public Type[] componentTypes = new Type[]
     {
         
