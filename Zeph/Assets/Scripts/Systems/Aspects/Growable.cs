@@ -7,7 +7,7 @@ public class Growable : Aspects
 {
     public Animator myAnim;
     [SerializeField] private Material mat;
-    private float matX;
+    [SerializeField] private float matX;
     [SerializeField] private Animator groundDistort;
 
 
@@ -23,7 +23,7 @@ public class Growable : Aspects
 
     [SerializeField] private ParticleSystem firefly;
     private ParticleSystem.EmissionModule fireflyRate;
-    public bool StopFuckingWithMyShaderValues = false;
+   /*Seriously?*/ public bool StopFuckingWithMyShaderValues = false;
 
     private bool lightShining;
 
@@ -32,7 +32,7 @@ public class Growable : Aspects
     {
     };
 
-    private static readonly int vector1B0F27Ffd = Shader.PropertyToID("Vector1_B0F27FFD");
+    //private static readonly int vector1B0F27Ffd = Shader.PropertyToID("Vector1_B0F27FFD");
     private static readonly int distort = Animator.StringToHash("Distort");
     private static readonly int grow = Animator.StringToHash("Grow");
     private static readonly int growing = Animator.StringToHash("Growing");
@@ -53,13 +53,6 @@ public class Growable : Aspects
             myAnim = GetComponent<Animator>();
         }
 
-        if (gameObject.CompareTag("Bridge"))
-        {
-            myAnim = GetComponent<Animator>();
-            mat = gameObject.GetComponent<SkinnedMeshRenderer>().material;
-            matX = mat.GetFloat(vector1B0F27Ffd);
-        }
-
         if (isTree)
         {
             myAnim = GetComponent<Animator>();
@@ -70,6 +63,19 @@ public class Growable : Aspects
             colliders.grown.enabled = false;
         }
     }
+
+   void Start()
+   {
+       if (gameObject.CompareTag("Bridge"))
+       {
+           //Finding the inital value for the Material is the issue
+           myAnim = GetComponent<Animator>();
+           mat = gameObject.GetComponent<SkinnedMeshRenderer>().material;
+           matX = mat.GetFloat("Vector1_B0F27FFD");
+           //Setting it is a temp fix for build for Fleadh
+           matX = 15;
+       }
+   }
 
    public void LightShine()
    {
@@ -114,7 +120,7 @@ public class Growable : Aspects
        if (gameObject.CompareTag("Bridge"))
        {
           // Debug.Log("Why you do this!");
-           mat.SetFloat(vector1B0F27Ffd, matX);
+          mat.SetFloat("Vector1_B0F27FFD", matX);
 
            if (lightShining)
            {
@@ -165,8 +171,9 @@ public class Growable : Aspects
            {
                colliders.grown.enabled = true;
            }
+       }
 
-           //gameObject.GetComponent<Renderer>().material = GrowingMaterial;
+       //gameObject.GetComponent<Renderer>().material = GrowingMaterial;
            if (gameObject.CompareTag("Bridge"))
            {
                if (matX >= 1)
@@ -184,17 +191,16 @@ public class Growable : Aspects
                            }
                    }
 
-                   if (!StopFuckingWithMyShaderValues)
-                   {
+                  // if (!StopFuckingWithMyShaderValues)
+                  // {
                        myAnim.SetBool(growing, true);
                        StartCoroutine(Appear());
-                   }
+                   //}
 
 
                }
            }
-       }
-   }
+    }
 
    public override void Negate(Transform source = null)
     {
