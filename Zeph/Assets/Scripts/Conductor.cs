@@ -7,7 +7,7 @@ public class Conductor : MonoBehaviour
 {
     private float currentTarget;
     [SerializeField] private float growSpeed;
-    [SerializeField] private float maxRadius;
+    [SerializeField] private float maxRadius = 25f;
     [SerializeField] private float minRadius;
     private List<GameObject> objectsInRadius;
     [SerializeField] private float shrinkSpeed;

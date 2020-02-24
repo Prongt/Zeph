@@ -137,62 +137,66 @@ public class Growable : Aspects
        }
    }
 
-    public override void Promote(Transform source = null, Element element = null)
-    {
-        base.Promote(source, element);
-        //Debug.Log("Grow Bitch!");
-        
-        if (firefly)
-        {
-            fireflyRate.rateOverTime = 0;
-        }
-        
+   public override void Promote(Transform source = null, Element element = null)
+   {
+       base.Promote(source, element);
+       //Debug.Log("Grow Bitch!");
 
-        if (growSoundEmitter)
-        {
-            growSoundEmitter.Play();
-        }
+       if (firefly)
+       {
+           fireflyRate.rateOverTime = 0;
+       }
 
-        if (isTree)
-        {
-            myAnim.SetBool(grow, true);
-        }
 
-        if (gameObject.CompareTag("Plant"))
-        {
-            myAnim.SetBool(growing, true);
-            colliders.grown.enabled = true;
-        }
-        //gameObject.GetComponent<Renderer>().material = GrowingMaterial;
-        if (gameObject.CompareTag("Bridge"))
-        {
-            if (matX >= 1)
-            {
-                if (growSoundEmitter)
-                {
-                    if (groundDistort)
-                        if (groundDistort.GetBool(distort))
-                    {
-                        growSoundEmitter.SetParameter("Distortion", 1.0f);
-                    }
-                    else
-                    {
-                        growSoundEmitter.SetParameter("Distortion", 0.0f);
-                    }
-                }
+       if (growSoundEmitter)
+       {
+           growSoundEmitter.Play();
+       }
 
-                if (!StopFuckingWithMyShaderValues)
-                {
-                    myAnim.SetBool(growing, true);
-                    StartCoroutine(Appear());
-                }
+       if (isTree)
+       {
+           myAnim.SetBool(grow, true);
+       }
 
-                
-            }
-        }
-    }
+       if (gameObject.CompareTag("Plant"))
+       {
+           myAnim.SetBool(growing, true);
+           if (colliders.grown)
+           {
+               colliders.grown.enabled = true;
+           }
 
-    public override void Negate(Transform source = null)
+           //gameObject.GetComponent<Renderer>().material = GrowingMaterial;
+           if (gameObject.CompareTag("Bridge"))
+           {
+               if (matX >= 1)
+               {
+                   if (growSoundEmitter)
+                   {
+                       if (groundDistort)
+                           if (groundDistort.GetBool(distort))
+                           {
+                               growSoundEmitter.SetParameter("Distortion", 1.0f);
+                           }
+                           else
+                           {
+                               growSoundEmitter.SetParameter("Distortion", 0.0f);
+                           }
+                   }
+
+                   if (!StopFuckingWithMyShaderValues)
+                   {
+                       myAnim.SetBool(growing, true);
+                       StartCoroutine(Appear());
+                   }
+
+
+               }
+           }
+       }
+   }
+
+   public override void Negate(Transform source = null)
     {
         //Stop growing
         //Debug.Log("Shrinking");
