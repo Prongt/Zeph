@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using FMODUnity;
+﻿using FMODUnity;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TriggerMusic : MonoBehaviour
 {
     [SerializeField] private StudioEventEmitter studioEventEmitter;
-    [SerializeField] private bool DontDestroyOnLoad = false;
-    public static bool MusicIsActive = false;
+    [SerializeField] private bool dontDestroyOnLoad;
+    public static bool MusicIsActive;
     private void Start()
     {
-        if (MusicIsActive == true)
-        {
-            return;
-        }
-
-        MusicIsActive = true;
+        // if (MusicIsActive)
+        // {
+        //     return;
+        // }
+        //
+        // MusicIsActive = true;
         GrabComponents();
         studioEventEmitter.Play();
-        if (DontDestroyOnLoad)
+        if (dontDestroyOnLoad)
         {
             DontDestroyOnLoad(this.gameObject);
         }
