@@ -5838,7 +5838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   studioEventEmitter: {fileID: 232602925}
-  DontDestroyOnLoad: 0
+  dontDestroyOnLoad: 0
 --- !u!114 &232602925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14574,6 +14574,9 @@ MonoBehaviour:
       m_Calls: []
   coolDownTime: 2.5
   newGravity: {x: 0, y: 9.81, z: 0}
+  useToFromGravity: 0
+  toGravity: {x: 0, y: 0, z: 0}
+  fromGravity: {x: 0, y: 0, z: 0}
   resetGravity: 0
 --- !u!65 &886078446
 BoxCollider:
@@ -23588,6 +23591,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1601319180
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 155872353383682370, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: levelIndex
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872353383682371, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: m_Name
+      value: MusicChanger
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872353383682373, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872353383682373, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872353383682373, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872353383682373, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872353383682373, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872353383682373, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872353383682373, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872353383682373, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872353383682373, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872353383682373, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 155872353383682373, guid: ae7a5c18722d88749b1d52c1d7b1e820,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ae7a5c18722d88749b1d52c1d7b1e820, type: 3}
 --- !u!4 &1611759755 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7839646135248715979, guid: 20c1292c2ad62d34ea61d598a3b052cd,
@@ -32295,6 +32372,9 @@ MonoBehaviour:
       m_Calls: []
   coolDownTime: 2.5
   newGravity: {x: 0, y: 0, z: -9.81}
+  useToFromGravity: 0
+  toGravity: {x: 0, y: 0, z: 0}
+  fromGravity: {x: 0, y: 0, z: 0}
   resetGravity: 1
 --- !u!4 &578561215888078343
 Transform:
@@ -57017,6 +57097,9 @@ MonoBehaviour:
       m_Calls: []
   coolDownTime: 2.5
   newGravity: {x: 0, y: 0, z: -9.81}
+  useToFromGravity: 0
+  toGravity: {x: 0, y: 0, z: 0}
+  fromGravity: {x: 0, y: 0, z: 0}
   resetGravity: 1
 --- !u!4 &6388238845948263463
 Transform:
@@ -58208,6 +58291,9 @@ MonoBehaviour:
       m_Calls: []
   coolDownTime: 2.5
   newGravity: {x: 0, y: 0, z: -9.81}
+  useToFromGravity: 0
+  toGravity: {x: 0, y: 0, z: 0}
+  fromGravity: {x: 0, y: 0, z: 0}
   resetGravity: 1
 --- !u!64 &7090148705264255522
 MeshCollider:
@@ -61585,6 +61671,9 @@ MonoBehaviour:
       m_Calls: []
   coolDownTime: 2.5
   newGravity: {x: 0, y: 0, z: -9.81}
+  useToFromGravity: 0
+  toGravity: {x: 0, y: 0, z: 0}
+  fromGravity: {x: 0, y: 0, z: 0}
   resetGravity: 1
 --- !u!1 &8305944068093748418
 GameObject:
@@ -61968,6 +62057,9 @@ MonoBehaviour:
       m_Calls: []
   coolDownTime: 2.5
   newGravity: {x: 0, y: 0, z: -9.81}
+  useToFromGravity: 0
+  toGravity: {x: 0, y: 0, z: 0}
+  fromGravity: {x: 0, y: 0, z: 0}
   resetGravity: 1
 --- !u!33 &8469003817475283180
 MeshFilter:
