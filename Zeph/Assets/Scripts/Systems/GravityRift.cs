@@ -1,16 +1,18 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 
 public class GravityRift : Aspects
 {
     [SerializeField] private Vector3 newGravity;
-    public static Vector3 ogGravity = new Vector3(0, -9.81f, 0);
+    [SerializeField] private bool useToFromGravity;
+    [SerializeField] private Vector3 toGravity;
+    [SerializeField] private Vector3 fromGravity;
+    private static Vector3 ogGravity = new Vector3(0, -9.81f, 0);
 
-    public static bool useNewGravity = false;
+    public static bool UseNewGravity = false;
 
     public bool resetGravity = true;
-    // Start is called before the first frame update
+
     void Awake()
     {
         //Debug.LogWarning("Hard setting gravity to default gravity");
@@ -37,7 +39,6 @@ public class GravityRift : Aspects
     
     public override void Promote(Transform source = null, Element element = null)
     {
-        //Debug.Log("Here " + gameObject.name);
         if (isCoolDownComplete == false)
         {
             Debug.Log("Cool down not complete on " + gameObject.name);
@@ -50,20 +51,40 @@ public class GravityRift : Aspects
     
     private void ChangeGravity()
     {
+        if (useToFromGravity)
+        {
+            if (Physics.gravity.Equals(toGravity))
+            {
+//                Debug.Log(fromGravity);
+                UseNewGravity = true;
+                Physics.gravity = fromGravity;
+                return;
+            }
+            
+            if (Physics.gravity.Equals(fromGravity))
+            {
+                //Debug.Log(toGravity);
+                UseNewGravity = true;
+                Physics.gravity = toGravity;
+                return;
+            }
+        }
+    
+    
         if (!resetGravity)
         {
             Physics.gravity = newGravity;
         }
         else
         {
-            if (!useNewGravity)
+            if (!UseNewGravity)
             {
-                useNewGravity = true;
+                UseNewGravity = true;
                 Physics.gravity = newGravity;
             }
             else
             {
-                useNewGravity = false;
+                UseNewGravity = false;
                 Physics.gravity = ogGravity;
             }
         }

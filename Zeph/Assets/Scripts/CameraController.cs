@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
     void LateUpdate ()
     {
         Vector3 desiredPosition;
-        if (GravityRift.useNewGravity)
+        if (GravityRift.UseNewGravity)
         { 
             desiredPosition = Vector3.Slerp(transform.position, camAlt.position, smoothFactor * Time.deltaTime);
         }
