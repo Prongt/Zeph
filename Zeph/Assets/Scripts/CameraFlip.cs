@@ -6,6 +6,7 @@ using Cinemachine;
 public class CameraFlip : MonoBehaviour
 {
    public CinemachineVirtualCamera myCam;
+   public static bool hasFlipped;
    
 
    void Start()
@@ -26,5 +27,34 @@ public class CameraFlip : MonoBehaviour
       myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = t;
 
       GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = true;
+      hasFlipped = true;
+   }
+   
+   void OnTriggerEnter(Collider other) {
+      if (gameObject.CompareTag("Flip"))
+      {
+         if (other.CompareTag("Player"))
+         {
+            if (hasFlipped)
+            {
+               FlipZ();
+               GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = false;
+               hasFlipped = false;
+            }
+         }
+      }
+   }
+
+   void OnCollisionEnter(Collision other)
+   {
+      if (gameObject.CompareTag("Flip"))
+         if (other.gameObject.CompareTag("Player"))
+         {
+            if (hasFlipped)
+            {
+               FlipZ();
+               hasFlipped = false;
+            }
+         }
    }
 }
