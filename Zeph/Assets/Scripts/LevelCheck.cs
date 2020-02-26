@@ -22,6 +22,7 @@ public class LevelCheck : MonoBehaviour
     void Update()
     {
         levelNum = GameObject.Find("Player Progress").GetComponent<LevelProgress>().playerProgress;
+        
 //        print(levelNum);
         if (levelNum >= 0)
         {

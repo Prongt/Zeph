@@ -18,8 +18,6 @@ public class RespawnWhenOutOfBounds : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag(tag)) return;
-        
-        if (rigidBody)
         rigidBody.Sleep();
         transform.SetPositionAndRotation(startPos, startRot);
     }

@@ -181,7 +181,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!1 &30499772 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7387033310733741918, guid: 20d07c45e20a02240ab3695ce905e947,
@@ -1308,7 +1309,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!65 &339043211
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1446,9 +1448,10 @@ GameObject:
   - component: {fileID: 354038429}
   - component: {fileID: 354038431}
   - component: {fileID: 354038430}
+  - component: {fileID: 354038432}
   m_Layer: 0
   m_Name: Ceiling Trigger
-  m_TagString: Untagged
+  m_TagString: Flip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1478,8 +1481,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.87307, y: 81.25374, z: 148.24542}
-  m_Center: {x: -2.436535, y: 2.4933624, z: -24.3947}
+  m_Size: {x: 243.63965, y: 81.25374, z: 148.24542}
+  m_Center: {x: 116.44676, y: 2.4933624, z: -24.3947}
 --- !u!114 &354038430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1508,6 +1511,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &354038432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354038427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643d6a6c8a3d7504bae1e27791a22da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCam: {fileID: 0}
 --- !u!1 &383314611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,7 +1640,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395545491}
   m_LocalRotation: {x: 0.11329905, y: 0.6979677, z: -0.113298066, w: 0.69797426}
-  m_LocalPosition: {x: -10.09, y: 7.31, z: 1.6100001}
+  m_LocalPosition: {x: -14.42, y: 7.02, z: -1.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2142,7 +2158,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31202
+  m_Name: pb_Mesh28568
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2563,7 +2579,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 1
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!65 &549612814
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3196,6 +3213,7 @@ GameObject:
   - component: {fileID: 684779629}
   - component: {fileID: 684779628}
   - component: {fileID: 684779627}
+  - component: {fileID: 684779630}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Rock
@@ -3326,7 +3344,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!54 &684779629
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3343,6 +3362,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 10
   m_CollisionDetection: 0
+--- !u!114 &684779630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684779622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b573777a2336ede4f9554a89a62b893f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: Flip
 --- !u!23 &695628349 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1589933463512180127, guid: 00d45e259f73ef241a12676ebc637a9f,
@@ -4562,7 +4594,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1038347141}
   m_LocalRotation: {x: 0.11329905, y: 0.6979677, z: -0.113298066, w: 0.69797426}
-  m_LocalPosition: {x: -10.09, y: 7.31, z: 1.6100001}
+  m_LocalPosition: {x: -14.42, y: 7.02, z: -1.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1049030510}
@@ -5517,6 +5549,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1772071015}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1140700907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140700906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b573777a2336ede4f9554a89a62b893f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: Flip
 --- !u!54 &1140700908
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5649,17 +5694,17 @@ PrefabInstance:
     - target: {fileID: 4890117515526024212, guid: 5c0917fafcb61764aa309728126c3964,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.33
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4890117515526024212, guid: 5c0917fafcb61764aa309728126c3964,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.25
+      value: 0.96
       objectReference: {fileID: 0}
     - target: {fileID: 4890117515526024212, guid: 5c0917fafcb61764aa309728126c3964,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.6100001
+      value: -1.46
       objectReference: {fileID: 0}
     - target: {fileID: 4890117515526024212, guid: 5c0917fafcb61764aa309728126c3964,
         type: 3}
@@ -5817,7 +5862,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!65 &1152375334
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6625,7 +6671,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!65 &1356594347
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7627,7 +7674,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!1 &1673860473
 GameObject:
   m_ObjectHideFlags: 0
@@ -7827,7 +7875,7 @@ PrefabInstance:
     - target: {fileID: 4119143606370083622, guid: 6aadae3cea8d5084b866226b42411316,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4119143606370083622, guid: 6aadae3cea8d5084b866226b42411316,
         type: 3}
@@ -8552,7 +8600,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!65 &1817985083
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8591,9 +8640,10 @@ GameObject:
   - component: {fileID: 1854679468}
   - component: {fileID: 1854679469}
   - component: {fileID: 1854679470}
+  - component: {fileID: 1854679471}
   m_Layer: 0
   m_Name: Floor Trigger
-  m_TagString: Untagged
+  m_TagString: Flip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8623,8 +8673,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.87307, y: 81.25374, z: 148.24542}
-  m_Center: {x: -2.436535, y: 2.4933624, z: -24.3947}
+  m_Size: {x: 71.97547, y: 81.25374, z: 148.24542}
+  m_Center: {x: -37.283916, y: 2.4933624, z: -24.3947}
 --- !u!114 &1854679469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8653,6 +8703,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1854679471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854679466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643d6a6c8a3d7504bae1e27791a22da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCam: {fileID: 0}
 --- !u!1 &1863177883 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8303744570717293300, guid: eb448211219e19c44b3c43559199fabb,
@@ -8706,7 +8769,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 1
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!65 &1863177887
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8767,7 +8831,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 1
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!65 &1903607729
 BoxCollider:
   m_ObjectHideFlags: 0
