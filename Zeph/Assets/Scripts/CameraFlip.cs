@@ -6,7 +6,8 @@ using Cinemachine;
 public class CameraFlip : MonoBehaviour
 {
    public CinemachineVirtualCamera myCam;
-   public static bool hasFlipped;
+   public static bool hasFlippedZ;
+   public static bool hasFlippedX;
    
 
    void Start()
@@ -18,6 +19,7 @@ public class CameraFlip : MonoBehaviour
       Vector3 t = myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
       t.x = -t.x;
       myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = t;
+      hasFlippedX = true;
    }
 
    public void FlipZ()
@@ -27,19 +29,26 @@ public class CameraFlip : MonoBehaviour
       myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = t;
 
       GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = true;
-      hasFlipped = true;
+      hasFlippedZ = true;
    }
    
    void OnTriggerEnter(Collider other) {
+
       if (gameObject.CompareTag("Flip"))
       {
          if (other.CompareTag("Player"))
          {
-            if (hasFlipped)
+            if (hasFlippedZ)
             {
                FlipZ();
                GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = false;
-               hasFlipped = false;
+               hasFlippedZ = false;
+            } 
+            if (hasFlippedX)
+            {
+               FlipX();
+               GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = false;
+               hasFlippedX = false;
             }
          }
       }
@@ -50,10 +59,10 @@ public class CameraFlip : MonoBehaviour
       if (gameObject.CompareTag("Flip"))
          if (other.gameObject.CompareTag("Player"))
          {
-            if (hasFlipped)
+            if (hasFlippedZ)
             {
                FlipZ();
-               hasFlipped = false;
+               hasFlippedZ = false;
             }
          }
    }

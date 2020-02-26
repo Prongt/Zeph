@@ -17,6 +17,16 @@ public class FallReset : MonoBehaviour
         }
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        other.GetComponent<PlayerMove>().enabled = false;
+        Physics.gravity = new Vector3(0,-9.81f,0);
+        GravityRift.UseNewGravity = false;
+        other.transform.position = CheckpointManager.curCheckpoint.transform.position;
+        other.transform.rotation = CheckpointManager.curCheckpoint.transform.rotation;
+        StartCoroutine(Delay());
+    }
+
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(1);

@@ -10,6 +10,8 @@ public class LevelCheck : MonoBehaviour
     [SerializeField] private GameObject caveButton;
     [SerializeField] private GameObject menuButton;
 
+    [SerializeField] private List<GameObject> mosaicPieces;
+
 
     private int levelNum;
     // Start is called before the first frame update
@@ -22,22 +24,31 @@ public class LevelCheck : MonoBehaviour
     void Update()
     {
         levelNum = GameObject.Find("Player Progress").GetComponent<LevelProgress>().playerProgress;
+        
 //        print(levelNum);
         if (levelNum >= 0)
         {
             tutorialButton.SetActive(true);
         }
-        if (levelNum >= 5)
-        {
-            caveButton.SetActive(true);
-        }
         if (levelNum >= 1)
         {
-            snowButton.SetActive(true);
+            caveButton.SetActive(true);
+            mosaicPieces[0].SetActive(true);
         }
         if (levelNum >= 2)
         {
+            snowButton.SetActive(true);
+            mosaicPieces[1].SetActive(true);
+        }
+        if (levelNum >= 3)
+        {
             forestButton.SetActive(true);
+            mosaicPieces[2].SetActive(true);
+        }
+
+        if (levelNum >= 4)
+        {
+            mosaicPieces[3].SetActive(true);
         }
     }
 }
