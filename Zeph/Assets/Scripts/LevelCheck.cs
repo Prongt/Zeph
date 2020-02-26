@@ -29,7 +29,7 @@ public class LevelCheck : MonoBehaviour
         }
         if (levelNum >= 1)
         {
-            forestButton.SetActive(true);
+            caveButton.SetActive(true);
         }
         if (levelNum >= 2)
         {
@@ -37,7 +37,7 @@ public class LevelCheck : MonoBehaviour
         }
         if (levelNum >= 3)
         {
-            caveButton.SetActive(true);
+            forestButton.SetActive(true);
         }
     }
 }
