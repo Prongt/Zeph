@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,14 +19,16 @@ public class MosaicPickUp : MonoBehaviour
         
     }
     
+    
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player"))
         {
             if (myProg.playerProgress < 4)
             {
                 myProg.playerProgress += 1;
-                SceneManager.LoadScene("Hub");
             }
+
+            SceneManager.LoadScene("Hub");
         }
     }
 }
