@@ -9,13 +9,14 @@ public class Chargeable : Aspects
     private float intensity;
     [SerializeField] private Material emissiveCrystal;
     [SerializeField] private Renderer myRend;
+    private Material startMat;
     public bool charged = false;
     public bool attached = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        startMat = myRend.material;
     }
 
     void Update()
@@ -23,6 +24,10 @@ public class Chargeable : Aspects
         if (charged)
         { 
             myRend.material = emissiveCrystal;
+        }
+        else
+        {
+            myRend.material = startMat;
         }
     }
     
@@ -53,6 +58,14 @@ public class Chargeable : Aspects
     public override void Negate(Transform source = null)
     {
         base.Promote(source);
+    }
+
+    public void Charge()
+    {
+        if (attached)
+        {
+            charged = true;
+        }
     }
 
 }
