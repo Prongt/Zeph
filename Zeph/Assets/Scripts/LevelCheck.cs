@@ -27,15 +27,15 @@ public class LevelCheck : MonoBehaviour
         {
             tutorialButton.SetActive(true);
         }
-        if (levelNum >= 1)
+        if (levelNum >= 5)
         {
             caveButton.SetActive(true);
         }
-        if (levelNum >= 2)
+        if (levelNum >= 1)
         {
             snowButton.SetActive(true);
         }
-        if (levelNum >= 3)
+        if (levelNum >= 2)
         {
             forestButton.SetActive(true);
         }

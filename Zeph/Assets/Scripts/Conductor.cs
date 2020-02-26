@@ -69,7 +69,7 @@ public class Conductor : MonoBehaviour
         var interactable = other.GetComponent<Interactable>();
         if (interactable)
         {
-            interactable.IsEnabled = true;
+            interactable.isFrozen = false;
         }
     }
 
@@ -91,6 +91,6 @@ public class Conductor : MonoBehaviour
         objectsInRadius.Remove(other.gameObject);
 
         var interactable = other.GetComponent<Interactable>();
-        if (interactable) interactable.IsEnabled = false;
+        if (interactable) interactable.isFrozen = true;
     }
 }
