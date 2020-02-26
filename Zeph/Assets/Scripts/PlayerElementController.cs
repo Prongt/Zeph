@@ -42,7 +42,7 @@ public class PlayerElementController : MonoBehaviour
     {
         if (light.intensity >= 95f)
         {
-            print("Intensity = " + light.intensity);
+//            print("Intensity = " + light.intensity);
             light.intensity = Mathf.Lerp(light.intensity, 94, 0.5f * Time.deltaTime);
         }
 
