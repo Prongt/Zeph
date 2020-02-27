@@ -2,6 +2,7 @@
 using System.Collections;
 using FMODUnity;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Growable : Aspects
 {
@@ -92,20 +93,24 @@ public class Growable : Aspects
    {
        if (isTree)
        {
-           if (myAnim.GetBool(distort) && myAnim.GetBool(grow))
+           if (gameObject.CompareTag("VerticalSlice"))
            {
-               colliders.small.isTrigger = true;
-               colliders.distort.enabled = true;
-               colliders.grown.enabled = false;
+               if (myAnim.GetBool(distort) && myAnim.GetBool(grow))
+               {
+                   colliders.small.isTrigger = true;
+                   colliders.distort.enabled = true;
+                   colliders.grown.enabled = false;
+               }
+           
+               if (myAnim.GetBool(distort) == false && myAnim.GetBool(grow))
+               {
+                   colliders.small.isTrigger = true;
+                   colliders.distort.enabled = false;
+                   colliders.grown.enabled = true;
+               }
+               return;
            }
-
-           if (myAnim.GetBool(distort) == false && myAnim.GetBool(grow))
-           {
-               colliders.small.isTrigger = true;
-               colliders.distort.enabled = false;
-               colliders.grown.enabled = true;
-           }
-
+           
            if (Distortion.IsDistorting)
            {
                myAnim.SetBool(distort, true);
@@ -120,6 +125,7 @@ public class Growable : Aspects
                colliders.distort.enabled = false;
                colliders.grown.enabled = true;
            }
+           
        }
 
 
