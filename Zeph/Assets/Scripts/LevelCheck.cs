@@ -30,17 +30,17 @@ public class LevelCheck : MonoBehaviour
         {
             tutorialButton.SetActive(true);
         }
-        if (levelNum >= 0)
+        if (levelNum >= 1)
         {
             caveButton.SetActive(true);
             mosaicPieces[0].SetActive(true);
         }
-        if (levelNum >= 0)
+        if (levelNum >= 2)
         {
             snowButton.SetActive(true);
             mosaicPieces[1].SetActive(true);
         }
-        if (levelNum >= 0)
+        if (levelNum >= 3)
         {
             forestButton.SetActive(true);
             mosaicPieces[2].SetActive(true);

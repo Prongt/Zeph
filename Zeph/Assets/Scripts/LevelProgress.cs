@@ -13,6 +13,7 @@ public class LevelProgress : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        print(Application.persistentDataPath);
         
     }
 
