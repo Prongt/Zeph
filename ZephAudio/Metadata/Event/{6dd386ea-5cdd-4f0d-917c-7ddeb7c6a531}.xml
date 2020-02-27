@@ -197,6 +197,7 @@
 			<destination>{588a81b6-bc6f-450c-aee4-5f322e75e83a}</destination>
 			<destination>{44bd8e16-91de-48e6-bc3a-3a5efeb39132}</destination>
 			<destination>{d99c5746-12dc-489a-9df8-b5f1ba385220}</destination>
+			<destination>{6c872549-46c1-4bbb-ae1f-53ab0a93b47b}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{719ebd8f-ed9a-4d9a-a772-fb27043207e7}">
@@ -1210,9 +1211,25 @@
 			<destination>{a2b6d95f-37a8-4a44-94b3-ed252318df66}</destination>
 		</relationship>
 	</object>
+	<object class="LoopRegion" id="{6c872549-46c1-4bbb-ae1f-53ab0a93b47b}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="length">
+			<value>186.90612244897966</value>
+		</property>
+		<relationship name="timeline">
+			<destination>{c466103f-46d4-4b4e-9915-e7fa0ead0d69}</destination>
+		</relationship>
+		<relationship name="markerTrack">
+			<destination>{a2b6d95f-37a8-4a44-94b3-ed252318df66}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{d39651f8-0136-4d4e-865d-442548271f02}">
 		<relationship name="effects">
 			<destination>{cea433e3-b556-4fc1-a904-4c4b15efd494}</destination>
+			<destination>{8c297e4e-be7f-4d43-b184-f229b85f6b45}</destination>
+			<destination>{8fb9149a-2681-47c6-9b85-965475b969c7}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{64d22bb8-172d-436a-aa20-98abb684da19}" />
@@ -1781,6 +1798,22 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{cea433e3-b556-4fc1-a904-4c4b15efd494}" />
+	<object class="MixerSend" id="{8c297e4e-be7f-4d43-b184-f229b85f6b45}">
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{70f90231-8934-472d-a2ec-120e1d9e6d3d}</destination>
+		</relationship>
+	</object>
+	<object class="MixerSend" id="{8fb9149a-2681-47c6-9b85-965475b969c7}">
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{ceefb281-2d45-4cf2-a667-850d6724e3a4}</destination>
+		</relationship>
+	</object>
 	<object class="AutomationPoint" id="{29bbac9d-cfe3-463a-ba00-1d7408601a8c}">
 		<property name="position">
 			<value>830</value>
