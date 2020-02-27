@@ -98,7 +98,11 @@ public class PlayerMoveRigidbody : MonoBehaviour
 		}
 	}
 
-	bool SnapToGround () {
+	bool SnapToGround ()
+	{
+		if (Distortion.IsDistorting) return false;
+		
+		
 		if (stepsSinceLastGrounded > 1 || stepsSinceLastJump <= 2) {
 			return false;
 		}
