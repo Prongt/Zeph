@@ -6574,50 +6574,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20c1292c2ad62d34ea61d598a3b052cd, type: 3}
---- !u!1 &390347981
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 390347982}
-  - component: {fileID: 390347983}
-  m_Layer: 0
-  m_Name: Default Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &390347982
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 390347981}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8170097734778344133}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &390347983
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 390347981}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9999998, y: 1, z: 3.2191095}
-  m_Center: {x: 0, y: 0, z: 1.109555}
 --- !u!1001 &403950146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6885,7 +6841,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!65 &427957909
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14552,7 +14509,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 1
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!114 &886078445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22048,7 +22006,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!65 &1358137489
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31392,7 +31351,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 1
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!4 &115026727279496835 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7479482813785416144, guid: 345cc7aa09d461849acf5d7499408482,
@@ -33401,7 +33361,8 @@ MonoBehaviour:
   additionalAspects: 04000000
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!64 &675878379257825647
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -45115,6 +45076,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TreeV1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 882bee8d3f79a3443a03bed397a3fc1a,
+        type: 3}
+      propertyPath: m_TagString
+      value: VerticalSlice
+      objectReference: {fileID: 0}
     - target: {fileID: 7561110372842451503, guid: 882bee8d3f79a3443a03bed397a3fc1a,
         type: 3}
       propertyPath: m_BlendShapeWeights.Array.size
@@ -45702,7 +45668,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!114 &3050711280682005973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49722,7 +49689,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 1
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!1 &3266362227830920643
 GameObject:
   m_ObjectHideFlags: 0
@@ -55155,7 +55123,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 1
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!4 &5583490388784070865
 Transform:
   m_ObjectHideFlags: 0
@@ -58258,7 +58227,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 1
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!114 &7078374788585113621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62846,6 +62816,16 @@ PrefabInstance:
       propertyPath: m_VolumetricDimmer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8674939098363182280, guid: 6a253270b8b706d4fb064a1ae71c60cc,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8674939098363182280, guid: 6a253270b8b706d4fb064a1ae71c60cc,
+        type: 3}
+      propertyPath: m_Height
+      value: 2.79
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a253270b8b706d4fb064a1ae71c60cc, type: 3}
 --- !u!33 &8682347955467754454
@@ -63097,7 +63077,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 1
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!33 &8753016679007928773
 MeshFilter:
   m_ObjectHideFlags: 0
