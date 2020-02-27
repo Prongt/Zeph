@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,5 +32,9 @@ public class LevelProgress : MonoBehaviour
         LevelData level = SaveSystem.LoadLevel();
         playerProgress = level.level;
     }
-    
+
+    private void OnApplicationQuit()
+    {
+        SaveLevel();
+    }
 }
