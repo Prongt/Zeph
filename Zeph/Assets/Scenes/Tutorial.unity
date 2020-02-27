@@ -2212,6 +2212,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 539446849}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &561460885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8688567687851389637, guid: 844d01b7599716a459488858e0bb6997,
+    type: 3}
+  m_PrefabInstance: {fileID: 1782059692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &561460886
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561460885}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.75
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &572421855
 GameObject:
   m_ObjectHideFlags: 0
@@ -3880,6 +3900,99 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1012384054}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1028932162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1028932163}
+  - component: {fileID: 1028932166}
+  - component: {fileID: 1028932165}
+  - component: {fileID: 1028932164}
+  m_Layer: 12
+  m_Name: Roll Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1028932163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028932162}
+  m_LocalRotation: {x: -0.20198841, y: 0.000000017658392, z: 5.3290692e-15, w: 0.9793879}
+  m_LocalPosition: {x: -0, y: -0.48, z: -1.11}
+  m_LocalScale: {x: 10.665, y: 3.2123, z: 3.6418319}
+  m_Children: []
+  m_Father: {fileID: 3908719731508467941}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -23.307001, y: 0, z: 0}
+--- !u!65 &1028932164
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028932162}
+  m_Material: {fileID: 13400000, guid: 292f5392b0552c943ab9710031ebc5be, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1028932165
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028932162}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1028932166
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028932162}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1041684738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4012,7 +4125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storyText:
-  - You now have the power of Gravity! Press 'o' to wield UNLIMITED POWER!!!!
+  - 'You now have the power of Gravity! Press the ''o'' key or Y button '
 --- !u!222 &1041788436
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6606,7 +6719,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storyText:
-  - You now have the power of Fire! Press 'i' to wield UNLIMITED POWER!!!!
+  - You now have the power of Fire! Press the 'i' key or X button to use your fire
+    ability.
 --- !u!222 &1575654299
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7385,6 +7499,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 931295630}
     m_Modifications:
+    - target: {fileID: 1398070115, guid: 844d01b7599716a459488858e0bb6997, type: 3}
+      propertyPath: fireSpreadRange
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 675878379130914365, guid: 844d01b7599716a459488858e0bb6997,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -7455,7 +7573,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Log | Log Room
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1398070118, guid: 844d01b7599716a459488858e0bb6997, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 844d01b7599716a459488858e0bb6997, type: 3}
 --- !u!4 &1782059693 stripped
 Transform:
@@ -8037,7 +8156,6 @@ Transform:
   - {fileID: 1432153075}
   - {fileID: 1697867124}
   - {fileID: 1498040830}
-  - {fileID: 2143057784}
   m_Father: {fileID: 54075411013749972}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8338,36 +8456,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2097551734}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2143057783
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2143057784}
-  m_Layer: 0
-  m_Name: Water
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2143057784
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143057783}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1980147010}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &54075411013749972
 Transform:
   m_ObjectHideFlags: 0
@@ -8914,7 +9002,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storyText:
-  - You now have the power of LIGHT! Press 'p' to wield UNLIMITED POWER!!!!
+  - You now have the power of LIGHT! Press the 'p' key or B button to use your light
+    power.
 --- !u!1 &2198759987189243830
 GameObject:
   m_ObjectHideFlags: 0
@@ -9375,6 +9464,7 @@ Transform:
   - {fileID: 945665094}
   - {fileID: 1146856302}
   - {fileID: 376728114}
+  - {fileID: 1028932163}
   m_Father: {fileID: 1824829955}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
