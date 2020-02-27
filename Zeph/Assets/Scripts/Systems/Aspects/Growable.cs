@@ -152,7 +152,6 @@ public class Growable : Aspects
    public override void Promote(Transform source = null, Element element = null)
    {
        base.Promote(source, element);
-       //Debug.Log("Grow Bitch!");
 
        if (firefly)
        {
@@ -162,7 +161,10 @@ public class Growable : Aspects
 
        if (growSoundEmitter)
        {
-           growSoundEmitter.Play();
+           if (!HasBeenActivated)
+           {
+               growSoundEmitter.Play();
+           }
        }
 
        if (isTree)
@@ -178,9 +180,8 @@ public class Growable : Aspects
                colliders.grown.enabled = true;
            }
        }
-
-       //gameObject.GetComponent<Renderer>().material = GrowingMaterial;
-           if (gameObject.CompareTag("Bridge"))
+       
+       if (gameObject.CompareTag("Bridge"))
            {
                if (matX >= 1)
                {
@@ -202,10 +203,9 @@ public class Growable : Aspects
                        myAnim.SetBool(growing, true);
                        StartCoroutine(Appear());
                    //}
-
-
                }
            }
+       HasBeenActivated = true;
     }
 
    public override void Negate(Transform source = null)

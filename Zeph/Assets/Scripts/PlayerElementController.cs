@@ -75,12 +75,15 @@ public class PlayerElementController : MonoBehaviour
             var audioEmitter = elementData[i].audioEmitter;
             if (audioEmitter)
             {
-                if (audioEmitter.IsPlaying())
+                // if (audioEmitter.IsPlaying())
+                // {
+                //     audioEmitter.Stop();
+                // }
+                if (!audioEmitter.IsPlaying())
                 {
-                    audioEmitter.Stop();
+                    audioEmitter.Play();   
                 }
-
-                audioEmitter.Play();
+                
             }
 
 
