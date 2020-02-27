@@ -19,7 +19,7 @@ public class CameraFlip : MonoBehaviour
       Vector3 t = myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
       t.x = -t.x;
       myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = t;
-      hasFlippedX = true;
+      hasFlippedX = !hasFlippedX;
    }
 
    public void FlipZ()
@@ -29,7 +29,7 @@ public class CameraFlip : MonoBehaviour
       myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = t;
 
       GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = true;
-      hasFlippedZ = true;
+      hasFlippedZ = !hasFlippedZ;
    }
    
    void OnTriggerEnter(Collider other) {
@@ -42,7 +42,7 @@ public class CameraFlip : MonoBehaviour
             {
                FlipZ();
                GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = false;
-               hasFlippedZ = false;
+               hasFlippedZ = !hasFlippedZ;
             } 
             if (hasFlippedX)
             {
