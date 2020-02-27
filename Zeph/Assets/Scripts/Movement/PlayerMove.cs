@@ -51,6 +51,7 @@ public class PlayerMove : MonoBehaviour
 	[Header("Tick if movement is janky")]
 	public bool reverseMovementDirections;
 	public bool flipMovement;
+	public bool reverseRotationInBuild = false;
 
 	[Header("Water Knock Back")]
 	public float knockBackDistance = 0.75f;
@@ -451,7 +452,15 @@ public class PlayerMove : MonoBehaviour
 			}
 			else
 			{
-				float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camera.eulerAngles.y;
+				float targetRotation;
+				targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camera.eulerAngles.y;
+
+#if UNITY_STANDALONE_WIN
+				if (reverseRotationInBuild)
+				{
+					targetRotation = Mathf.Atan2(-inputDir.x, -inputDir.y) * Mathf.Rad2Deg;
+				}
+#endif
 
 				float angle = Mathf.SmoothDampAngle(zephModel.localEulerAngles.y, targetRotation, ref turnVelocity,
 					GetModifiedSmoothTime(playerTurnSpeed));
