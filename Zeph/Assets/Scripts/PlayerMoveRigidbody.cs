@@ -21,6 +21,8 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
 	[SerializeField, Min(0f)]
 	float probeDistance = 1f;
+	[SerializeField, Range(0f, 5f)]
+	float rotationMultiplier = 1f;
 
 	[SerializeField]
 	LayerMask probeMask = -1, stairsMask = -1;
@@ -42,6 +44,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
 	float minGroundDotProduct, minStairsDotProduct;
 
 	int stepsSinceLastGrounded, stepsSinceLastJump;
+	private Vector2 playerInput;
 
 	void OnValidate () {
 		minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
@@ -54,7 +57,6 @@ public class PlayerMoveRigidbody : MonoBehaviour
 	}
 
 	void Update () {
-		Vector2 playerInput;
 		playerInput.x = -Input.GetAxis("Horizontal");
 		playerInput.y = -Input.GetAxis("Vertical");
 		playerInput = Vector2.ClampMagnitude(playerInput, 1f);
@@ -75,7 +77,25 @@ public class PlayerMoveRigidbody : MonoBehaviour
 		}
 
 		body.velocity = velocity;
+		Rotate();
 		ClearState();
+	}
+
+	void Rotate()
+	{
+		if (!(playerInput.magnitude > 0f)) return;
+		
+		
+		float targetRotation;
+		targetRotation = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg;
+		var vel = body.velocity.magnitude;
+
+		float angle = Mathf.SmoothDampAngle(transform.localEulerAngles.y, targetRotation, ref vel,
+			rotationMultiplier * Time.deltaTime);
+
+		var rot = transform.localEulerAngles;
+		rot.y = angle;
+		transform.localEulerAngles = rot;
 	}
 
 	void ClearState () {
@@ -100,7 +120,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
 	bool SnapToGround ()
 	{
-		if (Distortion.IsDistorting) return false;
+		if (GravityRift.useNewGravity) return false;
 		
 		
 		if (stepsSinceLastGrounded > 1 || stepsSinceLastJump <= 2) {
