@@ -758,21 +758,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d218af9ed212f74a9de9acf82901792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
-  maxAcceleration: 40
-  maxAirAcceleration: 44.1
   jumpHeight: 1
+  acceleration: 10
+  airAcceleration: 1
   maxGroundAngle: 60
-  maxStairsAngle: 50
-  maxSnapSpeed: 100
-  probeDistance: 1
-  rotationMultiplier: 1
-  probeMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  stairsMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  speed: 10
+  rotationModifier: 1
 --- !u!136 &4890117515486667104
 CapsuleCollider:
   m_ObjectHideFlags: 0

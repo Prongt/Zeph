@@ -18,8 +18,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
     [SerializeField] [Range(0, 90)] private float maxGroundAngle = 25f;
 
     [SerializeField] [Range(0f, 100f)] private float speed = 10f;
-
-
+    
     private float minGroundDotProduct;
 
     private Vector2 playerInput;
@@ -31,14 +30,39 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
     private bool OnGround => groundContactCount > 0;
 
+    private Vector3 currentGravity;
+    private Vector3 upVector;
+    private bool haltMovement;
+    
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        haltMovement = false;
+        currentGravity = Physics.gravity;
+        upVector = currentGravity.normalized;
+        
         minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
     }
 
+
     private void Update()
     {
+        if (Physics.gravity != currentGravity)
+        {
+            currentGravity = Physics.gravity;
+            upVector = -currentGravity;
+            haltMovement = true;
+            transform.up = Vector3.up;
+            haltMovement = false;
+        }
+        
+        
+        
         playerInput.x = -Input.GetAxis("Horizontal");
         playerInput.y = -Input.GetAxis("Vertical");
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
@@ -51,6 +75,8 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (haltMovement) return;
+        
         velocity = rigidbody.velocity;
         UpdateGroundContacts();
         AdjustVelocity();
