@@ -89,8 +89,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
     private void UpdateGroundContacts()
     {
         velocity = body.velocity;
-
-        UpdateSteepGroundContacts();
+        
         
         if (OnGround)
         {
@@ -98,21 +97,8 @@ public class PlayerMoveRigidbody : MonoBehaviour
         }
         else
         {
+            //TODO might be redundant
             groundContactNormal = Vector3.up;
-        }
-    }
-
-
-    private void UpdateSteepGroundContacts()
-    {
-        if (steepContactCount <= 1) return;
-
-        steepNormal.Normalize();
-        if (steepNormal.y >= minGroundDotProduct)
-        {
-            steepContactCount = 0;
-            groundContactCount = 1;
-            groundContactNormal = steepNormal;
         }
     }
 
