@@ -44,7 +44,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
     {
         haltMovement = false;
         currentGravity = Physics.gravity;
-        upVector = currentGravity.normalized;
+        upVector = -currentGravity.normalized;
         
         minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
     }
@@ -55,20 +55,29 @@ public class PlayerMoveRigidbody : MonoBehaviour
         if (Physics.gravity != currentGravity)
         {
             currentGravity = Physics.gravity;
-            upVector = -currentGravity;
+            upVector = -currentGravity.normalized;
             haltMovement = true;
-            transform.up = Vector3.up;
+            transform.up = upVector;
             haltMovement = false;
         }
-        
         
         
         playerInput.x = -Input.GetAxis("Horizontal");
         playerInput.y = -Input.GetAxis("Vertical");
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
-        desiredVelocity =
-            new Vector3(playerInput.x, 0f, playerInput.y) * speed;
+        if (currentGravity.z < 0 || currentGravity.z > 0)
+        {
+            //Debug.Log("alt gravity");
+            desiredVelocity =
+                new Vector3(playerInput.x, playerInput.y, 0f) * speed;
+        }
+        else
+        {
+            desiredVelocity =
+                new Vector3(playerInput.x, 0f, playerInput.y) * speed;
+        }
+        
 
         if (Input.GetButtonDown("Jump")) hasScheduledJump = true;
     }
@@ -88,7 +97,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
         }
 
         rigidbody.velocity = velocity;
-        Rotate();
+        //Rotate();
         ResetContactCounts();
     }
 
@@ -120,13 +129,14 @@ public class PlayerMoveRigidbody : MonoBehaviour
             groundContactNormal.Normalize();
         else
             //TODO might be redundant
-            groundContactNormal = Vector3.up;
+            groundContactNormal = upVector;
     }
 
     private void AdjustVelocity()
     {
-        var xAxis = ProjectOnContactPlane(Vector3.right).normalized;
-        var zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
+        var xAxis = ProjectOnContactPlane(transform.right).normalized;
+
+        var zAxis = ProjectOnContactPlane(transform.forward).normalized;
 
         var currentX = Vector3.Dot(velocity, xAxis);
         var currentZ = Vector3.Dot(velocity, zAxis);
@@ -136,8 +146,17 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
         var newX =
             Mathf.MoveTowards(currentX, desiredVelocity.x, maxSpeedChange);
-        var newZ =
-            Mathf.MoveTowards(currentZ, desiredVelocity.z, maxSpeedChange);
+
+        float newZ;
+        if (currentGravity.z < 0 || currentGravity.z > 0)
+        {
+             newZ = Mathf.MoveTowards(currentZ, desiredVelocity.y, maxSpeedChange);
+        }
+        else
+        {
+             newZ = Mathf.MoveTowards(currentZ, desiredVelocity.z, maxSpeedChange);
+        }
+        
 
         velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
     }
@@ -151,7 +170,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
             return;
 
         var jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-        jumpDirection = (jumpDirection + Vector3.up).normalized;
+        jumpDirection = (jumpDirection + upVector).normalized;
         var alignedSpeed = Vector3.Dot(velocity, jumpDirection);
         if (alignedSpeed > 0f) jumpSpeed = Mathf.Max(jumpSpeed - alignedSpeed, 0f);
         velocity += jumpDirection * jumpSpeed;
