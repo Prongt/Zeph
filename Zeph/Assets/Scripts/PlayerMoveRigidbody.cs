@@ -120,7 +120,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
 	bool SnapToGround ()
 	{
-		if (GravityRift.useNewGravity) return false;
+		//if (GravityRift.useNewGravity) return false;
 		
 		
 		if (stepsSinceLastGrounded > 1 || stepsSinceLastJump <= 2) {
@@ -149,7 +149,9 @@ public class PlayerMoveRigidbody : MonoBehaviour
 		return true;
 	}
 
-	bool CheckSteepContacts () {
+	bool CheckSteepContacts ()
+	{
+		//return false;
 		if (steepContactCount > 1) {
 			steepNormal.Normalize();
 			if (steepNormal.y >= minGroundDotProduct) {
@@ -186,7 +188,8 @@ public class PlayerMoveRigidbody : MonoBehaviour
 			jumpDirection = contactNormal;
 		}
 		else if (OnSteep) {
-			jumpDirection = steepNormal;
+			//jumpDirection = steepNormal;
+			return;
 		}
 		else {
 			return;
