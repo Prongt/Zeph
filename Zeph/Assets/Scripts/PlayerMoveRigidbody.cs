@@ -23,6 +23,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
     private Vector2 playerInput;
 
+    [Header("Rotation")] [SerializeField] private Transform zephModel;
     [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
 
     private Vector3 velocity;
@@ -97,7 +98,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
         }
 
         rigidbody.velocity = velocity;
-        //Rotate();
+        Rotate();
         ResetContactCounts();
     }
 
@@ -108,14 +109,14 @@ public class PlayerMoveRigidbody : MonoBehaviour
         var targetRotation = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg;
         var vel = rigidbody.velocity.magnitude;
 
-        var localEulerAngles = transform.localEulerAngles;
+        var localEulerAngles = zephModel.localEulerAngles;
         var angle = Mathf.SmoothDampAngle(localEulerAngles.y, targetRotation, ref vel,
             rotationModifier * Time.deltaTime);
 
         var rot = localEulerAngles;
         rot.y = angle;
         localEulerAngles = rot;
-        transform.localEulerAngles = localEulerAngles;
+        zephModel.localEulerAngles = localEulerAngles;
     }
 
     private void ResetContactCounts()
