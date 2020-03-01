@@ -30,7 +30,9 @@ public class PlayerMoveRigidbody : MonoBehaviour
     private Vector3 desiredVelocity;
 
     private bool OnGround => groundContactCount > 0;
-
+    private bool ZGravity => currentGravity.z < 0 || currentGravity.z > 0;
+    private bool YGravity => currentGravity.y < 0 || currentGravity.y > 0;
+    
     private Vector3 currentGravity;
     private Vector3 upVector;
     private bool haltMovement;
@@ -53,23 +55,15 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
     private void Update()
     {
-        if (Physics.gravity != currentGravity)
-        {
-            currentGravity = Physics.gravity;
-            upVector = -currentGravity.normalized;
-            haltMovement = true;
-            transform.up = upVector;
-            haltMovement = false;
-        }
+        GravitySwitching();
         
         
         playerInput.x = -Input.GetAxis("Horizontal");
         playerInput.y = -Input.GetAxis("Vertical");
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
-        if (currentGravity.z < 0 || currentGravity.z > 0)
+        if (ZGravity)
         {
-            //Debug.Log("alt gravity");
             desiredVelocity =
                 new Vector3(playerInput.x, playerInput.y, 0f) * speed;
         }
@@ -81,6 +75,19 @@ public class PlayerMoveRigidbody : MonoBehaviour
         
 
         if (Input.GetButtonDown("Jump")) hasScheduledJump = true;
+    }
+
+    private void GravitySwitching()
+    {
+        if (Physics.gravity != currentGravity)
+        {
+            currentGravity = Physics.gravity;
+            upVector = -currentGravity.normalized;
+            haltMovement = true;
+            transform.up = upVector;
+            rigidbody.AddForce(upVector, ForceMode.Impulse);
+            haltMovement = false;
+        }
     }
 
     private void FixedUpdate()
@@ -149,7 +156,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
             Mathf.MoveTowards(currentX, desiredVelocity.x, maxSpeedChange);
 
         float newZ;
-        if (currentGravity.z < 0 || currentGravity.z > 0)
+        if (ZGravity)
         {
              newZ = Mathf.MoveTowards(currentZ, desiredVelocity.y, maxSpeedChange);
         }
@@ -169,8 +176,27 @@ public class PlayerMoveRigidbody : MonoBehaviour
             jumpDirection = groundContactNormal;
         else
             return;
-
-        var jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+        
+        
+        
+        float jumpSpeed = 0;
+        if (currentGravity.z < 0)
+        {
+            jumpSpeed = Mathf.Sqrt(-2f * currentGravity.z * jumpHeight);
+        }
+        else if (currentGravity.z > 0)
+        {
+            jumpSpeed = Mathf.Sqrt(-2f * -currentGravity.z * jumpHeight);
+        }else if (currentGravity.y > 0)
+        {
+            jumpSpeed = Mathf.Sqrt(-2f * -currentGravity.y * jumpHeight);
+        }
+        else
+        {
+            jumpSpeed = Mathf.Sqrt(-2f * currentGravity.y * jumpHeight);
+        }
+        
+        
         jumpDirection = (jumpDirection + upVector).normalized;
         var alignedSpeed = Vector3.Dot(velocity, jumpDirection);
         if (alignedSpeed > 0f) jumpSpeed = Mathf.Max(jumpSpeed - alignedSpeed, 0f);
@@ -192,6 +218,28 @@ public class PlayerMoveRigidbody : MonoBehaviour
         for (var i = 0; i < collision.contactCount; i++)
         {
             var normal = collision.GetContact(i).normal;
+            
+            
+            if (ZGravity)
+            {
+                if (normal.z >= minGroundDotProduct)
+                {
+                    groundContactCount++;
+                    groundContactNormal = normal;
+                    continue;
+                }
+            }
+
+            if (GravityRift.useNewGravity)
+            {
+                if (normal.y <= minGroundDotProduct)
+                {
+                    groundContactCount++;
+                    groundContactNormal = normal;
+                    continue;
+                }
+            }
+            
             if (normal.y >= minGroundDotProduct)
             {
                 groundContactCount++;
