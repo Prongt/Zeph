@@ -19,7 +19,13 @@ public class PlayerMoveRigidbody : MonoBehaviour
     [Header("Rotation")] 
     [SerializeField] private Transform zephModel;
     [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
-    
+
+    [Header("Animation")] 
+    [SerializeField] private Animator zephAnimator;
+    [SerializeField] private string moveVariable = "moveSpeed";
+    [SerializeField] private string jumpVariable = "IsJumping";
+    private string danceVariable = "IsDancing";
+
     private float minGroundDotProduct;
 
     private Vector2 playerInput;
@@ -44,6 +50,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+        zephAnimator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -59,6 +66,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
     private void Update()
     {
         GravitySwitching();
+        ManageAnimation();
 
         playerInput.x = -Input.GetAxis("Horizontal");
         playerInput.y = -Input.GetAxis("Vertical");
@@ -81,7 +89,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
         currentGravity = Physics.gravity;
         upVector = -currentGravity.normalized;
 
-        StopAllCoroutines();
+        StopCoroutine(LerpTransformUp());
         StartCoroutine(LerpTransformUp());
     }
 
@@ -95,6 +103,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
             transform.up = Vector3.Lerp(transform.up, upVector, gravityFlipTime * Time.deltaTime);
             yield return null;
         }
+        transform.up = upVector;
 
         haltMovement = false;
     }
@@ -107,16 +116,47 @@ public class PlayerMoveRigidbody : MonoBehaviour
         UpdateGroundContacts();
         AdjustVelocity();
 
-        if (hasScheduledJump)
-        {
-            hasScheduledJump = false;
-            Jump();
-        }
+        Jump();
 
         rigidbody.velocity = velocity;
         Rotate();
         ResetContactCounts();
     }
+
+    void ManageAnimation()
+    {
+        if (!OnGround)
+        {
+            zephAnimator.SetBool(jumpVariable, true);
+        }
+        else
+        {
+            zephAnimator.SetBool(jumpVariable, false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            StopCoroutine(DanceRoutine());
+            StartCoroutine(DanceRoutine());
+        }
+
+        if (desiredVelocity.magnitude > 0.25f)
+        {
+            zephAnimator.SetFloat(moveVariable, 1.0f);
+        }
+        else
+        {
+            zephAnimator.SetFloat(moveVariable, 0f);
+        }
+    }
+
+    private IEnumerator DanceRoutine()
+    {
+        zephAnimator.SetBool(danceVariable, true);
+        yield return new WaitForSeconds(8f);
+        zephAnimator.SetBool(danceVariable, false);
+    }
+    
 
     private void Rotate()
     {
@@ -174,6 +214,9 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
     private void Jump()
     {
+        if (!hasScheduledJump) return;
+        hasScheduledJump = false;
+        
         Vector3 jumpDirection;
         if (OnGround)
             jumpDirection = groundContactNormal;
