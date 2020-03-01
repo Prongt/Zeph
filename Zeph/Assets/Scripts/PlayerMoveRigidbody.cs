@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class PlayerMoveRigidbody : MonoBehaviour
 {
-    [Header("Movement")]
+    [Header("Movement")] 
     [SerializeField] [Range(0f, 100f)] private float acceleration = 10f;
     [SerializeField] [Range(0f, 100f)] private float airAcceleration = 1f;
     [SerializeField] [Range(0, 90)] private float maxGroundAngle = 25f;
     [SerializeField] [Range(0f, 100f)] private float speed = 10f;
-    
-    [Header("Jumping")]
-    [SerializeField] [Range(0f, 10f)] private float jumpHeight = 2f;
-    
-    [Header("Gravity")]
-    [SerializeField] [Range(0f, 5f)] private float gravityFlipTime = 2.0f;
+    [SerializeField] private bool swapMovementAixs;
+    [SerializeField] private bool reverseMovement;
 
-    [Header("Rotation")] 
-    [SerializeField] private Transform zephModel;
+    [Header("Jumping")] [SerializeField] [Range(0f, 10f)]
+    private float jumpHeight = 2f;
+
+    [Header("Gravity")] [SerializeField] [Range(0f, 5f)]
+    private float gravityFlipTime = 2.0f;
+
+    [Header("Rotation")] [SerializeField] private Transform zephModel;
     [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
 
-    [Header("Animation")] 
-    [SerializeField] private Animator zephAnimator;
+    [Header("Animation")] [SerializeField] private Animator zephAnimator;
     [SerializeField] private string moveVariable = "moveSpeed";
     [SerializeField] private string jumpVariable = "IsJumping";
-    private string danceVariable = "IsDancing";
+    private readonly string danceVariable = "IsDancing";
+    private WaitForSeconds danceWaitForSeconds;
 
     private float minGroundDotProduct;
 
@@ -58,8 +59,9 @@ public class PlayerMoveRigidbody : MonoBehaviour
         haltMovement = false;
         currentGravity = Physics.gravity;
         upVector = -currentGravity.normalized;
-
         minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
+        
+        danceWaitForSeconds = new WaitForSeconds(8f);
     }
 
 
@@ -67,18 +69,33 @@ public class PlayerMoveRigidbody : MonoBehaviour
     {
         GravitySwitching();
         ManageAnimation();
-
-        playerInput.x = -Input.GetAxis("Horizontal");
-        playerInput.y = -Input.GetAxis("Vertical");
-        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+        HandleInput();
 
         if (ZGravity)
-            desiredVelocity =
-                new Vector3(playerInput.x, playerInput.y, 0f) * speed;
+            desiredVelocity = new Vector3(playerInput.x, playerInput.y, 0f) * speed;
         else
-            desiredVelocity =
-                new Vector3(playerInput.x, 0f, playerInput.y) * speed;
+            desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * speed;
+    }
 
+    private void HandleInput()
+    {
+        playerInput.x = -Input.GetAxis("Horizontal");
+        playerInput.y = -Input.GetAxis("Vertical");
+
+        if (swapMovementAixs)
+        {
+            var tempInput = playerInput;
+            playerInput.x = tempInput.y;
+            playerInput.y = tempInput.x;
+        }
+
+        if (reverseMovement)
+        {
+            playerInput.x = -playerInput.x;
+            playerInput.y = -playerInput.y;
+        }
+
+        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
         if (Input.GetButtonDown("Jump")) hasScheduledJump = true;
     }
 
@@ -103,8 +120,9 @@ public class PlayerMoveRigidbody : MonoBehaviour
             transform.up = Vector3.Lerp(transform.up, upVector, gravityFlipTime * Time.deltaTime);
             yield return null;
         }
-        transform.up = upVector;
 
+        //Snaps to new up vector just in case the lerp didnt finish
+        transform.up = upVector;
         haltMovement = false;
     }
 
@@ -123,16 +141,9 @@ public class PlayerMoveRigidbody : MonoBehaviour
         ResetContactCounts();
     }
 
-    void ManageAnimation()
+    private void ManageAnimation()
     {
-        if (!OnGround)
-        {
-            zephAnimator.SetBool(jumpVariable, true);
-        }
-        else
-        {
-            zephAnimator.SetBool(jumpVariable, false);
-        }
+        zephAnimator.SetBool(jumpVariable, !OnGround);
 
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -140,23 +151,16 @@ public class PlayerMoveRigidbody : MonoBehaviour
             StartCoroutine(DanceRoutine());
         }
 
-        if (desiredVelocity.magnitude > 0.25f)
-        {
-            zephAnimator.SetFloat(moveVariable, 1.0f);
-        }
-        else
-        {
-            zephAnimator.SetFloat(moveVariable, 0f);
-        }
+        zephAnimator.SetFloat(moveVariable, desiredVelocity.magnitude > 0.25f ? 1.0f : 0f);
     }
 
     private IEnumerator DanceRoutine()
     {
         zephAnimator.SetBool(danceVariable, true);
-        yield return new WaitForSeconds(8f);
+        yield return danceWaitForSeconds;
         zephAnimator.SetBool(danceVariable, false);
     }
-    
+
 
     private void Rotate()
     {
@@ -203,12 +207,8 @@ public class PlayerMoveRigidbody : MonoBehaviour
         var newX =
             Mathf.MoveTowards(currentX, desiredVelocity.x, maxSpeedChange);
 
-        float newZ;
-        if (ZGravity)
-            newZ = Mathf.MoveTowards(currentZ, desiredVelocity.y, maxSpeedChange);
-        else
-            newZ = Mathf.MoveTowards(currentZ, desiredVelocity.z, maxSpeedChange);
-        
+        var newZ = Mathf.MoveTowards(currentZ, ZGravity ? desiredVelocity.y : desiredVelocity.z, maxSpeedChange);
+
         velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
     }
 
@@ -216,7 +216,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
     {
         if (!hasScheduledJump) return;
         hasScheduledJump = false;
-        
+
         Vector3 jumpDirection;
         if (OnGround)
             jumpDirection = groundContactNormal;
