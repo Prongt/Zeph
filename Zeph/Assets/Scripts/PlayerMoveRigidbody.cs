@@ -1,6 +1,4 @@
-﻿using System;
-using Unity.Mathematics;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMoveRigidbody : MonoBehaviour
 {
@@ -13,8 +11,8 @@ public class PlayerMoveRigidbody : MonoBehaviour
 	[SerializeField, Range(0f, 10f)]
 	float jumpHeight = 2f;
 
-	[SerializeField, Range(0, 90)]
-	float maxGroundAngle = 25f, maxStairsAngle = 50f;
+	[SerializeField, Range(0, 90)] private float maxGroundAngle = 25f;
+	//maxStairsAngle = 50f;
 
 	[SerializeField, Range(0f, 100f)]
 	float maxSnapSpeed = 100f;
@@ -24,14 +22,14 @@ public class PlayerMoveRigidbody : MonoBehaviour
 	[SerializeField, Range(0f, 5f)]
 	float rotationMultiplier = 1f;
 
-	[SerializeField]
-	LayerMask probeMask = -1, stairsMask = -1;
+	[SerializeField] private LayerMask probeMask = -1;
+	//stairsMask = -1;
 
 	Rigidbody body;
 
 	Vector3 velocity, desiredVelocity;
 
-	bool desiredJump;
+	bool hasScheduledJump;
 
 	Vector3 contactNormal, steepNormal;
 
@@ -39,16 +37,16 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
 	bool OnGround => groundContactCount > 0;
 
-	bool OnSteep => steepContactCount > 0;
-	
-	float minGroundDotProduct, minStairsDotProduct;
+
+	private float minGroundDotProduct;
+	//minStairsDotProduct;
 
 	int stepsSinceLastGrounded, stepsSinceLastJump;
 	private Vector2 playerInput;
 
 	void OnValidate () {
 		minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
-		minStairsDotProduct = Mathf.Cos(maxStairsAngle * Mathf.Deg2Rad);
+		//minStairsDotProduct = Mathf.Cos(maxStairsAngle * Mathf.Deg2Rad);
 	}
 
 	void Awake () {
@@ -64,15 +62,18 @@ public class PlayerMoveRigidbody : MonoBehaviour
 		desiredVelocity =
 			new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
 
-		desiredJump |= Input.GetButtonDown("Jump");
+		if (Input.GetButtonDown("Jump"))
+		{
+			hasScheduledJump = true;
+		}
 	}
 
 	void FixedUpdate () {
 		UpdateState();
 		AdjustVelocity();
 
-		if (desiredJump) {
-			desiredJump = false;
+		if (hasScheduledJump) {
+			hasScheduledJump = false;
 			Jump();
 		}
 
@@ -120,9 +121,6 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
 	bool SnapToGround ()
 	{
-		//if (GravityRift.useNewGravity) return false;
-		
-		
 		if (stepsSinceLastGrounded > 1 || stepsSinceLastJump <= 2) {
 			return false;
 		}
@@ -130,13 +128,16 @@ public class PlayerMoveRigidbody : MonoBehaviour
 		if (speed > maxSnapSpeed) {
 			return false;
 		}
+		
 		if (!Physics.Raycast(
 			body.position, Vector3.down, out RaycastHit hit,
 			probeDistance, probeMask
-		)) {
+		))
+		{
 			return false;
 		}
-		if (hit.normal.y < GetMinDot(hit.collider.gameObject.layer)) {
+		
+		if (hit.normal.y < minGroundDotProduct) {
 			return false;
 		}
 
@@ -151,15 +152,14 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
 	bool CheckSteepContacts ()
 	{
-		//return false;
-		if (steepContactCount > 1) {
-			steepNormal.Normalize();
-			if (steepNormal.y >= minGroundDotProduct) {
-				steepContactCount = 0;
-				groundContactCount = 1;
-				contactNormal = steepNormal;
-				return true;
-			}
+		if (steepContactCount <= 1) return false;
+		
+		steepNormal.Normalize();
+		if (steepNormal.y >= minGroundDotProduct) {
+			steepContactCount = 0;
+			groundContactCount = 1;
+			contactNormal = steepNormal;
+			return true;
 		}
 		return false;
 	}
@@ -187,10 +187,6 @@ public class PlayerMoveRigidbody : MonoBehaviour
 		if (OnGround) {
 			jumpDirection = contactNormal;
 		}
-		else if (OnSteep) {
-			//jumpDirection = steepNormal;
-			return;
-		}
 		else {
 			return;
 		}
@@ -214,10 +210,9 @@ public class PlayerMoveRigidbody : MonoBehaviour
 	}
 
 	void EvaluateCollision (Collision collision) {
-		float minDot = GetMinDot(collision.gameObject.layer);
 		for (int i = 0; i < collision.contactCount; i++) {
 			Vector3 normal = collision.GetContact(i).normal;
-			if (normal.y >= minDot) {
+			if (normal.y >= minGroundDotProduct) {
 				groundContactCount += 1;
 				contactNormal += normal;
 			}
@@ -232,8 +227,5 @@ public class PlayerMoveRigidbody : MonoBehaviour
 		return vector - contactNormal * Vector3.Dot(vector, contactNormal);
 	}
 
-	float GetMinDot (int layer) {
-		return (stairsMask & (1 << layer)) == 0 ?
-			minGroundDotProduct : minStairsDotProduct;
-	}
+
 }
