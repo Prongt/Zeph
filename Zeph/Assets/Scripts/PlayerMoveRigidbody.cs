@@ -1,10 +1,28 @@
 ﻿using System;
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMoveRigidbody : MonoBehaviour
 {
+    [Header("Movement")]
+    [SerializeField] [Range(0f, 100f)] private float acceleration = 10f;
+    [SerializeField] [Range(0f, 100f)] private float airAcceleration = 1f;
+    [SerializeField] [Range(0, 90)] private float maxGroundAngle = 25f;
+    [SerializeField] [Range(0f, 100f)] private float speed = 10f;
+    
+    [Header("Jumping")]
+    [SerializeField] [Range(0f, 10f)] private float jumpHeight = 2f;
+    
+    [Header("Gravity")]
+    [SerializeField] [Range(0f, 5f)] private float gravityFlipTime = 2.0f;
+
+    [Header("Rotation")] 
+    [SerializeField] private Transform zephModel;
+    [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
+    
+    private float minGroundDotProduct;
+
+    private Vector2 playerInput;
     private new Rigidbody rigidbody;
 
     private int groundContactCount;
@@ -12,36 +30,16 @@ public class PlayerMoveRigidbody : MonoBehaviour
     private Vector3 groundContactNormal;
 
     private bool hasScheduledJump;
-
-    [SerializeField] [Range(0f, 10f)] private float jumpHeight = 2f;
-
-    [SerializeField] [Range(0f, 100f)] private float acceleration = 10f;
-    [SerializeField] [Range(0f, 100f)] private float airAcceleration = 1f;
-
-    [SerializeField] [Range(0, 90)] private float maxGroundAngle = 25f;
-
-    [SerializeField] [Range(0f, 100f)] private float speed = 10f;
-    [SerializeField] [Range(0f, 5f)] private float gravityFlipTime = 2.0f;
-    
-    private float minGroundDotProduct;
-
-    private Vector2 playerInput;
-
-    [Header("Rotation")] [SerializeField] private Transform zephModel;
-    [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
-    
-
     private Vector3 velocity;
     private Vector3 desiredVelocity;
 
     private bool OnGround => groundContactCount > 0;
     private bool ZGravity => currentGravity.z < 0 || currentGravity.z > 0;
-    private bool YGravity => currentGravity.y < 0 || currentGravity.y > 0;
-    
+
     private Vector3 currentGravity;
     private Vector3 upVector;
     private bool haltMovement;
-    
+
 
     private void Awake()
     {
@@ -53,7 +51,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
         haltMovement = false;
         currentGravity = Physics.gravity;
         upVector = -currentGravity.normalized;
-        
+
         minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
     }
 
@@ -61,65 +59,37 @@ public class PlayerMoveRigidbody : MonoBehaviour
     private void Update()
     {
         GravitySwitching();
-        
-        
+
         playerInput.x = -Input.GetAxis("Horizontal");
         playerInput.y = -Input.GetAxis("Vertical");
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
         if (ZGravity)
-        {
             desiredVelocity =
                 new Vector3(playerInput.x, playerInput.y, 0f) * speed;
-        }
         else
-        {
             desiredVelocity =
                 new Vector3(playerInput.x, 0f, playerInput.y) * speed;
-        }
-        
 
         if (Input.GetButtonDown("Jump")) hasScheduledJump = true;
     }
 
     private void GravitySwitching()
     {
-        if (Physics.gravity != currentGravity)
-        {
-            currentGravity = Physics.gravity;
-            upVector = -currentGravity.normalized;
-            haltMovement = true;
-            //transform.up = upVector;
-            //rigidbody.AddForce(upVector, ForceMode.Impulse);
-            //haltMovement = false;
-            
-            
-            StopAllCoroutines();
-            StartCoroutine(LerpTransformUp());
-            
-        }
+        if (Physics.gravity == currentGravity) return;
 
-        
-        // if (haltMovement){
-        //     if (Math.Abs(transform.up.y - upVector.y) > 0.05f || Math.Abs(transform.up.x - upVector.x) > 0.05f || Math.Abs(transform.up.z - upVector.z) > 0.05f)
-        //     {
-        //         Debug.Log("loop");
-        //         rigidbody.Sleep();
-        //         transform.up = Vector3.Lerp(transform.up, upVector, gravityFlipTime * Time.deltaTime);
-        //     }
-        //     else
-        //     {
-        //         Debug.Log("Adding force up");
-        //         rigidbody.AddForce(upVector, ForceMode.Impulse);
-        //         haltMovement = false;
-        //     }
-        // }
+        currentGravity = Physics.gravity;
+        upVector = -currentGravity.normalized;
+
+        StopAllCoroutines();
+        StartCoroutine(LerpTransformUp());
     }
 
     private IEnumerator LerpTransformUp()
     {
-        //haltMovement = true;
-        while (Math.Abs(transform.up.y - upVector.y) > 0.05f || Math.Abs(transform.up.x - upVector.x) > 0.05f || Math.Abs(transform.up.z - upVector.z) > 0.05f)
+        haltMovement = true;
+        while (Math.Abs(transform.up.y - upVector.y) > 0.05f || Math.Abs(transform.up.x - upVector.x) > 0.05f ||
+               Math.Abs(transform.up.z - upVector.z) > 0.05f)
         {
             rigidbody.Sleep();
             transform.up = Vector3.Lerp(transform.up, upVector, gravityFlipTime * Time.deltaTime);
@@ -127,16 +97,12 @@ public class PlayerMoveRigidbody : MonoBehaviour
         }
 
         haltMovement = false;
-        
-
-        //yield return null;
-
     }
 
     private void FixedUpdate()
     {
         if (haltMovement) return;
-        
+
         velocity = rigidbody.velocity;
         UpdateGroundContacts();
         AdjustVelocity();
@@ -179,7 +145,6 @@ public class PlayerMoveRigidbody : MonoBehaviour
         if (OnGround)
             groundContactNormal.Normalize();
         else
-            //TODO might be redundant
             groundContactNormal = upVector;
     }
 
@@ -200,15 +165,10 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
         float newZ;
         if (ZGravity)
-        {
-             newZ = Mathf.MoveTowards(currentZ, desiredVelocity.y, maxSpeedChange);
-        }
+            newZ = Mathf.MoveTowards(currentZ, desiredVelocity.y, maxSpeedChange);
         else
-        {
-             newZ = Mathf.MoveTowards(currentZ, desiredVelocity.z, maxSpeedChange);
-        }
+            newZ = Mathf.MoveTowards(currentZ, desiredVelocity.z, maxSpeedChange);
         
-
         velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
     }
 
@@ -219,27 +179,18 @@ public class PlayerMoveRigidbody : MonoBehaviour
             jumpDirection = groundContactNormal;
         else
             return;
-        
-        
-        
-        float jumpSpeed = 0;
+
+        float jumpSpeed;
         if (currentGravity.z < 0)
-        {
             jumpSpeed = Mathf.Sqrt(-2f * currentGravity.z * jumpHeight);
-        }
         else if (currentGravity.z > 0)
-        {
             jumpSpeed = Mathf.Sqrt(-2f * -currentGravity.z * jumpHeight);
-        }else if (currentGravity.y > 0)
-        {
+        else if (currentGravity.y > 0)
             jumpSpeed = Mathf.Sqrt(-2f * -currentGravity.y * jumpHeight);
-        }
         else
-        {
             jumpSpeed = Mathf.Sqrt(-2f * currentGravity.y * jumpHeight);
-        }
-        
-        
+
+
         jumpDirection = (jumpDirection + upVector).normalized;
         var alignedSpeed = Vector3.Dot(velocity, jumpDirection);
         if (alignedSpeed > 0f) jumpSpeed = Mathf.Max(jumpSpeed - alignedSpeed, 0f);
@@ -261,29 +212,23 @@ public class PlayerMoveRigidbody : MonoBehaviour
         for (var i = 0; i < collision.contactCount; i++)
         {
             var normal = collision.GetContact(i).normal;
-            
-            
-            
+
             if (ZGravity)
-            {
                 if (normal.z >= minGroundDotProduct)
                 {
                     groundContactCount++;
                     groundContactNormal = normal;
                     break;
                 }
-            }
 
             if (GravityRift.useNewGravity)
-            {
                 if (normal.y <= minGroundDotProduct)
                 {
                     groundContactCount++;
                     groundContactNormal = normal;
                     break;
                 }
-            }
-            
+
             if (normal.y >= minGroundDotProduct)
             {
                 groundContactCount++;
