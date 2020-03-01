@@ -2,230 +2,184 @@
 
 public class PlayerMoveRigidbody : MonoBehaviour
 {
-   [SerializeField, Range(0f, 100f)]
-	float maxSpeed = 10f;
+    private Rigidbody body;
 
-	[SerializeField, Range(0f, 100f)]
-	float maxAcceleration = 10f, maxAirAcceleration = 1f;
+    private Vector3 groundContactNormal, steepNormal;
 
-	[SerializeField, Range(0f, 10f)]
-	float jumpHeight = 2f;
+    private int groundContactCount, steepContactCount;
 
-	[SerializeField, Range(0, 90)] private float maxGroundAngle = 25f;
-	//maxStairsAngle = 50f;
+    private bool hasScheduledJump;
 
-	[SerializeField, Range(0f, 100f)]
-	float maxSnapSpeed = 100f;
+    [SerializeField] [Range(0f, 10f)] private float jumpHeight = 2f;
 
-	[SerializeField, Min(0f)]
-	float probeDistance = 1f;
-	[SerializeField, Range(0f, 5f)]
-	float rotationMultiplier = 1f;
+    [SerializeField] [Range(0f, 100f)] private float maxAcceleration = 10f, maxAirAcceleration = 1f;
 
-	[SerializeField] private LayerMask probeMask = -1;
-	//stairsMask = -1;
+    [SerializeField] [Range(0, 90)] private float maxGroundAngle = 25f;
 
-	Rigidbody body;
-
-	Vector3 velocity, desiredVelocity;
-
-	bool hasScheduledJump;
-
-	Vector3 contactNormal, steepNormal;
-
-	int groundContactCount, steepContactCount;
-
-	bool OnGround => groundContactCount > 0;
+    [SerializeField] [Range(0f, 100f)] private float maxSpeed = 10f;
 
 
-	private float minGroundDotProduct;
-	//minStairsDotProduct;
+    private float minGroundDotProduct;
 
-	int stepsSinceLastGrounded, stepsSinceLastJump;
-	private Vector2 playerInput;
+    private Vector2 playerInput;
 
-	void OnValidate () {
-		minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
-		//minStairsDotProduct = Mathf.Cos(maxStairsAngle * Mathf.Deg2Rad);
-	}
+    [SerializeField] [Range(0f, 5f)] private float rotationMultiplier = 1f;
 
-	void Awake () {
-		body = GetComponent<Rigidbody>();
-		OnValidate();
-	}
+    private Vector3 velocity, desiredVelocity;
 
-	void Update () {
-		playerInput.x = -Input.GetAxis("Horizontal");
-		playerInput.y = -Input.GetAxis("Vertical");
-		playerInput = Vector2.ClampMagnitude(playerInput, 1f);
+    private bool OnGround => groundContactCount > 0;
 
-		desiredVelocity =
-			new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
+    private void Awake()
+    {
+        body = GetComponent<Rigidbody>();
+        minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
+    }
 
-		if (Input.GetButtonDown("Jump"))
-		{
-			hasScheduledJump = true;
-		}
-	}
+    private void Update()
+    {
+        playerInput.x = -Input.GetAxis("Horizontal");
+        playerInput.y = -Input.GetAxis("Vertical");
+        playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
-	void FixedUpdate () {
-		UpdateState();
-		AdjustVelocity();
+        desiredVelocity =
+            new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
 
-		if (hasScheduledJump) {
-			hasScheduledJump = false;
-			Jump();
-		}
+        if (Input.GetButtonDown("Jump")) hasScheduledJump = true;
+    }
 
-		body.velocity = velocity;
-		Rotate();
-		ClearState();
-	}
+    private void FixedUpdate()
+    {
+        UpdateGroundContacts();
+        AdjustVelocity();
 
-	void Rotate()
-	{
-		if (!(playerInput.magnitude > 0f)) return;
-		
-		
-		float targetRotation;
-		targetRotation = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg;
-		var vel = body.velocity.magnitude;
+        if (hasScheduledJump)
+        {
+            hasScheduledJump = false;
+            Jump();
+        }
 
-		float angle = Mathf.SmoothDampAngle(transform.localEulerAngles.y, targetRotation, ref vel,
-			rotationMultiplier * Time.deltaTime);
+        body.velocity = velocity;
+        Rotate();
+        ResetContactCounts();
+    }
 
-		var rot = transform.localEulerAngles;
-		rot.y = angle;
-		transform.localEulerAngles = rot;
-	}
+    private void Rotate()
+    {
+        if ((playerInput.magnitude < 0.01f)) return;
+        
+        var targetRotation = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg;
+        var vel = body.velocity.magnitude;
 
-	void ClearState () {
-		groundContactCount = steepContactCount = 0;
-		contactNormal = steepNormal = Vector3.zero;
-	}
+        var localEulerAngles = transform.localEulerAngles;
+        var angle = Mathf.SmoothDampAngle(localEulerAngles.y, targetRotation, ref vel,
+            rotationMultiplier * Time.deltaTime);
 
-	void UpdateState () {
-		stepsSinceLastGrounded += 1;
-		stepsSinceLastJump += 1;
-		velocity = body.velocity;
-		if (OnGround || SnapToGround() || CheckSteepContacts()) {
-			stepsSinceLastGrounded = 0;
-			if (groundContactCount > 1) {
-				contactNormal.Normalize();
-			}
-		}
-		else {
-			contactNormal = Vector3.up;
-		}
-	}
+        var rot = localEulerAngles;
+        rot.y = angle;
+        localEulerAngles = rot;
+        transform.localEulerAngles = localEulerAngles;
+    }
 
-	bool SnapToGround ()
-	{
-		if (stepsSinceLastGrounded > 1 || stepsSinceLastJump <= 2) {
-			return false;
-		}
-		float speed = velocity.magnitude;
-		if (speed > maxSnapSpeed) {
-			return false;
-		}
-		
-		if (!Physics.Raycast(
-			body.position, Vector3.down, out RaycastHit hit,
-			probeDistance, probeMask
-		))
-		{
-			return false;
-		}
-		
-		if (hit.normal.y < minGroundDotProduct) {
-			return false;
-		}
+    private void ResetContactCounts()
+    {
+        groundContactCount = 0;
+        steepContactCount = 0;
+    }
 
-		groundContactCount = 1;
-		contactNormal = hit.normal;
-		float dot = Vector3.Dot(velocity, hit.normal);
-		if (dot > 0f) {
-			velocity = (velocity - hit.normal * dot).normalized * speed;
-		}
-		return true;
-	}
+    private void UpdateGroundContacts()
+    {
+        velocity = body.velocity;
 
-	bool CheckSteepContacts ()
-	{
-		if (steepContactCount <= 1) return false;
-		
-		steepNormal.Normalize();
-		if (steepNormal.y >= minGroundDotProduct) {
-			steepContactCount = 0;
-			groundContactCount = 1;
-			contactNormal = steepNormal;
-			return true;
-		}
-		return false;
-	}
-
-	void AdjustVelocity () {
-		Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
-		Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
-
-		float currentX = Vector3.Dot(velocity, xAxis);
-		float currentZ = Vector3.Dot(velocity, zAxis);
-
-		float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
-		float maxSpeedChange = acceleration * Time.deltaTime;
-		
-		float newX =
-			Mathf.MoveTowards(currentX, desiredVelocity.x, maxSpeedChange);
-		float newZ =
-			Mathf.MoveTowards(currentZ, desiredVelocity.z, maxSpeedChange);
-
-		velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
-	}
-
-	void Jump () {
-		Vector3 jumpDirection;
-		if (OnGround) {
-			jumpDirection = contactNormal;
-		}
-		else {
-			return;
-		}
-
-		stepsSinceLastJump = 0;
-		float jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-		jumpDirection = (jumpDirection + Vector3.up).normalized;
-		float alignedSpeed = Vector3.Dot(velocity, jumpDirection);
-		if (alignedSpeed > 0f) {
-			jumpSpeed = Mathf.Max(jumpSpeed - alignedSpeed, 0f);
-		}
-		velocity += jumpDirection * jumpSpeed;
-	}
-
-	void OnCollisionEnter (Collision collision) {
-		EvaluateCollision(collision);
-	}
-
-	void OnCollisionStay (Collision collision) {
-		EvaluateCollision(collision);
-	}
-
-	void EvaluateCollision (Collision collision) {
-		for (int i = 0; i < collision.contactCount; i++) {
-			Vector3 normal = collision.GetContact(i).normal;
-			if (normal.y >= minGroundDotProduct) {
-				groundContactCount += 1;
-				contactNormal += normal;
-			}
-			else if (normal.y > -0.01f) {
-				steepContactCount += 1;
-				steepNormal += normal;
-			}
-		}
-	}
-
-	Vector3 ProjectOnContactPlane (Vector3 vector) {
-		return vector - contactNormal * Vector3.Dot(vector, contactNormal);
-	}
+        UpdateSteepGroundContacts();
+        
+        if (OnGround)
+        {
+            groundContactNormal.Normalize();
+        }
+        else
+        {
+            groundContactNormal = Vector3.up;
+        }
+    }
 
 
+    private void UpdateSteepGroundContacts()
+    {
+        if (steepContactCount <= 1) return;
+
+        steepNormal.Normalize();
+        if (steepNormal.y >= minGroundDotProduct)
+        {
+            steepContactCount = 0;
+            groundContactCount = 1;
+            groundContactNormal = steepNormal;
+        }
+    }
+
+    private void AdjustVelocity()
+    {
+        var xAxis = ProjectOnContactPlane(Vector3.right).normalized;
+        var zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
+
+        var currentX = Vector3.Dot(velocity, xAxis);
+        var currentZ = Vector3.Dot(velocity, zAxis);
+
+        var acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
+        var maxSpeedChange = acceleration * Time.deltaTime;
+
+        var newX =
+            Mathf.MoveTowards(currentX, desiredVelocity.x, maxSpeedChange);
+        var newZ =
+            Mathf.MoveTowards(currentZ, desiredVelocity.z, maxSpeedChange);
+
+        velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
+    }
+
+    private void Jump()
+    {
+        Vector3 jumpDirection;
+        if (OnGround)
+            jumpDirection = groundContactNormal;
+        else
+            return;
+
+        var jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+        jumpDirection = (jumpDirection + Vector3.up).normalized;
+        var alignedSpeed = Vector3.Dot(velocity, jumpDirection);
+        if (alignedSpeed > 0f) jumpSpeed = Mathf.Max(jumpSpeed - alignedSpeed, 0f);
+        velocity += jumpDirection * jumpSpeed;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        EvaluateCollision(collision);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        EvaluateCollision(collision);
+    }
+
+    private void EvaluateCollision(Collision collision)
+    {
+        for (var i = 0; i < collision.contactCount; i++)
+        {
+            var normal = collision.GetContact(i).normal;
+            if (normal.y >= minGroundDotProduct)
+            {
+                groundContactCount++;
+                groundContactNormal = normal;
+            }
+            else if (normal.y > -0.01f)
+            {
+                steepContactCount++;
+                steepNormal = normal;
+            }
+        }
+    }
+
+    private Vector3 ProjectOnContactPlane(Vector3 vector)
+    {
+        return vector - groundContactNormal * Vector3.Dot(vector, groundContactNormal);
+    }
 }
