@@ -2,36 +2,38 @@
 
 public class PlayerMoveRigidbody : MonoBehaviour
 {
-    private Rigidbody body;
+    private new Rigidbody rigidbody;
 
-    private Vector3 groundContactNormal, steepNormal;
+    private int groundContactCount;
 
-    private int groundContactCount, steepContactCount;
+    private Vector3 groundContactNormal;
 
     private bool hasScheduledJump;
 
     [SerializeField] [Range(0f, 10f)] private float jumpHeight = 2f;
 
-    [SerializeField] [Range(0f, 100f)] private float maxAcceleration = 10f, maxAirAcceleration = 1f;
+    [SerializeField] [Range(0f, 100f)] private float acceleration = 10f;
+    [SerializeField] [Range(0f, 100f)] private float airAcceleration = 1f;
 
     [SerializeField] [Range(0, 90)] private float maxGroundAngle = 25f;
 
-    [SerializeField] [Range(0f, 100f)] private float maxSpeed = 10f;
+    [SerializeField] [Range(0f, 100f)] private float speed = 10f;
 
 
     private float minGroundDotProduct;
 
     private Vector2 playerInput;
 
-    [SerializeField] [Range(0f, 5f)] private float rotationMultiplier = 1f;
+    [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
 
-    private Vector3 velocity, desiredVelocity;
+    private Vector3 velocity;
+    private Vector3 desiredVelocity;
 
     private bool OnGround => groundContactCount > 0;
 
     private void Awake()
     {
-        body = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
         minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
     }
 
@@ -42,13 +44,14 @@ public class PlayerMoveRigidbody : MonoBehaviour
         playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
         desiredVelocity =
-            new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
+            new Vector3(playerInput.x, 0f, playerInput.y) * speed;
 
         if (Input.GetButtonDown("Jump")) hasScheduledJump = true;
     }
 
     private void FixedUpdate()
     {
+        velocity = rigidbody.velocity;
         UpdateGroundContacts();
         AdjustVelocity();
 
@@ -58,21 +61,21 @@ public class PlayerMoveRigidbody : MonoBehaviour
             Jump();
         }
 
-        body.velocity = velocity;
+        rigidbody.velocity = velocity;
         Rotate();
         ResetContactCounts();
     }
 
     private void Rotate()
     {
-        if ((playerInput.magnitude < 0.01f)) return;
-        
+        if (playerInput.magnitude < 0.01f) return;
+
         var targetRotation = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg;
-        var vel = body.velocity.magnitude;
+        var vel = rigidbody.velocity.magnitude;
 
         var localEulerAngles = transform.localEulerAngles;
         var angle = Mathf.SmoothDampAngle(localEulerAngles.y, targetRotation, ref vel,
-            rotationMultiplier * Time.deltaTime);
+            rotationModifier * Time.deltaTime);
 
         var rot = localEulerAngles;
         rot.y = angle;
@@ -83,23 +86,15 @@ public class PlayerMoveRigidbody : MonoBehaviour
     private void ResetContactCounts()
     {
         groundContactCount = 0;
-        steepContactCount = 0;
     }
 
     private void UpdateGroundContacts()
     {
-        velocity = body.velocity;
-        
-        
         if (OnGround)
-        {
             groundContactNormal.Normalize();
-        }
         else
-        {
             //TODO might be redundant
             groundContactNormal = Vector3.up;
-        }
     }
 
     private void AdjustVelocity()
@@ -110,8 +105,8 @@ public class PlayerMoveRigidbody : MonoBehaviour
         var currentX = Vector3.Dot(velocity, xAxis);
         var currentZ = Vector3.Dot(velocity, zAxis);
 
-        var acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
-        var maxSpeedChange = acceleration * Time.deltaTime;
+        var localAcceleration = OnGround ? acceleration : airAcceleration;
+        var maxSpeedChange = localAcceleration * Time.deltaTime;
 
         var newX =
             Mathf.MoveTowards(currentX, desiredVelocity.x, maxSpeedChange);
@@ -155,11 +150,6 @@ public class PlayerMoveRigidbody : MonoBehaviour
             {
                 groundContactCount++;
                 groundContactNormal = normal;
-            }
-            else if (normal.y > -0.01f)
-            {
-                steepContactCount++;
-                steepNormal = normal;
             }
         }
     }
