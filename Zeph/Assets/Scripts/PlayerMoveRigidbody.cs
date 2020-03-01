@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using Unity.Mathematics;
+using UnityEngine;
 
 public class PlayerMoveRigidbody : MonoBehaviour
 {
@@ -18,6 +21,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
     [SerializeField] [Range(0, 90)] private float maxGroundAngle = 25f;
 
     [SerializeField] [Range(0f, 100f)] private float speed = 10f;
+    [SerializeField] [Range(0f, 5f)] private float gravityFlipTime = 2.0f;
     
     private float minGroundDotProduct;
 
@@ -25,6 +29,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
 
     [Header("Rotation")] [SerializeField] private Transform zephModel;
     [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
+    
 
     private Vector3 velocity;
     private Vector3 desiredVelocity;
@@ -84,10 +89,48 @@ public class PlayerMoveRigidbody : MonoBehaviour
             currentGravity = Physics.gravity;
             upVector = -currentGravity.normalized;
             haltMovement = true;
-            transform.up = upVector;
-            rigidbody.AddForce(upVector, ForceMode.Impulse);
-            haltMovement = false;
+            //transform.up = upVector;
+            //rigidbody.AddForce(upVector, ForceMode.Impulse);
+            //haltMovement = false;
+            
+            
+            StopAllCoroutines();
+            StartCoroutine(LerpTransformUp());
+            
         }
+
+        
+        // if (haltMovement){
+        //     if (Math.Abs(transform.up.y - upVector.y) > 0.05f || Math.Abs(transform.up.x - upVector.x) > 0.05f || Math.Abs(transform.up.z - upVector.z) > 0.05f)
+        //     {
+        //         Debug.Log("loop");
+        //         rigidbody.Sleep();
+        //         transform.up = Vector3.Lerp(transform.up, upVector, gravityFlipTime * Time.deltaTime);
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("Adding force up");
+        //         rigidbody.AddForce(upVector, ForceMode.Impulse);
+        //         haltMovement = false;
+        //     }
+        // }
+    }
+
+    private IEnumerator LerpTransformUp()
+    {
+        //haltMovement = true;
+        while (Math.Abs(transform.up.y - upVector.y) > 0.05f || Math.Abs(transform.up.x - upVector.x) > 0.05f || Math.Abs(transform.up.z - upVector.z) > 0.05f)
+        {
+            rigidbody.Sleep();
+            transform.up = Vector3.Lerp(transform.up, upVector, gravityFlipTime * Time.deltaTime);
+            yield return null;
+        }
+
+        haltMovement = false;
+        
+
+        //yield return null;
+
     }
 
     private void FixedUpdate()
@@ -220,13 +263,14 @@ public class PlayerMoveRigidbody : MonoBehaviour
             var normal = collision.GetContact(i).normal;
             
             
+            
             if (ZGravity)
             {
                 if (normal.z >= minGroundDotProduct)
                 {
                     groundContactCount++;
                     groundContactNormal = normal;
-                    continue;
+                    break;
                 }
             }
 
@@ -236,7 +280,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
                 {
                     groundContactCount++;
                     groundContactNormal = normal;
-                    continue;
+                    break;
                 }
             }
             
@@ -244,6 +288,7 @@ public class PlayerMoveRigidbody : MonoBehaviour
             {
                 groundContactCount++;
                 groundContactNormal = normal;
+                break;
             }
         }
     }
