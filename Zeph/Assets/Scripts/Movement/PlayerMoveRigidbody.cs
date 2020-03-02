@@ -11,7 +11,7 @@ namespace Movement
         [SerializeField] [Range(0f, 100f)] private float airAcceleration = 1f;
         [SerializeField] [Range(0, 90)] private float maxGroundAngle = 25f;
         [SerializeField] [Range(0f, 100f)] private float speed = 10f;
-        [SerializeField] private bool swapMovementAixs;
+        [SerializeField] private bool swapMovementAxis;
         [SerializeField] private bool reverseX;
         [SerializeField] private bool reverseY;
 
@@ -85,7 +85,7 @@ namespace Movement
             playerInput.x = -Input.GetAxis("Horizontal");
             playerInput.y = -Input.GetAxis("Vertical");
 
-            if (swapMovementAixs)
+            if (swapMovementAxis)
             {
                 var tempInput = playerInput;
                 playerInput.x = tempInput.y;
