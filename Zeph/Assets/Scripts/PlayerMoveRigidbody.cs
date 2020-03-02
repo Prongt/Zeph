@@ -10,7 +10,8 @@ public class PlayerMoveRigidbody : MonoBehaviour
     [SerializeField] [Range(0, 90)] private float maxGroundAngle = 25f;
     [SerializeField] [Range(0f, 100f)] private float speed = 10f;
     [SerializeField] private bool swapMovementAixs;
-    [SerializeField] private bool reverseMovement;
+    [SerializeField] private bool reverseX;
+    [SerializeField] private bool reverseY;
 
     [Header("Jumping")] [SerializeField] [Range(0f, 10f)]
     private float jumpHeight = 2f;
@@ -89,9 +90,13 @@ public class PlayerMoveRigidbody : MonoBehaviour
             playerInput.y = tempInput.x;
         }
 
-        if (reverseMovement)
+        if (reverseX)
         {
             playerInput.x = -playerInput.x;
+        }
+
+        if (reverseY)
+        {
             playerInput.y = -playerInput.y;
         }
 
