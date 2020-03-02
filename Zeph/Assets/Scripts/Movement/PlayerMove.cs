@@ -2,545 +2,548 @@
 using FMODUnity;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+namespace Movement
 {
-	public float playerMoveSpeed = 6f;
-	public float playerGravity = -12f;
-	public float playerJumpHeight = 1f;
-	[Range(0,1)]
-	public float airControlPercent;
+	public class PlayerMove : MonoBehaviour
+	{
+		public float playerMoveSpeed = 6f;
+		public float playerGravity = -12f;
+		public float playerJumpHeight = 1f;
+		[Range(0,1)]
+		public float airControlPercent;
 
-	private Transform zephModel;
-	private Animator zephAnimator;
+		private Transform zephModel;
+		private Animator zephAnimator;
 
-	public float playerTurnSpeed = 0.2f;
-	private float turnVelocity;
+		public float playerTurnSpeed = 0.2f;
+		private float turnVelocity;
 
-	public float velocitySmoothing = 0.1f;
+		public float velocitySmoothing = 0.1f;
 
-	private float smoothingVelocity;
-	private float currentSpeed;
-	private float upVelocity;
+		private float smoothingVelocity;
+		private float currentSpeed;
+		private float upVelocity;
 
-	private CharacterController characterController;
-	private new Transform camera;
-	private Animator animator;
+		private CharacterController characterController;
+		private new Transform camera;
+		private Animator animator;
 	
 
-	[SerializeField]private float gravityJumpMultiplier = 3f;
-	[SerializeField]private float ceilingGravityModifier = 1f;
+		[SerializeField]private float gravityJumpMultiplier = 3f;
+		[SerializeField]private float ceilingGravityModifier = 1f;
 	
-	private Vector3 oldGravity;
-	private Vector3 gravityDirection;
-	private float playerYHeight;
-	private float characterWidth;
+		private Vector3 oldGravity;
+		private Vector3 gravityDirection;
+		private float playerYHeight;
+		private float characterWidth;
 
-	private Transform rayPoint;
+		private Transform rayPoint;
 
 
 	
-	public static bool PlayerIsGrounded;
-	private float gravityPull;
-	public static bool PlayerMovementEnabled = true;
-	public float gravityFlipTime = 2;
-	private Vector3 newUp;
-	private Vector3 originalUp;
-	[SerializeField] private float coyoteTime = 0.15f;
-	private float coyoteTimeRemaining;
+		public static bool PlayerIsGrounded;
+		private float gravityPull;
+		public static bool PlayerMovementEnabled = true;
+		public float gravityFlipTime = 2;
+		private Vector3 newUp;
+		private Vector3 originalUp;
+		[SerializeField] private float coyoteTime = 0.15f;
+		private float coyoteTimeRemaining;
 	
-	[Header("Tick if movement is janky")]
-	public bool reverseMovementDirections;
-	public bool flipMovement;
+		[Header("Tick if movement is janky")]
+		public bool reverseMovementDirections;
+		public bool flipMovement;
 
-	[Header("Water Knock Back")]
-	public float knockBackDistance = 0.75f;
-	public LayerMask waterLayerMask;
-	public float knockBackForce = 1.0f;
-	public float movePauseTime = 0.25f;
-	public StudioEventEmitter splashEmitter;
+		[Header("Water Knock Back")]
+		public float knockBackDistance = 0.75f;
+		public LayerMask waterLayerMask;
+		public float knockBackForce = 1.0f;
+		public float movePauseTime = 0.25f;
+		public StudioEventEmitter splashEmitter;
 
-	private Vector3 velocity;
-	private static readonly int moveSpeed = Animator.StringToHash("moveSpeed");
-	private static readonly int isJumping = Animator.StringToHash("IsJumping");
-	private static readonly int isDancing = Animator.StringToHash("IsDancing");
+		private Vector3 velocity;
+		private static readonly int moveSpeed = Animator.StringToHash("moveSpeed");
+		private static readonly int isJumping = Animator.StringToHash("IsJumping");
+		private static readonly int isDancing = Animator.StringToHash("IsDancing");
 
-	void Start ()
-	{
-		if (Camera.main != null) camera = Camera.main.transform;
-
-		rayPoint = GameObject.FindWithTag("RayPoint").transform;
-		GrabComponents();
-		
-		gravityDirection = Physics.gravity;
-		oldGravity = gravityDirection;
-
-		gravityJumpMultiplier = gravityJumpMultiplier * playerJumpHeight;
-		playerYHeight = GetComponent<Collider>().bounds.extents.y + 0.1f;
-		characterWidth = GetComponent<Collider>().bounds.extents.x + 0.15f;
-		gravityPull = playerGravity;
-		
-		zephModel = zephAnimator.transform;
-
-		PlayerMovementEnabled = true;
-		originalUp = transform.up;
-		gravityPull = playerGravity;
-	}
-
-	private void OnValidate()
-	{
-		GrabComponents();
-	}
-
-	private void GrabComponents()
-	{
-		if (splashEmitter == null)
+		void Start ()
 		{
-			splashEmitter = GetComponent<StudioEventEmitter>();
+			if (Camera.main != null) camera = Camera.main.transform;
+
+			rayPoint = GameObject.FindWithTag("RayPoint").transform;
+			GrabComponents();
+		
+			gravityDirection = Physics.gravity;
+			oldGravity = gravityDirection;
+
+			gravityJumpMultiplier = gravityJumpMultiplier * playerJumpHeight;
+			playerYHeight = GetComponent<Collider>().bounds.extents.y + 0.1f;
+			characterWidth = GetComponent<Collider>().bounds.extents.x + 0.15f;
+			gravityPull = playerGravity;
+		
+			zephModel = zephAnimator.transform;
+
+			PlayerMovementEnabled = true;
+			originalUp = transform.up;
+			gravityPull = playerGravity;
 		}
-		
-		characterController = GetComponent<CharacterController> ();
-		animator = GetComponentInChildren<Animator>();
-		zephAnimator = GetComponentInChildren<Animator>();
-	}
 
-	void Update ()
-	{
-		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
-
-		Vector2 inputDir = input.normalized;
-
-		gravityDirection = Physics.gravity;
-		PlayerIsGrounded = CheckIfGrounded(gravityDirection, playerYHeight);
-
-		if (gravityDirection != oldGravity)
+		private void OnValidate()
 		{
-			newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
-
-			StartCoroutine(PausePlayerMovement(gravityFlipTime, inputDir));
-			oldGravity = Physics.gravity;
+			GrabComponents();
 		}
-		
-		if (PlayerIsGrounded)
+
+		private void GrabComponents()
 		{
-			coyoteTimeRemaining = coyoteTime;
-		}
-		else
-		{
-			coyoteTimeRemaining -= Time.deltaTime;
-			
-		}
-		
-		KnockBack();
-		
-		if (PlayerMovementEnabled)
-		{
-			if (GravityRift.useNewGravity)
+			if (splashEmitter == null)
 			{
-				AltMove(inputDir, -Physics.gravity);
+				splashEmitter = GetComponent<StudioEventEmitter>();
+			}
+		
+			characterController = GetComponent<CharacterController> ();
+			animator = GetComponentInChildren<Animator>();
+			zephAnimator = GetComponentInChildren<Animator>();
+		}
+
+		void Update ()
+		{
+			Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
+
+			Vector2 inputDir = input.normalized;
+
+			gravityDirection = Physics.gravity;
+			PlayerIsGrounded = CheckIfGrounded(gravityDirection, playerYHeight);
+
+			if (gravityDirection != oldGravity)
+			{
+				newUp = new Vector3(-Physics.gravity.x, -Physics.gravity.y , -Physics.gravity.z ).normalized;
+
+				StartCoroutine(PausePlayerMovement(gravityFlipTime, inputDir));
+				oldGravity = Physics.gravity;
+			}
+		
+			if (PlayerIsGrounded)
+			{
+				coyoteTimeRemaining = coyoteTime;
 			}
 			else
 			{
-				Move(inputDir, -Physics.gravity);
+				coyoteTimeRemaining -= Time.deltaTime;
+			
 			}
 		
-			Rotate(inputDir);
-			
-			Jump();
-		}
-		else
-		{
-			if (GravityRift.useNewGravity == false)
+			KnockBack();
+		
+			if (PlayerMovementEnabled)
 			{
-				transform.up = Vector3.Lerp(transform.up, originalUp, (gravityFlipTime * 1.5f) * Time.deltaTime);
-				//transform.rotation = originalrot;
-			}
-			else
-			{
-				if (gravityDirection.y > 9f)
+				if (GravityRift.useNewGravity)
 				{
-					newUp = new Vector3(0,-1, 0);
-				}
-				transform.up = Vector3.Lerp(transform.up, newUp, (gravityFlipTime * 1.5f)  * Time.deltaTime);
-			}
-		}
-	}
-
-
-	IEnumerator PausePlayerMovement(float pauseTime, Vector2 inputDir = new Vector2())
-	{
-		if (inputDir != new Vector2())
-		{
-			float jumpVelocity;
-		
-			if (GravityRift.useNewGravity)
-			{
-				jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJumpMultiplier);
-				upVelocity = jumpVelocity;
-				AltMove(inputDir, -Physics.gravity);
-			}
-			else
-			{
-				jumpVelocity = Mathf.Sqrt(-2 * playerGravity * playerJumpHeight);
-				upVelocity = jumpVelocity;
-				Move(inputDir, -Physics.gravity);
-			}
-		}
-		
-		PlayerMovementEnabled = false;
-		yield return new WaitForSeconds(pauseTime);
-		PlayerMovementEnabled = true;
-	}
-	
-
-	private void AltMove(Vector2 inputDir, Vector3 upAxis)
-	{
-		upAxis.Normalize();
-
-		float targetSpeed = playerMoveSpeed * inputDir.magnitude;
-		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
-		
-		Vector3 velocity = new Vector3();
-		if (gravityDirection.x > 0 || gravityDirection.x < 0)
-		{
-			Debug.Log("Cheese");
-			upVelocity += Time.deltaTime * gravityPull;
-			//movement
-			velocity.y = inputDir.y * playerMoveSpeed;
-
-			//Stops player from getting stuck in the ground/wall when the player is in the air and is movinging in the direction of the ground/wall
-			// if (!PlayerIsGrounded)
-			// {
-			// 	if (CheckIfGrounded(Vector3.down, characterWidth))
-			// 	{
-			// 		inputDir.y = -inputDir.y;
-			// 	}
-			// 	if (CheckIfGrounded(Vector3.up, characterWidth))
-			// 	{
-			// 		inputDir.y = -inputDir.y;
-			// 	}
-			// 	if (CheckIfGrounded(Vector3.left, characterWidth))
-			// 	{
-			// 		inputDir.x = -inputDir.x;
-			// 	}
-			// 	if (CheckIfGrounded(Vector3.right, characterWidth))
-			// 	{
-			// 		inputDir.x = -inputDir.x;
-			// 	}
-			// }
-			
-			velocity.y = inputDir.y * playerMoveSpeed;
-			velocity.z = -inputDir.x * playerMoveSpeed;
-			
-			zephAnimator.SetFloat(moveSpeed, velocity.magnitude);
-
-			//gravity
-			if (gravityDirection.x > 0)
-			{
-				velocity.x -= upVelocity;
-			}else if (gravityDirection.x < 0)
-			{
-				velocity.x += upVelocity;
-			}
-		}
-		else if (gravityDirection.z > 0 || gravityDirection.z < 0)
-		{
-			if (gravityDirection.z > 0)
-			{
-				if (CheckIfGrounded(Vector3.right, 1f)) {
-					//Debug.Log("Grounded");
-					upVelocity = 0;
-					animator.SetBool(isJumping, false);
-				}
-			}
-			else
-			{
-				if (CheckIfGrounded(Vector3.left, 1f)) {
-					//Debug.Log("Grounded");
-					upVelocity = 0;
-					animator.SetBool(isJumping, false);
-				}
-			}
-			
-			upVelocity += Time.deltaTime * gravityPull;
-			//Movement
-			if (reverseMovementDirections)
-			{
-				if (gravityDirection.z > 0)
-				{
-					velocity.y = -inputDir.x * playerMoveSpeed;
+					AltMove(inputDir, -Physics.gravity);
 				}
 				else
 				{
-					velocity.y = inputDir.x * playerMoveSpeed;
+					Move(inputDir, -Physics.gravity);
 				}
-				
-				velocity.x = inputDir.y * playerMoveSpeed;
+		
+				Rotate(inputDir);
+			
+				Jump();
 			}
 			else
 			{
-				velocity.y = inputDir.y * playerMoveSpeed;
-				velocity.x = -inputDir.x * playerMoveSpeed;
+				if (GravityRift.useNewGravity == false)
+				{
+					transform.up = Vector3.Lerp(transform.up, originalUp, (gravityFlipTime * 1.5f) * Time.deltaTime);
+					//transform.rotation = originalrot;
+				}
+				else
+				{
+					if (gravityDirection.y > 9f)
+					{
+						newUp = new Vector3(0,-1, 0);
+					}
+					transform.up = Vector3.Lerp(transform.up, newUp, (gravityFlipTime * 1.5f)  * Time.deltaTime);
+				}
 			}
-			
-			
-			zephAnimator.SetFloat(moveSpeed, velocity.magnitude);
+		}
 
-			//Gravity
-			if (gravityDirection.z > 0)
-			{
-				velocity.z -= upVelocity;
-			}else if (gravityDirection.z < 0)
-			{
-				velocity.z += upVelocity;
-			}
-		}else if (gravityDirection.y > 9f)
+
+		IEnumerator PausePlayerMovement(float pauseTime, Vector2 inputDir = new Vector2())
 		{
+			if (inputDir != new Vector2())
+			{
+				float jumpVelocity;
+		
+				if (GravityRift.useNewGravity)
+				{
+					jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJumpMultiplier);
+					upVelocity = jumpVelocity;
+					AltMove(inputDir, -Physics.gravity);
+				}
+				else
+				{
+					jumpVelocity = Mathf.Sqrt(-2 * playerGravity * playerJumpHeight);
+					upVelocity = jumpVelocity;
+					Move(inputDir, -Physics.gravity);
+				}
+			}
+		
+			PlayerMovementEnabled = false;
+			yield return new WaitForSeconds(pauseTime);
+			PlayerMovementEnabled = true;
+		}
+	
+
+		private void AltMove(Vector2 inputDir, Vector3 upAxis)
+		{
+			upAxis.Normalize();
+
+			float targetSpeed = playerMoveSpeed * inputDir.magnitude;
+			currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
+		
+			Vector3 velocity = new Vector3();
+			if (gravityDirection.x > 0 || gravityDirection.x < 0)
+			{
+				Debug.Log("Cheese");
+				upVelocity += Time.deltaTime * gravityPull;
+				//movement
+				velocity.y = inputDir.y * playerMoveSpeed;
+
+				//Stops player from getting stuck in the ground/wall when the player is in the air and is movinging in the direction of the ground/wall
+				// if (!PlayerIsGrounded)
+				// {
+				// 	if (CheckIfGrounded(Vector3.down, characterWidth))
+				// 	{
+				// 		inputDir.y = -inputDir.y;
+				// 	}
+				// 	if (CheckIfGrounded(Vector3.up, characterWidth))
+				// 	{
+				// 		inputDir.y = -inputDir.y;
+				// 	}
+				// 	if (CheckIfGrounded(Vector3.left, characterWidth))
+				// 	{
+				// 		inputDir.x = -inputDir.x;
+				// 	}
+				// 	if (CheckIfGrounded(Vector3.right, characterWidth))
+				// 	{
+				// 		inputDir.x = -inputDir.x;
+				// 	}
+				// }
 			
-			if (CheckIfGrounded(Vector3.down, 1f)) {
-				//Debug.Log("Grounded");
+				velocity.y = inputDir.y * playerMoveSpeed;
+				velocity.z = -inputDir.x * playerMoveSpeed;
+			
+				zephAnimator.SetFloat(moveSpeed, velocity.magnitude);
+
+				//gravity
+				if (gravityDirection.x > 0)
+				{
+					velocity.x -= upVelocity;
+				}else if (gravityDirection.x < 0)
+				{
+					velocity.x += upVelocity;
+				}
+			}
+			else if (gravityDirection.z > 0 || gravityDirection.z < 0)
+			{
+				if (gravityDirection.z > 0)
+				{
+					if (CheckIfGrounded(Vector3.right, 1f)) {
+						//Debug.Log("Grounded");
+						upVelocity = 0;
+						animator.SetBool(isJumping, false);
+					}
+				}
+				else
+				{
+					if (CheckIfGrounded(Vector3.left, 1f)) {
+						//Debug.Log("Grounded");
+						upVelocity = 0;
+						animator.SetBool(isJumping, false);
+					}
+				}
+			
+				upVelocity += Time.deltaTime * gravityPull;
+				//Movement
+				if (reverseMovementDirections)
+				{
+					if (gravityDirection.z > 0)
+					{
+						velocity.y = -inputDir.x * playerMoveSpeed;
+					}
+					else
+					{
+						velocity.y = inputDir.x * playerMoveSpeed;
+					}
+				
+					velocity.x = inputDir.y * playerMoveSpeed;
+				}
+				else
+				{
+					velocity.y = inputDir.y * playerMoveSpeed;
+					velocity.x = -inputDir.x * playerMoveSpeed;
+				}
+			
+			
+				zephAnimator.SetFloat(moveSpeed, velocity.magnitude);
+
+				//Gravity
+				if (gravityDirection.z > 0)
+				{
+					velocity.z -= upVelocity;
+				}else if (gravityDirection.z < 0)
+				{
+					velocity.z += upVelocity;
+				}
+			}else if (gravityDirection.y > 9f)
+			{
+			
+				if (CheckIfGrounded(Vector3.down, 1f)) {
+					//Debug.Log("Grounded");
+					upVelocity = 0;
+					animator.SetBool(isJumping, false);
+				}
+//			Debug.Log("Up Move");
+				upVelocity += Time.deltaTime * gravityPull;
+				// //velocity = transform.forward * currentSpeed + upAxis * velocityY;
+				// velocity = transform.forward * currentSpeed + upAxis;
+				// velocity.y = velocityY;
+				//velocity = transform.forward;
+				var tempInput = inputDir;
+				if (flipMovement)
+				{
+					tempInput.x = -tempInput.x;
+					tempInput.y = -tempInput.y;
+				}
+			
+				if (reverseMovementDirections)
+				{
+					velocity.x = tempInput.y * playerMoveSpeed;
+					velocity.z = tempInput.x * playerMoveSpeed;
+				}
+				else
+				{
+					velocity.x = -tempInput.x * playerMoveSpeed;
+					velocity.z = -tempInput.y * playerMoveSpeed;
+				}
+			
+				velocity.y += -upVelocity*3;
+			
+			
+				zephAnimator.SetFloat(moveSpeed, velocity.magnitude);
+			}
+			else
+			{
+				upVelocity += Time.deltaTime * playerGravity;
+				velocity = transform.forward * currentSpeed + upAxis * upVelocity;
+			}
+			//
+			// if (reverseMovementDirections)
+			// {
+			// 	velocity = new Vector3(inputDir.y, 0, -inputDir.x);
+			// }else
+			// {
+			// 	velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
+			// }
+			//
+			// if (flipMovement)
+			// {
+			// 	velocity = new Vector3(-velocity.x, 0, -velocity.z);
+			// }
+
+			characterController.Move (velocity * Time.deltaTime);
+			currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.y).magnitude;
+
+			//if (CheckIfGrounded(Physics.gravity, 5f))
+			// if (Physics.Raycast(transform.position, -transform.up, 5f, LayerMask.NameToLayer("NoPlayer")))
+			// {
+			// 	Debug.Log("Grounded");
+			// 	upVelocity = 0;
+			// }
+		
+		
+		}
+
+		void Move(Vector2 inputDir, Vector3 upAxis) {
+			upAxis.Normalize();
+		
+			float targetSpeed = playerMoveSpeed * inputDir.magnitude; 
+
+			currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
+
+		
+			upVelocity += Time.deltaTime * gravityPull;
+
+			if (reverseMovementDirections)
+			{
+				velocity = new Vector3(inputDir.y, 0, -inputDir.x);
+			}else
+			{
+				velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
+			}
+
+			if (flipMovement)
+			{
+				velocity = new Vector3(-velocity.x, 0, -velocity.z);
+			}
+		
+		
+			velocity.Normalize();
+			velocity *= currentSpeed;
+
+			var speed = velocity;
+			zephAnimator.SetFloat(moveSpeed, speed.magnitude);
+			velocity.y = upVelocity;
+
+			characterController.Move (velocity * Time.deltaTime);
+			//currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.z).magnitude;
+		
+			if (characterController.isGrounded) {
 				upVelocity = 0;
 				animator.SetBool(isJumping, false);
 			}
-//			Debug.Log("Up Move");
-			upVelocity += Time.deltaTime * gravityPull;
-			// //velocity = transform.forward * currentSpeed + upAxis * velocityY;
-			// velocity = transform.forward * currentSpeed + upAxis;
-			// velocity.y = velocityY;
-			//velocity = transform.forward;
-			var tempInput = inputDir;
-			if (flipMovement)
-			{
-				tempInput.x = -tempInput.x;
-				tempInput.y = -tempInput.y;
-			}
-			
-			if (reverseMovementDirections)
-			{
-				velocity.x = tempInput.y * playerMoveSpeed;
-				velocity.z = tempInput.x * playerMoveSpeed;
-			}
-			else
-			{
-				velocity.x = -tempInput.x * playerMoveSpeed;
-				velocity.z = -tempInput.y * playerMoveSpeed;
-			}
-			
-			velocity.y += -upVelocity*3;
-			
-			
-			zephAnimator.SetFloat(moveSpeed, velocity.magnitude);
 		}
-		else
-		{
-			upVelocity += Time.deltaTime * playerGravity;
-			velocity = transform.forward * currentSpeed + upAxis * upVelocity;
-		}
-		//
-		// if (reverseMovementDirections)
-		// {
-		// 	velocity = new Vector3(inputDir.y, 0, -inputDir.x);
-		// }else
-		// {
-		// 	velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
-		// }
-		//
-		// if (flipMovement)
-		// {
-		// 	velocity = new Vector3(-velocity.x, 0, -velocity.z);
-		// }
-
-		characterController.Move (velocity * Time.deltaTime);
-		currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.y).magnitude;
-
-		//if (CheckIfGrounded(Physics.gravity, 5f))
-		// if (Physics.Raycast(transform.position, -transform.up, 5f, LayerMask.NameToLayer("NoPlayer")))
-		// {
-		// 	Debug.Log("Grounded");
-		// 	upVelocity = 0;
-		// }
-		
-		
-	}
-
-	void Move(Vector2 inputDir, Vector3 upAxis) {
-		upAxis.Normalize();
-		
-		float targetSpeed = playerMoveSpeed * inputDir.magnitude; 
-
-		currentSpeed = Mathf.SmoothDamp (currentSpeed, targetSpeed, ref smoothingVelocity, GetModifiedSmoothTime(velocitySmoothing));
-
-		
-		upVelocity += Time.deltaTime * gravityPull;
-
-		if (reverseMovementDirections)
-		{
-			velocity = new Vector3(inputDir.y, 0, -inputDir.x);
-		}else
-		{
-			velocity = new Vector3(-inputDir.x, 0, -inputDir.y);
-		}
-
-		if (flipMovement)
-		{
-			velocity = new Vector3(-velocity.x, 0, -velocity.z);
-		}
-		
-		
-		velocity.Normalize();
-		velocity *= currentSpeed;
-
-		var speed = velocity;
-		zephAnimator.SetFloat(moveSpeed, speed.magnitude);
-		velocity.y = upVelocity;
-
-		characterController.Move (velocity * Time.deltaTime);
-		//currentSpeed = new Vector2 (characterController.velocity.x, characterController.velocity.z).magnitude;
-		
-		if (characterController.isGrounded) {
-			upVelocity = 0;
-			animator.SetBool(isJumping, false);
-		}
-	}
 	
-	public IEnumerator UseDanceAnimation()
-	{
-		animator.SetBool(isDancing, true);
-		yield return new WaitForSeconds(8f);
-		animator.SetBool(isDancing, false);
-	}
-
-	public void FlipMovement()
-	{
-		flipMovement = !flipMovement;
-	}
-
-	private void Rotate(Vector2 inputDir)
-	{
-		if (inputDir != Vector2.zero)
+		public IEnumerator UseDanceAnimation()
 		{
-			if (GravityRift.useNewGravity)
+			animator.SetBool(isDancing, true);
+			yield return new WaitForSeconds(8f);
+			animator.SetBool(isDancing, false);
+		}
+
+		public void FlipMovement()
+		{
+			flipMovement = !flipMovement;
+		}
+
+		private void Rotate(Vector2 inputDir)
+		{
+			if (inputDir != Vector2.zero)
 			{
-				float targetRotation = Mathf.Atan2(-inputDir.x, -inputDir.y) * Mathf.Rad2Deg;
-				if (gravityDirection.z > 0 || gravityDirection.z < 0)
+				if (GravityRift.useNewGravity)
 				{
+					float targetRotation = Mathf.Atan2(-inputDir.x, -inputDir.y) * Mathf.Rad2Deg;
+					if (gravityDirection.z > 0 || gravityDirection.z < 0)
+					{
 					
-				}
+					}
 
-				if (flipMovement)
-				{
-					inputDir.x = -inputDir.x;
-					inputDir.y = -inputDir.y;
-				}
+					if (flipMovement)
+					{
+						inputDir.x = -inputDir.x;
+						inputDir.y = -inputDir.y;
+					}
 				
-				if (reverseMovementDirections)
-				{
-					targetRotation = Mathf.Atan2(inputDir.y, -inputDir.x) * Mathf.Rad2Deg;
-				}
+					if (reverseMovementDirections)
+					{
+						targetRotation = Mathf.Atan2(inputDir.y, -inputDir.x) * Mathf.Rad2Deg;
+					}
 
 
-				float angle = Mathf.SmoothDampAngle(zephModel.localEulerAngles.y, targetRotation, ref turnVelocity,
+					float angle = Mathf.SmoothDampAngle(zephModel.localEulerAngles.y, targetRotation, ref turnVelocity,
 						GetModifiedSmoothTime(playerTurnSpeed));
 
 					var rot = zephModel.localEulerAngles;
 					rot.y = angle;
 					zephModel.localEulerAngles = rot;
+				}
+				else
+				{
+					float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camera.eulerAngles.y;
+
+					float angle = Mathf.SmoothDampAngle(zephModel.localEulerAngles.y, targetRotation, ref turnVelocity,
+						GetModifiedSmoothTime(playerTurnSpeed));
+
+					var rot = zephModel.localEulerAngles;
+					rot.y = angle;
+					zephModel.localEulerAngles = rot;
+				}
+			}
+		}
+
+		void Jump()
+		{
+			if (!Input.GetButtonDown("Jump")) return;
+
+			if (!CheckIfGrounded(gravityDirection, playerYHeight) && !(coyoteTimeRemaining > 0)) return;
+		
+			animator.SetBool(isJumping, true);
+			float jumpVelocity;
+		
+			if (GravityRift.useNewGravity)
+			{
+				jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJumpMultiplier);
 			}
 			else
 			{
-				float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + camera.eulerAngles.y;
-
-				float angle = Mathf.SmoothDampAngle(zephModel.localEulerAngles.y, targetRotation, ref turnVelocity,
-					GetModifiedSmoothTime(playerTurnSpeed));
-
-				var rot = zephModel.localEulerAngles;
-				rot.y = angle;
-				zephModel.localEulerAngles = rot;
+				jumpVelocity = Mathf.Sqrt(-2 * playerGravity * playerJumpHeight);
 			}
+			upVelocity = jumpVelocity;
 		}
-	}
 
-	void Jump()
-	{
-		if (!Input.GetButtonDown("Jump")) return;
+		private float GetModifiedSmoothTime(float smoothTime) {
+			if (characterController.isGrounded) {
+				return smoothTime;
+			}
 
-		if (!CheckIfGrounded(gravityDirection, playerYHeight) && !(coyoteTimeRemaining > 0)) return;
+			if (airControlPercent <= 0.01f) {
+				return float.MaxValue;
+			}
+			return smoothTime / airControlPercent;
+		}
+
+
+		private void KnockBack()
+		{
+			var forwardRay = new Ray(transform.position, zephModel.forward);
 		
-		animator.SetBool(isJumping, true);
-		float jumpVelocity;
-		
-		if (GravityRift.useNewGravity)
-		{
-			jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJumpMultiplier);
-		}
-		else
-		{
-			jumpVelocity = Mathf.Sqrt(-2 * playerGravity * playerJumpHeight);
-		}
-		upVelocity = jumpVelocity;
-	}
-
-	private float GetModifiedSmoothTime(float smoothTime) {
-		if (characterController.isGrounded) {
-			return smoothTime;
-		}
-
-		if (airControlPercent <= 0.01f) {
-			return float.MaxValue;
-		}
-		return smoothTime / airControlPercent;
-	}
-
-
-	private void KnockBack()
-	{
-		var forwardRay = new Ray(transform.position, zephModel.forward);
-		
-		if (Physics.Raycast(forwardRay, out var hit, knockBackDistance, waterLayerMask))
-		{
-			StartCoroutine(PausePlayerMovement(movePauseTime));
-
-			var knockBackVector = transform.position - hit.point;
-			knockBackVector.Normalize();
-			characterController.Move(knockBackVector * knockBackForce);
-			splashEmitter.Play();
-			
-		}
-
-		var groundRay = new Ray(transform.position, -transform.up);
-		if (Physics.Raycast(groundRay, out var downHit, knockBackDistance, waterLayerMask))
-		{
-			StartCoroutine(PausePlayerMovement(movePauseTime));
-			var knockBackVector = transform.position + Vector3.right + Vector3.forward;
-			if (downHit.collider.CompareTag("Water"))
+			if (Physics.Raycast(forwardRay, out var hit, knockBackDistance, waterLayerMask))
 			{
-				knockBackVector = transform.position + Vector3.right;
-			}
+				StartCoroutine(PausePlayerMovement(movePauseTime));
+
+				var knockBackVector = transform.position - hit.point;
+				knockBackVector.Normalize();
+				characterController.Move(knockBackVector * knockBackForce);
+				splashEmitter.Play();
 			
-			knockBackVector.Normalize();
-			characterController.Move(knockBackVector * (knockBackForce *2));
-			splashEmitter.Play();
-		}
-	}
-
-	private bool CheckIfGrounded(Vector3 direction, float distance)
-	{
-		if (GravityRift.useNewGravity)
-		{
-			Ray ray = new Ray(rayPoint.position, direction);
-			if (Physics.Raycast(ray, out var hit, distance))
-			{
-				//Debug.DrawRay(rayPoint.position, hit.point, Color.red, distance);
-				//Debug.Log(hit.collider.name);
-				return true;
 			}
 
-			return false;
+			var groundRay = new Ray(transform.position, -transform.up);
+			if (Physics.Raycast(groundRay, out var downHit, knockBackDistance, waterLayerMask))
+			{
+				StartCoroutine(PausePlayerMovement(movePauseTime));
+				var knockBackVector = transform.position + Vector3.right + Vector3.forward;
+				if (downHit.collider.CompareTag("Water"))
+				{
+					knockBackVector = transform.position + Vector3.right;
+				}
+			
+				knockBackVector.Normalize();
+				characterController.Move(knockBackVector * (knockBackForce *2));
+				splashEmitter.Play();
+			}
+		}
 
-		}
-		else
+		private bool CheckIfGrounded(Vector3 direction, float distance)
 		{
-			return characterController.isGrounded;
+			if (GravityRift.useNewGravity)
+			{
+				Ray ray = new Ray(rayPoint.position, direction);
+				if (Physics.Raycast(ray, out var hit, distance))
+				{
+					//Debug.DrawRay(rayPoint.position, hit.point, Color.red, distance);
+					//Debug.Log(hit.collider.name);
+					return true;
+				}
+
+				return false;
+
+			}
+			else
+			{
+				return characterController.isGrounded;
+			}
+			//return GravityRift.useNewGravity ?  : characterController.isGrounded;
 		}
-		//return GravityRift.useNewGravity ?  : characterController.isGrounded;
 	}
 }

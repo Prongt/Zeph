@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Movement;
 
 public class CameraFlip : MonoBehaviour
 {

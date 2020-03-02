@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Movement;
 using UnityEngine;
 
 public class PlayDanceAnimation : MonoBehaviour
