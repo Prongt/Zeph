@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//For the Stalactite. Checks if its hit by a rock and falls.
 public class Break : MonoBehaviour
 {
     private Rigidbody myRB;
@@ -23,7 +25,6 @@ public class Break : MonoBehaviour
     {
         if (other.CompareTag("Rock"))
         {
-            print("falling");
             myRB.useGravity = true;
         }
     }

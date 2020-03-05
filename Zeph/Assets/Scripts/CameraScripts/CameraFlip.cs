@@ -12,8 +12,14 @@ public class CameraFlip : MonoBehaviour
 
    void Start()
    {
+      //Finds the main Virtual Camera in the scene
       myCam = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+
+      //Resets the flip checks from scene to scene.
+      hasFlippedX = false;
+      hasFlippedZ = false;
    }
+   //Flips the Body offset X value. Can be accessed using a promote script
    public void FlipX()
    {
       Vector3 t = myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
@@ -21,7 +27,7 @@ public class CameraFlip : MonoBehaviour
       myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = t;
       hasFlippedX = !hasFlippedX;
    }
-
+   //Flips the Body offset Z value. Can be accessed using a promote script
    public void FlipZ()
    {
       Vector3 t = myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
@@ -32,6 +38,7 @@ public class CameraFlip : MonoBehaviour
       hasFlippedZ = !hasFlippedZ;
    }
    
+   //Mainly for the Vert Slice scene/Cave Scene. Flips the camera if the player falls after the camera has previously been flipped.
    void OnTriggerEnter(Collider other) {
 
       if (gameObject.CompareTag("Flip"))
@@ -54,6 +61,7 @@ public class CameraFlip : MonoBehaviour
       }
    }
 
+   //Same as above but for actual collisions as opposed to a trigger.
    void OnCollisionEnter(Collision other)
    {
       if (gameObject.CompareTag("Flip"))
