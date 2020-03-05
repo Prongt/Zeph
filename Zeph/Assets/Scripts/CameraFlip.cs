@@ -13,6 +13,8 @@ public class CameraFlip : MonoBehaviour
    void Start()
    {
       myCam = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+      hasFlippedX = false;
+      hasFlippedZ = false;
    }
    public void FlipX()
    {
