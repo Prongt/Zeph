@@ -8,7 +8,7 @@ public class CameraFlip : MonoBehaviour
    public CinemachineVirtualCamera myCam;
    public static bool hasFlippedZ;
    public static bool hasFlippedX;
-   
+
 
    void Start()
    {
@@ -37,7 +37,7 @@ public class CameraFlip : MonoBehaviour
       GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = true;
       hasFlippedZ = !hasFlippedZ;
    }
-   
+
    //Mainly for the Vert Slice scene/Cave Scene. Flips the camera if the player falls after the camera has previously been flipped.
    void OnTriggerEnter(Collider other) {
 
@@ -50,7 +50,7 @@ public class CameraFlip : MonoBehaviour
                FlipZ();
                GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = false;
                hasFlippedZ = !hasFlippedZ;
-            } 
+            }
             if (hasFlippedX)
             {
                FlipX();
