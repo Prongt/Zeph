@@ -1,26 +1,34 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class Chargeable : Aspects
 {
     private float intensity;
+    [Tooltip("The material used if the crystal has been charged")]
     [SerializeField] private Material emissiveCrystal;
+    [Tooltip("The crystal's renderer")]
     [SerializeField] private Renderer myRend;
     private Material startMat;
+    
+    [Header("Crystal State")]
+    [Tooltip("Change this if you want the crystal to be charged and emitting light")]
     public bool charged = false;
+    [Tooltip("Change this if you want the crystal to be think its attached to a mirror")]
     public bool attached = false;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
+        //Gets the original material
         startMat = myRend.material;
     }
 
     void Update()
     {
+        //Changes if inspector values are changed
         if (charged)
         { 
             myRend.material = emissiveCrystal;
@@ -51,7 +59,6 @@ public class Chargeable : Aspects
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-        myRend.material = emissiveCrystal;
         charged = true;
     }
 
@@ -60,6 +67,7 @@ public class Chargeable : Aspects
         base.Promote(source);
     }
 
+    //Function for the mirrors to activate using Unity Events
     public void Charge()
     {
         if (attached)

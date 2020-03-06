@@ -76,44 +76,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aspectMaterial: {fileID: 11400000, guid: 8cce4da513af75744bf08ed16b0b525d, type: 2}
+  aspectMaterial: {fileID: 0}
   additionalAspects: 
   onlyActivatedByPlayer: 128
   requireDefaultGravity: 110
-  IsEnabled: 78
---- !u!114 &988760978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2203314150654975084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67758dcb4870a3843b9a0e696a3eab98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AspectType: 0
-  onPromote:
-    m_PersistentCalls:
-      m_Calls: []
-  onNegate:
-    m_PersistentCalls:
-      m_Calls: []
-  coolDownTime: 0
-  pullForce:
-    UseConstant: 1
-    ConstantValue: 100
-    Variable: {fileID: 0}
-  maxThrowForce:
-    UseConstant: 1
-    ConstantValue: 0
-    Variable: {fileID: 0}
-  throwForce: 0.5
-  orbitSize: 3
-  rotSpeed: 0
-  collisionSoundEventEmitter: {fileID: 0}
-  firefly: {fileID: 0}
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!1 &4124796863402226357
 GameObject:
   m_ObjectHideFlags: 0

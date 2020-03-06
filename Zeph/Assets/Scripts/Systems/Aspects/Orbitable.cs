@@ -77,9 +77,15 @@ public class Orbitable : Aspects
             firefly = null;
         }
 
-        //TODO find better solution
-        centerPoint = GameObject.FindWithTag("OrbitPoint").transform;
-        
+        //Orbit point is now created at runtime
+        if (centerPoint == null)
+        {
+            centerPoint = new GameObject("Orbit Point").transform;
+            GameObject parent = GameObject.Find("Zeph_Animated");
+            centerPoint.SetParent(parent.transform);
+            centerPoint.localPosition = new Vector3(0, 0.5f, 0);
+        }
+
         if (collisionSoundEventEmitter == null)
         {
             collisionSoundEventEmitter = GetComponent<StudioEventEmitter>();
@@ -219,15 +225,10 @@ public class Orbitable : Aspects
     {
         //Delay on checks to make things work smoother
         yield return new WaitForSeconds(0.3f);
-        
-        if (!gameObject.CompareTag("Heavy"))
+        if (Vector3.Distance(centerPoint.position, transform.position) <= 3)
         {
-            if (Vector3.Distance(centerPoint.position, transform.position) <= 3)
-            {
                 orbiting = true;
-            }
         }
-        
         if (throwable)
         {
             throwable = false;
@@ -252,14 +253,6 @@ public class Orbitable : Aspects
                     collisionSoundEventEmitter.Play();
                 }
             }
-        }
-
-        
-        //This Part is for the pillar. If object is heavy and hits the floor it comes to a dead stop.
-        if (gameObject.CompareTag("Heavy") && other.gameObject.CompareTag("Floor"))
-        {
-            myRB.constraints = RigidbodyConstraints.FreezeRotation;
-            myRB.constraints = RigidbodyConstraints.FreezePosition;
         }
     }
 }
