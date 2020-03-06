@@ -109,7 +109,7 @@ public class Interactable : MonoBehaviour
             EditorApplication.delayCall += () => { DestroyImmediate(gameObject.GetComponent(type), true); };
 
             Debug.Log("The following component " +
-                      type.Name + " on " + gameObject.name + " was removed");
+                      type.Name + " on " + gameObject.name + " was removed", gameObject);
         }
         else //Removes component in play mode
             DestroyImmediate(gameObject.GetComponent(type));

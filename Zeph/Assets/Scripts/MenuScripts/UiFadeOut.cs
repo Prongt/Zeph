@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Movement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,7 +41,7 @@ public class UiFadeOut : MonoBehaviour
 
     private void DisplayText()
     {
-        PlayerMove.PlayerMovementEnabled = false;
+        PlayerMoveRigidbody.haltMovement = true;
         text.text = storyText[storyIndex];
         if (Input.GetButtonDown("Story"))
         {
@@ -59,7 +60,7 @@ public class UiFadeOut : MonoBehaviour
         //Debug.Log("No");
         gameObject.SetActive(false);
         storyIndex = 0;
-        PlayerMove.PlayerMovementEnabled = true;
+        PlayerMoveRigidbody.haltMovement = false;
 
 //        foreach (var element in guiElements)
 //        {

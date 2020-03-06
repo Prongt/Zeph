@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class GravityRift : Aspects
 {
-    [SerializeField] private Vector3 newGravity;
-    [SerializeField] private bool useToFromGravity;
-    [SerializeField] private Vector3 toGravity;
+    public static bool UseNewGravity;
+    private readonly Vector3 defaultGravity = new Vector3(0, -9.81f, 0);
+
+    public Type[] componentTypes =
+    {
+    };
+
     [SerializeField] private Vector3 fromGravity;
-    private static Vector3 ogGravity = new Vector3(0, -9.81f, 0);
+    [SerializeField] private Vector3 toGravity;
 
-    public static bool UseNewGravity = false;
 
-    public bool resetGravity = true;
-
-    void Awake()
+    private void Awake()
     {
         //Debug.LogWarning("Hard setting gravity to default gravity");
-        Physics.gravity = new Vector3(0, -9.81f, 0);
-        ogGravity = Physics.gravity;
+        Physics.gravity = defaultGravity;
     }
 
     protected override void Initialize()
@@ -26,68 +26,41 @@ public class GravityRift : Aspects
         AspectType = AspectType.GravityRift;
     }
 
-    public Type[] componentTypes = new Type[]
-    {
-        
-    };
-
     public override Type[] RequiredComponents()
     {
         return componentTypes;
     }
 
-    
+
     public override void Promote(Transform source = null, Element element = null)
     {
         if (isCoolDownComplete == false)
         {
-            Debug.Log("Cool down not complete on " + gameObject.name);
+            //Debug.Log("Cool down not complete on ", gameObject);
             return;
         }
+
         base.Promote(source, element);
-        
+
         ChangeGravity();
     }
-    
+
     private void ChangeGravity()
     {
-        if (useToFromGravity)
+        if (Physics.gravity.Equals(toGravity))
         {
-            if (Physics.gravity.Equals(toGravity))
-            {
-//                Debug.Log(fromGravity);
-                UseNewGravity = true;
-                Physics.gravity = fromGravity;
-                return;
-            }
-            
-            if (Physics.gravity.Equals(fromGravity))
-            {
-                //Debug.Log(toGravity);
-                UseNewGravity = true;
-                Physics.gravity = toGravity;
-                return;
-            }
+            UseNewGravity = true;
+            Physics.gravity = fromGravity;
+            return;
         }
-    
-    
-        if (!resetGravity)
+
+        if (Physics.gravity.Equals(fromGravity))
         {
-            Physics.gravity = newGravity;
+            UseNewGravity = true;
+            Physics.gravity = toGravity;
         }
-        else
-        {
-            if (!UseNewGravity)
-            {
-                UseNewGravity = true;
-                Physics.gravity = newGravity;
-            }
-            else
-            {
-                UseNewGravity = false;
-                Physics.gravity = ogGravity;
-            }
-        }
+
+        if (Physics.gravity.Equals(defaultGravity)) UseNewGravity = false;
     }
 
     public override void Negate(Transform source = null)
@@ -96,6 +69,4 @@ public class GravityRift : Aspects
         //Not pushed
         //Debug.Log("Not being pushed");
     }
-    
-        
 }

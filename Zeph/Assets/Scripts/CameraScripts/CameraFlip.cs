@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Movement;
 
 public class CameraFlip : MonoBehaviour
 {
@@ -9,11 +10,14 @@ public class CameraFlip : MonoBehaviour
    public static bool hasFlippedZ;
    public static bool hasFlippedX;
 
+   private PlayerMoveRigidbody playerMoveRigidbody;
 
    void Start()
    {
       //Finds the main Virtual Camera in the scene
       myCam = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+      playerMoveRigidbody = FindObjectOfType<PlayerMoveRigidbody>();
+      
 
       //Resets the flip checks from scene to scene.
       hasFlippedX = false;
@@ -34,7 +38,7 @@ public class CameraFlip : MonoBehaviour
       t.z = -t.z;
       myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = t;
 
-      GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = true;
+      playerMoveRigidbody.FlipMovement();
       hasFlippedZ = !hasFlippedZ;
    }
 
@@ -48,13 +52,13 @@ public class CameraFlip : MonoBehaviour
             if (hasFlippedZ)
             {
                FlipZ();
-               GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = false;
+               playerMoveRigidbody.FlipMovement();
                hasFlippedZ = !hasFlippedZ;
             }
             if (hasFlippedX)
             {
                FlipX();
-               GameObject.Find("Zeph").GetComponent<PlayerMove>().flipMovement = false;
+               playerMoveRigidbody.FlipMovement();
                hasFlippedX = false;
             }
          }

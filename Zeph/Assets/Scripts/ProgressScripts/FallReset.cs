@@ -1,14 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Movement;
 using UnityEngine;
 
 public class FallReset : MonoBehaviour
 {
+    private PlayerMoveRigidbody playerMoveRigidbody;
+
+    private void Start()
+    {
+        playerMoveRigidbody = FindObjectOfType<PlayerMoveRigidbody>();
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerMove>().enabled = false;
+            playerMoveRigidbody.enabled = false;
             Physics.gravity = new Vector3(0,-9.81f,0);
             GravityRift.UseNewGravity = false;
             other.transform.position = CheckpointManager.curCheckpoint.transform.position;
@@ -19,7 +28,9 @@ public class FallReset : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        other.GetComponent<PlayerMove>().enabled = false;
+        if (!other.CompareTag("Player")) return;
+        
+        playerMoveRigidbody.enabled = false;
         Physics.gravity = new Vector3(0,-9.81f,0);
         GravityRift.UseNewGravity = false;
         other.transform.position = CheckpointManager.curCheckpoint.transform.position;
@@ -30,6 +41,6 @@ public class FallReset : MonoBehaviour
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(1);
-        GameObject.Find("Zeph").GetComponent<PlayerMove>().enabled = true;
+        playerMoveRigidbody.enabled = true;
     }
 }

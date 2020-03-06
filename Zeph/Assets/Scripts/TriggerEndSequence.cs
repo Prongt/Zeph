@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Movement;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,7 +12,7 @@ public class TriggerEndSequence : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerMove.PlayerMovementEnabled = false;
+            PlayerMoveRigidbody.haltMovement = true;
             OnPlayerEnter.Invoke();
         }
     }

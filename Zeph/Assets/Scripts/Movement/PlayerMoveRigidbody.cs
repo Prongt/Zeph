@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Movement
@@ -10,7 +9,7 @@ namespace Movement
         [Header("Movement")] 
         [SerializeField] [Range(0f, 100f)] private float acceleration = 10f;
         [SerializeField] [Range(0f, 100f)] private float airAcceleration = 1f;
-        [SerializeField] [Range(0, 90)] private float maxGroundAngle = 25f;
+        [SerializeField] [Range(0, 90)] private float maxGroundAngle = 50f;
         [SerializeField] [Range(0f, 100f)] private float speed = 10f;
         [SerializeField] private bool swapMovementAxis;
         [SerializeField] private bool reverseX;
@@ -28,7 +27,7 @@ namespace Movement
         [Header("Animation")] [SerializeField] private Animator zephAnimator;
         [SerializeField] private string moveVariable = "moveSpeed";
         [SerializeField] private string jumpVariable = "IsJumping";
-        private readonly string danceVariable = "IsDancing";
+        private static readonly int isDancing = Animator.StringToHash("IsDancing");
         private WaitForSeconds danceWaitForSeconds;
 
         private float minGroundDotProduct;
@@ -49,13 +48,15 @@ namespace Movement
 
         private Vector3 currentGravity;
         private Vector3 upVector;
-        private bool haltMovement;
+        public static bool haltMovement;
+        
 
 
         private void Awake()
         {
             rigidbody = GetComponent<Rigidbody>();
             zephAnimator = GetComponentInChildren<Animator>();
+            haltMovement = false;
         }
 
         private void Start()
@@ -149,6 +150,12 @@ namespace Movement
             ResetContactCounts();
         }
 
+        public void FlipMovement()
+        {
+            reverseX = !reverseX;
+            reverseY = !reverseY;
+        }
+
         private void ManageAnimation()
         {
             zephAnimator.SetBool(jumpVariable, !OnGround);
@@ -164,9 +171,9 @@ namespace Movement
 
         private IEnumerator DanceRoutine()
         {
-            zephAnimator.SetBool(danceVariable, true);
+            zephAnimator.SetBool(isDancing, true);
             yield return danceWaitForSeconds;
-            zephAnimator.SetBool(danceVariable, false);
+            zephAnimator.SetBool(isDancing, false);
         }
 
 
@@ -264,27 +271,43 @@ namespace Movement
             {
                 var normal = collision.GetContact(i).normal;
 
+//                Debug.Log(normal);
                 if (ZGravity)
+                {
                     if (normal.z >= minGroundDotProduct)
                     {
                         groundContactCount++;
                         groundContactNormal = normal;
+                        //Debug.Log("Wall");
                         break;
                     }
-
-                if (GravityRift.UseNewGravity)
-                    if (normal.y <= minGroundDotProduct)
+                    
+                    if (normal.z <= minGroundDotProduct)
                     {
                         groundContactCount++;
                         groundContactNormal = normal;
+                        //Debug.Log("Wall");
                         break;
                     }
-
-                if (normal.y >= minGroundDotProduct)
+                }
+                else
                 {
-                    groundContactCount++;
-                    groundContactNormal = normal;
-                    break;
+                    if (GravityRift.UseNewGravity)
+                    {
+                        if (normal.y <= minGroundDotProduct)
+                        {
+                            groundContactCount++;
+                            groundContactNormal = normal;
+                           //Debug.Log("Roof");
+                            break;
+                        }
+                    }else if (normal.y >= minGroundDotProduct)
+                    {
+                        groundContactCount++;
+                        groundContactNormal = normal;
+                       //Debug.Log("Floor");
+                        break;
+                    }
                 }
             }
         }
