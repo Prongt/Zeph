@@ -81,5 +81,6 @@ public enum AspectType
     Story,
     Chargeable,
     Map,
-    Pullable
+    Pullable,
+    PillarPull
 }
