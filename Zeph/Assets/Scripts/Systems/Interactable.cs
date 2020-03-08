@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -26,11 +27,11 @@ public class Interactable : MonoBehaviour
 
     private void Awake()
     {
-        if (additionalAspects == null) additionalAspects = new List<AspectType>();
-        
-        if (componentsRequiredByAspects == null) componentsRequiredByAspects = new List<Type>();
-        
-        SetActiveAspects();
+        // if (additionalAspects == null) additionalAspects = new List<AspectType>();
+        //
+        // if (componentsRequiredByAspects == null) componentsRequiredByAspects = new List<Type>();
+        //
+        //SetActiveAspects();
     }
 
     #region AspectComponents
@@ -106,11 +107,12 @@ public class Interactable : MonoBehaviour
         if (Application.isEditor) //Removes component in editor
         {
             if (!gameObject.GetComponent(type)) return;
+            if (this == null) return;
+            if (gameObject.GetComponent(type) == null) return;
             
             EditorApplication.delayCall += () => { DestroyImmediate(gameObject.GetComponent(type), true); };
-
-            Debug.Log("The following component " +
-                      type.Name + " on " + gameObject.name + " was removed", gameObject);
+            
+            //Debug.Log("The following component " + type.Name + " on " + gameObject.name + " was removed", gameObject);
         }
         else //Removes component in play mode
             DestroyImmediate(gameObject.GetComponent(type));
@@ -147,7 +149,6 @@ public class Interactable : MonoBehaviour
 
         aspectTypesList = tempAspects;
         UpdateAspectComponents();
-        
     }
 
     private void OnValidate()
