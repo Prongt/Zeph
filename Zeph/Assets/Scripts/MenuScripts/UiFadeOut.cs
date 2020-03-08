@@ -41,7 +41,7 @@ public class UiFadeOut : MonoBehaviour
 
     private void DisplayText()
     {
-        PlayerMoveRigidbody.haltMovement = true;
+        PlayerMoveRigidbody.HaltMovement = true;
         text.text = storyText[storyIndex];
         if (Input.GetButtonDown("Story"))
         {
@@ -60,7 +60,7 @@ public class UiFadeOut : MonoBehaviour
         //Debug.Log("No");
         gameObject.SetActive(false);
         storyIndex = 0;
-        PlayerMoveRigidbody.haltMovement = false;
+        PlayerMoveRigidbody.HaltMovement = false;
 
 //        foreach (var element in guiElements)
 //        {

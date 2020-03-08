@@ -24,7 +24,6 @@ public class Growable : Aspects
 
     [SerializeField] private ParticleSystem firefly;
     private ParticleSystem.EmissionModule fireflyRate;
-   /*Seriously?*/ public bool StopFuckingWithMyShaderValues = false;
 
     private bool lightShining;
 
@@ -204,11 +203,8 @@ public class Growable : Aspects
                            }
                    }
 
-                  // if (!StopFuckingWithMyShaderValues)
-                  // {
-                       myAnim.SetBool(growing, true);
+                   myAnim.SetBool(growing, true);
                        StartCoroutine(Appear());
-                   //}
                }
            }
        HasBeenActivated = true;

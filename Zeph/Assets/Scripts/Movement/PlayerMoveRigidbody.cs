@@ -48,7 +48,7 @@ namespace Movement
 
         private Vector3 currentGravity;
         private Vector3 upVector;
-        public static bool haltMovement;
+        public static bool HaltMovement;
         
 
 
@@ -56,12 +56,12 @@ namespace Movement
         {
             rigidbody = GetComponent<Rigidbody>();
             zephAnimator = GetComponentInChildren<Animator>();
-            haltMovement = false;
+            HaltMovement = false;
         }
 
         private void Start()
         {
-            haltMovement = false;
+            HaltMovement = false;
             currentGravity = Physics.gravity;
             upVector = -currentGravity.normalized;
             minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
@@ -121,7 +121,7 @@ namespace Movement
 
         private IEnumerator LerpTransformUp()
         {
-            haltMovement = true;
+            HaltMovement = true;
             while (Math.Abs(transform.up.y - upVector.y) > 0.05f || Math.Abs(transform.up.x - upVector.x) > 0.05f ||
                    Math.Abs(transform.up.z - upVector.z) > 0.05f)
             {
@@ -132,12 +132,12 @@ namespace Movement
 
             //Snaps to new up vector just in case the lerp didnt finish
             transform.up = upVector;
-            haltMovement = false;
+            HaltMovement = false;
         }
 
         private void FixedUpdate()
         {
-            if (haltMovement) return;
+            if (HaltMovement) return;
 
             velocity = rigidbody.velocity;
             UpdateGroundContacts();

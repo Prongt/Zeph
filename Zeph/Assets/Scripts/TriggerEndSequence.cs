@@ -12,7 +12,7 @@ public class TriggerEndSequence : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerMoveRigidbody.haltMovement = true;
+            PlayerMoveRigidbody.HaltMovement = true;
             OnPlayerEnter.Invoke();
         }
     }
