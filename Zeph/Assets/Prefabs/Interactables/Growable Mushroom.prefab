@@ -25,36 +25,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
---- !u!114 &2191652698383778115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5038241101929153263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cc1a007d369be948bdad9d08ceac61a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AspectType: 0
-  onPromote:
-    m_PersistentCalls:
-      m_Calls: []
-  onNegate:
-    m_PersistentCalls:
-      m_Calls: []
-  coolDownTime: 0
-  myAnim: {fileID: 0}
-  mat: {fileID: 0}
-  groundDistort: {fileID: 0}
-  isTree: 0
-  colliders:
-    small: {fileID: 0}
-    grown: {fileID: 0}
-    distort: {fileID: 0}
-  growSoundEmitter: {fileID: 0}
-  firefly: {fileID: 0}
+  chromaticAberration: {fileID: 0}
 --- !u!114 &6864602366103456426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,6 +42,34 @@ MonoBehaviour:
   additionalAspects: 04000000
   onlyActivatedByPlayer: 1
   requireDefaultGravity: 0
+  isFrozen: 0
+  canBeFrozen: 0
+--- !u!114 &5963127957455625958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038241101929153263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021aba07c8094c3eae0f587c30b5d811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  coolDownTime: 0
+  colliders:
+    small: {fileID: 0}
+    grown: {fileID: 0}
+    distort: {fileID: 0}
+  growSoundEmitter: {fileID: 0}
+  firefly: {fileID: 0}
 --- !u!1001 &8963971135342645395
 PrefabInstance:
   m_ObjectHideFlags: 0

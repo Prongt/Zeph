@@ -149,11 +149,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aspectMaterial: {fileID: 11400000, guid: 2acb987a995ba514792eb7ece74fef3d, type: 2}
+  aspectMaterial: {fileID: 11400000, guid: c533cb30e99e6af4d99b331750be9b40, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 1
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!114 &328717128324609096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +178,22 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 50
---- !u!114 &328717128324609098
+--- !u!114 &7083383552256830245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8623895666464238858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bda2e19b62f1a24cbdc4e0a90095aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unGrownXValue: 11.45
+  growSpeed: 0.5
+  grownXValue: -1
+--- !u!114 &5232029552064358511
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,36 +220,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 328717128324609092}
+        m_MethodName: set_isTrigger
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7297772632070940139}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onNegate:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 0
-  myAnim: {fileID: 0}
-  mat: {fileID: 2100000, guid: 84f896da31f47fb42ba06bbcaa9abf57, type: 2}
-  groundDistort: {fileID: 0}
-  isTree: 0
   colliders:
     small: {fileID: 0}
-    grown: {fileID: 7297772632070940139}
+    grown: {fileID: 0}
     distort: {fileID: 0}
-  growSoundEmitter: {fileID: 328717128324609096}
+  growSoundEmitter: {fileID: 0}
   firefly: {fileID: 0}
-  StopFuckingWithMyShaderValues: 0
---- !u!114 &7083383552256830245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8623895666464238858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bda2e19b62f1a24cbdc4e0a90095aab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unGrownXValue: 11.45
-  growSpeed: 0.5
-  grownXValue: -1
 --- !u!1001 &328717129067983875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -355,7 +373,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 6e82fe3a6cee15845b649def68c67d21, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7561110372842451503, guid: 8c08c4aa4425d3f449a7c234b118a0e8,
         type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[0]

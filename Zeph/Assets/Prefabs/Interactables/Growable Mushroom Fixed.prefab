@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5471672966829139527}
   - component: {fileID: 690890664259531115}
   - component: {fileID: 2788406587637610817}
-  - component: {fileID: 1108567963}
+  - component: {fileID: -2115875911308143010}
   m_Layer: 0
   m_Name: Growable Mushroom Fixed
   m_TagString: Plant
@@ -121,9 +121,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: bd65dc0eb1d350644bab712e0c279952, type: 2}
+  additionalAspects: 
   onlyActivatedByPlayer: 1
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!65 &2788406587637610817
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -137,7 +139,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: -0.33, y: 0, z: 0}
---- !u!114 &1108567963
+--- !u!114 &-2115875911308143010
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +148,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1386567227216967982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cc1a007d369be948bdad9d08ceac61a, type: 3}
+  m_Script: {fileID: 11500000, guid: 021aba07c8094c3eae0f587c30b5d811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AspectType: 0
@@ -157,13 +159,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 0
-  myAnim: {fileID: 0}
-  mat: {fileID: 0}
-  groundDistort: {fileID: 0}
-  isTree: 0
   colliders:
-    small: {fileID: 1960427212561514723}
-    grown: {fileID: 1960427212561514723}
+    small: {fileID: 0}
+    grown: {fileID: 0}
     distort: {fileID: 0}
   growSoundEmitter: {fileID: 0}
   firefly: {fileID: 0}

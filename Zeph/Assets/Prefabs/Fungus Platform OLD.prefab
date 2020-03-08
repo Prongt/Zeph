@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3376345453637596723}
   m_Layer: 0
-  m_Name: Fungus Platform
+  m_Name: Fungus Platform OLD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,36 +58,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 3049172315057216404, guid: 94a52bbc6a129ce49a067277eca92cbc, type: 3}
---- !u!114 &70500757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5906467661100488243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cc1a007d369be948bdad9d08ceac61a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AspectType: 0
-  onPromote:
-    m_PersistentCalls:
-      m_Calls: []
-  onNegate:
-    m_PersistentCalls:
-      m_Calls: []
-  coolDownTime: 0
-  myAnim: {fileID: 0}
-  mat: {fileID: 0}
-  groundDistort: {fileID: 0}
-  isTree: 0
-  colliders:
-    small: {fileID: 0}
-    grown: {fileID: 0}
-    distort: {fileID: 0}
-  growSoundEmitter: {fileID: 0}
-  firefly: {fileID: 0}
 --- !u!114 &70500758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +74,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!114 &615602273605727919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +99,32 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: -1
   OverrideMaxDistance: -1
+--- !u!114 &-2974818349030146905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5906467661100488243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021aba07c8094c3eae0f587c30b5d811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  coolDownTime: 0
+  colliders:
+    small: {fileID: 0}
+    grown: {fileID: 0}
+    distort: {fileID: 0}
+  growSoundEmitter: {fileID: 0}
+  firefly: {fileID: 0}
 --- !u!1001 &2510211559837749050
 PrefabInstance:
   m_ObjectHideFlags: 0

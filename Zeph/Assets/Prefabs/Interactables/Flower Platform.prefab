@@ -88,8 +88,8 @@ GameObject:
   - component: {fileID: 3835201268821993678}
   - component: {fileID: 6219357325931781033}
   - component: {fileID: 7256589329877776409}
-  - component: {fileID: 6518540091242182894}
   - component: {fileID: 3792421715463717166}
+  - component: {fileID: 269621565}
   m_Layer: 0
   m_Name: flowerPlatformUnwrappedAnimated
   m_TagString: Plant
@@ -212,37 +212,8 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
---- !u!114 &6518540091242182894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7919585591400953767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cc1a007d369be948bdad9d08ceac61a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AspectType: 0
-  onPromote:
-    m_PersistentCalls:
-      m_Calls: []
-  onNegate:
-    m_PersistentCalls:
-      m_Calls: []
-  coolDownTime: 0
-  myAnim: {fileID: 0}
-  mat: {fileID: 0}
-  groundDistort: {fileID: 0}
-  isTree: 0
-  colliders:
-    small: {fileID: 6219357325931781033}
-    grown: {fileID: 2215851322316690877}
-    distort: {fileID: 0}
-  growSoundEmitter: {fileID: 3792421715463717166}
-  firefly: {fileID: 0}
+  isFrozen: 0
+  canBeFrozen: 0
 --- !u!114 &3792421715463717166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,3 +237,29 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 50
+--- !u!114 &269621565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7919585591400953767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021aba07c8094c3eae0f587c30b5d811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  coolDownTime: 0
+  colliders:
+    small: {fileID: 6219357325931781033}
+    grown: {fileID: 2215851322316690877}
+    distort: {fileID: 0}
+  growSoundEmitter: {fileID: 3792421715463717166}
+  firefly: {fileID: 0}

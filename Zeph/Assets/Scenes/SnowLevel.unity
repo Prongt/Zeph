@@ -763,8 +763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aspectMaterial: {fileID: 11400000, guid: 2acb987a995ba514792eb7ece74fef3d, type: 2}
-  additionalAspects: 04000000
+  aspectMaterial: {fileID: 11400000, guid: 14f4d92a51c5fb44c8ebf406cc93fb04, type: 2}
+  additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
   isFrozen: 1
@@ -778,7 +778,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 146925344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cc1a007d369be948bdad9d08ceac61a, type: 3}
+  m_Script: {fileID: 11500000, guid: 19ce0b5322434487a3fa1ec628b57635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AspectType: 0
@@ -789,44 +789,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 0
-  myAnim: {fileID: 0}
-  mat: {fileID: 0}
-  matX: 0
-  groundDistort: {fileID: 0}
-  isTree: 1
   colliders:
     small: {fileID: 146925352}
     grown: {fileID: 368630640}
     distort: {fileID: 1541677396}
   growSoundEmitter: {fileID: 0}
   firefly: {fileID: 0}
-  StopFuckingWithMyShaderValues: 0
---- !u!114 &146925347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146925344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92de12aee320a8e479171bf04c82fb16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AspectType: 0
-  onPromote:
-    m_PersistentCalls:
-      m_Calls: []
-  onNegate:
-    m_PersistentCalls:
-      m_Calls: []
-  coolDownTime: 0
-  myAnim: {fileID: 0}
-  onGround: 0
-  effect: {fileID: 0}
-  distortionEffect: {fileID: 0}
-  distortionEventEmitter: {fileID: 0}
-  chromaticAberration: {fileID: 0}
 --- !u!95 &146925348
 Animator:
   serializedVersion: 3
@@ -3977,6 +3945,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1193704107}
     m_Modifications:
+    - target: {fileID: -2115875911308143010, guid: 38cc0d989a707a64b91cc6f334ae3af6,
+        type: 3}
+      propertyPath: colliders.small
+      value: 
+      objectReference: {fileID: 1360836772}
+    - target: {fileID: -2115875911308143010, guid: 38cc0d989a707a64b91cc6f334ae3af6,
+        type: 3}
+      propertyPath: colliders.grown
+      value: 
+      objectReference: {fileID: 2041218626}
     - target: {fileID: 690890664259531115, guid: 38cc0d989a707a64b91cc6f334ae3af6,
         type: 3}
       propertyPath: IsEnabled
@@ -5717,7 +5695,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1414931126846651532, guid: b5c80e450274e0d47a26b6f51e91bc1f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b5c80e450274e0d47a26b6f51e91bc1f, type: 3}
 --- !u!4 &1073669855 stripped
 Transform:
@@ -6630,6 +6609,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5916769500531941254, guid: 42348fbe4a5f1a14a9cc5b81b535516c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 42348fbe4a5f1a14a9cc5b81b535516c, type: 3}
+--- !u!65 &1360836772 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2788406587637610817, guid: 38cc0d989a707a64b91cc6f334ae3af6,
+    type: 3}
+  m_PrefabInstance: {fileID: 701085717}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1369775599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9820,6 +9805,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2033764752}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &2041218626 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 1960427212561514723, guid: 38cc0d989a707a64b91cc6f334ae3af6,
+    type: 3}
+  m_PrefabInstance: {fileID: 701085717}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2041295943 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6263204554074487366, guid: 42348fbe4a5f1a14a9cc5b81b535516c,
@@ -11271,7 +11262,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1414931126846651532, guid: b5c80e450274e0d47a26b6f51e91bc1f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b5c80e450274e0d47a26b6f51e91bc1f, type: 3}
 --- !u!4 &7083383552256830243 stripped
 Transform:

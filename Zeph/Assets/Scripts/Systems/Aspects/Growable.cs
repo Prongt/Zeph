@@ -1,41 +1,30 @@
 ﻿using System;
-using System.Collections;
 using FMODUnity;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Growable : Aspects
 {
-    public Animator myAnim;
-    [SerializeField] private Material mat;
-    [SerializeField] private float matX;
-    [SerializeField] private Animator groundDistort;
+    protected Animator Animator;
+    protected Renderer Renderer;
+    [SerializeField] protected Colliders colliders;
+    [SerializeField] protected StudioEventEmitter growSoundEmitter;
+    protected bool HasGrown;
 
-
-    [SerializeField] private bool isTree;
-    [SerializeField] private Colliders colliders;
-
-    [SerializeField] private StudioEventEmitter growSoundEmitter;
-
-    private SkinnedMeshRenderer meshRenderer;
-    private Mesh mesh;
-
-    private bool hasGrown;
-
+    
+    
     [SerializeField] private ParticleSystem firefly;
     private ParticleSystem.EmissionModule fireflyRate;
 
-    private bool lightShining;
+    protected bool LightShining;
 
 
-    public Type[] componentTypes = new Type[]
+    public Type[] componentTypes =
     {
     };
-
-    //private static readonly int vector1B0F27Ffd = Shader.PropertyToID("Vector1_B0F27FFD");
-    private static readonly int distort = Animator.StringToHash("Distort");
-    private static readonly int grow = Animator.StringToHash("Grow");
-    private static readonly int growing = Animator.StringToHash("Growing");
+    
+    protected static readonly int distort = Animator.StringToHash("Distort");
+    protected static readonly int grow = Animator.StringToHash("Grow");
+    protected static readonly int growing = Animator.StringToHash("Growing");
 
 
     public override Type[] RequiredComponents()
@@ -43,236 +32,51 @@ public class Growable : Aspects
         return componentTypes;
     }
 
-   protected override void Initialize()
+    protected override void Initialize()
     {
         base.Initialize();
-        AspectType = AspectType.Growable;
-
-        if (firefly)
-        {
-            fireflyRate = firefly.emission;
-        }
         
+        if (firefly) fireflyRate = firefly.emission;
 
-        if (gameObject.CompareTag("Plant"))
-        {
-            myAnim = GetComponent<Animator>();
-        }
-
-        if (isTree)
-        {
-            myAnim = GetComponent<Animator>();
-            meshRenderer = GetComponent<SkinnedMeshRenderer>();
-
-            colliders.small.isTrigger = false;
-            colliders.distort.enabled = false;
-            colliders.grown.enabled = false;
-        }
+        Renderer = GetComponentInChildren<Renderer>();
+        Animator = GetComponentInChildren<Animator>();
     }
 
-   void Start()
-   {
-       if (gameObject.CompareTag("Bridge"))
-       {
-           //Finding the inital value for the Material is the issue
-           myAnim = GetComponent<Animator>();
-           mat = gameObject.GetComponent<SkinnedMeshRenderer>().material;
-           matX = mat.GetFloat("Vector1_B0F27FFD");
-           //Setting it is a temp fix for build for Fleadh
-           matX = 15;
-       }
-   }
 
-   public void LightShine()
-   {
-       lightShining = true;
-   }
-
-   void Update()
-   {
-       if (isTree)
-       {
-           if (gameObject.CompareTag("VerticalSlice"))
-           {
-               if (myAnim.GetBool(distort) && myAnim.GetBool(grow))
-               {
-                   colliders.small.isTrigger = true;
-                   colliders.distort.enabled = true;
-                   colliders.grown.enabled = false;
-               }
-           
-               if (myAnim.GetBool(distort) == false && myAnim.GetBool(grow))
-               {
-                   colliders.small.isTrigger = true;
-                   colliders.distort.enabled = false;
-                   colliders.grown.enabled = true;
-               }
-               return;
-           }
-           
-           if (Distortion.IsDistorting)
-           {
-               myAnim.SetBool(distort, true);
-               colliders.small.isTrigger = true;
-               colliders.distort.enabled = true;
-               colliders.grown.enabled = false;
-           }
-           else
-           {
-               myAnim.SetBool(distort, false);
-               colliders.small.isTrigger = true;
-               colliders.distort.enabled = false;
-               colliders.grown.enabled = true;
-           }
-           
-       }
-
-
-       if (gameObject.CompareTag("Bridge"))
-       {
-          // Debug.Log("Why you do this!");
-          mat.SetFloat("Vector1_B0F27FFD", matX);
-
-           if (lightShining)
-           {
-               StartCoroutine(Appear());
-           }
-           
-           if (Distortion.IsDistorting)
-           {
-               myAnim.SetBool(distort, true);
-           }
-           else
-           {
-               myAnim.SetBool(distort, false);
-           }
-
-           if (myAnim.GetBool(distort) && matX < 1 && matX > -13)
-           {
-               matX -= 5 * Time.deltaTime;
-           }
-       }
-   }
-
-   public override void Promote(Transform source = null, Element element = null)
-   {
-       base.Promote(source, element);
-
-       if (firefly)
-       {
-           fireflyRate.rateOverTime = 0;
-       }
-
-
-       if (growSoundEmitter)
-       {
-           if (!HasBeenActivated)
-           {
-               growSoundEmitter.Play();
-           }
-       }
-
-       if (isTree)
-       {
-           myAnim.SetBool(grow, true);
-       }
-
-       if (gameObject.CompareTag("Plant"))
-       {
-           myAnim.SetBool(growing, true);
-           if (colliders.grown)
-           {
-               colliders.grown.enabled = true;
-           }
-       }
-       
-       if (gameObject.CompareTag("Bridge"))
-           {
-               if (matX >= 1)
-               {
-                   if (growSoundEmitter)
-                   {
-                       if (groundDistort)
-                           if (groundDistort.GetBool(distort))
-                           {
-                               growSoundEmitter.SetParameter("Distortion", 1.0f);
-                           }
-                           else
-                           {
-                               growSoundEmitter.SetParameter("Distortion", 0.0f);
-                           }
-                   }
-
-                   myAnim.SetBool(growing, true);
-                       StartCoroutine(Appear());
-               }
-           }
-       HasBeenActivated = true;
-    }
-
-   public override void Negate(Transform source = null)
+    public void LightShine()
     {
-        //Stop growing
-        //Debug.Log("Shrinking");
+        LightShining = true;
+    }
+
+
+    public override void Promote(Transform source = null, Element element = null)
+    {
+        base.Promote(source, element);
+
+        if (firefly) fireflyRate.rateOverTime = 0;
+
+        GrowSound();
+    }
+
+    private void GrowSound()
+    {
+        if (growSoundEmitter)
+            if (!HasGrowSoundBeenPlayed)
+                growSoundEmitter.Play();
+
+
+        HasGrowSoundBeenPlayed = true;
+    }
+
+
+    public override void Negate(Transform source = null)
+    {
         base.Promote(source);
     }
 
-//TODO implement a while loop rather than using recursive calls
-    IEnumerator Appear()
-    {
-        yield return new WaitForSeconds(0f);
-        if (groundDistort != null)
-        {
-            if (groundDistort.GetBool(distort) && hasGrown)
-            {
-                matX = -14;
-            }
-
-            if (!groundDistort.GetBool(distort))
-            {
-                if (matX >= 1)
-                {
-                    matX -= 5 * Time.deltaTime;
-                    StartCoroutine(Appear());
-                }
-                else
-                {
-                    hasGrown = true;
-
-                    StopCoroutine(Appear());
-                }
-            }
-            else if (groundDistort.GetBool(distort))
-            {
-                if (matX >= -13)
-                {
-                    matX -= 5 * Time.deltaTime;
-                    StartCoroutine(Appear());
-                }
-                else
-                {
-                    hasGrown = true;
-                    StopCoroutine(Appear());
-                }
-            }
-        }
-        else
-        {
-            if (matX >= 1)
-            {
-                matX -= 5 * Time.deltaTime;
-                StartCoroutine(Appear());
-            }
-            else
-            {
-                hasGrown = true;
-                StopCoroutine(Appear());
-            }
-        }
-    }
 
     [Serializable]
-    private struct Colliders
+    protected struct Colliders
     {
         public Collider small;
         public Collider grown;

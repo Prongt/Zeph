@@ -10,7 +10,7 @@ public abstract class Aspects : MonoBehaviour
     [SerializeField] private UnityEvent onPromote;
     [SerializeField] private UnityEvent onNegate;
     protected Element element;
-    protected bool HasBeenActivated = false;
+    protected bool HasGrowSoundBeenPlayed = false;
     
     [SerializeField] private float coolDownTime = 0.0f;
     protected bool isCoolDownComplete = true;
@@ -82,5 +82,8 @@ public enum AspectType
     Chargeable,
     Map,
     Pullable,
+    VineBridge,
+    GrowablePlant,
+    GrowableTree,
     PillarPull
 }
