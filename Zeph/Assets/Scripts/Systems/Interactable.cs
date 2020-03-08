@@ -18,6 +18,7 @@ public class Interactable : MonoBehaviour
 
     public bool isFrozen = false;
     public bool canBeFrozen = false;
+    public bool requireRaycast = true;
 
     private List<AspectType> aspectTypesList;
     private List<Aspects> aspectComponentsList;

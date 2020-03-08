@@ -106,18 +106,27 @@ public class PlayerElementController : MonoBehaviour
                 var nearestPoint = collisionObj.ClosestPoint(position);
                 var dir = nearestPoint - position;
 
-                Physics.Raycast(position, dir, out RaycastHit hitInfo,
-                    elementData[i].element.PlayerRange,
-                    layerMask);
+                if (obj.requireRaycast)
+                {
+                    Physics.Raycast(position, dir, out RaycastHit hitInfo,
+                        elementData[i].element.PlayerRange,
+                        layerMask);
 
-                if (hitInfo.collider != collisionObj) continue;
+                    if (hitInfo.collider != collisionObj) continue;
                     
-                var playerY = transform.position.y;
-
-                if (Mathf.Abs(nearestPoint.y - playerY) < height)
+                    var playerY = transform.position.y;
+                    
+                    if (Mathf.Abs(nearestPoint.y - playerY) < height)
+                    {
+                        obj.ApplyElement(elementData[i].element, gameObject.transform, true);
+                    }
+                }
+                else
                 {
                     obj.ApplyElement(elementData[i].element, gameObject.transform, true);
                 }
+
+                
             }
         }
     }

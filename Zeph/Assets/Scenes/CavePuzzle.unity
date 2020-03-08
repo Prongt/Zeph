@@ -160,8 +160,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 2.5
-  toGravity: {x: 0, y: 0, z: -9.81}
   fromGravity: {x: 0, y: -9.81, z: 0}
+  toGravity: {x: 0, y: 0, z: -9.81}
 --- !u!114 &26246173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +180,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 0
 --- !u!1 &30499772 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7387033310733741918, guid: 20d07c45e20a02240ab3695ce905e947,
@@ -1389,8 +1390,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 2.5
-  toGravity: {x: 0, y: 0, z: -9.81}
   fromGravity: {x: 0, y: 9.81, z: 0}
+  toGravity: {x: 0, y: 0, z: -9.81}
 --- !u!114 &339043210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1409,6 +1410,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 0
 --- !u!65 &339043211
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2670,8 +2672,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 2.5
-  toGravity: {x: 0, y: 0, z: 0}
   fromGravity: {x: 0, y: 0, z: 0}
+  toGravity: {x: 0, y: 0, z: 0}
 --- !u!114 &549612813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2690,6 +2692,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 0
 --- !u!65 &549612814
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3455,6 +3458,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 1
 --- !u!54 &684779629
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4363,18 +4367,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &956026859 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7970142285665259632, guid: a0fa9709b3579714aac745890da4d762,
-    type: 3}
-  m_PrefabInstance: {fileID: 1959882078}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cc1a007d369be948bdad9d08ceac61a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &969984019 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4327580101418433995, guid: eb448211219e19c44b3c43559199fabb,
@@ -6271,8 +6263,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 2.5
-  toGravity: {x: 0, y: 0, z: 9.81}
   fromGravity: {x: 0, y: -9.81, z: 0}
+  toGravity: {x: 0, y: 0, z: 9.81}
 --- !u!114 &1152375333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6291,6 +6283,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 0
 --- !u!65 &1152375334
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7077,8 +7070,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 2.5
-  toGravity: {x: 0, y: 0, z: -9.81}
   fromGravity: {x: 0, y: -9.81, z: 0}
+  toGravity: {x: 0, y: 0, z: -9.81}
 --- !u!114 &1356594346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7097,6 +7090,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 0
 --- !u!65 &1356594347
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8099,8 +8093,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 2.5
-  toGravity: {x: 0, y: 0, z: 9.81}
   fromGravity: {x: 0, y: 9.81, z: 0}
+  toGravity: {x: 0, y: 0, z: 9.81}
 --- !u!114 &1642213415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8119,6 +8113,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 0
 --- !u!1 &1673860473
 GameObject:
   m_ObjectHideFlags: 0
@@ -9115,8 +9110,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 2.5
-  toGravity: {x: 0, y: 9.81, z: 0}
   fromGravity: {x: 0, y: 0, z: -9.81}
+  toGravity: {x: 0, y: 9.81, z: 0}
 --- !u!114 &1817985082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9135,6 +9130,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 0
 --- !u!65 &1817985083
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9281,8 +9277,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 2.5
-  toGravity: {x: 0, y: 9.81, z: 0}
   fromGravity: {x: 0, y: 0, z: -9.81}
+  toGravity: {x: 0, y: 9.81, z: 0}
 --- !u!114 &1863177886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9301,6 +9297,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 0
 --- !u!65 &1863177887
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9526,8 +9523,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 2.5
-  toGravity: {x: 0, y: 0, z: -9.81}
   fromGravity: {x: 0, y: -9.81, z: 0}
+  toGravity: {x: 0, y: 0, z: -9.81}
 --- !u!114 &1903607728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9546,6 +9543,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 0
 --- !u!65 &1903607729
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10098,7 +10096,7 @@ MonoBehaviour:
           m_StringArgument: Growing
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 956026859}
+      - m_Target: {fileID: 0}
         m_MethodName: LightShine
         m_Mode: 1
         m_Arguments:
