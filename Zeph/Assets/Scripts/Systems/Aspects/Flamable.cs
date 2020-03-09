@@ -178,6 +178,7 @@ public class Flamable : Aspects
             {
                 if (col)
                 {
+                    //TODO cache colliders that have been used previously and return before get component is called again
                     var obj = col.GetComponent<Interactable>();
                     if (obj)
                     {
