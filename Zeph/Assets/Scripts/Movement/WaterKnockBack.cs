@@ -1,30 +1,27 @@
-﻿
-using System;
-using FMODUnity;
-using Movement;
+﻿using FMODUnity;
 using UnityEngine;
 
-public class WaterKnockBack : MonoBehaviour
+namespace Movement
 {
-    [SerializeField] private bool applyKnockBackForce;
-    [HideIf("applyKnockBackForce", true)][SerializeField] private float forceAmount = 5f;
-    [SerializeField] private bool teleportPlayer;
-    [HideIf("teleportPlayer", true)][SerializeField] private Transform teleportPostion;
-    [EventRef][SerializeField] private string fmodEvent;
-
-    private Rigidbody playerRigidbody;
-    private PlayerMoveRigidbody playerMoveRigidbody;
-
-    private void Start()
+    public class WaterKnockBack : MonoBehaviour
     {
-        playerMoveRigidbody = FindObjectOfType<PlayerMoveRigidbody>();
-        playerRigidbody = playerMoveRigidbody.GetComponent<Rigidbody>();
-    }
+        [SerializeField] private bool applyKnockBackForce;
+        [HideIf("applyKnockBackForce", true)][SerializeField] private float forceAmount = 5f;
+        [SerializeField] private bool teleportPlayer;
+        [HideIf("teleportPlayer", true)][SerializeField] private Transform teleportPosition;
+        [EventRef][SerializeField] private string fmodEvent;
 
-    private void OnCollisionEnter(Collision col)
-    {
-        if (col.collider.CompareTag("Player"))
+        private PlayerMoveRigidbody playerMoveRigidbody;
+
+        private void Start()
         {
+            playerMoveRigidbody = FindObjectOfType<PlayerMoveRigidbody>();
+        }
+
+        private void OnCollisionEnter(Collision col)
+        {
+            if (!col.collider.CompareTag("Player")) return;
+        
             if (applyKnockBackForce)
             {
                 var knockBackVector = col.contacts[0].point - col.transform.position;
@@ -35,12 +32,11 @@ public class WaterKnockBack : MonoBehaviour
 
             if (teleportPlayer)
             {
-                playerMoveRigidbody.TeleportPlayer(teleportPostion);
+                playerMoveRigidbody.TeleportPlayer(teleportPosition);
             }
-            
-            
+        
             RuntimeManager.PlayOneShot(fmodEvent, transform.position);
         }
-    }
     
+    }
 }
