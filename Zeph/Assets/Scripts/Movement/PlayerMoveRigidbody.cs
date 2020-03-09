@@ -316,5 +316,15 @@ namespace Movement
         {
             return vector - groundContactNormal * Vector3.Dot(vector, groundContactNormal);
         }
+
+        public void ApplyKnockBackForce(Vector3 force, ForceMode forceMode)
+        {
+            rigidbody.AddForce(force, forceMode);
+        }
+
+        public void TeleportPlayer(Transform point)
+        {
+            rigidbody.MovePosition(point.position);
+        }
     }
 }

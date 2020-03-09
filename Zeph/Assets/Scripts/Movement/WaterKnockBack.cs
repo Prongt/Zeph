@@ -1,14 +1,46 @@
-﻿using System;
+﻿
+using System;
+using FMODUnity;
 using Movement;
 using UnityEngine;
 
 public class WaterKnockBack : MonoBehaviour
 {
+    [SerializeField] private bool applyKnockBackForce;
+    [HideIf("applyKnockBackForce", true)][SerializeField] private float forceAmount = 5f;
+    [SerializeField] private bool teleportPlayer;
+    [HideIf("teleportPlayer", true)][SerializeField] private Transform teleportPostion;
+    [EventRef][SerializeField] private string fmodEvent;
+
+    private Rigidbody playerRigidbody;
+    private PlayerMoveRigidbody playerMoveRigidbody;
+
+    private void Start()
+    {
+        playerMoveRigidbody = FindObjectOfType<PlayerMoveRigidbody>();
+        playerRigidbody = playerMoveRigidbody.GetComponent<Rigidbody>();
+    }
+
     private void OnCollisionEnter(Collision col)
     {
         if (col.collider.CompareTag("Player"))
         {
-            var pMove = col.collider.GetComponent<PlayerMoveRigidbody>();
+            if (applyKnockBackForce)
+            {
+                var knockBackVector = col.contacts[0].point - col.transform.position;
+                knockBackVector = -knockBackVector.normalized;
+            
+                playerMoveRigidbody.ApplyKnockBackForce(knockBackVector * forceAmount, ForceMode.Impulse);
+            }
+
+            if (teleportPlayer)
+            {
+                playerMoveRigidbody.TeleportPlayer(teleportPostion);
+            }
+            
+            
+            RuntimeManager.PlayOneShot(fmodEvent, transform.position);
         }
     }
+    
 }

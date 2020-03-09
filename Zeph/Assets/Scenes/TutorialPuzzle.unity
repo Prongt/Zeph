@@ -951,6 +951,7 @@ GameObject:
   - component: {fileID: 227198799}
   - component: {fileID: 227198798}
   - component: {fileID: 227198797}
+  - component: {fileID: 227198800}
   m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
@@ -1032,6 +1033,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227198795}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &227198800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227198795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850b9f7c2aad409a8858907931a340da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applyKnockBackForce: 1
+  forceAmount: 5
+  teleportPlayer: 0
+  teleportPostion: {fileID: 0}
+  fmodEvent: event:/WaterSplash
+--- !u!1 &261354905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 261354906}
+  m_Layer: 12
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &261354906
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261354905}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0.49}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 945665094}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &281276103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1750,6 +1798,7 @@ GameObject:
   - component: {fileID: 376728117}
   - component: {fileID: 376728116}
   - component: {fileID: 376728115}
+  - component: {fileID: 376728118}
   m_Layer: 12
   m_Name: Collider Right
   m_TagString: Untagged
@@ -1765,8 +1814,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376728113}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.42, y: -0, z: -0.594}
-  m_LocalScale: {x: 4.4600043, y: 3.2123, z: 7.562992}
+  m_LocalPosition: {x: 3.42, y: -0, z: 2.3}
+  m_LocalScale: {x: 4.4600043, y: 3.2123, z: 1.7999922}
   m_Children: []
   m_Father: {fileID: 3908719731508467941}
   m_RootOrder: 2
@@ -1831,6 +1880,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376728113}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &376728118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376728113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850b9f7c2aad409a8858907931a340da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applyKnockBackForce: 1
+  forceAmount: 5
+  teleportPlayer: 0
+  teleportPostion: {fileID: 0}
+  fmodEvent: event:/WaterSplash
 --- !u!1001 &403652235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3622,6 +3688,7 @@ GameObject:
   - component: {fileID: 945665097}
   - component: {fileID: 945665096}
   - component: {fileID: 945665095}
+  - component: {fileID: 945665098}
   m_Layer: 12
   m_Name: Collider
   m_TagString: Untagged
@@ -3639,7 +3706,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.594}
   m_LocalScale: {x: 10.665, y: 3.2123, z: 3.6418319}
-  m_Children: []
+  m_Children:
+  - {fileID: 261354906}
   m_Father: {fileID: 3908719731508467941}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3703,6 +3771,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 945665093}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &945665098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945665093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850b9f7c2aad409a8858907931a340da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applyKnockBackForce: 1
+  forceAmount: 5
+  teleportPlayer: 0
+  teleportPostion: {fileID: 261354906}
+  fmodEvent: event:/WaterSplash
 --- !u!1 &951288718
 GameObject:
   m_ObjectHideFlags: 0
@@ -4060,7 +4145,7 @@ GameObject:
   - component: {fileID: 1028932166}
   - component: {fileID: 1028932165}
   - component: {fileID: 1028932164}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Roll Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4885,6 +4970,7 @@ GameObject:
   - component: {fileID: 1146856305}
   - component: {fileID: 1146856304}
   - component: {fileID: 1146856303}
+  - component: {fileID: 1146856306}
   m_Layer: 12
   m_Name: Collider Left
   m_TagString: Untagged
@@ -4900,8 +4986,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1146856301}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.529, y: 0, z: -0.594}
-  m_LocalScale: {x: 4.4600043, y: 3.2123, z: 7.562992}
+  m_LocalPosition: {x: -3.529, y: -0, z: 2.3}
+  m_LocalScale: {x: 4.4600043, y: 3.2123, z: 1.7999922}
   m_Children: []
   m_Father: {fileID: 3908719731508467941}
   m_RootOrder: 1
@@ -4966,6 +5052,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1146856301}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1146856306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146856301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850b9f7c2aad409a8858907931a340da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applyKnockBackForce: 1
+  forceAmount: 5
+  teleportPlayer: 0
+  teleportPostion: {fileID: 0}
+  fmodEvent: event:/WaterSplash
 --- !u!1 &1163705821
 GameObject:
   m_ObjectHideFlags: 0
@@ -5270,7 +5373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213894229}
   m_LocalRotation: {x: 0.00000003214536, y: 0.94575137, z: -0.32489145, w: 0.00000006054287}
-  m_LocalPosition: {x: 0, y: 10.86, z: 27.36}
+  m_LocalPosition: {x: 0, y: 10.2699995, z: 24.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 286670757}
@@ -5553,12 +5656,12 @@ PrefabInstance:
     - target: {fileID: 9208862592938453265, guid: 9f50a790dd832c84a8a8e8934c841229,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.86
+      value: 10.2699995
       objectReference: {fileID: 0}
     - target: {fileID: 9208862592938453265, guid: 9f50a790dd832c84a8a8e8934c841229,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.36
+      value: 24.7
       objectReference: {fileID: 0}
     - target: {fileID: 9208862592938453265, guid: 9f50a790dd832c84a8a8e8934c841229,
         type: 3}
@@ -10148,12 +10251,12 @@ PrefabInstance:
     - target: {fileID: 933983065396221027, guid: 79fbcdfe73814b64aa5b88df483ec81f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.75
+      value: 1.16
       objectReference: {fileID: 0}
     - target: {fileID: 933983065396221027, guid: 79fbcdfe73814b64aa5b88df483ec81f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.36
+      value: 14.7
       objectReference: {fileID: 0}
     - target: {fileID: 933983065396221027, guid: 79fbcdfe73814b64aa5b88df483ec81f,
         type: 3}
