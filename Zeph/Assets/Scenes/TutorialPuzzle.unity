@@ -3815,6 +3815,30 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.5963116, y: 2.009799, z: 5.721026}
   m_Center: {x: -2.5182717, y: 0.01094369, z: 1.5768447}
+--- !u!114 &958047003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958047000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9a18e1c95dc4a94797d2404c25feedd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  coolDownTime: 0
+  pullForce:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
 --- !u!1001 &1010451735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8411,6 +8435,30 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1371032854}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2045861857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045861855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9a18e1c95dc4a94797d2404c25feedd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  coolDownTime: 0
+  pullForce:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
 --- !u!65 &2045861864
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9530,6 +9578,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Power Disabler
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276391809687439256, guid: 5d087a84aaec8bc4c9eaf8af32241993,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3276391809687439257, guid: 5d087a84aaec8bc4c9eaf8af32241993,
         type: 3}
@@ -10695,6 +10748,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 1
 --- !u!114 &8210847648878504525
 MonoBehaviour:
   m_ObjectHideFlags: 0

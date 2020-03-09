@@ -16,8 +16,26 @@ public class Element : ScriptableObject
     [SerializeField] private bool powerIsEnabled;
     [HideInInspector] public Collider[] colliders;
     public List<AspectType> Promotes => promotes;
-
     public List<AspectType> Negates => negates;
+    public List<string> promoteStrings;
+    public List<string> negateStrings;
+
+    private void OnValidate()
+    {
+        promoteStrings.Clear();
+        foreach (AspectType aspectType in promotes)
+        {
+            promoteStrings.Add(aspectType.ToString());
+        }
+        
+        negateStrings.Clear();
+        foreach (AspectType aspectType in negates)
+        {
+            negateStrings.Add(aspectType.ToString());
+        }
+    }
+
+    
 
     public bool PowerIsEnabled
     {

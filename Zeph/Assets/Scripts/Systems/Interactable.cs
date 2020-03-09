@@ -250,12 +250,12 @@ public class Interactable : MonoBehaviour
         {
             return;
         }
-        
+        //new code without boxing allocations
         for (int i = 0; i < aspectComponentsList.Count; i++)
         {
             for (int p = 0; p < element.Promotes.Count; p++)
             {
-                if (aspectComponentsList[i].GetType().ToString() == element.Promotes[p].ToString())
+                if (aspectComponentsList[i].GetType().ToString() == element.promoteStrings[p])
                 {
                     aspectComponentsList[i].Promote(source, element);
                 }
@@ -263,12 +263,32 @@ public class Interactable : MonoBehaviour
             
             for (int n = 0; n < element.Negates.Count; n++)
             {
-                if (aspectComponentsList[i].GetType().ToString() == element.Negates[n].ToString())
+                if (aspectComponentsList[i].GetType().ToString() == element.negateStrings[n])
                 {
                     aspectComponentsList[i].Negate(source);
                 }
             }
         }
+        
+        //Old code but has boxing allocations which create garbage
+        // for (int i = 0; i < aspectComponentsList.Count; i++)
+        // {
+        //     for (int p = 0; p < element.Promotes.Count; p++)
+        //     {
+        //         if (aspectComponentsList[i].GetType().ToString() == element.Promotes[p].ToString())
+        //         {
+        //             aspectComponentsList[i].Promote(source, element);
+        //         }
+        //     }
+        //     
+        //     for (int n = 0; n < element.Negates.Count; n++)
+        //     {
+        //         if (aspectComponentsList[i].GetType().ToString() == element.Negates[n].ToString())
+        //         {
+        //             aspectComponentsList[i].Negate(source);
+        //         }
+        //     }
+        // }
     }
 
 }

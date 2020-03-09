@@ -31,7 +31,12 @@ public class Flamable : Aspects
     private bool isOnFire = false;
     private Collider[] colliders = new Collider[10];
 
+    private Vector3 overlapBoxExtents;
+    //private List<Collider> colliders = new List<Collider>(25);
+
     private Animator myAnim;
+
+    private WaitForSeconds fireSpreadWaitForSeconds;
 
     public Type[] componentTypes = new Type[]
     {
@@ -61,7 +66,10 @@ public class Flamable : Aspects
             burningParticleEffect.enabled = true;
             burningParticleEffect.Stop();
         }
-            
+        
+        overlapBoxExtents = new Vector3(boxDimensions.x / 2, boxDimensions.y / 2, boxDimensions.z / 2);
+        colliders = new Collider[maxNumberOfAffectableObjects];
+        fireSpreadWaitForSeconds = new WaitForSeconds(fireSpreadPerSecond);
 
         if (fireSpreadPerSecond < 0.01f)
         {
@@ -150,12 +158,16 @@ public class Flamable : Aspects
     {
         while (isOnFire)
         {
-            yield return new WaitForSeconds(fireSpreadPerSecond);
+            yield return fireSpreadWaitForSeconds;
             
-            colliders = new Collider[maxNumberOfAffectableObjects];
+            
+            
+            //colliders = new Collider[maxNumberOfAffectableObjects];
+
+            
             if (useBoxCollider)
             {
-                Physics.OverlapBoxNonAlloc(transform.position, new Vector3(boxDimensions.x/2,boxDimensions.y/2,boxDimensions.z /2), colliders);
+                Physics.OverlapBoxNonAlloc(transform.position, overlapBoxExtents, colliders);
             }
             else
             {
@@ -175,6 +187,7 @@ public class Flamable : Aspects
                 
             }
             
+            //colliders.Clear();
             
 //            for (int i = 0; i < colliders.Length; i++)
 //            {

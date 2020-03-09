@@ -1,25 +1,41 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 
 public class PowerCollectionPoint : MonoBehaviour
 {
     [SerializeField] private ElementState elementState;
     [SerializeField] private GameObject uiToActivate;
-    private bool hasBeenActivated = false;
+    private bool hasBeenActivated;
+    private PlayerElementController playerElementController;
+    private void Start()
+    {
+        playerElementController = FindObjectOfType<PlayerElementController>();
+    }
+
     private void OnTriggerEnter(Collider col)
     {
         if (hasBeenActivated) return;
         if (!col.CompareTag("Player")) return;
 
-        var elementController = col.GetComponent<PlayerElementController>();
-        if (!elementController) return;
-        
-        foreach (var elementData in elementController.elementData)
+        for (int i = 0; i < playerElementController.elementData.Length; i++)
         {
-            if (elementData.element == elementState.element)
+            var element = playerElementController.elementData[i].element;
+            if (element == elementState.element)
             {
-                elementData.element.PowerIsEnabled = elementState.isEnabled;
+                element.PowerIsEnabled = elementState.isEnabled;
             }
         }
+
+        // var elementController = col.GetComponent<PlayerElementController>();
+        // if (!elementController) return;
+        //
+        // foreach (var elementData in elementController.elementData)
+        // {
+        //     if (elementData.element == elementState.element)
+        //     {
+        //         elementData.element.PowerIsEnabled = elementState.isEnabled;
+        //     }
+        // }
         
         if (uiToActivate) uiToActivate.SetActive(true);
         
