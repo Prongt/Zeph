@@ -31,6 +31,14 @@ public class GravityRift : Aspects
         return componentTypes;
     }
 
+    private void Update()
+    {
+        if (Physics.gravity == defaultGravity)
+        {
+            UseNewGravity = false;
+        }
+    }
+
 
     public override void Promote(Transform source = null, Element element = null)
     {

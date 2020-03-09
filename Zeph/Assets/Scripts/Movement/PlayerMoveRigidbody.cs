@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Movement
@@ -270,19 +271,10 @@ namespace Movement
             for (var i = 0; i < collision.contactCount; i++)
             {
                 var normal = collision.GetContact(i).normal;
-
-//                Debug.Log(normal);
+                
                 if (ZGravity)
                 {
-                    if (normal.z >= minGroundDotProduct)
-                    {
-                        groundContactCount++;
-                        groundContactNormal = normal;
-                        //Debug.Log("Wall");
-                        break;
-                    }
-                    
-                    if (normal.z <= minGroundDotProduct)
+                    if (math.abs(normal.z) > minGroundDotProduct)
                     {
                         groundContactCount++;
                         groundContactNormal = normal;
@@ -292,6 +284,7 @@ namespace Movement
                 }
                 else
                 {
+                    //TODO replace with math.abs
                     if (GravityRift.UseNewGravity)
                     {
                         if (normal.y <= minGroundDotProduct)
