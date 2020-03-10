@@ -18,6 +18,8 @@ namespace Movement
 
         [Header("Jumping")] [SerializeField] [Range(0f, 10f)]
         private float jumpHeight = 2f;
+        [SerializeField] [Range(0f, 1f)] private float coyoteTime = 0.125f;
+        private float timeSinceLastJump;
 
         [Header("Gravity")] [SerializeField] [Range(0f, 5f)]
         private float gravityFlipTime = 2.0f;
@@ -81,6 +83,8 @@ namespace Movement
                 desiredVelocity = new Vector3(playerInput.x, playerInput.y, 0f) * speed;
             else
                 desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * speed;
+
+            timeSinceLastJump += Time.deltaTime;
         }
 
         private void HandleInput()
@@ -234,10 +238,15 @@ namespace Movement
             hasScheduledJump = false;
 
             Vector3 jumpDirection;
-            if (OnGround)
+            
+            if (OnGround || timeSinceLastJump < coyoteTime)
+            {
                 jumpDirection = groundContactNormal;
-            else
+                timeSinceLastJump = 0;
+            }
+            else{
                 return;
+            }
 
             float jumpSpeed;
             if (currentGravity.z < 0)
