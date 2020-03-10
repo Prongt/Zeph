@@ -284,6 +284,13 @@ namespace Movement
                 }
                 else
                 {
+                    // if (math.abs(normal.y) > minGroundDotProduct)
+                    // {
+                    //     groundContactCount++;
+                    //     groundContactNormal = normal;
+                    //     break;
+                    // }
+                    
                     //TODO replace with math.abs
                     if (GravityRift.UseNewGravity)
                     {
