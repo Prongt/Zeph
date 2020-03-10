@@ -256,14 +256,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d218af9ed212f74a9de9acf82901792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 10
-  airAcceleration: 5
-  maxGroundAngle: 25
+  acceleration: 100
+  airAcceleration: 100
+  maxGroundAngle: 50
   speed: 5
   swapMovementAxis: 0
   reverseX: 0
   reverseY: 0
+  inputLimit: 0.125
+  dragWhileMoving: 0
+  dragWhileStopped: 100
   jumpHeight: 1.3
+  coyoteTime: 0.125
   gravityFlipTime: 2
   zephModel: {fileID: 296424879828176462}
   rotationModifier: 1
@@ -309,7 +313,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 933983065396221026}
   m_Material: {fileID: 13400000, guid: 21364d69b07e8bb40aeffcfcb7b12291, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.48
   m_Height: 1.1991779
   m_Direction: 1

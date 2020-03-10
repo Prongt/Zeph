@@ -2,22 +2,23 @@
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Movement
 {
     public class PlayerMoveRigidbody : MonoBehaviour
     {
         [Header("Movement")] 
-        [SerializeField] [Range(0f, 100f)] private float acceleration = 10f;
-        [SerializeField] [Range(0f, 100f)] private float airAcceleration = 1f;
+        [SerializeField] [Range(0f, 100f)] private float acceleration = 100f;
+        [SerializeField] [Range(0f, 100f)] private float airAcceleration = 100f;
         [SerializeField] [Range(0, 90)] private float maxGroundAngle = 50f;
-        [SerializeField] [Range(0f, 100f)] private float speed = 10f;
+        [SerializeField] [Range(0f, 100f)] private float speed = 5f;
         [SerializeField] private bool swapMovementAxis;
         [SerializeField] private bool reverseX;
         [SerializeField] private bool reverseY;
-        [SerializeField] private float inputLimit = 0.05f;
-        [SerializeField] private float baseDrag = 0.5f;
-        [SerializeField] private float newDrag = 5f;
+        [Range(0f, 1f)][SerializeField] private float inputLimit = 0.125f;
+        [Range(0f, 100f)][SerializeField] private float dragWhileMoving = 0.5f;
+        [Range(0f, 200f)][SerializeField] private float dragWhileStopped = 100f;
         
 
         [Header("Jumping")] [SerializeField] [Range(0f, 10f)]
@@ -74,6 +75,8 @@ namespace Movement
             minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
         
             danceWaitForSeconds = new WaitForSeconds(8f);
+
+            StartCoroutine(MovementDrag());
         }
 
 
@@ -90,6 +93,52 @@ namespace Movement
 
             timeSinceLastJump += Time.deltaTime;
             
+        }
+
+        private IEnumerator MovementDrag()
+        {
+            while (gameObject.activeSelf)
+            {
+                if (hasScheduledJump)
+                {
+                    rigidbody.drag = dragWhileMoving;
+                    yield return new WaitForSeconds(0.25f);
+                }
+                
+                bool noPlayerInput = Math.Abs(playerInput.x) < inputLimit && Math.Abs(playerInput.y) < inputLimit;
+            
+                if (noPlayerInput && groundContactCount > 0)
+                {
+                    rigidbody.drag = dragWhileStopped;
+                }
+                else
+                {
+                    rigidbody.drag = dragWhileMoving;
+                }
+
+                yield return null;
+            }
+        }
+        
+        private void FixedUpdate()
+        {
+            if (HaltMovement) return;
+            velocity = rigidbody.velocity;
+            
+
+            
+
+            UpdateGroundContacts();
+            AdjustVelocity();
+
+            Jump();
+
+            
+            rigidbody.velocity = velocity;
+            
+            
+            Rotate();
+            ResetContactCounts();
         }
 
         private void HandleInput()
@@ -147,32 +196,7 @@ namespace Movement
             HaltMovement = false;
         }
 
-        private void FixedUpdate()
-        {
-            if (HaltMovement) return;
-            velocity = rigidbody.velocity;
-            
-            if (Math.Abs(playerInput.x) < inputLimit && Math.Abs(playerInput.y) < inputLimit && !hasScheduledJump)
-            {
-                rigidbody.drag = newDrag;
-            }
-            else
-            {
-                rigidbody.drag = baseDrag;
-            }
 
-            UpdateGroundContacts();
-            AdjustVelocity();
-
-            Jump();
-
-            
-            rigidbody.velocity = velocity;
-            
-            
-            Rotate();
-            ResetContactCounts();
-        }
         
         
 
@@ -268,6 +292,8 @@ namespace Movement
             else{
                 return;
             }
+            
+            //rigidbody.drag = dragWhileMoving;
 
             float jumpSpeed;
             if (currentGravity.z < 0)
