@@ -15,6 +15,10 @@ namespace Movement
         [SerializeField] private bool swapMovementAxis;
         [SerializeField] private bool reverseX;
         [SerializeField] private bool reverseY;
+        [SerializeField] private float inputLimit = 0.05f;
+        [SerializeField] private float baseDrag = 0.5f;
+        [SerializeField] private float newDrag = 5f;
+        
 
         [Header("Jumping")] [SerializeField] [Range(0f, 10f)]
         private float jumpHeight = 2f;
@@ -85,6 +89,7 @@ namespace Movement
                 desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * speed;
 
             timeSinceLastJump += Time.deltaTime;
+            
         }
 
         private void HandleInput()
@@ -111,6 +116,8 @@ namespace Movement
 
             playerInput = Vector2.ClampMagnitude(playerInput, 1f);
             if (Input.GetButtonDown("Jump")) hasScheduledJump = true;
+
+            //Debug.Log(playerInput.x);
         }
 
         private void GravitySwitching()
@@ -143,17 +150,31 @@ namespace Movement
         private void FixedUpdate()
         {
             if (HaltMovement) return;
-
             velocity = rigidbody.velocity;
+            
+            if (Math.Abs(playerInput.x) < inputLimit && Math.Abs(playerInput.y) < inputLimit && !hasScheduledJump)
+            {
+                rigidbody.drag = newDrag;
+            }
+            else
+            {
+                rigidbody.drag = baseDrag;
+            }
+
             UpdateGroundContacts();
             AdjustVelocity();
 
             Jump();
 
+            
             rigidbody.velocity = velocity;
+            
+            
             Rotate();
             ResetContactCounts();
         }
+        
+        
 
         public void FlipMovement()
         {
