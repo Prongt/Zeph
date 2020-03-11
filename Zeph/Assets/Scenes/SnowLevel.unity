@@ -9052,19 +9052,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 0
-  pullForce:
-    UseConstant: 1
-    ConstantValue: 100
-    Variable: {fileID: 0}
+  collisionSoundEventEmitter: {fileID: 0}
+  firefly: {fileID: 0}
   maxThrowForce:
     UseConstant: 1
     ConstantValue: 15
     Variable: {fileID: 0}
-  throwForce: 0.5
   orbitSize: 3
+  pullForce:
+    UseConstant: 1
+    ConstantValue: 100
+    Variable: {fileID: 0}
   rotSpeed: 0
-  collisionSoundEventEmitter: {fileID: 0}
-  firefly: {fileID: 0}
+  throwForce: 0.5
 --- !u!114 &1739501209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10277,6 +10277,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604569719269804469, guid: a720873750d2e9742883b18fae16ed9c,
+        type: 3}
+      propertyPath: requireRaycast
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5777596619545814462, guid: a720873750d2e9742883b18fae16ed9c,
         type: 3}
