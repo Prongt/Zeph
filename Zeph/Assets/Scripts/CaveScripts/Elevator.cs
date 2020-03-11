@@ -4,7 +4,7 @@
 public class Elevator : MonoBehaviour
 {
     [SerializeField] private Vector3 startPos;
-    [SerializeField] private float height;
+    [SerializeField] private float height = 4.5f;
     public Vector3 endPos;
     public bool rising = true;
 

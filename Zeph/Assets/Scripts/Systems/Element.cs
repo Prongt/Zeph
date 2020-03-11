@@ -9,7 +9,7 @@ public class Element : ScriptableObject
     [SerializeField] private List<AspectType> negates;
 
     [Tooltip("Only used by the player")] [SerializeField]
-    private float playerRange;
+    private float playerRange = 3f;
 
     [SerializeField] private Color debugColor;
     [SerializeField] private string buttonName;
