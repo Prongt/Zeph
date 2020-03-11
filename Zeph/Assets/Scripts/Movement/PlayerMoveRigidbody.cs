@@ -61,6 +61,7 @@ namespace Movement
         private bool ZGravity => currentGravity.z < 0 || currentGravity.z > 0;
 
         private bool reduceDrag;
+        private WaitForSeconds reduceDragWaitForSeconds;
 
         private void Awake()
         {
@@ -77,6 +78,7 @@ namespace Movement
             minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
 
             danceWaitForSeconds = new WaitForSeconds(8f);
+            reduceDragWaitForSeconds = new WaitForSeconds(0.25f);
 
             StartCoroutine(MovementDrag());
         }
@@ -100,13 +102,10 @@ namespace Movement
         {
             while (gameObject.activeSelf)
             {
-                
-            
-            
                 if (hasScheduledJump || reduceDrag)
                 {
                     rigidbody.drag = dragWhileMoving;
-                    yield return new WaitForSeconds(0.25f);
+                    yield return reduceDragWaitForSeconds;
                     reduceDrag = false;
                 }
 
