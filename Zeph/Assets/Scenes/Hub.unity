@@ -916,6 +916,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 1
 --- !u!4 &762842245 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4890117515526024212, guid: 5c0917fafcb61764aa309728126c3964,
@@ -1482,7 +1483,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: VerticalSlicePuzzle
+          m_StringArgument: ForestPuzzle
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1061237323
@@ -5982,7 +5983,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Tutorial
+          m_StringArgument: TutorialPuzzle
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1622228880
@@ -6155,6 +6156,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 1
 --- !u!65 &1726040341
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6534,7 +6536,6 @@ MonoBehaviour:
   forestButton: {fileID: 1061237320}
   snowButton: {fileID: 2138844666}
   caveButton: {fileID: 886433041}
-  menuButton: {fileID: 0}
   mosaicPieces:
   - {fileID: 64352447}
   - {fileID: 2121434317}
