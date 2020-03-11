@@ -2,63 +2,65 @@
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Movement
 {
     public class PlayerMoveRigidbody : MonoBehaviour
     {
-        [Header("Movement")] 
-        [SerializeField] [Range(0f, 100f)] private float acceleration = 100f;
-        [SerializeField] [Range(0f, 100f)] private float airAcceleration = 100f;
-        [SerializeField] [Range(0, 90)] private float maxGroundAngle = 50f;
-        [SerializeField] [Range(0f, 100f)] private float speed = 5f;
-        [SerializeField] private bool swapMovementAxis;
-        [SerializeField] private bool reverseX;
-        [SerializeField] private bool reverseY;
-        [Range(0f, 1f)][SerializeField] private float inputLimit = 0.125f;
-        [Range(0f, 100f)][SerializeField] private float dragWhileMoving = 0.5f;
-        [Range(0f, 200f)][SerializeField] private float dragWhileStopped = 100f;
-        
+        private static readonly int isDancing = Animator.StringToHash("IsDancing");
+        public static bool HaltMovement;
 
-        [Header("Jumping")] [SerializeField] [Range(0f, 10f)]
-        private float jumpHeight = 2f;
+        [Header("Movement")] [SerializeField] [Range(0f, 100f)]
+        private float acceleration = 100f;
+
+        [SerializeField] [Range(0f, 100f)] private float airAcceleration = 100f;
         [SerializeField] [Range(0f, 1f)] private float coyoteTime = 0.125f;
-        private float timeSinceLastJump;
+
+        private Vector3 currentGravity;
+        private WaitForSeconds danceWaitForSeconds;
+        private Vector3 desiredVelocity;
+        [Range(0f, 100f)] [SerializeField] private float dragWhileMoving = 0.5f;
+        [Range(0f, 200f)] [SerializeField] private float dragWhileStopped = 100f;
 
         [Header("Gravity")] [SerializeField] [Range(0f, 5f)]
         private float gravityFlipTime = 2.0f;
-
-        [Header("Rotation")] [SerializeField] private Transform zephModel;
-        [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
-
-        [Header("Animation")] [SerializeField] private Animator zephAnimator;
-        [SerializeField] private string moveVariable = "moveSpeed";
-        [SerializeField] private string jumpVariable = "IsJumping";
-        private static readonly int isDancing = Animator.StringToHash("IsDancing");
-        private WaitForSeconds danceWaitForSeconds;
-
-        private float minGroundDotProduct;
-
-        private Vector2 playerInput;
-        private new Rigidbody rigidbody;
 
         private int groundContactCount;
 
         private Vector3 groundContactNormal;
 
         private bool hasScheduledJump;
+        [Range(0f, 1f)] [SerializeField] private float inputLimit = 0.125f;
+
+
+        [Header("Jumping")] [SerializeField] [Range(0f, 10f)]
+        private float jumpHeight = 2f;
+
+        [SerializeField] private string jumpVariable = "IsJumping";
+        [SerializeField] [Range(0, 90)] private float maxGroundAngle = 50f;
+
+        private float minGroundDotProduct;
+        [SerializeField] private string moveVariable = "moveSpeed";
+
+        private Vector2 playerInput;
+        [SerializeField] private bool reverseX;
+        [SerializeField] private bool reverseY;
+        private new Rigidbody rigidbody;
+        [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
+        [SerializeField] [Range(0f, 100f)] private float speed = 5f;
+        [SerializeField] private bool swapMovementAxis;
+        private float timeSinceLastJump;
+        private Vector3 upVector;
         private Vector3 velocity;
-        private Vector3 desiredVelocity;
+
+        [Header("Animation")] [SerializeField] private Animator zephAnimator;
+
+        [Header("Rotation")] [SerializeField] private Transform zephModel;
 
         private bool OnGround => groundContactCount > 0;
         private bool ZGravity => currentGravity.z < 0 || currentGravity.z > 0;
 
-        private Vector3 currentGravity;
-        private Vector3 upVector;
-        public static bool HaltMovement;
-        
-
+        private bool reduceDrag;
 
         private void Awake()
         {
@@ -73,7 +75,7 @@ namespace Movement
             currentGravity = Physics.gravity;
             upVector = -currentGravity.normalized;
             minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
-        
+
             danceWaitForSeconds = new WaitForSeconds(8f);
 
             StartCoroutine(MovementDrag());
@@ -92,51 +94,45 @@ namespace Movement
                 desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * speed;
 
             timeSinceLastJump += Time.deltaTime;
-            
         }
 
         private IEnumerator MovementDrag()
         {
             while (gameObject.activeSelf)
             {
-                if (hasScheduledJump)
+                
+            
+            
+                if (hasScheduledJump || reduceDrag)
                 {
                     rigidbody.drag = dragWhileMoving;
                     yield return new WaitForSeconds(0.25f);
+                    reduceDrag = false;
                 }
-                
-                bool noPlayerInput = Math.Abs(playerInput.x) < inputLimit && Math.Abs(playerInput.y) < inputLimit;
-            
+
+                var noPlayerInput = Math.Abs(playerInput.x) < inputLimit && Math.Abs(playerInput.y) < inputLimit;
+
                 if (noPlayerInput && groundContactCount > 0)
-                {
                     rigidbody.drag = dragWhileStopped;
-                }
                 else
-                {
                     rigidbody.drag = dragWhileMoving;
-                }
 
                 yield return null;
             }
         }
-        
+
         private void FixedUpdate()
         {
             if (HaltMovement) return;
             velocity = rigidbody.velocity;
-            
-
-            
 
             UpdateGroundContacts();
             AdjustVelocity();
 
             Jump();
 
-            
             rigidbody.velocity = velocity;
-            
-            
+
             Rotate();
             ResetContactCounts();
         }
@@ -153,20 +149,12 @@ namespace Movement
                 playerInput.y = tempInput.x;
             }
 
-            if (reverseX)
-            {
-                playerInput.x = -playerInput.x;
-            }
+            if (reverseX) playerInput.x = -playerInput.x;
 
-            if (reverseY)
-            {
-                playerInput.y = -playerInput.y;
-            }
+            if (reverseY) playerInput.y = -playerInput.y;
 
             playerInput = Vector2.ClampMagnitude(playerInput, 1f);
             if (Input.GetButtonDown("Jump")) hasScheduledJump = true;
-
-            //Debug.Log(playerInput.x);
         }
 
         private void GravitySwitching()
@@ -196,9 +184,6 @@ namespace Movement
             HaltMovement = false;
         }
 
-
-        
-        
 
         public void FlipMovement()
         {
@@ -283,17 +268,16 @@ namespace Movement
             hasScheduledJump = false;
 
             Vector3 jumpDirection;
-            
+
             if (OnGround || timeSinceLastJump < coyoteTime)
             {
                 jumpDirection = groundContactNormal;
                 timeSinceLastJump = 0;
             }
-            else{
+            else
+            {
                 return;
             }
-            
-            //rigidbody.drag = dragWhileMoving;
 
             float jumpSpeed;
             if (currentGravity.z < 0)
@@ -327,7 +311,7 @@ namespace Movement
             for (var i = 0; i < collision.contactCount; i++)
             {
                 var normal = collision.GetContact(i).normal;
-                
+
                 if (ZGravity)
                 {
                     if (math.abs(normal.z) > minGroundDotProduct)
@@ -340,28 +324,10 @@ namespace Movement
                 }
                 else
                 {
-                    // if (math.abs(normal.y) > minGroundDotProduct)
-                    // {
-                    //     groundContactCount++;
-                    //     groundContactNormal = normal;
-                    //     break;
-                    // }
-                    
-                    //TODO replace with math.abs
-                    if (GravityRift.UseNewGravity)
-                    {
-                        if (normal.y <= minGroundDotProduct)
-                        {
-                            groundContactCount++;
-                            groundContactNormal = normal;
-                           //Debug.Log("Roof");
-                            break;
-                        }
-                    }else if (normal.y >= minGroundDotProduct)
+                    if (math.abs(normal.y) > minGroundDotProduct)
                     {
                         groundContactCount++;
                         groundContactNormal = normal;
-                       //Debug.Log("Floor");
                         break;
                     }
                 }
@@ -376,6 +342,7 @@ namespace Movement
         public void ApplyKnockBackForce(Vector3 force, ForceMode forceMode)
         {
             rigidbody.AddForce(force, forceMode);
+            reduceDrag = true;
         }
 
         public void TeleportPlayer(Transform point)
