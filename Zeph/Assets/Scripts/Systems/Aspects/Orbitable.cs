@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using FMODUnity;
+using Movement;
 using UnityEngine;
 using UnityEngine.Experimental.VFX;
 
@@ -42,6 +43,10 @@ public class Orbitable : Aspects
     [SerializeField] private StudioEventEmitter collisionSoundEventEmitter;
     [SerializeField] private ParticleSystem firefly;
     private ParticleSystem.EmissionModule fireflyRate;
+
+
+
+    private Transform zephTransform;
     
 
     public Type[] componentTypes = new Type[]
@@ -63,6 +68,7 @@ public class Orbitable : Aspects
 
     void Start()
     {
+        zephTransform = FindObjectOfType<PlayerMoveRigidbody>().transform;
         myRB = GetComponent<Rigidbody>();
 
         if (!gameObject.CompareTag("Log"))
@@ -165,7 +171,7 @@ public class Orbitable : Aspects
     void Orbit()
     {
         //Setting parent means the object does trail behind the player.
-        gameObject.transform.SetParent(GameObject.Find("Zeph").transform);
+        gameObject.transform.SetParent(zephTransform);
         
         //Sake of ease constraints added
         myRB.constraints = RigidbodyConstraints.FreezeRotation;
