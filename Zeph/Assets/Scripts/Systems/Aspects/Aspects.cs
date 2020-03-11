@@ -7,8 +7,8 @@ public abstract class Aspects : MonoBehaviour
 {
     [HideInInspector] public AspectType AspectType;
 
-    [SerializeField] private UnityEvent onPromote;
-    [SerializeField] private UnityEvent onNegate;
+    [SerializeField] private UnityEvent onPromote = default;
+    [SerializeField] private UnityEvent onNegate = default;
     protected Element element;
     protected bool HasGrowSoundBeenPlayed = false;
     

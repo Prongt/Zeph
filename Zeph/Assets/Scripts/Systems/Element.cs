@@ -5,15 +5,15 @@ using UnityEngine;
 public class Element : ScriptableObject
 {
     //[SerializeField] private ElementsEnum elementEnum;
-    [SerializeField] private List<AspectType> promotes;
-    [SerializeField] private List<AspectType> negates;
+    [SerializeField] private List<AspectType> promotes = default;
+    [SerializeField] private List<AspectType> negates = default;
 
     [Tooltip("Only used by the player")] [SerializeField]
-    private float playerRange;
+    private float playerRange = 3f;
 
-    [SerializeField] private Color debugColor;
-    [SerializeField] private string buttonName;
-    [SerializeField] private bool powerIsEnabled;
+    [SerializeField] private Color debugColor = Color.red;
+    [SerializeField] private string buttonName = default;
+    [SerializeField] private bool powerIsEnabled = true;
     [HideInInspector] public Collider[] colliders;
     public List<AspectType> Promotes => promotes;
     public List<AspectType> Negates => negates;

@@ -9,9 +9,9 @@ public class Chargeable : Aspects
 {
     private float intensity;
     [Tooltip("The material used if the crystal has been charged")]
-    [SerializeField] private Material emissiveCrystal;
+    [SerializeField] private Material emissiveCrystal = default;
     [Tooltip("The crystal's renderer")]
-    [SerializeField] private Renderer myRend;
+    [SerializeField] private Renderer myRend = default;
     private Material startMat;
     
     [Header("Crystal State")]

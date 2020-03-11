@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class Activator : MonoBehaviour
 {
-    [SerializeField] private UnityEvent onPlayerEnter;
+    [SerializeField] private UnityEvent onPlayerEnter = default;
 
     public virtual void Activate()
     {

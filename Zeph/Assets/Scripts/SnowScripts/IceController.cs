@@ -8,20 +8,17 @@ public class IceController : MonoBehaviour
     private float desiredValue = -4.7f;
     private float valueToSet;
     private float lerpTime = 1;
-    [SerializeField] private float freezeTime;
-    [SerializeField] private float meltTime;
+    [SerializeField] private float freezeTime = 0.25f;
+    [SerializeField] private float meltTime = 0.25f;
     [SerializeField] private bool dontReFreeze = false;
     private static readonly int iceLevel = Shader.PropertyToID("iceLevel");
     private Collider col;
-    
+
 
     private void Awake()
     {
         meshRenderer = GetComponent<Renderer>();
-        if (!meshRenderer)
-        {
-            meshRenderer = GetComponentInChildren<Renderer>();
-        }
+        if (!meshRenderer) meshRenderer = GetComponentInChildren<Renderer>();
 
         col = GetComponent<Collider>();
     }
@@ -50,7 +47,7 @@ public class IceController : MonoBehaviour
     public void Freeze()
     {
         if (dontReFreeze) return;
-        
+
         SetIceOverTime(-4.7f, freezeTime);
         col.isTrigger = false;
     }

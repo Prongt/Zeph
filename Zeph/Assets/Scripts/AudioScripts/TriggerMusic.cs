@@ -4,7 +4,7 @@ using UnityEngine;
 public class TriggerMusic : MonoBehaviour
 {
     [SerializeField] private StudioEventEmitter studioEventEmitter;
-    [SerializeField] private bool dontDestroyOnLoad;
+    [SerializeField] private bool dontDestroyOnLoad = default;
     public static bool MusicIsActive;
     private void Start()
     {

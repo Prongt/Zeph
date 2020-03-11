@@ -421,7 +421,9 @@ namespace FMODUnity
                 #if !UNITY_2019_2_OR_NEWER
                 case BuildTarget.StandaloneLinux:
                 #endif
+#pragma warning disable 618
                 case BuildTarget.StandaloneLinuxUniversal:
+#pragma warning restore 618
                 case BuildTarget.StandaloneLinux64:
                     return FMODPlatform.Linux;
                 case BuildTarget.StandaloneOSX:

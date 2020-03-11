@@ -9,8 +9,8 @@ public class SnowController : MonoBehaviour
     private float desiredValue = -1;
     private float valueToSet;
     private float lerpTime = 1;
-    [SerializeField] private float freezeTime;
-    [SerializeField] private float meltTime;
+    [SerializeField] private float freezeTime = 0.25f;
+    [SerializeField] private float meltTime = 2;
     
     private void Awake()
     {

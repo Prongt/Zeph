@@ -7,7 +7,9 @@ namespace Cinemachine.Timeline
 {
     [Serializable]
     [TrackClipType(typeof(CinemachineShot))]
+#pragma warning disable 618
     [TrackMediaType(TimelineAsset.MediaType.Script)]
+#pragma warning restore 618
     [TrackBindingType(typeof(CinemachineBrain))]
     [TrackColor(0.53f, 0.0f, 0.08f)]
     public class CinemachineTrack : TrackAsset

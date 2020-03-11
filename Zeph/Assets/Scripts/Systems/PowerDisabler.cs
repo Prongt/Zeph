@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PowerDisabler : MonoBehaviour
 {
-    [SerializeField] private ElementState[] elementsToDisable;
+    [SerializeField] private ElementState[] elementsToDisable = default;
     private PlayerElementController playerElementController;
     private void Start()
     {

@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class LevelCheck : MonoBehaviour
 {
-    [SerializeField] private GameObject tutorialButton;
-    [SerializeField] private GameObject forestButton;
-    [SerializeField] private GameObject snowButton;
-    [SerializeField] private GameObject caveButton;
-    [SerializeField] private GameObject menuButton;
+    [SerializeField] private GameObject tutorialButton = default;
+    [SerializeField] private GameObject forestButton = default;
+    [SerializeField] private GameObject snowButton = default;
+    [SerializeField] private GameObject caveButton = default;
 
-    [SerializeField] private List<GameObject> mosaicPieces;
+    [SerializeField] private List<GameObject> mosaicPieces = default;
 
 
     private int levelNum;
@@ -30,17 +29,17 @@ public class LevelCheck : MonoBehaviour
         {
             tutorialButton.SetActive(true);
         }
-        if (levelNum >= 1)
+        if (levelNum >= 0)
         {
             caveButton.SetActive(true);
             mosaicPieces[0].SetActive(true);
         }
-        if (levelNum >= 2)
+        if (levelNum >= 0)
         {
             snowButton.SetActive(true);
             mosaicPieces[1].SetActive(true);
         }
-        if (levelNum >= 3)
+        if (levelNum >= 0)
         {
             forestButton.SetActive(true);
             mosaicPieces[2].SetActive(true);

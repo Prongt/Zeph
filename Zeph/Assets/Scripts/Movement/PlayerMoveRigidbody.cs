@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -17,9 +16,9 @@ namespace Movement
         [SerializeField] [Range(0f, 1f)] private float coyoteTime = 0.125f;
 
         private Vector3 currentGravity;
-        private WaitForSeconds danceWaitForSeconds;
+        private readonly WaitForSeconds danceWaitForSeconds = new WaitForSeconds(8f);
         private Vector3 desiredVelocity;
-        [Range(0f, 100f)] [SerializeField] private float dragWhileMoving = 0.5f;
+        [Range(0f, 100f)] [SerializeField] private float dragWhileMoving = 0.01f;
         [Range(0f, 200f)] [SerializeField] private float dragWhileStopped = 100f;
 
         [Header("Gravity")] [SerializeField] [Range(0f, 5f)]
@@ -34,7 +33,7 @@ namespace Movement
 
 
         [Header("Jumping")] [SerializeField] [Range(0f, 10f)]
-        private float jumpHeight = 2f;
+        private float jumpHeight = 1.3f;
 
         [SerializeField] private string jumpVariable = "IsJumping";
         [SerializeField] [Range(0, 90)] private float maxGroundAngle = 50f;
@@ -43,25 +42,25 @@ namespace Movement
         [SerializeField] private string moveVariable = "moveSpeed";
 
         private Vector2 playerInput;
-        [SerializeField] private bool reverseX;
-        [SerializeField] private bool reverseY;
+        [SerializeField] private bool reverseX = false;
+        [SerializeField] private bool reverseY = false;
         private new Rigidbody rigidbody;
         [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
         [SerializeField] [Range(0f, 100f)] private float speed = 5f;
-        [SerializeField] private bool swapMovementAxis;
+        [SerializeField] private bool swapMovementAxis = false;
         private float timeSinceLastJump;
         private Vector3 upVector;
         private Vector3 velocity;
 
         [Header("Animation")] [SerializeField] private Animator zephAnimator;
 
-        [Header("Rotation")] [SerializeField] private Transform zephModel;
+        [Header("Rotation")] [SerializeField] private Transform zephModel = default;
 
         private bool OnGround => groundContactCount > 0;
         private bool ZGravity => currentGravity.z < 0 || currentGravity.z > 0;
 
         private bool reduceDrag;
-        private WaitForSeconds reduceDragWaitForSeconds;
+        private readonly WaitForSeconds reduceDragWaitForSeconds = new WaitForSeconds(0.25f);
 
         private void Awake()
         {
@@ -77,9 +76,6 @@ namespace Movement
             upVector = -currentGravity.normalized;
             minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
 
-            danceWaitForSeconds = new WaitForSeconds(8f);
-            reduceDragWaitForSeconds = new WaitForSeconds(0.25f);
-
             StartCoroutine(MovementDrag());
         }
 
@@ -88,7 +84,7 @@ namespace Movement
         {
             GravitySwitching();
             ManageAnimation();
-            HandleInput();
+            HandlePlayerInput();
 
             if (ZGravity)
                 desiredVelocity = new Vector3(playerInput.x, playerInput.y, 0f) * speed;
@@ -109,7 +105,7 @@ namespace Movement
                     reduceDrag = false;
                 }
 
-                var noPlayerInput = Math.Abs(playerInput.x) < inputLimit && Math.Abs(playerInput.y) < inputLimit;
+                var noPlayerInput = math.abs(playerInput.x) < inputLimit && math.abs(playerInput.y) < inputLimit;
 
                 if (noPlayerInput && groundContactCount > 0)
                     rigidbody.drag = dragWhileStopped;
@@ -132,11 +128,11 @@ namespace Movement
 
             rigidbody.velocity = velocity;
 
-            Rotate();
+            RotatePlayerModel();
             ResetContactCounts();
         }
 
-        private void HandleInput()
+        private void HandlePlayerInput()
         {
             playerInput.x = -Input.GetAxis("Horizontal");
             playerInput.y = -Input.GetAxis("Vertical");
@@ -170,8 +166,8 @@ namespace Movement
         private IEnumerator LerpTransformUp()
         {
             HaltMovement = true;
-            while (Math.Abs(transform.up.y - upVector.y) > 0.05f || Math.Abs(transform.up.x - upVector.x) > 0.05f ||
-                   Math.Abs(transform.up.z - upVector.z) > 0.05f)
+            while (math.abs(transform.up.y - upVector.y) > 0.05f || math.abs(transform.up.x - upVector.x) > 0.05f ||
+                   math.abs(transform.up.z - upVector.z) > 0.05f)
             {
                 rigidbody.Sleep();
                 transform.up = Vector3.Lerp(transform.up, upVector, gravityFlipTime * Time.deltaTime);
@@ -211,7 +207,7 @@ namespace Movement
         }
 
 
-        private void Rotate()
+        private void RotatePlayerModel()
         {
             if (playerInput.magnitude < 0.01f) return;
 
@@ -287,8 +283,7 @@ namespace Movement
                 jumpSpeed = Mathf.Sqrt(-2f * -currentGravity.y * jumpHeight);
             else
                 jumpSpeed = Mathf.Sqrt(-2f * currentGravity.y * jumpHeight);
-
-
+            
             jumpDirection = (jumpDirection + upVector).normalized;
             var alignedSpeed = Vector3.Dot(velocity, jumpDirection);
             if (alignedSpeed > 0f) jumpSpeed = Mathf.Max(jumpSpeed - alignedSpeed, 0f);
@@ -317,7 +312,6 @@ namespace Movement
                     {
                         groundContactCount++;
                         groundContactNormal = normal;
-                        //Debug.Log("Wall");
                         break;
                     }
                 }

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PowerCollectionPoint : MonoBehaviour
 {
-    [SerializeField] private ElementState elementState;
-    [SerializeField] private GameObject uiToActivate;
+    [SerializeField] private ElementState elementState = default;
+    [SerializeField] private GameObject uiToActivate = default;
     private bool hasBeenActivated;
     private PlayerElementController playerElementController;
     private void Start()

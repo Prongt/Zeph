@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 public class Distortable : MonoBehaviour
 {
     [SerializeField] private Animator myAnim;
-    [SerializeField] private Colliders colliders;
+    [SerializeField] private Colliders colliders = default;
     private static readonly int distort = Animator.StringToHash("Distort");
     
 
@@ -45,6 +46,7 @@ public class Distortable : MonoBehaviour
     private struct Colliders
     {
         public Collider normal;
+        // ReSharper disable once MemberHidesStaticFromOuterClass
         public Collider distort;
     }
 }

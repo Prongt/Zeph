@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CrystalAttach : MonoBehaviour
 {
-    [SerializeField] private Transform crystalPos;
+    [SerializeField] private Transform crystalPos = default;
     
     // Start is called before the first frame update
     void Start()

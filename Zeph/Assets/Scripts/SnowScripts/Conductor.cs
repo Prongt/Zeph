@@ -6,16 +6,18 @@ using UnityEngine;
 public class Conductor : MonoBehaviour
 {
     private float currentTarget;
-    [SerializeField] private float growSpeed;
+    [SerializeField] private float growSpeed = 0.25f;
     [SerializeField] private float maxRadius = 25f;
-    [SerializeField] private float minRadius;
+    [SerializeField] private float minRadius = 1;
     private List<GameObject> objectsInRadius;
-    [SerializeField] private float shrinkSpeed;
-    [SerializeField] private float waitTime;
+    [SerializeField] private float shrinkSpeed = 0.1f;
+    [SerializeField] private float waitTime = 3;
+    private WaitForSeconds waitForSeconds;
 
     private void Awake()
     {
         objectsInRadius = new List<GameObject>();
+        waitForSeconds = new WaitForSeconds(waitTime);
     }
 
     [ContextMenu("Grow")]
@@ -23,25 +25,25 @@ public class Conductor : MonoBehaviour
     {
         currentTarget = maxRadius;
         StopAllCoroutines();
-        StartCoroutine(GrowWaitShrinkRoutine(growSpeed, waitTime, shrinkSpeed));
+        StartCoroutine(GrowWaitShrinkRoutine(growSpeed, shrinkSpeed));
     }
 
 
-    private IEnumerator GrowWaitShrinkRoutine(float growSpeed, float waitTime, float shrinkSpeed)
+    private IEnumerator GrowWaitShrinkRoutine(float growingSpeed, float shrinkingSpeed)
     {
         while (math.abs(transform.localScale.x - currentTarget) > 0.25f)
         {
             transform.localScale = Vector3.Slerp(transform.localScale, Vector3.one * currentTarget,
-                growSpeed * Time.deltaTime);
+                growingSpeed * Time.deltaTime);
             yield return null;
         }
 
-        yield return new WaitForSeconds(waitTime);
+        yield return waitForSeconds;
 
         while (math.abs(transform.localScale.x - minRadius) > 0.25f)
         {
             transform.localScale =
-                Vector3.Slerp(transform.localScale, Vector3.one * minRadius, shrinkSpeed * Time.deltaTime);
+                Vector3.Slerp(transform.localScale, Vector3.one * minRadius, shrinkingSpeed * Time.deltaTime);
             yield return null;
         }
     }
