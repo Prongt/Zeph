@@ -9,8 +9,8 @@ public class Pullable : Aspects
     {
     };
 
-    [SerializeField] private Transform movePosition;
-    [SerializeField] private float moveTime;
+    [SerializeField] private Transform movePosition = default;
+    [SerializeField] private float moveTime = 2.5f;
 
     public override Type[] RequiredComponents()
     {

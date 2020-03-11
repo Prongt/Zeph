@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class MapControl : MonoBehaviour
 {
     [Header("Buttons/Levels")]
-    [SerializeField] private List<Button> leftColumn;
-    [SerializeField] private List<Button> rightColumn;
+    [SerializeField] private List<Button> leftColumn = default;
+    [SerializeField] private List<Button> rightColumn = default;
 
     private GameObject selector;
     

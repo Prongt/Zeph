@@ -7,7 +7,7 @@ using UnityEngine.ProBuilder.MeshOperations;
 
 public class MirrorBeam : MonoBehaviour
 {
-    [SerializeField] private UnityEvent onActivate;
+    [SerializeField] private UnityEvent onActivate = default;
 
     public GameObject crystal;
     

@@ -5,11 +5,11 @@ namespace Movement
 {
     public class WaterKnockBack : MonoBehaviour
     {
-        [SerializeField] private bool applyKnockBackForce;
+        [SerializeField] private bool applyKnockBackForce = false;
         [HideIf("applyKnockBackForce", true)][SerializeField] private float forceAmount = 5f;
-        [SerializeField] private bool teleportPlayer;
-        [HideIf("teleportPlayer", true)][SerializeField] private Transform teleportPosition;
-        [EventRef][SerializeField] private string fmodEvent;
+        [SerializeField] private bool teleportPlayer = false;
+        [HideIf("teleportPlayer", true)][SerializeField] private Transform teleportPosition = default;
+        [EventRef][SerializeField] private string fmodEvent = default;
 
         private PlayerMoveRigidbody playerMoveRigidbody;
 

@@ -28,8 +28,7 @@ public class PlayerMove : MonoBehaviour
 	
 
 	[SerializeField]private float gravityJumpMultiplier = 3f;
-	[SerializeField]private float ceilingGravityModifier = 1f;
-	
+
 	private Vector3 oldGravity;
 	private Vector3 gravityDirection;
 	private float playerYHeight;

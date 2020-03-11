@@ -7,7 +7,7 @@ public class PillarPull : Aspects
 {
     private Rigidbody myRB;
     private Vector3 direction;
-    [SerializeField] private FloatReference pullForce;
+    [SerializeField] private FloatReference pullForce = default;
     
     public override Type[] RequiredComponents()
     {

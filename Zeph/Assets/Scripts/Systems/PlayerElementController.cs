@@ -9,16 +9,16 @@ public class PlayerElementController : MonoBehaviour
 {
     public PlayerElementData[] elementData;
     [SerializeField] private float height = 1;
-    [SerializeField] private bool drawGizmos;
+    [SerializeField] private bool drawGizmos = false;
     [HideIf("drawGizmos", true)][SerializeField] private float gizmoHeight = 1.0f;
     private new Light light;
 
     private Animator animator;
 
-    [SerializeField] private VisualEffect fireEffect;
-    [SerializeField] private VisualEffect leafEffect;
+    [SerializeField] private VisualEffect fireEffect = default;
+    [SerializeField] private VisualEffect leafEffect = default;
 
-    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private LayerMask layerMask = default;
 
     //number of collisions detected for each element
     private const int MaxAffectableObjects = 25;

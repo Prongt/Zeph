@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RespawnWhenOutOfBounds : MonoBehaviour
 {
-    [SerializeField][TagField] private new string tag;
+    [SerializeField][TagField] private new string tag = default;
     private Vector3 startPos;
     private Quaternion startRot;
     private Rigidbody rigidBody;

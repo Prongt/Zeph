@@ -27,7 +27,7 @@ public class Orbitable : Aspects
     [SerializeField] private ParticleSystem firefly;
     private ParticleSystem.EmissionModule fireflyRate;
 
-    [SerializeField] private FloatReference maxThrowForce;
+    [SerializeField] private FloatReference maxThrowForce = default;
     //private float rotIncrease = 10;
 
     //Objects rigidbody
@@ -41,7 +41,7 @@ public class Orbitable : Aspects
     public float orbitSize = 3;
 
     //Everything controlling orbit and throw values
-    [Header("Pull/Push")] [SerializeField] private FloatReference pullForce;
+    [Header("Pull/Push")] [SerializeField] private FloatReference pullForce = default;
 
     //Time the object takes to reach the desired position on the radius
     private readonly float radiusSpeed = 10f;

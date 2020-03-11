@@ -42,19 +42,19 @@ namespace Movement
         [SerializeField] private string moveVariable = "moveSpeed";
 
         private Vector2 playerInput;
-        [SerializeField] private bool reverseX;
-        [SerializeField] private bool reverseY;
+        [SerializeField] private bool reverseX = false;
+        [SerializeField] private bool reverseY = false;
         private new Rigidbody rigidbody;
         [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
         [SerializeField] [Range(0f, 100f)] private float speed = 5f;
-        [SerializeField] private bool swapMovementAxis;
+        [SerializeField] private bool swapMovementAxis = false;
         private float timeSinceLastJump;
         private Vector3 upVector;
         private Vector3 velocity;
 
         [Header("Animation")] [SerializeField] private Animator zephAnimator;
 
-        [Header("Rotation")] [SerializeField] private Transform zephModel;
+        [Header("Rotation")] [SerializeField] private Transform zephModel = default;
 
         private bool OnGround => groundContactCount > 0;
         private bool ZGravity => currentGravity.z < 0 || currentGravity.z > 0;

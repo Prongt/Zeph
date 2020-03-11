@@ -10,7 +10,7 @@ public class FloatReference
    //[HideIf("UseConstant", false)][SerializeField] private float ConstantValue;
    [SerializeField] private float ConstantValue;
    //[HideIf("UseConstant", false, true)][SerializeField] private FloatVariable Variable;
-   [SerializeField] private FloatVariable Variable;
+   [SerializeField] private FloatVariable Variable = default;
 
     public FloatReference()
     { }

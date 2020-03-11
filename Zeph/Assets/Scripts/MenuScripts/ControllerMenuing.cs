@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ControllerMenuing : MonoBehaviour
 {
-    [SerializeField] private List<Button> menuOptions;
+    [SerializeField] private List<Button> menuOptions = default;
     private GameObject selector;
     
     //This may be redundant

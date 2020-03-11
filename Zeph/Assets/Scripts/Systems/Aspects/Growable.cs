@@ -12,7 +12,7 @@ public class Growable : Aspects
 
     
     
-    [SerializeField] private ParticleSystem firefly;
+    [SerializeField] private ParticleSystem firefly = default;
     private ParticleSystem.EmissionModule fireflyRate;
 
     protected bool LightShining;

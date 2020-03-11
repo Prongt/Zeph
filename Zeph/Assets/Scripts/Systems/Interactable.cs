@@ -9,7 +9,7 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [Tooltip("Aspect material used by this object")] [Header("Aspects")] [SerializeField]
-    private AspectMaterial aspectMaterial;
+    private AspectMaterial aspectMaterial = default;
 
     [Tooltip("Any additional aspects this object requires")] [SerializeField]
     private List<AspectType> additionalAspects;

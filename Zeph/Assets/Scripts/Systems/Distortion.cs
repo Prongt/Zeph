@@ -15,11 +15,10 @@ public class Distortion : Aspects
     public static bool IsDistorting;
     private bool animating;
 
-    [SerializeField] private bool onGround;
-    [SerializeField] private GameObject effect;
-    [SerializeField] private GameObject distortionEffect;
-    [SerializeField] private StudioEventEmitter distortionEventEmitter;
-    [SerializeField] private GameObject chromaticAberration;
+    [SerializeField] private GameObject effect = default;
+    [SerializeField] private GameObject distortionEffect = default;
+    [SerializeField] private StudioEventEmitter distortionEventEmitter = default;
+    [SerializeField] private GameObject chromaticAberration = default;
 
     protected override void Initialize()
     {
