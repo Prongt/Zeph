@@ -35,8 +35,7 @@ namespace Movement
                 playerMoveRigidbody.TeleportPlayer(teleportPosition);
             }
         
-            RuntimeManager.PlayOneShot(fmodEvent, transform.position);
+            RuntimeManager.PlayOneShot(fmodEvent, col.contacts[0].point);
         }
-    
     }
 }
