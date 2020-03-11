@@ -10,8 +10,8 @@ public class GravityRift : Aspects
     {
     };
 
-    [SerializeField] private Vector3 fromGravity;
-    [SerializeField] private Vector3 toGravity;
+    [SerializeField] private Vector3 fromGravity = new Vector3(0, -9.81f, 0);
+    [SerializeField] private Vector3 toGravity = new Vector3(0, 0, -9.81f);
 
 
     private void Awake()
