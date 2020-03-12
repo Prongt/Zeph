@@ -34,8 +34,8 @@ namespace Movement
 
         [Header("Jumping")] [SerializeField] [Range(0f, 10f)]
         private float jumpHeight = 1.3f;
-
         [SerializeField] private string jumpVariable = "IsJumping";
+        private bool isJumping = false;
         [SerializeField] [Range(0, 90)] private float maxGroundAngle = 50f;
 
         private float minGroundDotProduct;
@@ -48,7 +48,7 @@ namespace Movement
         [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
         [SerializeField] [Range(0f, 100f)] private float speed = 5f;
         [SerializeField] private bool swapMovementAxis = false;
-        private float timeSinceLastJump;
+        [SerializeField] private float timeSinceGrounded;
         private Vector3 upVector;
         private Vector3 velocity;
 
@@ -61,6 +61,7 @@ namespace Movement
 
         private bool reduceDrag;
         private readonly WaitForSeconds reduceDragWaitForSeconds = new WaitForSeconds(0.25f);
+        
 
         private void Awake()
         {
@@ -90,8 +91,15 @@ namespace Movement
                 desiredVelocity = new Vector3(playerInput.x, playerInput.y, 0f) * speed;
             else
                 desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * speed;
-
-            timeSinceLastJump += Time.deltaTime;
+            
+            if (OnGround)
+            {
+                timeSinceGrounded = 0;
+            }
+            else
+            {
+                timeSinceGrounded += Time.deltaTime;   
+            }
         }
 
         private IEnumerator MovementDrag()
@@ -261,28 +269,32 @@ namespace Movement
         {
             if (!hasScheduledJump) return;
             hasScheduledJump = false;
+            
+            if (OnGround) isJumping = false;
+            if (isJumping) return;
+            
+            if (!OnGround && !(timeSinceGrounded < coyoteTime)) return;
 
-            Vector3 jumpDirection;
-
-            if (OnGround || timeSinceLastJump < coyoteTime)
-            {
-                jumpDirection = groundContactNormal;
-                timeSinceLastJump = 0;
-            }
-            else
-            {
-                return;
-            }
+            isJumping = true;
+            
+            Vector3 jumpDirection = groundContactNormal;
 
             float jumpSpeed;
+            float force;
+            
+            //force
+            
+            
             if (currentGravity.z < 0)
-                jumpSpeed = Mathf.Sqrt(-2f * currentGravity.z * jumpHeight);
+                force = currentGravity.z;
             else if (currentGravity.z > 0)
-                jumpSpeed = Mathf.Sqrt(-2f * -currentGravity.z * jumpHeight);
+                force = -currentGravity.z;
             else if (currentGravity.y > 0)
-                jumpSpeed = Mathf.Sqrt(-2f * -currentGravity.y * jumpHeight);
+                force = -currentGravity.y;
             else
-                jumpSpeed = Mathf.Sqrt(-2f * currentGravity.y * jumpHeight);
+                force = currentGravity.y;
+
+            jumpSpeed = Mathf.Sqrt(-2f * force * jumpHeight);
             
             jumpDirection = (jumpDirection + upVector).normalized;
             var alignedSpeed = Vector3.Dot(velocity, jumpDirection);
