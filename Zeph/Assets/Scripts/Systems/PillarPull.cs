@@ -31,6 +31,7 @@ public class PillarPull : Aspects
         direction = source.transform.position - transform.position;
         
         myRB.AddForce(direction * pullForce.Value);
+        print("pulled");
     }
 
     public override void Negate(Transform source = null)
