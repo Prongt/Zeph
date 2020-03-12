@@ -16,7 +16,7 @@ public class CameraFlip : MonoBehaviour
    {
       //Finds the main Virtual Camera in the scene
       //TODO It doesent find the camera cause its disabled
-      myCam = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+      //myCam = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
       playerMoveRigidbody = FindObjectOfType<PlayerMoveRigidbody>();
       
 
@@ -39,6 +39,13 @@ public class CameraFlip : MonoBehaviour
       t.z = -t.z;
       myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = t;
 
+      playerMoveRigidbody.FlipMovement();
+      hasFlippedZ = !hasFlippedZ;
+   }
+
+   public void OrbitChangePoint()
+   {
+      myCam.GetCinemachineComponent<CinemachineOrbitalTransposer>().m_Heading.m_HeadingBias = 180;
       playerMoveRigidbody.FlipMovement();
       hasFlippedZ = !hasFlippedZ;
    }
