@@ -35,14 +35,12 @@ public class PlayerElementController : MonoBehaviour
         {
             elementData[i].element.colliders = new Collider[25];
         }
-
     }
 
     private void Update()
     {
         if (light.intensity >= 95f)
         {
-//            print("Intensity = " + light.intensity);
             light.intensity = Mathf.Lerp(light.intensity, 94, 0.5f * Time.deltaTime);
         }
 
@@ -75,15 +73,10 @@ public class PlayerElementController : MonoBehaviour
             var audioEmitter = elementData[i].audioEmitter;
             if (audioEmitter)
             {
-                // if (audioEmitter.IsPlaying())
-                // {
-                //     audioEmitter.Stop();
-                // }
                 if (!audioEmitter.IsPlaying())
                 {
                     audioEmitter.Play();   
                 }
-                
             }
 
 
@@ -91,7 +84,7 @@ public class PlayerElementController : MonoBehaviour
             elementData[i].element.colliders = new Collider[MaxAffectableObjects];
             Physics.OverlapSphereNonAlloc(transform.position, elementData[i].element.PlayerRange,
                 elementData[i].element.colliders);
-            // ReSharper disable once ForCanBeConvertedToForeach
+            
             for (var j = 0; j < elementData[i].element.colliders.Length; j++)
             {
                 var collisionObj = elementData[i].element.colliders[j];
@@ -125,14 +118,12 @@ public class PlayerElementController : MonoBehaviour
                 {
                     obj.ApplyElement(elementData[i].element, gameObject.transform, true);
                 }
-
-                
             }
         }
     }
-    
-    
-    IEnumerator UsePowerAnimation()
+
+
+    private IEnumerator UsePowerAnimation()
     {
         animator.SetBool(usePower, true);
         yield return new WaitForSeconds(1f);
