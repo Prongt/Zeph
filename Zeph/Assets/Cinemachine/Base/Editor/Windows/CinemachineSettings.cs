@@ -239,7 +239,9 @@ namespace Cinemachine.Editor
 
         private static Vector2 sScrollPosition = Vector2.zero;
 
+#pragma warning disable 618
         [PreferenceItem("Cinemachine")]
+#pragma warning restore 618
         private static void OnGUI()
         {
             if (CinemachineHeader != null)
