@@ -520,6 +520,7 @@ GameObject:
   - component: {fileID: 1362796442}
   - component: {fileID: 7988426004799259034}
   - component: {fileID: 1567351960}
+  - component: {fileID: 7723805629151112012}
   m_Layer: 0
   m_Name: Brazier
   m_TagString: Null
@@ -573,7 +574,9 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
+  requireRaycast: 1
 --- !u!114 &7988426004799259034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,18 +631,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 0
+  boxDimensions: {x: 3, y: 3, z: 3}
   burnedMaterial: {fileID: 0}
   burningParticleEffect: {fileID: 675878380895071749}
-  destroyable: 0
-  destroyTime: 1
   canBeSource: 1
-  useBoxCollider: 1
-  boxDimensions: {x: 3, y: 3, z: 3}
-  firefly: {fileID: 0}
-  fireSpreadRange: 3
-  fireSpreadPerSecond: 0.1
-  maxNumberOfAffectableObjects: 7
+  destroyable: 0
   fireEventEmitter: {fileID: 1567351960}
+  firefly: {fileID: 0}
+  fireSpreadPerSecond: 0.1
+  fireSpreadRange: 3
+  maxNumberOfAffectableObjects: 7
+  useBoxCollider: 1
 --- !u!114 &1567351960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,6 +665,22 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!54 &7723805629151112012
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025292489989712168}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &7245538910750206208
 PrefabInstance:
   m_ObjectHideFlags: 0

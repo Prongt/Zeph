@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 782515183076848808}
   - component: {fileID: 5382931524497381895}
   - component: {fileID: 1001689330}
+  - component: {fileID: 4835573798648427022}
   m_Layer: 0
   m_Name: Wall Vines
   m_TagString: Untagged
@@ -172,7 +173,9 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
+  requireRaycast: 1
 --- !u!95 &5382931524497381895
 Animator:
   serializedVersion: 3
@@ -212,18 +215,33 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 0
+  boxDimensions: {x: 0, y: 0, z: 0}
   burnedMaterial: {fileID: 0}
   burningParticleEffect: {fileID: 7300065972751596856}
-  destroyable: 1
-  destroyTime: 4
   canBeSource: 1
-  useBoxCollider: 0
-  boxDimensions: {x: 0, y: 0, z: 0}
-  firefly: {fileID: 0}
-  fireSpreadRange: 3
-  fireSpreadPerSecond: 0.1
-  maxNumberOfAffectableObjects: 15
+  destroyable: 1
   fireEventEmitter: {fileID: 0}
+  firefly: {fileID: 0}
+  fireSpreadPerSecond: 0.1
+  fireSpreadRange: 3
+  maxNumberOfAffectableObjects: 15
+  useBoxCollider: 0
+--- !u!54 &4835573798648427022
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859120943577764186}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &8355275644779749980
 PrefabInstance:
   m_ObjectHideFlags: 0

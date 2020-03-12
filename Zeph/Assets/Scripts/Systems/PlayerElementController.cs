@@ -18,7 +18,7 @@ public class PlayerElementController : MonoBehaviour
     [SerializeField] private VisualEffect fireEffect = default;
     [SerializeField] private VisualEffect leafEffect = default;
 
-    [SerializeField] private LayerMask layerMask = default;
+    [SerializeField] private LayerMask layerMask;
 
     //number of collisions detected for each element
     private const int MaxAffectableObjects = 25;
@@ -98,7 +98,7 @@ public class PlayerElementController : MonoBehaviour
                 var position = transform.position;
                 var nearestPoint = collisionObj.ClosestPoint(position);
                 var dir = nearestPoint - position;
-
+                //Debug.Log("Found");
                 if (obj.requireRaycast)
                 {
                     Physics.Raycast(position, dir, out RaycastHit hitInfo,
@@ -106,6 +106,7 @@ public class PlayerElementController : MonoBehaviour
                         layerMask);
 
                     if (hitInfo.collider != collisionObj) continue;
+                   
                     
                     var playerY = transform.position.y;
                     
