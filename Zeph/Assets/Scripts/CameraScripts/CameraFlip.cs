@@ -10,10 +10,18 @@ public class CameraFlip : MonoBehaviour
    public static bool hasFlippedZ;
    public static bool hasFlippedX;
 
+   [SerializeField] private ConfineController cameraConfines;
+   
+
    private PlayerMoveRigidbody playerMoveRigidbody;
 
    void Start()
    {
+      if (!gameObject.CompareTag("Flip"))
+      {
+         cameraConfines = null;
+      }
+      
       //Finds the main Virtual Camera in the scene
       //TODO It doesent find the camera cause its disabled
       //myCam = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
@@ -61,13 +69,16 @@ public class CameraFlip : MonoBehaviour
             {
                FlipZ();
                playerMoveRigidbody.FlipMovement();
+               cameraConfines.ChangeZOffset();
                hasFlippedZ = !hasFlippedZ;
             }
             if (hasFlippedX)
             {
                FlipX();
                playerMoveRigidbody.FlipMovement();
+               cameraConfines.ChangeXOffset();
                hasFlippedX = false;
+               
             }
          }
       }
