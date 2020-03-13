@@ -17,14 +17,12 @@ public class CameraFlip : MonoBehaviour
 
    void Start()
    {
+      //Avoiding Errors
       if (!gameObject.CompareTag("Flip"))
       {
          cameraConfines = null;
       }
       
-      //Finds the main Virtual Camera in the scene
-      //TODO It doesent find the camera cause its disabled
-      //myCam = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
       playerMoveRigidbody = FindObjectOfType<PlayerMoveRigidbody>();
       
 
