@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675878379130914339}
-  m_LocalRotation: {x: -0.7071069, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 0, y: 1.13, z: -0.47}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.06, z: -0.54}
+  m_LocalScale: {x: 0.35407016, y: 0.45469686, z: 0.35407016}
   m_Children:
   - {fileID: 675878380545513507}
   m_Father: {fileID: 3155651065420791369}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &675878379130914366
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -41,7 +41,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675878379130914339}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 29080cbc3370f9b4bbb95a74bafcf7e0, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 7671018ed5c270e43ab95a819c1590a2, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -86,7 +86,8 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -269,6 +270,9 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
+  isFrozen: 0
+  canBeFrozen: 0
+  requireRaycast: 1
 --- !u!65 &1398070118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -302,22 +306,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 0
-  pullForce:
-    UseConstant: 1
-    ConstantValue: 100
-    Variable: {fileID: 0}
+  collisionSoundEventEmitter: {fileID: 4086989470586638596}
+  firefly: {fileID: 0}
   maxThrowForce:
     UseConstant: 1
     ConstantValue: 15
     Variable: {fileID: 0}
-  throwForce: 0.5
   orbitSize: 3
+  pullForce:
+    UseConstant: 1
+    ConstantValue: 100
+    Variable: {fileID: 0}
   rotSpeed: 0
-  orbiting: 0
-  throwable: 0
-  radiusSpeed: 10
-  collisionSoundEventEmitter: {fileID: 4086989470586638596}
-  firefly: {fileID: 0}
+  throwForce: 0.5
 --- !u!114 &1398070115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,18 +339,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 0
+  boxDimensions: {x: 0, y: 0, z: 0}
   burnedMaterial: {fileID: 0}
   burningParticleEffect: {fileID: 675878379130914366}
-  destroyable: 0
-  destroyTime: 1
   canBeSource: 1
-  useBoxCollider: 0
-  boxDimensions: {x: 0, y: 0, z: 0}
-  firefly: {fileID: 0}
-  fireSpreadRange: 3
-  fireSpreadPerSecond: 0.1
-  maxNumberOfAffectableObjects: 15
+  destroyable: 0
   fireEventEmitter: {fileID: 1970962841}
+  firefly: {fileID: 0}
+  fireSpreadPerSecond: 0.1
+  fireSpreadRange: 3
+  maxNumberOfAffectableObjects: 15
+  useBoxCollider: 0
 --- !u!114 &4086989470586638596
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22682,6 +22682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zOffset: 10
+  yOffset: 0
+  xOffset: 0
 --- !u!4 &1106106783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3298696934714605379, guid: 9483016822660594dadcceafaac76f09,
@@ -27077,6 +27079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCam: {fileID: 0}
+  cameraConfines: {fileID: 0}
 --- !u!65 &1617732739
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38885,14 +38888,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675878380664328399}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.0009994507, y: 1.48, z: -0.0189991}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.03, y: 0.22, z: -0.0189991}
+  m_LocalScale: {x: 0.55764, y: 0.55764, z: 0.55764}
   m_Children:
   - {fileID: 675878380857932081}
   m_Father: {fileID: 8615268225381861960}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &675878380664328393
 VFXRenderer:
   m_ObjectHideFlags: 2
@@ -38940,7 +38943,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675878380664328399}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 29080cbc3370f9b4bbb95a74bafcf7e0, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 7671018ed5c270e43ab95a819c1590a2, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -43902,6 +43905,11 @@ PrefabInstance:
       propertyPath: StopEvent
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 94898863203390962, guid: 710e389d0c1c87043af04ea87bb09894,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 675878380664328392, guid: 710e389d0c1c87043af04ea87bb09894,
         type: 3}
       propertyPath: m_RootOrder
@@ -43915,12 +43923,12 @@ PrefabInstance:
     - target: {fileID: 675878380664328393, guid: 710e389d0c1c87043af04ea87bb09894,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 675878380664328399, guid: 710e389d0c1c87043af04ea87bb09894,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 675878380857932082, guid: 710e389d0c1c87043af04ea87bb09894,
         type: 3}
@@ -48092,6 +48100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCam: {fileID: 479735241}
+  cameraConfines: {fileID: 0}
 --- !u!54 &4861689932947624889
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -48548,6 +48557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCam: {fileID: 0}
+  cameraConfines: {fileID: 0}
 --- !u!1 &5132235792508702963 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 0bf9087fdf0be154c88e244ce7cd5c10,
@@ -55444,6 +55454,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3050711280352381277}
     m_Modifications:
+    - target: {fileID: 94898863203390962, guid: 710e389d0c1c87043af04ea87bb09894,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 675878380664328393, guid: 710e389d0c1c87043af04ea87bb09894,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

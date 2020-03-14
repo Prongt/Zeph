@@ -62,36 +62,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1080319252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2386787459758795529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cc1a007d369be948bdad9d08ceac61a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AspectType: 0
-  onPromote:
-    m_PersistentCalls:
-      m_Calls: []
-  onNegate:
-    m_PersistentCalls:
-      m_Calls: []
-  coolDownTime: 0
-  myAnim: {fileID: 0}
-  mat: {fileID: 0}
-  groundDistort: {fileID: 0}
-  isTree: 0
-  colliders:
-    small: {fileID: 0}
-    grown: {fileID: 0}
-    distort: {fileID: 0}
-  growSoundEmitter: {fileID: 0}
-  firefly: {fileID: 0}
 --- !u!114 &1080319253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,7 +78,35 @@ MonoBehaviour:
   additionalAspects: 
   onlyActivatedByPlayer: 0
   requireDefaultGravity: 0
-  IsEnabled: 1
+  isFrozen: 0
+  canBeFrozen: 0
+  requireRaycast: 1
+--- !u!114 &5573386285477171636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2386787459758795529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021aba07c8094c3eae0f587c30b5d811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AspectType: 0
+  onPromote:
+    m_PersistentCalls:
+      m_Calls: []
+  onNegate:
+    m_PersistentCalls:
+      m_Calls: []
+  coolDownTime: 0
+  colliders:
+    small: {fileID: 0}
+    grown: {fileID: 0}
+    distort: {fileID: 0}
+  growSoundEmitter: {fileID: 0}
+  firefly: {fileID: 0}
 --- !u!1001 &5926314463015268864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174,7 +172,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: ce237a78cc69ab64ca645e2986b66102,
         type: 3}
       propertyPath: m_Name
-      value: Mushroom V3
+      value: Mushroom V3 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7561110372842451503, guid: ce237a78cc69ab64ca645e2986b66102,
         type: 3}
