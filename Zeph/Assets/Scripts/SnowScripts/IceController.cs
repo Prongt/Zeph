@@ -1,4 +1,6 @@
-﻿using Unity.Mathematics;
+﻿using System;
+using FMODUnity;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class IceController : MonoBehaviour
@@ -9,7 +11,9 @@ public class IceController : MonoBehaviour
     private float valueToSet;
     private float lerpTime = 1;
     [SerializeField] private float freezeTime = 0.25f;
+    [SerializeField] [EventRef] private string freezeEvent = default;
     [SerializeField] private float meltTime = 0.25f;
+    [SerializeField] [EventRef] private string meltEvent = default;
     [SerializeField] private bool dontReFreeze = false;
     private static readonly int iceLevel = Shader.PropertyToID("iceLevel");
     private Collider col;
@@ -41,6 +45,11 @@ public class IceController : MonoBehaviour
         SetIceOverTime(5.2f, meltTime);
         col.isTrigger = true;
         //Debug.Log("Melt");
+
+        if (meltEvent != String.Empty)
+        {
+            RuntimeManager.PlayOneShot(meltEvent, transform.position);
+        }
     }
 
     [ContextMenu("Freeze")]
@@ -50,5 +59,10 @@ public class IceController : MonoBehaviour
 
         SetIceOverTime(-4.7f, freezeTime);
         col.isTrigger = false;
+        
+        if (freezeEvent != String.Empty)
+        {
+            RuntimeManager.PlayOneShot(freezeEvent, transform.position);
+        }
     }
 }
