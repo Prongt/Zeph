@@ -82,6 +82,7 @@ MonoBehaviour:
   requireDefaultGravity: 110
   isFrozen: 0
   canBeFrozen: 0
+  requireRaycast: 1
 --- !u!114 &6980426692029676733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +107,25 @@ MonoBehaviour:
     UseConstant: 1
     ConstantValue: 0
     Variable: {fileID: 0}
+--- !u!114 &8397615957388142913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203314150654975084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dfb3d26ce626f4ca8d0e58b8b65b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionEvent: event:/Effects/Interactables/Pillar Fall
+  tagsToIgnore:
+  - Player
+  - Heavy
+  - Log
+  playOnce: 1
+  audioPoint: {fileID: 1426170590969752389}
 --- !u!1 &4124796863402226357
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +186,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.3544014, y: 2.4713378, z: 0.8116127}
   m_Center: {x: 0.020375133, y: 0.016587261, z: 0.4037279}
+--- !u!1 &7781790225390231655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1426170590969752389}
+  m_Layer: 0
+  m_Name: Collision Audio Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1426170590969752389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781790225390231655}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.55, y: 0, z: 4.186}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3099318536608203710}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3904237470048485611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -330,6 +380,12 @@ GameObject:
 --- !u!1 &2203314150654975084 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6287836789983732601, guid: a6bf27d28d2d51c4398cf099a22309bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 3904237470048485611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3099318536608203710 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2102159042361312085, guid: a6bf27d28d2d51c4398cf099a22309bd,
     type: 3}
   m_PrefabInstance: {fileID: 3904237470048485611}
   m_PrefabAsset: {fileID: 0}
