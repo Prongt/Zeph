@@ -40,6 +40,7 @@ public class Growable : Aspects
 
         Renderer = GetComponentInChildren<Renderer>();
         Animator = GetComponentInChildren<Animator>();
+        growSoundEmitter = GetComponentInChildren<StudioEventEmitter>();
     }
 
 
