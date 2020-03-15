@@ -8506,7 +8506,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 675878379262439111}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &540490938
+--- !u!114 &540490933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8519,7 +8519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Distortion Event
+  Event: event:/Effects/Envirnomental/Distortion Event
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -8529,6 +8529,22 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 0
   OverrideMaxDistance: 0
+--- !u!54 &540490934
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540490931}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &549388625 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7839646135248715979, guid: 20c1292c2ad62d34ea61d598a3b052cd,
@@ -17502,7 +17518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Effects/Flowing Water
+  Event: event:/Effects/Water/Flowing Water
   PlayEvent: 1
   StopEvent: 2
   AllowFadeout: 1
@@ -25829,6 +25845,22 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2058418227433790873}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &1481518893
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481518891}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1481518898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25842,7 +25874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Distortion Event
+  Event: event:/Effects/Envirnomental/Distortion Event
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -26879,6 +26911,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1600297107 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2142111675251919152, guid: a0fa9709b3579714aac745890da4d762,
+    type: 3}
+  m_PrefabInstance: {fileID: 7970142285015999495}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1600297115
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600297107}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1601319180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31083,7 +31137,7 @@ MonoBehaviour:
   forceAmount: 5
   teleportPlayer: 1
   teleportPosition: {fileID: 635992913}
-  fmodEvent: event:/WaterSplash
+  fmodEvent: event:/Effects/Water/WaterSplash
 --- !u!1001 &1966467960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31582,7 +31636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Distortion Event
+  Event: event:/Effects/Envirnomental/Distortion Event
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -31592,6 +31646,22 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 0
   OverrideMaxDistance: 0
+--- !u!54 &1991904619
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991904617}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &1991904624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2494429701315109736, guid: 2e8776903bc0b95479bc8c972cdd0d1a,
@@ -37247,7 +37317,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6336400535071425784}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2145697413
+--- !u!114 &2145697408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37260,7 +37330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Distortion Event
+  Event: event:/Effects/Envirnomental/Distortion Event
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -37270,6 +37340,22 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 0
   OverrideMaxDistance: 0
+--- !u!54 &2145697409
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145697406}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &32772690732745857
 GameObject:
   m_ObjectHideFlags: 0
@@ -37683,7 +37769,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -38370,7 +38456,7 @@ PrefabInstance:
         type: 3}
       propertyPath: distortionEventEmitter
       value: 
-      objectReference: {fileID: 1991904618}
+      objectReference: {fileID: 540490933}
     - target: {fileID: 4670109159768736927, guid: 2e8776903bc0b95479bc8c972cdd0d1a,
         type: 3}
       propertyPath: chromaticAberration
@@ -41260,7 +41346,7 @@ PrefabInstance:
         type: 3}
       propertyPath: distortionEventEmitter
       value: 
-      objectReference: {fileID: 1991904618}
+      objectReference: {fileID: 1481518898}
     - target: {fileID: 4670109159768736927, guid: 2e8776903bc0b95479bc8c972cdd0d1a,
         type: 3}
       propertyPath: chromaticAberration
@@ -41395,6 +41481,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8140017363461281485}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &2127116230074187410
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127116230074187409}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &2135016320052450877
 Transform:
   m_ObjectHideFlags: 0
@@ -42667,7 +42769,7 @@ MonoBehaviour:
   forceAmount: 20
   teleportPlayer: 0
   teleportPosition: {fileID: 0}
-  fmodEvent: event:/WaterSplash
+  fmodEvent: event:/Effects/Water/WaterSplash
 --- !u!65 &3050711280422636440
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43397,7 +43499,7 @@ MonoBehaviour:
   forceAmount: 20
   teleportPlayer: 0
   teleportPosition: {fileID: 0}
-  fmodEvent: event:/WaterSplash
+  fmodEvent: event:/Effects/Water/WaterSplash
 --- !u!65 &3050711281420591634
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -48113,7 +48215,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -49653,7 +49755,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -50441,7 +50543,7 @@ PrefabInstance:
         type: 3}
       propertyPath: distortionEventEmitter
       value: 
-      objectReference: {fileID: 1991904618}
+      objectReference: {fileID: 540490933}
     - target: {fileID: 4670109159768736927, guid: 2e8776903bc0b95479bc8c972cdd0d1a,
         type: 3}
       propertyPath: chromaticAberration
