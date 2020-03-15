@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.00.00">
 	<object class="MixerReturn" id="{70f90231-8934-472d-a2ec-120e1d9e6d3d}">
+		<property name="volume">
+			<value>-80</value>
+		</property>
 		<property name="name">
 			<value>Distortion</value>
 		</property>
@@ -17,20 +20,20 @@
 	<object class="MixerBusEffectChain" id="{97f8a5c2-8e7f-4d75-b4e0-a278abd45c8b}">
 		<relationship name="effects">
 			<destination>{7cafbd77-ee11-4aae-a11d-7477b9f28de7}</destination>
-			<destination>{5a500561-e4d6-4840-9255-59c084d62070}</destination>
 			<destination>{aa4133d7-76f5-421e-a4fb-782ade2bf328}</destination>
+			<destination>{e9db936c-4a19-4626-b259-86de054efe68}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{ed9f56e8-e3d5-4e59-91d6-be546feb9dc9}" />
 	<object class="MixerBusFader" id="{7cafbd77-ee11-4aae-a11d-7477b9f28de7}" />
-	<object class="PitchShifterEffect" id="{5a500561-e4d6-4840-9255-59c084d62070}">
-		<property name="pitch">
-			<value>1.0200001</value>
-		</property>
-	</object>
 	<object class="DistortionEffect" id="{aa4133d7-76f5-421e-a4fb-782ade2bf328}">
 		<property name="level">
-			<value>0.305000007</value>
+			<value>0.300000012</value>
+		</property>
+	</object>
+	<object class="PitchShifterEffect" id="{e9db936c-4a19-4626-b259-86de054efe68}">
+		<property name="pitch">
+			<value>0.980000019</value>
 		</property>
 	</object>
 </objects>

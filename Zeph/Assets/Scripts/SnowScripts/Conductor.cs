@@ -39,7 +39,7 @@ public class Conductor : MonoBehaviour
 
     private void Update()
     {
-        conductorEvent.SetParameter(conductorExtentsParam, transform.localScale.x * 2);
+        conductorEvent.SetParameter(conductorExtentsParam, transform.localScale.x);
     }
 
     private IEnumerator GrowWaitShrinkRoutine(float growingSpeed, float shrinkingSpeed)
