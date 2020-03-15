@@ -52,6 +52,8 @@ public class Orbitable : Aspects
 
     private Transform zephTransform;
 
+    private float timeSinceLastOrbiting;
+
 
     public override Type[] RequiredComponents()
     {
@@ -89,12 +91,23 @@ public class Orbitable : Aspects
         }
 
         if (collisionSoundEventEmitter == null) collisionSoundEventEmitter = GetComponent<StudioEventEmitter>();
+
+        timeSinceLastOrbiting = 50;
     }
 
     private void Update()
     {
         if (rotSpeed <= throwForce * 10) rotSpeed = throwForce * 10;
         if (rotSpeed <= -throwForce * 10) rotSpeed = throwForce * 10;
+
+        if (orbiting)
+        {
+            timeSinceLastOrbiting = 0;
+        }
+        else
+        {
+            timeSinceLastOrbiting += Time.deltaTime;
+        }
     }
 
     //Orbit function called on late update to allow time for the player to move first
@@ -207,7 +220,22 @@ public class Orbitable : Aspects
 
         orbitDirection = !orbitDirection;
 
-        if (!orbiting) return;
+        if (orbiting)
+        {
+            PlayCollisionSound();
+        }
+        else
+        {
+            if (!other.collider.CompareTag("Player") && timeSinceLastOrbiting < 3f)
+            {
+                PlayCollisionSound();
+            }
+        }
+        
+    }
+
+    private void PlayCollisionSound()
+    {
         if (collisionSoundEventEmitter == null) return;
 
         if (collisionSoundEventEmitter.IsPlaying()) collisionSoundEventEmitter.Stop();
