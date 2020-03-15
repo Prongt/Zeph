@@ -1,8 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Management.Instrumentation;
+using FMOD.Studio;
+using FMODUnity;
 using Unity.Mathematics;
 using UnityEngine;
 
+[RequireComponent(typeof(StudioEventEmitter))]
 public class Conductor : MonoBehaviour
 {
     private float currentTarget;
@@ -13,11 +18,15 @@ public class Conductor : MonoBehaviour
     [SerializeField] private float shrinkSpeed = 0.1f;
     [SerializeField] private float waitTime = 3;
     private WaitForSeconds waitForSeconds;
+    [Header("Fmod")]
+    [SerializeField] private StudioEventEmitter conductorEvent;
+    [SerializeField] [ParamRef] private string conductorExtentsParam;
 
     private void Awake()
     {
         objectsInRadius = new List<GameObject>();
         waitForSeconds = new WaitForSeconds(waitTime);
+        conductorEvent = GetComponent<StudioEventEmitter>();
     }
 
     [ContextMenu("Grow")]
@@ -28,9 +37,15 @@ public class Conductor : MonoBehaviour
         StartCoroutine(GrowWaitShrinkRoutine(growSpeed, shrinkSpeed));
     }
 
+    private void Update()
+    {
+        conductorEvent.SetParameter(conductorExtentsParam, transform.localScale.x * 2);
+    }
 
     private IEnumerator GrowWaitShrinkRoutine(float growingSpeed, float shrinkingSpeed)
     {
+        if (!conductorEvent.IsPlaying()) conductorEvent.Play();
+
         while (math.abs(transform.localScale.x - currentTarget) > 0.25f)
         {
             transform.localScale = Vector3.Slerp(transform.localScale, Vector3.one * currentTarget,
@@ -46,6 +61,7 @@ public class Conductor : MonoBehaviour
                 Vector3.Slerp(transform.localScale, Vector3.one * minRadius, shrinkingSpeed * Time.deltaTime);
             yield return null;
         }
+        conductorEvent.Stop();
     }
 
 

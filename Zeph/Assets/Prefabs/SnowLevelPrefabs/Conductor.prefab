@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8749495076832523041}
   - component: {fileID: 7171645747988131782}
   - component: {fileID: 1560543963536927576}
-  - component: {fileID: 3405558585916758156}
+  - component: {fileID: 4334573176246547288}
+  - component: {fileID: 321141422644933831}
   m_Layer: 17
   m_Name: Effect Sphere
   m_TagString: Untagged
@@ -111,7 +112,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3405558585916758156
+--- !u!114 &4334573176246547288
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,6 +129,31 @@ MonoBehaviour:
   minRadius: 1
   shrinkSpeed: 0.1
   waitTime: 3
+  conductorEvent: {fileID: 321141422644933831}
+  conductorExtentsParam: ConductorExtents
+--- !u!114 &321141422644933831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016216754623253301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Effects/Interactables/Conductor
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &2674243735881140394
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +459,7 @@ MonoBehaviour:
   onPromote:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3405558585916758156}
+      - m_Target: {fileID: 4334573176246547288}
         m_MethodName: Grow
         m_Mode: 1
         m_Arguments:
