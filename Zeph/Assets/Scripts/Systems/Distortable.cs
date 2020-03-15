@@ -5,7 +5,7 @@ using UnityEngine;
 public class Distortable : MonoBehaviour
 {
     [SerializeField] private Animator myAnim;
-    public Colliders colliders = default;
+    [SerializeField] private Colliders colliders = default;
     private static readonly int distort = Animator.StringToHash("Distort");
     
 
@@ -42,7 +42,8 @@ public class Distortable : MonoBehaviour
         myAnim.SetBool(distort, Distortion.IsDistorting);
     }
     
-    public struct Colliders
+    [Serializable]
+    private struct Colliders
     {
         public Collider normal;
         // ReSharper disable once MemberHidesStaticFromOuterClass
