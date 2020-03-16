@@ -6,12 +6,13 @@ public class VineBridge : Growable
 {
     private Material mat;
     [SerializeField] private float matX;
+    [SerializeField] private float finalValue;
+    [SerializeField] private float finalDistortValue;
 
     protected override void Initialize()
     {
         base.Initialize();
         AspectType = AspectType.VineBridge;
-        //Debug.Log("Vine");
     }
 
     void Start()
@@ -50,7 +51,7 @@ public class VineBridge : Growable
                 Animator.SetBool(distort, false);
             }
 
-            if (Animator.GetBool(distort) && matX < 1 && matX > -13)
+            if (Animator.GetBool(distort) && matX < finalValue && matX > finalDistortValue)
             {
                 matX -= 5 * Time.deltaTime;
             }
@@ -62,7 +63,7 @@ public class VineBridge : Growable
     private void BridgePromote()
     {
         if (matX >= 1)
-            {
+        {
                 if (growSoundEmitter)
                 {
                     if (Animator)
@@ -77,8 +78,8 @@ public class VineBridge : Growable
                 }
 
                 Animator.SetBool(growing, true);
-                StartCoroutine(BridgeAppear());
-            }
+                StartCoroutine(BridgeAppear()); 
+        }
     }
     
     //TODO implement a while loop rather than using recursive calls
@@ -89,12 +90,12 @@ public class VineBridge : Growable
         {
             if (Animator.GetBool(distort) && HasGrown)
             {
-                matX = -14;
+                matX = finalDistortValue;
             }
 
             if (!Animator.GetBool(distort))
             {
-                if (matX >= 1)
+                if (matX >= finalValue)
                 {
                     matX -= 5 * Time.deltaTime;
                     StartCoroutine(BridgeAppear());
@@ -102,13 +103,12 @@ public class VineBridge : Growable
                 else
                 {
                     HasGrown = true;
-
                     StopCoroutine(BridgeAppear());
                 }
             }
             else if (Animator.GetBool(distort))
             {
-                if (matX >= -13)
+                if (matX >= finalDistortValue)
                 {
                     matX -= 5 * Time.deltaTime;
                     StartCoroutine(BridgeAppear());
@@ -122,7 +122,7 @@ public class VineBridge : Growable
         }
         else
         {
-            if (matX >= 1)
+            if (matX >= finalValue)
             {
                 matX -= 5 * Time.deltaTime;
                 StartCoroutine(BridgeAppear());
