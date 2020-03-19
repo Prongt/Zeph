@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -27,11 +25,11 @@ public class Interactable : MonoBehaviour
 
     private void Awake()
     {
-        // if (additionalAspects == null) additionalAspects = new List<AspectType>();
-        //
-        // if (componentsRequiredByAspects == null) componentsRequiredByAspects = new List<Type>();
-        //
-        //SetActiveAspects();
+         if (additionalAspects == null) additionalAspects = new List<AspectType>();
+        
+         if (componentsRequiredByAspects == null) componentsRequiredByAspects = new List<Type>();
+        
+        SetActiveAspects();
     }
 
     #region AspectComponents
