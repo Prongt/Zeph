@@ -85,7 +85,7 @@ public class Orbitable : Aspects
         if (centerPoint == null)
         {
             centerPoint = new GameObject("Orbit Point").transform;
-            var parent = GameObject.Find("Zeph_Animated");
+            var parent = PlayerMoveRigidbody.orbitPoint;
             centerPoint.SetParent(parent.transform);
             centerPoint.localPosition = new Vector3(0, 0.5f, 0);
         }

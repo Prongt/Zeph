@@ -61,13 +61,15 @@ namespace Movement
 
         private bool reduceDrag;
         private readonly WaitForSeconds reduceDragWaitForSeconds = new WaitForSeconds(0.25f);
-        
 
+        public static Transform orbitPoint;
         private void Awake()
         {
             rigidbody = GetComponent<Rigidbody>();
             zephAnimator = GetComponentInChildren<Animator>();
             HaltMovement = false;
+
+            orbitPoint = zephModel;
         }
 
         private void Start()
@@ -76,6 +78,7 @@ namespace Movement
             currentGravity = Physics.gravity;
             upVector = -currentGravity.normalized;
             minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
+            
 
             StartCoroutine(MovementDrag());
         }
