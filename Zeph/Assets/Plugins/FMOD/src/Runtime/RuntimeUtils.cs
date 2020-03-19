@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.IO;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -420,10 +421,8 @@ namespace FMODUnity
                     return FMODPlatform.PS4;
                 #if !UNITY_2019_2_OR_NEWER
                 case BuildTarget.StandaloneLinux:
-                #endif
-#pragma warning disable 618
                 case BuildTarget.StandaloneLinuxUniversal:
-#pragma warning restore 618
+                #endif
                 case BuildTarget.StandaloneLinux64:
                     return FMODPlatform.Linux;
                 case BuildTarget.StandaloneOSX:
@@ -454,5 +453,26 @@ namespace FMODUnity
             }
         }
         #endif
+
+        public static bool VerifyPlatformLibsExist()
+        {
+            string libPath = Application.dataPath + "/Plugins/FMOD/lib/";
+            #if UNITY_XBOXONE 
+            libPath += "xboxone/fmodstudio.dll";
+            #elif UNITY_PS4
+            libPath += "ps4/libfmodstudio.prx";
+            #elif UNITY_STADIA
+            libPath += "stadia/libfmodstudio.so";
+            #elif UNITY_SWITCH && UNITY_EDITOR // Not called at runtime because the static lib is not included in the built game.
+            libPath += "switch/libfmodstudiounityplugin.a";
+            #endif
+            if (Path.HasExtension(libPath) && !File.Exists(libPath))
+            {
+                Debug.LogWarning("[FMOD] Unable to locate '" + libPath +"'.");
+                Debug.LogWarning("[FMOD] This platform requires verification 'https://fmod.com/profile#permissions' and an additional package from 'https://fmod.com/download'.");
+                return false;
+            }
+            return true;
+        }
     }
 }
