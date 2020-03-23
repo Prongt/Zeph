@@ -14,6 +14,7 @@ public class ConfineController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+        print("I AM RUNNING");
     }
 
     // Sets camera confine position
