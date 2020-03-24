@@ -29,6 +29,11 @@ public class PillarPull : Aspects
         base.Promote(source, element);
         Vector3 direction = gameObject.transform.position - source.position;
         var dot = Vector3.Dot(direction, gameObject.transform.right);
+        if (gameObject.CompareTag("SnowPillar"))
+        {
+            dot = Vector3.Dot(direction, gameObject.transform.forward);
+        }
+        print(dot);
         if (dot > 0)
         {
             myAnim.SetBool("Fall", true);
