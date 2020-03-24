@@ -1,5 +1,56 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9214022819104094581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: ConductorExtents
+  m_EditorClassIdentifier: 
+  Name: ConductorExtents
+  Min: 0
+  Max: 40
+  Default: 1
+  Exists: 1
+--- !u!114 &-8955833918744389288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: ConductorExtents
+  m_EditorClassIdentifier: 
+  Name: ConductorExtents
+  Min: 0
+  Max: 40
+  Default: 1
+  Exists: 1
+--- !u!114 &-8740937089522898995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Goal Reached
+  m_EditorClassIdentifier: 
+  Name: Goal Reached
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-8600195249329963043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,6 +103,23 @@ MonoBehaviour:
   Max: 5
   Default: 0
   Exists: 1
+--- !u!114 &-7483861099716659327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: Distortion
+  m_EditorClassIdentifier: 
+  Name: Distortion
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-6867626413699056862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +136,23 @@ MonoBehaviour:
   Min: 0
   Max: 40
   Default: 1
+  Exists: 1
+--- !u!114 &-6701060539748369280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: CurrentLevel
+  m_EditorClassIdentifier: 
+  Name: CurrentLevel
+  Min: 0
+  Max: 5
+  Default: 0
   Exists: 1
 --- !u!114 &-6615103195378388927
 MonoBehaviour:
@@ -210,6 +295,23 @@ MonoBehaviour:
   Max: 5
   Default: 0
   Exists: 1
+--- !u!114 &-5073003397918471897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Conductor/
+  m_EditorClassIdentifier: 
+  Name: 
+  Min: 0
+  Max: 0
+  Default: 0
+  Exists: 1
 --- !u!114 &-4172997097529988213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +345,8 @@ MonoBehaviour:
   Path: event:/Effects/Water/WaterSplash
   guid: a289a65b62a6624fbb231d40b66d095c
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -284,12 +387,13 @@ MonoBehaviour:
   Path: event:/Effects/Interactables/Conductor
   guid: 137eb35664108d40a6292537f6fc9a42
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 402470824917655037}
+  - {fileID: -5073003397918471897}
   MinDistance: 1
   MaxDistance: 20
   Length: 28000
@@ -343,7 +447,8 @@ MonoBehaviour:
   Path: event:/Effects/Envirnomental/Distortion Event
   guid: b1f8e734c938814bbdb74b663ab5bb17
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -402,7 +507,8 @@ MonoBehaviour:
   Path: event:/Effects/Player Abilities/PlayerLightAbility
   guid: 09decffcc9e6e246b02c2c25f293bbb5
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -425,7 +531,8 @@ MonoBehaviour:
   Path: event:/Effects/Interactables/OrbitingLogCollision
   guid: 3a366860cc8b6b499ff8164d25a80c77
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -465,7 +572,8 @@ MonoBehaviour:
   Path: event:/Effects/Interactables/Pillar Fall
   guid: a1230ee423a1bc4eb561b6d916021a78
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -508,6 +616,24 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-2133525479047665368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Effects.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Effects.bank
+  SubDir: 
+  lastModified: 637202150908619614
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-1827332528026668658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,7 +649,8 @@ MonoBehaviour:
   Path: event:/Effects/Interactables/Box Drop
   guid: 7acb2f01a51a4649ad493d9b12ff6c34
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -546,12 +673,13 @@ MonoBehaviour:
   Path: event:/Music
   guid: ea86d36ddd5c0d4f917c7ddeb7c6a531
   Banks:
-  - {fileID: -6467532906408577674}
+  - {fileID: 3743398683654285481}
+  - {fileID: 2938732065987348307}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 8139705462239000700}
+  - {fileID: -8740937089522898995}
   MinDistance: 0
   MaxDistance: 0
   Length: 991500
@@ -570,7 +698,8 @@ MonoBehaviour:
   Path: event:/Effects/Interactables/Ivy Bridge Grow
   guid: 255ee78573e88a408924fa3624431e95
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -578,6 +707,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 15100
+--- !u!114 &-854331937957168009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637202150908629359
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-772974308588390016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,7 +757,8 @@ MonoBehaviour:
   Path: event:/Effects/Water/Flowing Water
   guid: 4b2b81d9fb2f294bbd982ab514ba87cb
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -700,9 +848,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 7165689195900389205}
-  - {fileID: 1889583891870054319}
-  - {fileID: -2377381611155253098}
-  - {fileID: -6467532906408577674}
+  - {fileID: -2133525479047665368}
+  - {fileID: -854331937957168009}
+  - {fileID: 2938732065987348307}
   EditorEvents:
   - {fileID: -2611802243152315699}
   - {fileID: 3960358427202756481}
@@ -723,14 +871,14 @@ MonoBehaviour:
   - {fileID: 8644701137690902481}
   - {fileID: -1682025833778202768}
   EditorParameters:
-  - {fileID: 256809676025895960}
-  - {fileID: 636187881012115485}
-  - {fileID: 6376456317264954711}
+  - {fileID: 2775231662435206827}
+  - {fileID: -6701060539748369280}
+  - {fileID: -9214022819104094581}
   MasterBanks:
-  - {fileID: -2377381611155253098}
+  - {fileID: -854331937957168009}
   StringsBanks:
   - {fileID: 7165689195900389205}
-  stringsBankWriteTime: 637199632603485195
+  stringsBankWriteTime: 637199600447033260
   cacheVersion: 3
 --- !u!114 &256809676025895960
 MonoBehaviour:
@@ -817,6 +965,23 @@ MonoBehaviour:
   Max: 5
   Default: 0
   Exists: 1
+--- !u!114 &1736223927174558269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Goal Reached
+  m_EditorClassIdentifier: 
+  Name: Goal Reached
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &1889583891870054319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,6 +1018,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &2251067603586820023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Conductor/
+  m_EditorClassIdentifier: 
+  Name: 
+  Min: 0
+  Max: 0
+  Default: 0
+  Exists: 0
 --- !u!114 &2291911059684368034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,6 +1070,76 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &2527624770869509717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: CurrentLevel
+  m_EditorClassIdentifier: 
+  Name: CurrentLevel
+  Min: 0
+  Max: 5
+  Default: 0
+  Exists: 1
+--- !u!114 &2775231662435206827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: Distortion
+  m_EditorClassIdentifier: 
+  Name: Distortion
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &2938732065987348307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Music.bank
+  SubDir: 
+  lastModified: 637202150909559875
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &3743398683654285481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Music.bank
+  SubDir: 
+  lastModified: 637202150909559875
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &3792431467540982804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -903,7 +1155,8 @@ MonoBehaviour:
   Path: event:/Effects/Player Abilities/PlayerWindAbility
   guid: 69bc35b54ebd444187bf3e5afd4d0fce
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -926,7 +1179,8 @@ MonoBehaviour:
   Path: event:/Effects/Ice/IceMelt
   guid: 1118bf05b3bab04f98584876dd2fdaf4
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -1000,7 +1254,8 @@ MonoBehaviour:
   Path: snapshot:/Reverb
   guid: 99f139226474384f89c7994911a93522
   Banks:
-  - {fileID: -2377381611155253098}
+  - {fileID: 9019922958797999551}
+  - {fileID: -854331937957168009}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -1058,7 +1313,8 @@ MonoBehaviour:
   Path: event:/Effects/Ice/IceFreeze
   guid: 7e3aef602df22545b2faed92419534ce
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1118,6 +1374,24 @@ MonoBehaviour:
   Max: 40
   Default: 1
   Exists: 1
+--- !u!114 &6615221618984564709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Effects.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Effects.bank
+  SubDir: 
+  lastModified: 637202150908619614
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &6720084495930305547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1133,7 +1407,8 @@ MonoBehaviour:
   Path: event:/Effects/Interactables/FireCrackling
   guid: f5e387f56c40fe468a3a85fb1cb76106
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -1156,7 +1431,8 @@ MonoBehaviour:
   Path: event:/Effects/Player Abilities/PlayerFireAbility
   guid: 7da1143ed80b8f4ca6dd2e42e66eea9c
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1196,7 +1472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: ../ZephAudio/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637199632603485195
+  lastModified: 637199600447033260
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1234,7 +1510,8 @@ MonoBehaviour:
   Path: event:/Effects/Interactables/Flower Grow
   guid: bff1357f0deab34fbc36267ed0d3a335
   Banks:
-  - {fileID: 1889583891870054319}
+  - {fileID: 6615221618984564709}
+  - {fileID: -2133525479047665368}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1291,7 +1568,8 @@ MonoBehaviour:
   Path: snapshot:/Distortion
   guid: d405cab6ef818e42aa601637efaa745a
   Banks:
-  - {fileID: -2377381611155253098}
+  - {fileID: 9019922958797999551}
+  - {fileID: -854331937957168009}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -1315,4 +1593,22 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+  Exists: 1
+--- !u!114 &9019922958797999551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637202150908629359
+  LoadResult: 0
+  FileSizes: []
   Exists: 1
