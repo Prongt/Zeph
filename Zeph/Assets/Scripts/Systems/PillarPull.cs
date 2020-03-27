@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Boo.Lang.Environments;
 using UnityEngine;
 
 public class PillarPull : Aspects
