@@ -128,6 +128,8 @@ namespace Movement
             {
                 zephAnimator = GetComponentInChildren<Animator>();
             }
+
+            zephAnimator.enabled = true;
         }
 
         private IEnumerator MovementDrag()
