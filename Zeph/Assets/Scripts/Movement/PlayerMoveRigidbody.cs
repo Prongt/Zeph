@@ -80,7 +80,6 @@ namespace Movement
             currentGravity = Physics.gravity;
             upVector = -currentGravity.normalized;
             minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
-            
 
             StartCoroutine(MovementDrag());
         }
@@ -224,7 +223,7 @@ namespace Movement
 
         private void ManageAnimation()
         {
-            //if (StopMovementAndPhysics) return;
+            
             
             zephAnimator.SetBool(jumpVariable, !OnGround);
 
@@ -233,7 +232,7 @@ namespace Movement
                 StopCoroutine(DanceRoutine());
                 StartCoroutine(DanceRoutine());
             }
-
+            if (StopMovementAndPhysics) return;
             zephAnimator.SetFloat(moveVariable, desiredVelocity.magnitude > 0.25f ? 1.0f : 0f);
         }
 
