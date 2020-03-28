@@ -88,9 +88,18 @@ namespace Movement
 
         private void Update()
         {
-            HaltMovement = StopMovementAndPhysics;
-            rigidbody.useGravity = StopMovementAndPhysics;
-            rigidbody.isKinematic = StopMovementAndPhysics;
+            if (StopMovementAndPhysics)
+            {
+                HaltMovement = true;
+                rigidbody.useGravity = true;
+                rigidbody.isKinematic = true;
+            }
+            else
+            {
+                HaltMovement = false;
+                rigidbody.useGravity = false;
+                rigidbody.isKinematic = false;
+            }
         
         
         
