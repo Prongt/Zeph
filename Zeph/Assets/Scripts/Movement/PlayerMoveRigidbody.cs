@@ -9,7 +9,8 @@ namespace Movement
     {
         private static readonly int isDancing = Animator.StringToHash("IsDancing");
         public static bool HaltMovement;
-
+        public bool StopMovementAndPhysics = false;
+        
         [Header("Movement")] [SerializeField] [Range(0f, 100f)]
         private float acceleration = 100f;
 
@@ -87,6 +88,12 @@ namespace Movement
 
         private void Update()
         {
+            HaltMovement = StopMovementAndPhysics;
+            rigidbody.useGravity = StopMovementAndPhysics;
+            rigidbody.isKinematic = StopMovementAndPhysics;
+        
+        
+        
             GravitySwitching();
             ManageAnimation();
             HandlePlayerInput();

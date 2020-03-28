@@ -7,6 +7,8 @@ using UnityEngine.VFX;
 
 public class PlayerElementController : MonoBehaviour
 {
+    public bool BlockPowers = false;
+
     public PlayerElementData[] elementData;
     [SerializeField] private float height = 1;
     [SerializeField] private bool drawGizmos = false;
@@ -39,6 +41,8 @@ public class PlayerElementController : MonoBehaviour
 
     private void Update()
     {
+        if (BlockPowers) return;
+    
         if (light.intensity >= 95f)
         {
             light.intensity = Mathf.Lerp(light.intensity, 94, 0.5f * Time.deltaTime);
