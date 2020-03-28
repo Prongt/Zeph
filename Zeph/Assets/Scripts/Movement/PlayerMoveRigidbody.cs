@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -102,6 +103,14 @@ namespace Movement
             else
             {
                 timeSinceGrounded += Time.deltaTime;   
+            }
+        }
+
+        private void OnEnable()
+        {
+            if (zephAnimator == null)
+            {
+                zephAnimator = GetComponentInChildren<Animator>();
             }
         }
 
