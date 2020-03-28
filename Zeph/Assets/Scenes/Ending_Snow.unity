@@ -24908,7 +24908,6 @@ GameObject:
   m_Component:
   - component: {fileID: 633995471}
   - component: {fileID: 633995470}
-  - component: {fileID: 633995469}
   m_Layer: 0
   m_Name: Snow Level Timeline
   m_TagString: Untagged
@@ -24916,25 +24915,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &633995469
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633995468}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!320 &633995470
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -24945,7 +24925,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 05352143ab5561b4c8a86373508f73f2, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -42716,37 +42696,37 @@ PrefabInstance:
     - target: {fileID: 9208862592938453265, guid: 9f50a790dd832c84a8a8e8934c841229,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.794952
+      value: -13.49495
       objectReference: {fileID: 0}
     - target: {fileID: 9208862592938453265, guid: 9f50a790dd832c84a8a8e8934c841229,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.542973
+      value: 18.04297
       objectReference: {fileID: 0}
     - target: {fileID: 9208862592938453265, guid: 9f50a790dd832c84a8a8e8934c841229,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 91.648125
+      value: 138.95001
       objectReference: {fileID: 0}
     - target: {fileID: 9208862592938453265, guid: 9f50a790dd832c84a8a8e8934c841229,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0000000128821585
+      value: -0.00000002474288
       objectReference: {fileID: 0}
     - target: {fileID: 9208862592938453265, guid: 9f50a790dd832c84a8a8e8934c841229,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.98144287
+      value: 0.99539196
       objectReference: {fileID: 0}
     - target: {fileID: 9208862592938453265, guid: 9f50a790dd832c84a8a8e8934c841229,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.19175473
+      value: -0.095890224
       objectReference: {fileID: 0}
     - target: {fileID: 9208862592938453265, guid: 9f50a790dd832c84a8a8e8934c841229,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0000001868099
+      value: -0.000000427621
       objectReference: {fileID: 0}
     - target: {fileID: 9208862592938453265, guid: 9f50a790dd832c84a8a8e8934c841229,
         type: 3}
@@ -61933,6 +61913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308a6e1d644397942ac53e779b7a3eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeline: {fileID: 633995470}
 --- !u!65 &1444105165
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -86733,7 +86714,7 @@ PrefabInstance:
     - target: {fileID: 933983065396221027, guid: 79fbcdfe73814b64aa5b88df483ec81f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 146.07
+      value: 129.8
       objectReference: {fileID: 0}
     - target: {fileID: 933983065396221027, guid: 79fbcdfe73814b64aa5b88df483ec81f,
         type: 3}
@@ -94694,7 +94675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1918433646
 Transform:
   m_ObjectHideFlags: 0
@@ -94703,7 +94684,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1918433645}
   m_LocalRotation: {x: -0.00000002474288, y: 0.99539196, z: -0.095890224, w: -0.000000427621}
-  m_LocalPosition: {x: -13.49495, y: 18.04297, z: 155.22}
+  m_LocalPosition: {x: -13.49495, y: 18.04297, z: 138.95001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 465006152}
@@ -94726,7 +94707,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 20
   m_LookAt: {fileID: 1800908497}
   m_Follow: {fileID: 1800908497}
   m_Lens:
