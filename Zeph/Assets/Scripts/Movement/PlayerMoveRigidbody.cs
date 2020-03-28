@@ -68,7 +68,7 @@ namespace Movement
         private void Awake()
         {
             rigidbody = GetComponent<Rigidbody>();
-            zephAnimator = GetComponentInChildren<Animator>();
+            //zephAnimator = GetComponentInChildren<Animator>();
             HaltMovement = false;
 
             orbitPoint = zephModel;
@@ -91,14 +91,12 @@ namespace Movement
             if (StopMovementAndPhysics)
             {
                 HaltMovement = true;
-                rigidbody.useGravity = true;
-                rigidbody.isKinematic = true;
+                rigidbody.Sleep();
+                groundContactCount = 2;
             }
             else
             {
                 HaltMovement = false;
-                rigidbody.useGravity = false;
-                rigidbody.isKinematic = false;
             }
         
         
@@ -122,15 +120,15 @@ namespace Movement
             }
         }
 
-        private void OnEnable()
-        {
-            if (zephAnimator == null)
-            {
-                zephAnimator = GetComponentInChildren<Animator>();
-            }
-
-            zephAnimator.enabled = true;
-        }
+        // private void OnEnable()
+        // {
+        //     if (zephAnimator == null)
+        //     {
+        //         zephAnimator = GetComponentInChildren<Animator>();
+        //     }
+        //
+        //     zephAnimator.enabled = true;
+        // }
 
         private IEnumerator MovementDrag()
         {
@@ -226,6 +224,8 @@ namespace Movement
 
         private void ManageAnimation()
         {
+            //if (StopMovementAndPhysics) return;
+            
             zephAnimator.SetBool(jumpVariable, !OnGround);
 
             if (Input.GetKeyDown(KeyCode.M))
