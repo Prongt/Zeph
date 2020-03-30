@@ -92,6 +92,7 @@ namespace Movement
                 HaltMovement = true;
                 rigidbody.Sleep();
                 groundContactCount = 2;
+                hasScheduledJump = false;
             }
             else
             {
