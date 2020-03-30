@@ -15,7 +15,7 @@ public class PlayerElementController : MonoBehaviour
     [HideIf("drawGizmos", true)][SerializeField] private float gizmoHeight = 1.0f;
     private new Light light;
 
-    private Animator animator;
+    [SerializeField]private Animator animator;
 
     [SerializeField] private VisualEffect fireEffect = default;
     [SerializeField] private VisualEffect leafEffect = default;
@@ -31,7 +31,7 @@ public class PlayerElementController : MonoBehaviour
     private void Awake()
     {
         light = GetComponentInChildren<Light>();
-        animator = GetComponentInChildren<Animator>();
+        //animator = GetComponentInChildren<Animator>();
 
         for (var i = 0; i < elementData.Length; i++)
         {
