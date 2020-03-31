@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -15,13 +14,14 @@ namespace Movement
         private float acceleration = 100f;
 
         [SerializeField] [Range(0f, 100f)] private float airAcceleration = 100f;
-        [SerializeField] [Range(0f, 1f)] private float coyoteTime = 0.125f;
 
         private Vector3 currentGravity;
         private readonly WaitForSeconds danceWaitForSeconds = new WaitForSeconds(8f);
         private Vector3 desiredVelocity;
         [Range(0f, 100f)] [SerializeField] private float dragWhileMoving = 0.01f;
         [Range(0f, 200f)] [SerializeField] private float dragWhileStopped = 100f;
+        [SerializeField] [Range(0, 90)] private float maxGroundAngle = 50f;
+        private float minGroundDotProduct;
 
         [Header("Gravity")] [SerializeField] [Range(0f, 5f)]
         private float gravityFlipTime = 2.0f;
@@ -31,32 +31,37 @@ namespace Movement
         private Vector3 groundContactNormal;
 
         private bool hasScheduledJump;
-        [Range(0f, 1f)] [SerializeField] private float inputLimit = 0.125f;
+        
 
 
         [Header("Jumping")] [SerializeField] [Range(0f, 10f)]
         private float jumpHeight = 1.3f;
-        [SerializeField] private string jumpVariable = "IsJumping";
+        [SerializeField] [Range(0f, 1f)] private float coyoteTime = 0.125f;
+        private float timeSinceGrounded;
         private bool isJumping = false;
-        [SerializeField] [Range(0, 90)] private float maxGroundAngle = 50f;
-
-        private float minGroundDotProduct;
-        [SerializeField] private string moveVariable = "moveSpeed";
+        
+        
 
         private Vector2 playerInput;
+        [Header("Input")]
+        [Range(0f, 1f)] [SerializeField] private float inputLimit = 0.125f;
         [SerializeField] private bool reverseX = false;
         [SerializeField] private bool reverseY = false;
-        private new Rigidbody rigidbody;
-        [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
-        [SerializeField] [Range(0f, 100f)] private float speed = 5f;
         [SerializeField] private bool swapMovementAxis = false;
-        private float timeSinceGrounded;
+        
         private Vector3 upVector;
         private Vector3 velocity;
+        private new Rigidbody rigidbody;
 
-        [Header("Animation")] [SerializeField] private Animator zephAnimator;
+        [Header("Animation")] 
+        [SerializeField] private Animator zephAnimator;
+        [SerializeField] private string moveVariable = "moveSpeed";
+        [SerializeField] private string jumpVariable = "IsJumping";
 
-        [Header("Rotation")] [SerializeField] private Transform zephModel = default;
+        [Header("Rotation")] 
+        [SerializeField] private Transform zephModel = default;
+        [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
+        [SerializeField] [Range(0f, 100f)] private float speed = 5f;
 
         private bool OnGround => groundContactCount > 0;
         private bool ZGravity => currentGravity.z < 0 || currentGravity.z > 0;
@@ -118,17 +123,10 @@ namespace Movement
             {
                 timeSinceGrounded += Time.deltaTime;   
             }
-        }
 
-        // private void OnEnable()
-        // {
-        //     if (zephAnimator == null)
-        //     {
-        //         zephAnimator = GetComponentInChildren<Animator>();
-        //     }
-        //
-        //     zephAnimator.enabled = true;
-        // }
+            if (OnGround) isJumping = false;
+        }
+        
 
         private IEnumerator MovementDrag()
         {
@@ -224,8 +222,6 @@ namespace Movement
 
         private void ManageAnimation()
         {
-            
-            
             zephAnimator.SetBool(jumpVariable, !OnGround);
 
             if (Input.GetKeyDown(KeyCode.M))
@@ -299,22 +295,35 @@ namespace Movement
         {
             if (!hasScheduledJump) return;
             hasScheduledJump = false;
-            
-            if (OnGround) isJumping = false;
-            if (isJumping) return;
-            
-            if (!OnGround && !(timeSinceGrounded < coyoteTime)) return;
 
-            isJumping = true;
+            if (isJumping) return;
+ 
+            if (OnGround)
+            {
+                isJumping = true;
+            }
+            else
+            {
+                if (timeSinceGrounded < coyoteTime)
+                {
+                    isJumping = true;
+                }
+                else
+                {
+                    return;
+                }
+            }
             
             Vector3 jumpDirection = groundContactNormal;
+            
+            if (timeSinceGrounded < coyoteTime)
+            {
+                jumpDirection = upVector;
+            }
 
             float jumpSpeed;
             float force;
-            
-            //force
-            
-            
+
             if (currentGravity.z < 0)
                 force = currentGravity.z;
             else if (currentGravity.z > 0)
