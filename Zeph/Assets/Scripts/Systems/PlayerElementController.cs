@@ -42,10 +42,13 @@ public class PlayerElementController : MonoBehaviour
     private void Update()
     {
         if (BlockPowers) return;
-    
-        if (light.intensity >= 95f)
+
+        if (light)
         {
-            light.intensity = Mathf.Lerp(light.intensity, 94, 0.5f * Time.deltaTime);
+            if (light.intensity >= 95f)
+            {
+                light.intensity = Mathf.Lerp(light.intensity, 94, 0.5f * Time.deltaTime);
+            }
         }
 
         UsePowers();

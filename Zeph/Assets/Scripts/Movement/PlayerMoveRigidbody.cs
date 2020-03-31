@@ -50,7 +50,7 @@ namespace Movement
         [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
         [SerializeField] [Range(0f, 100f)] private float speed = 5f;
         [SerializeField] private bool swapMovementAxis = false;
-        [SerializeField] private float timeSinceGrounded;
+        private float timeSinceGrounded;
         private Vector3 upVector;
         private Vector3 velocity;
 
