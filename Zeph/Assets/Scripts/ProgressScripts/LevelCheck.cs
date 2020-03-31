@@ -7,7 +7,6 @@ public class LevelCheck : MonoBehaviour
     [SerializeField] private GameObject tutorialButton = default;
     [SerializeField] private GameObject forestButton = default;
     [SerializeField] private GameObject snowButton = default;
-    [SerializeField] private GameObject caveButton = default;
 
     [SerializeField] private List<GameObject> mosaicPieces = default;
 
@@ -25,27 +24,22 @@ public class LevelCheck : MonoBehaviour
         levelNum = GameObject.Find("Player Progress").GetComponent<LevelProgress>().playerProgress;
         
 //        print(levelNum);
-        if (levelNum >= 0)
+        if (levelNum == 0)
         {
             tutorialButton.SetActive(true);
         }
-        if (levelNum >= 0)
-        {
-            caveButton.SetActive(true);
-            mosaicPieces[0].SetActive(true);
-        }
-        if (levelNum >= 0)
+        if (levelNum == 1)
         {
             snowButton.SetActive(true);
-            mosaicPieces[1].SetActive(true);
+            //mosaicPieces[1].SetActive(true);
         }
-        if (levelNum >= 0)
+        if (levelNum == 2)
         {
             forestButton.SetActive(true);
-            mosaicPieces[2].SetActive(true);
+            //mosaicPieces[2].SetActive(true);
         }
 
-        if (levelNum >= 4)
+        if (levelNum == 4)
         {
             mosaicPieces[3].SetActive(true);
         }

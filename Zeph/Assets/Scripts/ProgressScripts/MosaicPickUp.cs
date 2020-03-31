@@ -25,7 +25,7 @@ public class MosaicPickUp : MonoBehaviour
         {
             if (myProg != null)
             {
-                if (myProg.playerProgress < 4)
+                if (myProg.playerProgress < 3)
                 {
                     myProg.playerProgress += 1;
                 }
