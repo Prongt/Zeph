@@ -23,9 +23,12 @@ public class MosaicPickUp : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player"))
         {
-            if (myProg.playerProgress < 4)
+            if (myProg != null)
             {
-                myProg.playerProgress += 1;
+                if (myProg.playerProgress < 4)
+                {
+                    myProg.playerProgress += 1;
+                }
             }
 
             SceneManager.LoadScene("Hub");
