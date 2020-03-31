@@ -56,6 +56,12 @@ public class CameraFlip : MonoBehaviour
       hasFlippedZ = !hasFlippedZ;
    }
 
+   public void ChangeYOffset()
+   {
+      Vector3 followOffset = myCam.GetCinemachineComponent<CinemachineOrbitalTransposer>().m_FollowOffset;
+      myCam.GetCinemachineComponent<CinemachineOrbitalTransposer>().m_FollowOffset = new Vector3(followOffset.x, 8, followOffset.z);
+   }
+
    //Mainly for the Vert Slice scene/Cave Scene. Flips the camera if the player falls after the camera has previously been flipped.
    void OnTriggerEnter(Collider other) {
 
