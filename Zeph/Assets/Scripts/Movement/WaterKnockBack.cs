@@ -1,8 +1,10 @@
-﻿using FMODUnity;
+﻿using System;
+using FMODUnity;
 using UnityEngine;
 
 namespace Movement
 {
+
     public class WaterKnockBack : MonoBehaviour
     {
         [SerializeField] private bool applyKnockBackForce = false;
@@ -10,12 +12,21 @@ namespace Movement
         [SerializeField] private bool teleportPlayer = false;
         [HideIf("teleportPlayer", true)][SerializeField] private Transform teleportPosition = default;
         [EventRef][SerializeField] private string fmodEvent = default;
+        [SerializeField] private bool disableDuringDistort = false;
 
         private PlayerMoveRigidbody playerMoveRigidbody;
+        private Collider collider;
 
         private void Start()
         {
             playerMoveRigidbody = FindObjectOfType<PlayerMoveRigidbody>();
+            collider = GetComponent<Collider>();
+        }
+
+        private void Update()
+        {
+            if (!disableDuringDistort) return;
+            collider.isTrigger = Distortion.IsDistorting;
         }
 
         private void OnCollisionEnter(Collision col)
@@ -38,5 +49,6 @@ namespace Movement
         
             RuntimeManager.PlayOneShot(fmodEvent, col.contacts[0].point);
         }
+        
     }
 }

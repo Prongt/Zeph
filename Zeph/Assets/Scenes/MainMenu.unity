@@ -301,6 +301,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &34505039 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8074763108548394223, guid: d5d98fb0cb706cd43ae265550a4597f9,
+    type: 3}
+  m_PrefabInstance: {fileID: 8074763108255016605}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &98778466
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,30 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f966f2608315dd4cad8be6f5c76d039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &289895259 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8074763108548394217, guid: d5d98fb0cb706cd43ae265550a4597f9,
-    type: 3}
-  m_PrefabInstance: {fileID: 8074763108255016605}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &383040162 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8074763106775891147, guid: d5d98fb0cb706cd43ae265550a4597f9,
-    type: 3}
-  m_PrefabInstance: {fileID: 8074763108255016605}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  endingToLoad: 
 --- !u!1 &394465647
 GameObject:
   m_ObjectHideFlags: 0
@@ -5367,7 +5350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 34505039}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1827794954
@@ -5402,10 +5385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9288a01624562a3448c7eddecfac31c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuOptions:
-  - {fileID: 289895259}
-  - {fileID: 383040162}
-  curPos: 0
+  eve: {fileID: 1827794953}
+  defaultButton: {fileID: 34505039}
 --- !u!1001 &8074763108255016605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5611,7 +5592,7 @@ PrefabInstance:
     - target: {fileID: 8074763108548394217, guid: d5d98fb0cb706cd43ae265550a4597f9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Hub
+      value: TutorialPuzzle
       objectReference: {fileID: 0}
     - target: {fileID: 8074763108548394217, guid: d5d98fb0cb706cd43ae265550a4597f9,
         type: 3}

@@ -12,6 +12,22 @@ public class PowerDisabler : MonoBehaviour
         ElementStateChanger();
     }
 
+    private void OnDestroy()
+    {
+    //TODO remove duplicate code
+        foreach (var elementData in playerElementController.elementData)
+        {
+            foreach (var elementState in elementsToDisable)
+            {
+                if (elementData.element == elementState.element)
+                {
+                    elementData.element.PowerIsEnabled = true;
+                }
+            }
+        }
+    }
+
+
     private void ElementStateChanger()
     {
         foreach (var elementData in playerElementController.elementData)

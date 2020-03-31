@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using FMODUnity;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.HighDefinition;
 
 public class Distortion : Aspects
 {
@@ -77,6 +72,11 @@ public class Distortion : Aspects
             }
             
         }
+    }
+
+    private void OnDestroy()
+    {
+        IsDistorting = false;
     }
 
     private bool CheckIfChromaticAberrationAttached()
