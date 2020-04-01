@@ -15,20 +15,21 @@ public class GrowableTree : Growable
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-
         Animator.SetBool(grow, true);
-            
-        
     }
 
     private void Update()
     {
-        Animator.SetBool(distort, Distortion.IsDistorting);
-        
+        if (Animator.GetBool(grow))
+        {
+            Animator.SetBool(distort, Distortion.IsDistorting);
+        }
+
         if (gameObject.CompareTag("VerticalSlice"))
         {
             if (Animator.GetBool(distort) && Animator.GetBool(grow))
             {
+                Debug.Log("Distort");
                 colliders.small.isTrigger = true;
                 colliders.distort.enabled = true;
                 colliders.grown.enabled = false;
@@ -44,6 +45,7 @@ public class GrowableTree : Growable
             return;
         }
 
+        Debug.Log("Hello");
         if (Distortion.IsDistorting)
         {
             Animator.SetBool(distort, true);
