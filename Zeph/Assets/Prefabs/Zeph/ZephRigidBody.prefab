@@ -254,22 +254,22 @@ MonoBehaviour:
   StopMovementAndPhysics: 0
   acceleration: 100
   airAcceleration: 100
-  coyoteTime: 0.125
   dragWhileMoving: 0
   dragWhileStopped: 100
-  gravityFlipTime: 2
-  inputLimit: 0.125
-  jumpHeight: 1.3
-  jumpVariable: IsJumping
   maxGroundAngle: 50
-  moveVariable: moveSpeed
+  gravityFlipTime: 2
+  jumpHeight: 1.3
+  coyoteTime: 0.125
+  inputLimit: 0.125
   reverseX: 0
   reverseY: 0
-  rotationModifier: 1
-  speed: 5
   swapMovementAxis: 0
   zephAnimator: {fileID: 7680641887084716852}
+  moveVariable: moveSpeed
+  jumpVariable: IsJumping
   zephModel: {fileID: 5945216272781265141}
+  rotationModifier: 1
+  speed: 5
 --- !u!54 &933983065396221030
 Rigidbody:
   m_ObjectHideFlags: 0
