@@ -7,6 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(StudioEventEmitter))]
 public class Conductor : MonoBehaviour
 {
+    public static Transform GlobalConductor;
+
     private float currentTarget;
     [SerializeField] private float growSpeed = 0.25f;
     [SerializeField] private float maxRadius = 25f;
@@ -29,6 +31,7 @@ public class Conductor : MonoBehaviour
     [ContextMenu("Grow")]
     public void Grow()
     {
+        GlobalConductor = this.transform;
         currentTarget = maxRadius;
         StopAllCoroutines();
         StartCoroutine(GrowWaitShrinkRoutine(growSpeed, shrinkSpeed));
