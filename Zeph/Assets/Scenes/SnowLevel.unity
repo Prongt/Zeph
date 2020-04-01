@@ -32767,6 +32767,16 @@ PrefabInstance:
       propertyPath: m_BlendShapeWeights.Array.data[0]
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 6482771270257789699, guid: 2a948affe8e59454187a1b8a5af132dc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482771270257789699, guid: 2a948affe8e59454187a1b8a5af132dc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 61d2dc184791a7e41bd33477d61dbaf0, type: 2}
     - target: {fileID: 6572605082563947185, guid: 2a948affe8e59454187a1b8a5af132dc,
         type: 3}
       propertyPath: m_Enabled
@@ -32829,6 +32839,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a948affe8e59454187a1b8a5af132dc, type: 3}
+--- !u!1 &3537889549611065014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4771835226547953701, guid: 2a948affe8e59454187a1b8a5af132dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 3537889549611065013}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3537889549611065015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3537889549611065014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd00faecfec56844b7157887c680ff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conductor: {fileID: 596741070}
+  radius: 0.5
 --- !u!95 &3673345950158619479
 Animator:
   serializedVersion: 3
@@ -33409,7 +33439,7 @@ MeshCollider:
   m_GameObject: {fileID: 6792045388235215224}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 30
@@ -33642,7 +33672,7 @@ Transform:
   m_GameObject: {fileID: 6792045388235215224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.03, y: 1.03, z: 1.03}
+  m_LocalScale: {x: 0.99, y: 0.99, z: 0.99}
   m_Children: []
   m_Father: {fileID: 969128250}
   m_RootOrder: 1
