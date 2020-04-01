@@ -32,6 +32,11 @@ public class Interactable : MonoBehaviour
         SetActiveAspects();
     }
 
+    public void Enable()
+    {
+        isFrozen = false;
+    }
+
     #region AspectComponents
 
     /// <summary>
