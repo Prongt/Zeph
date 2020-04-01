@@ -6,24 +6,16 @@ using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
-    public List<GameObject> checkpoints;
+    public static List<GameObject> checkpoints;
+    [Tooltip("Set your checkpoints here")]
+    public List<GameObject> setCheckpoints; 
     public static GameObject curCheckpoint;
+    protected static int checkPointCount = 0;
     
-    //This script is put on a trigger currently. Works best for 2 checkpoint levels right now
-    //this is put on the second checkpoint
-    
-    //TODO Rewrite code to be more flexible for more checkpoints.
     
     void Start()
     {
-        curCheckpoint = checkpoints[0];
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            curCheckpoint = checkpoints[1];
-        }
+        checkpoints = setCheckpoints;
+        curCheckpoint = checkpoints[checkPointCount];
     }
 }

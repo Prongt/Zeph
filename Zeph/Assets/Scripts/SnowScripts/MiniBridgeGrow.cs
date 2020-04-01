@@ -1,7 +1,8 @@
-﻿using Unity.Mathematics;
+﻿using System;
+using Unity.Mathematics;
 using UnityEngine;
 
-public class MiniBridgeGrow : MonoBehaviour
+public class MiniBridgeGrow : Aspects
 {
     private Renderer meshRenderer;
 
@@ -23,6 +24,27 @@ public class MiniBridgeGrow : MonoBehaviour
         }
 
         desiredValue = unGrownXValue;
+    }
+
+    public Type[] componentTypes =
+    {
+    };
+    
+    public override Type[] RequiredComponents()
+    {
+        return componentTypes;
+    }
+
+    public override void Promote(Transform source = null, Element element = null)
+    {
+        base.Promote(source, element);
+        //SetGrow(grownXValue, growSpeed);
+        print("Promoted");
+    }
+
+    public override void Negate(Transform source = null)
+    {
+        base.Negate(source);
     }
 
     private void SetGrow(float value, float time)
