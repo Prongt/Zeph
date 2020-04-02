@@ -23,16 +23,16 @@ public class MosaicPickUp : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player"))
         {
+            print("Entered Collider");
             if (myProg != null)
             {
                 if (myProg.playerProgress < 3)
                 {
                     myProg.playerProgress += 1;
+                    print(myProg.playerProgress);
                     myProg.SaveLevel();
                 }
             }
-
-            SceneManager.LoadScene("Hub");
         }
     }
 }
