@@ -17,6 +17,11 @@ public class LoadScene : MonoBehaviour
             SceneManager.LoadScene("Hub");
         }
     }
+
+    public void MapLoad(String sceneToLoad)
+    {
+        SceneManager.LoadScene(sceneToLoad);
+    }
     
     public void QuitGame()
     {
