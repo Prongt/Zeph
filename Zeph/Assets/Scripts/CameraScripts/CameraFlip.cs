@@ -9,6 +9,7 @@ public class CameraFlip : MonoBehaviour
    public CinemachineVirtualCamera myCam;
    public static bool hasFlippedZ;
    public static bool hasFlippedX;
+   public static bool hasChangedOrbitPoint;
 
    [SerializeField] private ConfineController cameraConfines;
    
@@ -29,6 +30,7 @@ public class CameraFlip : MonoBehaviour
       //Resets the flip checks from scene to scene.
       hasFlippedX = false;
       hasFlippedZ = false;
+      hasChangedOrbitPoint = false;
    }
    //Flips the Body offset X value. Can be accessed using a promote script
    public void FlipX()
@@ -82,7 +84,14 @@ public class CameraFlip : MonoBehaviour
                playerMoveRigidbody.FlipMovement();
                cameraConfines.ChangeXOffset();
                hasFlippedX = false;
-               
+            }
+
+            if (hasChangedOrbitPoint)
+            {
+               OrbitChangePoint();
+               playerMoveRigidbody.FlipMovement();
+               cameraConfines.ChangeZOffset();
+               hasChangedOrbitPoint = false;
             }
          }
       }
