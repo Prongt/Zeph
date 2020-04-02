@@ -14,7 +14,8 @@ public class LevelProgress : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         print(Application.persistentDataPath);
-        
+        LoadLevel();
+        print("Levels Loaded");
     }
 
     // Update is called once per frame
