@@ -10223,7 +10223,6 @@ MonoBehaviour:
     distort: {fileID: 0}
   growSoundEmitter: {fileID: 0}
   firefly: {fileID: 0}
-  useTrigger: 0
 --- !u!1 &429344796 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8791037740938436727, guid: 62155b2a936b31941a6a464371c3a1b4,
@@ -14726,6 +14725,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 0
+  myCol: {fileID: 0}
 --- !u!1001 &694286115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34236,6 +34236,7 @@ GameObject:
   - component: {fileID: 1358137489}
   - component: {fileID: 1358137488}
   - component: {fileID: 1358137487}
+  - component: {fileID: 1358137490}
   m_Layer: 0
   m_Name: Story Nugget
   m_TagString: Untagged
@@ -34321,6 +34322,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.929245, y: 4.311223, z: 3.0658722}
   m_Center: {x: -0.2205782, y: 1.6556115, z: 0.06391525}
+--- !u!54 &1358137490
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358137485}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
 --- !u!1001 &1363060641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37332,22 +37349,22 @@ PrefabInstance:
     - target: {fileID: 8049717073012007378, guid: e3dfdd460ab3c7e4ca27cecf155f7e23,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.3026
+      value: 1.978642
       objectReference: {fileID: 0}
     - target: {fileID: 8049717073012007378, guid: e3dfdd460ab3c7e4ca27cecf155f7e23,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8049717073012007378, guid: e3dfdd460ab3c7e4ca27cecf155f7e23,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8049717073012007378, guid: e3dfdd460ab3c7e4ca27cecf155f7e23,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8049717073012007378, guid: e3dfdd460ab3c7e4ca27cecf155f7e23,
         type: 3}
@@ -37377,12 +37394,12 @@ PrefabInstance:
     - target: {fileID: 8049717073012007378, guid: e3dfdd460ab3c7e4ca27cecf155f7e23,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 401.09
+      value: 401.597
       objectReference: {fileID: 0}
     - target: {fileID: 8049717073012007378, guid: e3dfdd460ab3c7e4ca27cecf155f7e23,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -193.14
+      value: -193.13998
       objectReference: {fileID: 0}
     - target: {fileID: 8049717073012007378, guid: e3dfdd460ab3c7e4ca27cecf155f7e23,
         type: 3}
