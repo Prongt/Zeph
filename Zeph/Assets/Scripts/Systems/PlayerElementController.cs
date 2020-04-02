@@ -22,6 +22,10 @@ public class PlayerElementController : MonoBehaviour
 
     [SerializeField] private LayerMask layerMask;
 
+    private bool fire;
+    public bool orbit;
+    private bool lightP;
+
     //number of collisions detected for each element
     private const int MaxAffectableObjects = 25;
 
@@ -65,14 +69,17 @@ public class PlayerElementController : MonoBehaviour
                 case "FirePower":
                     //Debug.Log("Fire power used");
                     fireEffect.SetInt("Spawn Rate", 1000);
+                    fire = true;
                     break;
                 case "OrbitPower":
                     //Debug.Log("Orbit power used");
                     leafEffect.SetInt("Spawn Rate", 30);
+                    orbit = true;
                     break;
                 case "LightPower":
                     //Debug.Log("Light power used");
                     light.intensity = 1200f;
+                    lightP = true;
                     break;
             }
 
@@ -133,9 +140,27 @@ public class PlayerElementController : MonoBehaviour
 
     private IEnumerator UsePowerAnimation()
     {
-        animator.SetBool(usePower, true);
-        yield return new WaitForSeconds(1f);
-        animator.SetBool(usePower, false);
+        if (fire)
+        {
+            animator.SetBool("Fire", true);
+            yield return new WaitForSeconds(1f);
+            animator.SetBool("Fire", false);
+            fire = false;
+        } else if (orbit)
+        {
+            animator.SetBool("Orbit", true);
+            yield return new WaitForSeconds(1f);
+            animator.SetBool("Orbit", false);
+            orbit = false;
+        } else if (lightP)
+        {
+            animator.SetBool("Light", true);
+            yield return new WaitForSeconds(1f);
+            animator.SetBool("Light", false);
+            lightP = false;
+        }
+        //animator.SetBool(usePower, true);
+        //animator.SetBool(usePower, false);
         fireEffect.SetInt("Spawn Rate", 0);
         leafEffect.SetInt("Spawn Rate",0);
     }
