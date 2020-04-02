@@ -224,12 +224,13 @@ namespace Movement
         {
             zephAnimator.SetBool(jumpVariable, !OnGround);
 
+            if (StopMovementAndPhysics) return;
             if (Input.GetKeyDown(KeyCode.M))
             {
                 StopCoroutine(DanceRoutine());
                 StartCoroutine(DanceRoutine());
             }
-            if (StopMovementAndPhysics) return;
+            
             zephAnimator.SetFloat(moveVariable, desiredVelocity.magnitude > 0.25f ? 1.0f : 0f);
         }
 
