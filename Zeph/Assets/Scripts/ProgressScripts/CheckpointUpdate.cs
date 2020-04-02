@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class CheckpointUpdate : CheckpointManager
 {
-    private bool hitCheckpoint;
+    public bool hitCheckpoint;
     
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !hitCheckpoint)
         {
-            if (checkPointCount < checkpoints.Count)
+            print("checkPoint Updated");
+            if (checkPointCount < 3)
             {
+                   
                 checkPointCount++;
+                print(checkPointCount); 
             }
             
             curCheckpoint = checkpoints[checkPointCount];

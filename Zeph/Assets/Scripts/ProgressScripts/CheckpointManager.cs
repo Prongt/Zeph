@@ -18,4 +18,10 @@ public class CheckpointManager : MonoBehaviour
         checkpoints = setCheckpoints;
         curCheckpoint = checkpoints[checkPointCount];
     }
+
+    private void Update()
+    {
+        checkpoints = setCheckpoints;
+        curCheckpoint = checkpoints[checkPointCount];
+    }
 }

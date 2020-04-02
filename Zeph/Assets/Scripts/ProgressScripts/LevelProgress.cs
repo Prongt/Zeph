@@ -12,7 +12,7 @@ public class LevelProgress : MonoBehaviour
     private void Awake()
     {
         LoadLevel();
-        print("Levels Loaded");
+        print(Application.persistentDataPath);
     }
 
     // Start is called before the first frame update
