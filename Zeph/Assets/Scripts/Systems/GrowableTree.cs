@@ -29,7 +29,6 @@ public class GrowableTree : Growable
         {
             if (Animator.GetBool(distort) && Animator.GetBool(grow))
             {
-                Debug.Log("Distort");
                 colliders.small.isTrigger = true;
                 colliders.distort.enabled = true;
                 colliders.grown.enabled = false;
@@ -44,8 +43,7 @@ public class GrowableTree : Growable
 
             return;
         }
-
-        Debug.Log("Hello");
+        
         if (Distortion.IsDistorting)
         {
             Animator.SetBool(distort, true);
