@@ -4,6 +4,7 @@ using UnityEngine;
 public class PillarPull : Aspects
 {
     private Animator myAnim;
+    public Collider myCol;
     
     public override Type[] RequiredComponents()
     {
@@ -18,12 +19,20 @@ public class PillarPull : Aspects
     void Start()
     {
         myAnim = GetComponent<Animator>();
+        if (!gameObject.CompareTag("Heavy"))
+        {
+            myAnim.SetBool("Large", true);
+        }
     }
     
 
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
+        if (myCol != null)
+        {
+            myCol.enabled = false;
+        }
         Vector3 direction = gameObject.transform.position - source.position;
         var dot = Vector3.Dot(direction, gameObject.transform.right);
         if (gameObject.CompareTag("SnowPillar"))
