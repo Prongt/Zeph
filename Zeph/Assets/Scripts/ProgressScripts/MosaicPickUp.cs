@@ -28,6 +28,7 @@ public class MosaicPickUp : MonoBehaviour
                 if (myProg.playerProgress < 3)
                 {
                     myProg.playerProgress += 1;
+                    myProg.SaveLevel();
                 }
             }
 
