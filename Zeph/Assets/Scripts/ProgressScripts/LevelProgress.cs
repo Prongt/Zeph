@@ -13,6 +13,7 @@ public class LevelProgress : MonoBehaviour
     {
         LoadLevel();
         print(Application.persistentDataPath);
+  
     }
 
     // Start is called before the first frame update
@@ -25,7 +26,6 @@ public class LevelProgress : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void SaveLevel()
