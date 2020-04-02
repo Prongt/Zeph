@@ -10,10 +10,22 @@ public class MapControl : MonoBehaviour
 {
     public EventSystem eve;
     public GameObject defaultButton;
-    
-    void Update()
+    private bool isOpen;
+
+    private void OnEnable()
     {
+        isOpen = true;
+    }
+
+    void Update()
+    { 
         PlayerMoveRigidbody.HaltMovement = true;
+        if (isOpen)
+        {
+            eve.SetSelectedGameObject(defaultButton);
+            isOpen = false;
+        }
+        
         if (eve.currentSelectedGameObject == null)
         {
             if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
