@@ -4,29 +4,28 @@ public class SnowCutoutManager : MonoBehaviour
 {
     [SerializeField] private bool useSpecifiedConductor = true;
     [HideIf("useSpecifiedConductor", true)] [SerializeField] private GameObject conductor;
-    [SerializeField] private  float radius = 0.5f;
     private Material material;
     private static readonly int position = Shader.PropertyToID("Position");
-
+    private Transform tempConductor;
+   
     private void Start()
     {
         material = gameObject.GetComponent<Renderer>().material;
+        tempConductor = useSpecifiedConductor ? conductor.transform : transform;
     }
 
     private void Update()
     {
-        Vector3 conductorPos;
-        if (useSpecifiedConductor)
+        if (!useSpecifiedConductor)
         {
-            conductorPos = conductor.transform.position;
-        }
-        else
-        {
-            conductorPos = Conductor.GlobalConductor.position;
+            if (Conductor.GlobalConductor)
+            {
+                tempConductor = Conductor.GlobalConductor.transform;
+            }
         }
         
         material.SetVector(position,  
-        new Vector4(conductorPos.x, conductorPos.y, conductorPos.z, 
-        conductor.transform.localScale.x / 2));
+        new Vector4(tempConductor.position.x, tempConductor.position.y, tempConductor.position.z, 
+        tempConductor.transform.localScale.x / 2));
     }
 }
