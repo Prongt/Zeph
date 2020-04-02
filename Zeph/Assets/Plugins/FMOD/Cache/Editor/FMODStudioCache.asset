@@ -140,6 +140,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-8594004609828754641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637211926065433492
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-8435810483524145172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +209,23 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+  Exists: 1
+--- !u!114 &-8252481514904301683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: ConductorExtents
+  m_EditorClassIdentifier: 
+  Name: ConductorExtents
+  Min: 0
+  Max: 40
+  Default: 1
   Exists: 1
 --- !u!114 &-8062243515834745932
 MonoBehaviour:
@@ -261,6 +296,23 @@ MonoBehaviour:
   Max: 40
   Default: 1
   Exists: 0
+--- !u!114 &-7763415091903461259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Conductor/
+  m_EditorClassIdentifier: 
+  Name: 
+  Min: 0
+  Max: 0
+  Default: 0
+  Exists: 1
 --- !u!114 &-7715853090878914631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -802,6 +854,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-6314723210797125958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: Distortion
+  m_EditorClassIdentifier: 
+  Name: Distortion
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-6313459782919989705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -994,6 +1063,23 @@ MonoBehaviour:
   lastModified: 637211930348322316
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &-5726022418543034445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Goal Reached
+  m_EditorClassIdentifier: 
+  Name: Goal Reached
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &-5518367427605366511
 MonoBehaviour:
@@ -1404,7 +1490,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1528,12 +1614,12 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 128344163749588724}
+  - {fileID: -7763415091903461259}
   MinDistance: 1
   MaxDistance: 20
   Length: 28000
@@ -1625,7 +1711,7 @@ MonoBehaviour:
   lastModified: 637211935714255170
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-3607712590949130057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1762,7 +1848,7 @@ MonoBehaviour:
   Min: 0
   Max: 40
   Default: 1
-  Exists: 1
+  Exists: 0
 --- !u!114 &-3359022195231224356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1843,7 +1929,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1957,6 +2043,24 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-2662561851151740092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Effects.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Effects.bank
+  SubDir: 
+  lastModified: 637211926065423527
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-2611802243152315699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1985,7 +2089,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2072,7 +2176,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2159,7 +2263,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2386,7 +2490,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2526,12 +2630,12 @@ MonoBehaviour:
   - {fileID: 1583927035921677150}
   - {fileID: 7736783153367706542}
   - {fileID: -5259506122214255418}
-  - {fileID: 4679747102532737710}
+  - {fileID: 1786233320319009939}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 8040614842414723695}
+  - {fileID: -5726022418543034445}
   MinDistance: 0
   MaxDistance: 0
   Length: 991500
@@ -2666,7 +2770,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2875,7 +2979,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -3086,9 +3190,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 7165689195900389205}
-  - {fileID: 6225279694453125790}
-  - {fileID: -3608178710385804662}
-  - {fileID: 4679747102532737710}
+  - {fileID: -2662561851151740092}
+  - {fileID: -8594004609828754641}
+  - {fileID: 1786233320319009939}
   EditorEvents:
   - {fileID: -2611802243152315699}
   - {fileID: 3960358427202756481}
@@ -3109,14 +3213,14 @@ MonoBehaviour:
   - {fileID: 8644701137690902481}
   - {fileID: -1682025833778202768}
   EditorParameters:
-  - {fileID: 2272546848331342316}
-  - {fileID: 2252864890657894936}
-  - {fileID: -3381670001274864485}
+  - {fileID: -6314723210797125958}
+  - {fileID: 2681610074446690342}
+  - {fileID: -8252481514904301683}
   MasterBanks:
-  - {fileID: -3608178710385804662}
+  - {fileID: -8594004609828754641}
   StringsBanks:
   - {fileID: 7165689195900389205}
-  stringsBankWriteTime: 637211935714265121
+  stringsBankWriteTime: 637211926065443473
   cacheVersion: 3
 --- !u!114 &113290953574812828
 MonoBehaviour:
@@ -3152,7 +3256,7 @@ MonoBehaviour:
   Min: 0
   Max: 0
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &256809676025895960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3760,6 +3864,24 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &1786233320319009939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: ../ZephAudio/Build/Desktop/Music.bank
+  SubDir: 
+  lastModified: 637211926065922184
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &1797553351359844544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3983,7 +4105,7 @@ MonoBehaviour:
   Min: 0
   Max: 5
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &2272546848331342316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4000,7 +4122,7 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &2291911059684368034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4174,6 +4296,23 @@ MonoBehaviour:
   lastModified: 637211926065423527
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &2681610074446690342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: CurrentLevel
+  m_EditorClassIdentifier: 
+  Name: CurrentLevel
+  Min: 0
+  Max: 5
+  Default: 0
   Exists: 1
 --- !u!114 &2775231662435206827
 MonoBehaviour:
@@ -4586,7 +4725,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -4656,7 +4795,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -5013,7 +5152,7 @@ MonoBehaviour:
   lastModified: 637211935714733884
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &4715802951631077894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5215,7 +5354,7 @@ MonoBehaviour:
   - {fileID: -5836429964747361907}
   - {fileID: 4550777029770001471}
   - {fileID: 292518696404688275}
-  - {fileID: -3608178710385804662}
+  - {fileID: -8594004609828754641}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -5407,7 +5546,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -5483,7 +5622,7 @@ MonoBehaviour:
   lastModified: 637211935714245185
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &6256008807181588168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5793,7 +5932,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -5881,7 +6020,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -5973,7 +6112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: ../ZephAudio/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637211935714265121
+  lastModified: 637211926065443473
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -6165,7 +6304,7 @@ MonoBehaviour:
   - {fileID: -4905152491560795754}
   - {fileID: -3739177517061173440}
   - {fileID: -3613016300185149876}
-  - {fileID: 6225279694453125790}
+  - {fileID: -2662561851151740092}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -6275,7 +6414,7 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &8129577433566001310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6527,7 +6666,7 @@ MonoBehaviour:
   - {fileID: -5836429964747361907}
   - {fileID: 4550777029770001471}
   - {fileID: 292518696404688275}
-  - {fileID: -3608178710385804662}
+  - {fileID: -8594004609828754641}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
