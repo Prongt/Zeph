@@ -8,7 +8,14 @@ public class LoadScene : MonoBehaviour
     [SerializeField] private string endingToLoad;
     public void SceneLoad(String sceneToLoad)
     {
-        SceneManager.LoadScene(sceneToLoad);
+        if (GameObject.Find("Player Progress").GetComponent<LevelProgress>().playerProgress == 0)
+        {
+            SceneManager.LoadScene(sceneToLoad);
+        }
+        else
+        {
+            SceneManager.LoadScene("Hub");
+        }
     }
     
     public void QuitGame()

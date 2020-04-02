@@ -8,13 +8,18 @@ public class LevelProgress : MonoBehaviour
 {
 
     public int playerProgress;
-    
+
+    private void Awake()
+    {
+        LoadLevel();
+        print("Levels Loaded");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         print(Application.persistentDataPath);
-        
     }
 
     // Update is called once per frame
