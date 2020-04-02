@@ -30,11 +30,12 @@ public class LoadScene : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print("Colliding");
         if (gameObject.CompareTag("Arch"))
         {
             if (other.CompareTag("Player"))
             {
-                SceneLoad(endingToLoad);
+                SceneManager.LoadScene(endingToLoad);
             }
         }
     }
