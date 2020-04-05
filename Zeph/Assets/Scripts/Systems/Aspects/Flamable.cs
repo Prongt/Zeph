@@ -153,6 +153,15 @@ public class Flamable : Aspects
         }
     }
 
+    private void OnDestroy()
+    {
+        if (!fireEventEmitter) return;
+        if (fireEventEmitter.IsPlaying())
+        {
+            fireEventEmitter.Stop();
+        }
+    }
+
     private void OnDrawGizmos()
     {
         if (canBeSource == false) return;
