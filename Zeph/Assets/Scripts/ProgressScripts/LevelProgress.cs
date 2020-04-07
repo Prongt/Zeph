@@ -1,24 +1,37 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Runtime.Serialization.Formatters.Binary;
+
 
 public class LevelProgress : MonoBehaviour
 {
 
     public int playerProgress;
+    private string path;
 
     private void Awake()
     {
-        LoadLevel();
-        print(Application.persistentDataPath);
-  
+       path = Application.persistentDataPath + "/level.grannus";
+       if (File.Exists(path))
+       {
+            print("loading");
+            LoadLevel();
+       }
+       else
+       {
+            print("saving");
+            SaveLevel();
+       }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        print(path);
         DontDestroyOnLoad(gameObject);
         print(Application.persistentDataPath);
     }
