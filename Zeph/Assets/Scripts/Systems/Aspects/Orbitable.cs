@@ -35,7 +35,7 @@ public class Orbitable : Aspects
     private bool orbitDirection = true;
 
     //Bools controlling if the object orbits or is thrown
-    public bool orbiting;
+    private bool orbiting;
 
     [Header("Orbit Vars")] [SerializeField]
     public float orbitSize = 3;
@@ -46,7 +46,7 @@ public class Orbitable : Aspects
     //Time the object takes to reach the desired position on the radius
     public float radiusSpeed = 10f;
     [SerializeField] private float rotSpeed;
-    public bool throwable;
+    private bool throwable;
     public float throwForce = 0.5f;
 
 
