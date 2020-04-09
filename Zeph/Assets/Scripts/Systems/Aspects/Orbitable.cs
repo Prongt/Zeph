@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Orbitable : Aspects
 {
-    private Transform centerPoint;
+    public Transform centerPoint;
 
     //VFX of the orbiting affect
     //[SerializeField] private VisualEffect orbitEffect;
@@ -35,7 +35,7 @@ public class Orbitable : Aspects
     private bool orbitDirection = true;
 
     //Bools controlling if the object orbits or is thrown
-    private bool orbiting;
+    public bool orbiting;
 
     [Header("Orbit Vars")] [SerializeField]
     public float orbitSize = 3;
@@ -44,15 +44,17 @@ public class Orbitable : Aspects
     [Header("Pull/Push")] [SerializeField] private FloatReference pullForce = default;
 
     //Time the object takes to reach the desired position on the radius
-    private readonly float radiusSpeed = 10f;
+    public float radiusSpeed = 10f;
     [SerializeField] private float rotSpeed;
-    private bool throwable;
+    public bool throwable;
     public float throwForce = 0.5f;
 
 
     private Transform zephTransform;
 
     private float timeSinceLastOrbiting;
+
+    private Vector3 relativeDistance = Vector3.zero;
 
 
     public override Type[] RequiredComponents()
@@ -87,7 +89,7 @@ public class Orbitable : Aspects
             centerPoint = new GameObject("Orbit Point").transform;
             var parent = PlayerMoveRigidbody.orbitPoint;
             centerPoint.SetParent(parent.transform);
-            centerPoint.localPosition = new Vector3(0, 0.5f, 0);
+            centerPoint.localPosition = new Vector3(0, 1.5f, 0);
         }
 
         if (collisionSoundEventEmitter == null) collisionSoundEventEmitter = GetComponent<StudioEventEmitter>();
@@ -125,6 +127,7 @@ public class Orbitable : Aspects
         base.Promote(source, element);
         //Initial pull to center
         direction = source.transform.position - transform.position;
+        relativeDistance = transform.position - centerPoint.position;
 
         if (firefly != null) fireflyRate.rateOverTime = 0;
 
@@ -162,35 +165,32 @@ public class Orbitable : Aspects
         //The orbiting code. Rotates around a point, gets a desired position, moves towards that desired position. forces the object to be on the right y level
         if (orbitDirection)
         {
-            transform.RotateAround(centerPoint.position, Vector3.up, rotSpeed * Time.deltaTime);
-
-            var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize +
-                                  centerPoint.position;
-
-            transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
-
-            //Might not need this anymore
+            transform.position = centerPoint.position + relativeDistance;
+            transform.RotateAround(centerPoint.position, Vector3.up,rotSpeed * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
+            relativeDistance = transform.position - centerPoint.position;
         }
         else
         {
+            transform.position = centerPoint.position + relativeDistance;
             transform.RotateAround(centerPoint.position, Vector3.up, -rotSpeed * Time.deltaTime);
-
-            var desiredPosition = (transform.position - centerPoint.position).normalized * orbitSize +
-                                  centerPoint.position;
-
-            transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
-
-            //Might not need this anymore
             transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
+            relativeDistance = transform.position - centerPoint.position;
         }
 
         //This speeds up the orbit
         if (throwForce <= maxThrowForce.Value) throwForce += 1 * Time.deltaTime;
+
+        //Ensures object is thrown if ends up orbiting out of promotion range
+        if (Input.GetButton("OrbitPower"))
+        {
+            Throw();
+        }
     }
 
     private void Throw()
     {
+        orbiting = false;
         transform.parent = null;
 
         myRb.constraints = RigidbodyConstraints.None;
