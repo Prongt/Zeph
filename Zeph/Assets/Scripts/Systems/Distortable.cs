@@ -22,6 +22,7 @@ public class Distortable : MonoBehaviour
 
     private void Update()
     {
+        //Static bool set from the distortion script on the distortion rifts
         if (Distortion.IsDistorting)
         {
             if (colliders.normal && colliders.distort)

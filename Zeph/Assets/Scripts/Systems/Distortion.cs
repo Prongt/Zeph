@@ -6,7 +6,7 @@ public class Distortion : Aspects
 {
     [SerializeField] private Animator myAnim;
 
-
+    //Accessible from all scripts to act as a global variable
     public static bool IsDistorting;
     private bool animating;
 

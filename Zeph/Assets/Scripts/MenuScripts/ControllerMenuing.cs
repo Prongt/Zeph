@@ -12,6 +12,7 @@ public class ControllerMenuing : MonoBehaviour
     
     void Update()
     {
+        //Resets the default button if mouse is used and then controller is used
         if (eve.currentSelectedGameObject == null)
         {
             if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)

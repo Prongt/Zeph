@@ -19,6 +19,7 @@ public class MapControl : MonoBehaviour
 
     void Update()
     { 
+        //freezes the player
         PlayerMoveRigidbody.HaltMovement = true;
         if (isOpen)
         {
@@ -26,6 +27,7 @@ public class MapControl : MonoBehaviour
             isOpen = false;
         }
         
+        //Resets the button if mouse is used and then the controller is used
         if (eve.currentSelectedGameObject == null)
         {
             if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)

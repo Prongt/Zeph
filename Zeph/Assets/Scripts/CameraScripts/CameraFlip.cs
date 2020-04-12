@@ -51,6 +51,7 @@ public class CameraFlip : MonoBehaviour
       hasFlippedZ = !hasFlippedZ;
    }
 
+   //Changes the orbit transposer default orbit point to be opposite where it begins
    public void OrbitChangePoint()
    {
       myCam.GetCinemachineComponent<CinemachineOrbitalTransposer>().m_Heading.m_HeadingBias = 180;

@@ -8,9 +8,6 @@ public class Orbitable : Aspects
 {
     public Transform centerPoint;
 
-    //VFX of the orbiting affect
-    //[SerializeField] private VisualEffect orbitEffect;
-
     [Header("Extras")] [SerializeField] private StudioEventEmitter collisionSoundEventEmitter;
 
     public Type[] componentTypes =
@@ -28,9 +25,7 @@ public class Orbitable : Aspects
     private ParticleSystem.EmissionModule fireflyRate;
 
     [SerializeField] private FloatReference maxThrowForce = default;
-    //private float rotIncrease = 10;
-
-    //Objects rigidbody
+    
     private Rigidbody myRb;
     private bool orbitDirection = true;
 
@@ -70,6 +65,7 @@ public class Orbitable : Aspects
 
     private void Start()
     {
+        //Finds player and checks for fireflies on current object
         zephTransform = FindObjectOfType<PlayerMoveRigidbody>().transform;
         delayWaitForSeconds = new WaitForSeconds(0.3f);
         myRb = GetComponent<Rigidbody>();
@@ -84,6 +80,7 @@ public class Orbitable : Aspects
         }
 
         //Orbit point is now created at runtime
+        //TODO try find orbit point after creation to stop duplicates
         if (centerPoint == null)
         {
             centerPoint = new GameObject("Orbit Point").transform;
@@ -99,6 +96,7 @@ public class Orbitable : Aspects
 
     private void Update()
     {
+        //Increases in the rotation speed in both directions
         if (rotSpeed <= throwForce * 10) rotSpeed = throwForce * 10;
         if (rotSpeed <= -throwForce * 10) rotSpeed = throwForce * 10;
 
@@ -162,7 +160,10 @@ public class Orbitable : Aspects
         myRb.constraints = RigidbodyConstraints.FreezeRotation;
         myRb.useGravity = false;
 
-        //The orbiting code. Rotates around a point, gets a desired position, moves towards that desired position. forces the object to be on the right y level
+        //Gets a relative distance to keep the orbiting object at.
+        //Rotates around the centerpoint created earlier at the defined speed.
+        //Forces the object to rotate at a higher y-value level.
+        //Updates the relative position.
         if (orbitDirection)
         {
             transform.position = centerPoint.position + relativeDistance;
@@ -190,6 +191,7 @@ public class Orbitable : Aspects
 
     private void Throw()
     {
+        //Unsets any previously set constraints
         orbiting = false;
         transform.parent = null;
 
@@ -218,6 +220,7 @@ public class Orbitable : Aspects
     {
         if (other.gameObject.CompareTag("Floor")) return;
 
+        //switches which way the object is orbiting
         orbitDirection = !orbitDirection;
 
         if (orbiting)
