@@ -22,7 +22,7 @@ public class GrowablePlant : Growable
 
         if (colliders.small)
         {
-            colliders.small.isTrigger = false;
+            colliders.small.isTrigger = true;
         }
     }
 }
