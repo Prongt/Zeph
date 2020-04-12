@@ -6529,7 +6529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850b9f7c2aad409a8858907931a340da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applyKnockBackForce: 1
+  applyKnockBackForce: 0
   forceAmount: 20
   teleportPlayer: 0
   teleportPosition: {fileID: 0}
@@ -10571,7 +10571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850b9f7c2aad409a8858907931a340da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applyKnockBackForce: 1
+  applyKnockBackForce: 0
   forceAmount: 20
   teleportPlayer: 0
   teleportPosition: {fileID: 0}
@@ -32619,7 +32619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850b9f7c2aad409a8858907931a340da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applyKnockBackForce: 1
+  applyKnockBackForce: 0
   forceAmount: 20
   teleportPlayer: 0
   teleportPosition: {fileID: 0}
@@ -47058,7 +47058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   applyKnockBackForce: 0
   forceAmount: 5
-  teleportPlayer: 1
+  teleportPlayer: 0
   teleportPosition: {fileID: 635992913}
   fmodEvent: event:/Effects/Water/WaterSplash
   disableDuringDistort: 0
@@ -48018,7 +48018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850b9f7c2aad409a8858907931a340da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applyKnockBackForce: 1
+  applyKnockBackForce: 0
   forceAmount: 20
   teleportPlayer: 0
   teleportPosition: {fileID: 0}
@@ -53720,7 +53720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850b9f7c2aad409a8858907931a340da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applyKnockBackForce: 1
+  applyKnockBackForce: 0
   forceAmount: 20
   teleportPlayer: 0
   teleportPosition: {fileID: 0}
@@ -54311,7 +54311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850b9f7c2aad409a8858907931a340da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applyKnockBackForce: 1
+  applyKnockBackForce: 0
   forceAmount: 20
   teleportPlayer: 0
   teleportPosition: {fileID: 0}
@@ -55385,6 +55385,10 @@ PrefabInstance:
       propertyPath: teleportPlayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1464992361, guid: 8a775d76d70915c40add417db5ec3166, type: 3}
+      propertyPath: applyKnockBackForce
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3140306928886518275, guid: 8a775d76d70915c40add417db5ec3166,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -55420,9 +55424,24 @@ PrefabInstance:
       propertyPath: teleportPlayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3140306928886518276, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: applyKnockBackForce
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3140306928886518278, guid: 8a775d76d70915c40add417db5ec3166,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140306929722630604, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: applyKnockBackForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140306929722630604, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: teleportPlayer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3140306929722630606, guid: 8a775d76d70915c40add417db5ec3166,
@@ -55436,6 +55455,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 720278599}
     - target: {fileID: 3140306929874531199, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: teleportPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140306929874531199, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: applyKnockBackForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140306929934887533, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: applyKnockBackForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140306929934887533, guid: 8a775d76d70915c40add417db5ec3166,
         type: 3}
       propertyPath: teleportPlayer
       value: 0
@@ -55460,9 +55494,24 @@ PrefabInstance:
       propertyPath: teleportPlayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3140306929943373369, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: applyKnockBackForce
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3140306929943373371, guid: 8a775d76d70915c40add417db5ec3166,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140306930114862468, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: applyKnockBackForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140306930114862468, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: teleportPlayer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3140306930114862470, guid: 8a775d76d70915c40add417db5ec3166,
@@ -55470,9 +55519,29 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3140306930219165952, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: applyKnockBackForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140306930219165952, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: teleportPlayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3140306930219165954, guid: 8a775d76d70915c40add417db5ec3166,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140306930628737183, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: applyKnockBackForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140306930628737183, guid: 8a775d76d70915c40add417db5ec3166,
+        type: 3}
+      propertyPath: teleportPlayer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6392140135104430778, guid: 8a775d76d70915c40add417db5ec3166,
