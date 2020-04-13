@@ -86,5 +86,6 @@ public enum AspectType
     GrowablePlant,
     GrowableTree,
     PillarPull,
-    MiniBridgeGrow
+    MiniBridgeGrow,
+    RopeBridge
 }

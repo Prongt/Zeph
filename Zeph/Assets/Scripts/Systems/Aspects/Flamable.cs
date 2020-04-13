@@ -6,6 +6,8 @@ using UnityEngine.VFX;
 
 public class Flamable : Aspects
 {
+    [SerializeField] private bool lit;
+    
     private static readonly int burning = Animator.StringToHash("Burning");
 
     [HideIf("useBoxCollider", true)] [SerializeField]
@@ -16,6 +18,7 @@ public class Flamable : Aspects
 
     [SerializeField] private bool canBeSource = false;
     private Collider[] colliders = new Collider[10];
+    
 
     public Type[] componentTypes =
     {
@@ -35,8 +38,6 @@ public class Flamable : Aspects
     private float fireSpreadRange = 3;
 
     private WaitForSeconds fireSpreadWaitForSeconds;
-
-    private bool isOnFire;
 
     [Range(5, 25)] [SerializeField] private int maxNumberOfAffectableObjects = 15;
     //private List<Collider> colliders = new List<Collider>(25);
@@ -70,6 +71,13 @@ public class Flamable : Aspects
             burningParticleEffect.Stop();
         }
 
+        if (lit)
+        {
+            if (renderer != null) renderer.material = burnedMaterial;
+
+            if (burningParticleEffect) burningParticleEffect.Play();
+        }
+
         overlapBoxExtents = new Vector3(boxDimensions.x / 2, boxDimensions.y / 2, boxDimensions.z / 2);
         colliders = new Collider[maxNumberOfAffectableObjects];
         fireSpreadWaitForSeconds = new WaitForSeconds(fireSpreadPerSecond);
@@ -91,20 +99,20 @@ public class Flamable : Aspects
         base.Promote(source, element);
         if (!gameObject.CompareTag("Log") && firefly) fireflyRate.rateOverTime = 0;
 
-        if (!isOnFire)
+        if (!lit)
         {
             if (renderer != null) renderer.material = burnedMaterial;
 
             if (burningParticleEffect) burningParticleEffect.Play();
         }
 
-        if (canBeSource && !isOnFire)
+        if (canBeSource && !lit)
         {
-            isOnFire = true;
+            lit = true;
             StartCoroutine(FireSpread());
         }
 
-        isOnFire = true;
+        lit = true;
 
         if (destroyable)
         {
@@ -134,7 +142,7 @@ public class Flamable : Aspects
 
     private IEnumerator FireSpread()
     {
-        while (isOnFire)
+        while (lit)
         {
             yield return fireSpreadWaitForSeconds;
             if (useBoxCollider)
