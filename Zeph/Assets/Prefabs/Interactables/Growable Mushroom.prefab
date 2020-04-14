@@ -21,29 +21,10 @@ MonoBehaviour:
       m_Calls: []
   coolDownTime: 0
   myAnim: {fileID: 0}
-  onGround: 0
   effect: {fileID: 0}
   distortionEffect: {fileID: 0}
   distortionEventEmitter: {fileID: 0}
   chromaticAberration: {fileID: 0}
---- !u!114 &6864602366103456426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5038241101929153263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aspectMaterial: {fileID: 11400000, guid: cc2f4bf24786ab7479a7308d8c875b70, type: 2}
-  additionalAspects: 04000000
-  onlyActivatedByPlayer: 1
-  requireDefaultGravity: 0
-  isFrozen: 0
-  canBeFrozen: 0
 --- !u!114 &5963127957455625958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,6 +51,39 @@ MonoBehaviour:
     distort: {fileID: 0}
   growSoundEmitter: {fileID: 0}
   firefly: {fileID: 0}
+--- !u!114 &6864602366103456426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038241101929153263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea62ecc3e87fe3e40809696a9cdf257e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectMaterial: {fileID: 11400000, guid: cc2f4bf24786ab7479a7308d8c875b70, type: 2}
+  additionalAspects: 04000000
+  onlyActivatedByPlayer: 1
+  requireDefaultGravity: 0
+  isFrozen: 0
+  canBeFrozen: 0
+  requireRaycast: 1
+--- !u!114 &-874599274947415194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038241101929153263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7f6a71d9c9af84aa9f788fe6735c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interacted: 0
+  disappearDistance: 7
 --- !u!1001 &8963971135342645395
 PrefabInstance:
   m_ObjectHideFlags: 0

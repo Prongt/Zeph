@@ -14,7 +14,7 @@ public class Story : Aspects
 
     public Type[] componentTypes = new Type[]
     {
-        
+        typeof(FireflyController)
     };
     
     public override Type[] RequiredComponents()
@@ -25,6 +25,8 @@ public class Story : Aspects
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
+        
+        GetComponentInChildren<FireflyController>().interacted = true;
     }
 
     public override void Negate(Transform source = null)

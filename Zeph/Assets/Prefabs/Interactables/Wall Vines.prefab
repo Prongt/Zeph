@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 1001689330}
   - component: {fileID: 4835573798648427022}
   - component: {fileID: 7988164877863695024}
+  - component: {fileID: -4978620768766098675}
   m_Layer: 0
   m_Name: Wall Vines
   m_TagString: Untagged
@@ -216,13 +217,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 0
+  lit: 0
   boxDimensions: {x: 0, y: 0, z: 0}
   burnedMaterial: {fileID: 0}
   burningParticleEffect: {fileID: 7300065972751596856}
   canBeSource: 1
   destroyable: 1
   fireEventEmitter: {fileID: 7988164877863695024}
-  firefly: {fileID: 0}
   fireSpreadPerSecond: 0.1
   fireSpreadRange: 3
   maxNumberOfAffectableObjects: 15
@@ -266,6 +267,20 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 10
   OverrideMaxDistance: 50
+--- !u!114 &-4978620768766098675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859120943577764186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7f6a71d9c9af84aa9f788fe6735c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interacted: 0
+  disappearDistance: 0
 --- !u!1001 &8355275644779749980
 PrefabInstance:
   m_ObjectHideFlags: 0

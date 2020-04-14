@@ -14,6 +14,7 @@ public class PillarPull : Aspects
     public Type[] componentTypes = new Type[]
     {
         typeof(Animator),
+        typeof(FireflyController)
     };
     
     void Start()
@@ -29,6 +30,9 @@ public class PillarPull : Aspects
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
+        
+        GetComponentInChildren<FireflyController>().interacted = true;
+        
         if (myCol != null)
         {
             myCol.enabled = false;

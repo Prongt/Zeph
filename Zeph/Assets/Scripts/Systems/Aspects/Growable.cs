@@ -20,6 +20,7 @@ public class Growable : Aspects
 
     public Type[] componentTypes =
     {
+        typeof(FireflyController)
     };
     
     protected static readonly int distort = Animator.StringToHash("Distort");
@@ -35,8 +36,6 @@ public class Growable : Aspects
     protected override void Initialize()
     {
         base.Initialize();
-        
-        if (firefly) fireflyRate = firefly.emission;
 
         Renderer = GetComponentInChildren<Renderer>();
         Animator = GetComponentInChildren<Animator>();
@@ -54,8 +53,8 @@ public class Growable : Aspects
     {
         base.Promote(source, element);
 
-        if (firefly) fireflyRate.rateOverTime = 0;
-
+        GetComponentInChildren<FireflyController>().interacted = true;
+        
         GrowSound();
     }
 

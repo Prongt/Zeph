@@ -29,6 +29,8 @@ public class VineBridge : Growable
     {
         base.Promote(source, element);
         
+        GetComponentInChildren<FireflyController>().interacted = true;
+        
         BridgePromote();
     }
     

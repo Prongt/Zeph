@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 923422508681692550}
   - component: {fileID: 7137960247471020789}
   - component: {fileID: 1831412205}
+  - component: {fileID: 6930302163511672821}
   m_Layer: 0
-  m_Name: FlamableTree
+  m_Name: FlamableTree OLD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,6 +58,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -96,6 +98,10 @@ MonoBehaviour:
   aspectMaterial: {fileID: 0}
   additionalAspects: 00000000
   onlyActivatedByPlayer: 0
+  requireDefaultGravity: 0
+  isFrozen: 0
+  canBeFrozen: 0
+  requireRaycast: 1
 --- !u!114 &7137960247471020789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,17 +121,19 @@ MonoBehaviour:
   onNegate:
     m_PersistentCalls:
       m_Calls: []
+  coolDownTime: 0
+  lit: 0
+  boxDimensions: {x: 4, y: 4, z: 4}
   burnedMaterial: {fileID: 2100000, guid: 3d1608f71b7f30e4cb23ba205e1be550, type: 2}
   burningParticleEffect: {fileID: 5991376894092091881, guid: 5d6c452d16630434e9fa06446c82d674,
     type: 3}
-  destroyable: 1
-  destroyTime: 1
   canBeSource: 1
-  useBoxCollider: 1
-  boxDimensions: {x: 4, y: 4, z: 4}
-  fireSpreadRange: 3
+  destroyable: 1
+  fireEventEmitter: {fileID: 0}
   fireSpreadPerSecond: 0.1
+  fireSpreadRange: 3
   maxNumberOfAffectableObjects: 10
+  useBoxCollider: 1
 --- !u!65 &1831412205
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -139,3 +147,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.0932307, y: 4.1353245, z: 4.7795024}
   m_Center: {x: 0.07562899, y: 0.086102866, z: 0.9320938}
+--- !u!114 &6930302163511672821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2326552805311984477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7f6a71d9c9af84aa9f788fe6735c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interacted: 0
+  disappearDistance: 7

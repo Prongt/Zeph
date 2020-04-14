@@ -24,14 +24,13 @@ public class Flamable : Aspects
     {
         //typeof(StudioEventEmitter),
         //typeof(Rigidbody)
+        typeof(FireflyController)
     };
 
     [SerializeField] private bool destroyable = false;
 
     [Header("Audio")] [SerializeField] private StudioEventEmitter fireEventEmitter = default;
-
-    [SerializeField] private ParticleSystem firefly;
-    private ParticleSystem.EmissionModule fireflyRate;
+    
     [Range(0.01f, 5f)] [SerializeField] private float fireSpreadPerSecond = 0.1f;
 
     [HideIf("useBoxCollider", false, true)] [SerializeField]
@@ -84,20 +83,14 @@ public class Flamable : Aspects
 
 
         myAnim = GetComponent<Animator>();
-        if (firefly)
-        {
-            if (!gameObject.CompareTag("Log"))
-                fireflyRate = firefly.emission;
-            else
-                firefly = null;
-        }
     }
 
 
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-        if (!gameObject.CompareTag("Log") && firefly) fireflyRate.rateOverTime = 0;
+
+        GetComponentInChildren<FireflyController>().interacted = true;
 
         if (!lit)
         {

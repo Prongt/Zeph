@@ -42,6 +42,8 @@ VisualEffect:
   m_GameObject: {fileID: 675878379980133412}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 29080cbc3370f9b4bbb95a74bafcf7e0, type: 3}
+  m_InitialEventName: OnPlay
+  m_InitialEventNameOverriden: 0
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
@@ -81,6 +83,7 @@ VFXRenderer:
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -144,8 +147,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675878380495447140}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 2
+  m_Shape: 0
   m_Color: {r: 1, g: 0.5489015, b: 0, a: 1}
   m_Intensity: 10
   m_Range: 2.3525295
@@ -211,8 +215,9 @@ GameObject:
   - component: {fileID: 541707123749489678}
   - component: {fileID: 2288947009978109903}
   - component: {fileID: 675878379161709530}
+  - component: {fileID: 5553938235997697813}
   m_Layer: 0
-  m_Name: IvyBarrier1 (1)
+  m_Name: IvyBarrier1 (1) OLD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,6 +260,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -312,16 +318,18 @@ MonoBehaviour:
   onNegate:
     m_PersistentCalls:
       m_Calls: []
+  coolDownTime: 0
+  lit: 0
+  boxDimensions: {x: 1.37, y: 7.7, z: 18.78}
   burnedMaterial: {fileID: 2100000, guid: 3d1608f71b7f30e4cb23ba205e1be550, type: 2}
   burningParticleEffect: {fileID: 675878379980133415}
-  destroyable: 1
-  destroyTime: 2
   canBeSource: 1
-  useBoxCollider: 1
-  boxDimensions: {x: 1.37, y: 7.7, z: 18.78}
-  fireSpreadRange: 3
+  destroyable: 1
+  fireEventEmitter: {fileID: 0}
   fireSpreadPerSecond: 0.1
+  fireSpreadRange: 3
   maxNumberOfAffectableObjects: 7
+  useBoxCollider: 1
 --- !u!114 &2288947009978109903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +345,10 @@ MonoBehaviour:
   aspectMaterial: {fileID: 11400000, guid: 817d2d5844de2ae49931217ee3c7bc33, type: 2}
   additionalAspects: 
   onlyActivatedByPlayer: 0
+  requireDefaultGravity: 0
+  isFrozen: 0
+  canBeFrozen: 0
+  requireRaycast: 1
 --- !u!65 &675878379161709530
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -350,3 +362,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 7.41, z: 10}
   m_Center: {x: 0, y: 0, z: 5}
+--- !u!114 &5553938235997697813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2768384659964916654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7f6a71d9c9af84aa9f788fe6735c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interacted: 0
+  disappearDistance: 7
