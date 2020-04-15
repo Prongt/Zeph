@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 62987360}
   - component: {fileID: 62987361}
   - component: {fileID: 473534943411793075}
+  - component: {fileID: 2726474171712564339}
   m_Layer: 0
   m_Name: Conductor
   m_TagString: Untagged
@@ -474,13 +475,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   coolDownTime: 0
+  lit: 0
   boxDimensions: {x: 0, y: 0, z: 0}
   burnedMaterial: {fileID: 0}
   burningParticleEffect: {fileID: 0}
   canBeSource: 0
   destroyable: 0
   fireEventEmitter: {fileID: 0}
-  firefly: {fileID: 0}
   fireSpreadPerSecond: 0.1
   fireSpreadRange: 3
   maxNumberOfAffectableObjects: 15
@@ -520,6 +521,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2726474171712564339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6867874587618208931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7f6a71d9c9af84aa9f788fe6735c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interacted: 0
+  disappearDistance: 7
 --- !u!1 &7001547936608670481
 GameObject:
   m_ObjectHideFlags: 0

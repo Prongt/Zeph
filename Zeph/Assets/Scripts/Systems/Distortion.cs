@@ -102,7 +102,7 @@ public class Distortion : Aspects
 
     public Type[] componentTypes = new Type[]
     {
-
+        typeof(FireflyController)
     };
 
     private static readonly int distort = Animator.StringToHash("Distort");
