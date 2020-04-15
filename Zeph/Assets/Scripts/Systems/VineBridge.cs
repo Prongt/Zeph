@@ -8,6 +8,8 @@ public class VineBridge : Growable
     [SerializeField] private float matX;
     [SerializeField] private float finalValue;
     [SerializeField] private float finalDistortValue;
+    [SerializeField] private float growSpeed = 5;
+    [SerializeField] private float distortGrowSpeed = 5;
 
     protected override void Initialize()
     {
@@ -53,10 +55,10 @@ public class VineBridge : Growable
                 Animator.SetBool(distort, false);
             }
 
-            if (Animator.GetBool(distort) && matX < finalValue && matX > finalDistortValue)
+            /*if (Animator.GetBool(distort) && matX < finalValue && matX > finalDistortValue)
             {
-                matX -= 5 * Time.deltaTime;
-            }
+                matX -= distortGrowSpeed * Time.deltaTime;
+            }*/
         
     }
     
@@ -99,7 +101,7 @@ public class VineBridge : Growable
             {
                 if (matX >= finalValue)
                 {
-                    matX -= 5 * Time.deltaTime;
+                    matX -= growSpeed * Time.deltaTime;
                     StartCoroutine(BridgeAppear());
                 }
                 else
@@ -112,7 +114,7 @@ public class VineBridge : Growable
             {
                 if (matX >= finalDistortValue)
                 {
-                    matX -= 5 * Time.deltaTime;
+                    matX -= distortGrowSpeed * Time.deltaTime;
                     StartCoroutine(BridgeAppear());
                 }
                 else
@@ -126,7 +128,7 @@ public class VineBridge : Growable
         {
             if (matX >= finalValue)
             {
-                matX -= 5 * Time.deltaTime;
+                matX -= growSpeed * Time.deltaTime;
                 StartCoroutine(BridgeAppear());
             }
             else
