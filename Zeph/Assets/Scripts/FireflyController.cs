@@ -29,6 +29,7 @@ public class FireflyController : MonoBehaviour
         {
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) < disappearDistance)
             {
+                Debug.Log(Vector3.Distance(gameObject.transform.position, player.transform.position));
                 Disappear();
             }
             else

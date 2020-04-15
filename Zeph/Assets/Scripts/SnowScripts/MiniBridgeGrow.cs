@@ -28,6 +28,7 @@ public class MiniBridgeGrow : Aspects
 
     public Type[] componentTypes =
     {
+        typeof(FireflyController)
     };
     
     public override Type[] RequiredComponents()

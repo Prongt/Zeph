@@ -15,7 +15,7 @@ public class RopeBridge : Aspects
     
     public Type[] componentTypes =
     {
-      
+      typeof(FireflyController)
     };
     
     // Start is called before the first frame update
