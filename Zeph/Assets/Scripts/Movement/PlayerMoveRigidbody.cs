@@ -92,6 +92,8 @@ namespace Movement
 
         private void Update()
         {
+            StopMovementAndPhysics = HaltMovement;
+            
             if (StopMovementAndPhysics)
             {
                 HaltMovement = true;
@@ -168,6 +170,7 @@ namespace Movement
 
         private void HandlePlayerInput()
         {
+            if (StopMovementAndPhysics) return;
             playerInput.x = -Input.GetAxis("Horizontal");
             playerInput.y = -Input.GetAxis("Vertical");
 
