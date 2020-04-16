@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1481345518}
   - component: {fileID: -8080150693659343983}
   - component: {fileID: -2584483512982836418}
+  - component: {fileID: 2736258340534200585}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -61,6 +62,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -113,6 +115,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aspectMaterial: {fileID: 11400000, guid: 52d90422a83d4db41a3d928d0760060c, type: 2}
   additionalAspects: 
+  onlyActivatedByPlayer: 0
+  requireDefaultGravity: 0
+  isFrozen: 0
+  canBeFrozen: 0
+  requireRaycast: 1
 --- !u!82 &3018646443490881418
 AudioSource:
   m_ObjectHideFlags: 0
@@ -244,20 +251,22 @@ MonoBehaviour:
   onNegate:
     m_PersistentCalls:
       m_Calls: []
-  pullForce:
-    UseConstant: 1
-    ConstantValue: 0
-    Variable: {fileID: 0}
+  coolDownTime: 0
+  centerPoint: {fileID: 0}
+  collisionSoundEventEmitter: {fileID: 0}
+  firefly: {fileID: 0}
   maxThrowForce:
     UseConstant: 1
     ConstantValue: 0
     Variable: {fileID: 0}
-  throwForce: 0.5
   orbitSize: 4
-  yOffset: 0
+  pullForce:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  radiusSpeed: 10
   rotSpeed: 0.5
-  orbiting: 0
-  throwable: 0
+  throwForce: 0.5
 --- !u!114 &-8080150693659343983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,11 +286,18 @@ MonoBehaviour:
   onNegate:
     m_PersistentCalls:
       m_Calls: []
+  coolDownTime: 0
+  lit: 0
+  boxDimensions: {x: 0, y: 0, z: 0}
   burnedMaterial: {fileID: 0}
   burningParticleEffect: {fileID: 0}
   canBeSource: 0
-  fireSpreadInterval: 0.25
+  destroyable: 0
+  fireEventEmitter: {fileID: 0}
+  fireSpreadPerSecond: 0.1
   fireSpreadRange: 3
+  maxNumberOfAffectableObjects: 15
+  useBoxCollider: 0
 --- !u!135 &-2584483512982836418
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -295,3 +311,17 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &2736258340534200585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3018646443490881463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7f6a71d9c9af84aa9f788fe6735c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interacted: 0
+  disappearDistance: 7
