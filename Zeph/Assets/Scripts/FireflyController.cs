@@ -20,6 +20,11 @@ public class FireflyController : MonoBehaviour
         fireflyRate = fireflies.emission;
         player = GameObject.FindWithTag("Player");
         orgRate = fireflyRate.rateOverTime;
+
+        if (fireflies == null)
+        {
+            Debug.LogError("Fireflies not found");
+        }
     }
 
     // Update is called once per frame
@@ -29,7 +34,7 @@ public class FireflyController : MonoBehaviour
         {
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) < disappearDistance)
             {
-                Debug.Log(Vector3.Distance(gameObject.transform.position, player.transform.position));
+                //Debug.Log(Vector3.Distance(gameObject.transform.position, player.transform.position));
                 Disappear();
             }
             else
@@ -44,7 +49,7 @@ public class FireflyController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Fireflies not found");
+            //Debug.LogError("Fireflies not found");
         }
     }
 
