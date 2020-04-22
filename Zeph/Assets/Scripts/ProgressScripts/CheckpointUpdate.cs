@@ -8,18 +8,18 @@ public class CheckpointUpdate : CheckpointManager
     
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !hitCheckpoint)
+        if (other.CompareTag("Player"))
         {
             print("checkPoint Updated");
-            if (checkPointCount < 3)
+            if (checkPointCount < 3 && !hitCheckpoint)
             {
-                   
                 checkPointCount++;
-                print(checkPointCount); 
+                print(checkPointCount);
+                hitCheckpoint = true;
             }
             
             curCheckpoint = checkpoints[checkPointCount];
-            hitCheckpoint = true;
+            
         }
     }
 }
