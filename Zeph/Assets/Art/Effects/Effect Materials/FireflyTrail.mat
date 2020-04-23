@@ -444,15 +444,15 @@ Material:
     - _SpecularOcclusionMode: 1
     - _SrcBlend: 1
     - _StencilRef: 0
-    - _StencilRefDepth: 32
-    - _StencilRefDistortionVec: 64
+    - _StencilRefDepth: 0
+    - _StencilRefDistortionVec: 4
     - _StencilRefGBuffer: 2
-    - _StencilRefMV: 160
-    - _StencilWriteMask: 3
-    - _StencilWriteMaskDepth: 48
-    - _StencilWriteMaskDistortionVec: 64
+    - _StencilRefMV: 32
+    - _StencilWriteMask: 6
+    - _StencilWriteMaskDepth: 8
+    - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskGBuffer: 51
-    - _StencilWriteMaskMV: 176
+    - _StencilWriteMaskMV: 40
     - _SubsurfaceMask0: 1
     - _SubsurfaceMask1: 1
     - _SubsurfaceMask2: 1
@@ -473,6 +473,7 @@ Material:
     - _TransmissionEnable: 1
     - _TransparentCullMode: 2
     - _TransparentSortPriority: 0
+    - _TransparentZWrite: 0
     - _UVBase0: 0
     - _UVBase1: 0
     - _UVBase2: 0
