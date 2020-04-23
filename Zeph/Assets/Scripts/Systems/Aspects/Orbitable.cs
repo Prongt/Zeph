@@ -30,7 +30,7 @@ public class Orbitable : Aspects
     private bool orbitDirection = true;
 
     //Bools controlling if the object orbits or is thrown
-    private bool orbiting;
+    public bool orbiting;
 
     [Header("Orbit Vars")] [SerializeField]
     public float orbitSize = 3;
@@ -66,18 +66,18 @@ public class Orbitable : Aspects
     private void Start()
     {
         //Finds player and checks for fireflies on current object
-        zephTransform = FindObjectOfType<PlayerMoveRigidbody>().transform;
+        zephTransform = GameObject.FindWithTag("Player").transform;
         delayWaitForSeconds = new WaitForSeconds(0.3f);
         myRb = GetComponent<Rigidbody>();
 
-        if (!gameObject.CompareTag("Log"))
+        /*if (!gameObject.CompareTag("Log"))
         {
             if (firefly != null) fireflyRate = firefly.emission;
         }
         else
         {
             firefly = null;
-        }
+        }*/
 
         //Orbit point is now created at runtime
         //TODO try find orbit point after creation to stop duplicates
@@ -209,10 +209,19 @@ public class Orbitable : Aspects
 
     private IEnumerator Delay()
     {
+        print("Checking Distance");
         //Delay on checks to make things work smoother
         yield return delayWaitForSeconds;
-        if (Vector3.Distance(centerPoint.position, transform.position) <= 3) orbiting = true;
-        if (throwable) throwable = false;
+        if (Vector3.Distance(centerPoint.position, transform.position) <= 3)
+        {
+            print("In distance");
+            orbiting = true;
+        }
+
+        if (throwable)
+        {
+            throwable = false;
+        }
     }
 
 
