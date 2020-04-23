@@ -30,7 +30,7 @@ public class Orbitable : Aspects
     private bool orbitDirection = true;
 
     //Bools controlling if the object orbits or is thrown
-    public bool orbiting;
+    private bool orbiting;
 
     [Header("Orbit Vars")] [SerializeField]
     public float orbitSize = 3;
@@ -209,12 +209,10 @@ public class Orbitable : Aspects
 
     private IEnumerator Delay()
     {
-        print("Checking Distance");
         //Delay on checks to make things work smoother
         yield return delayWaitForSeconds;
         if (Vector3.Distance(centerPoint.position, transform.position) <= 3)
         {
-            print("In distance");
             orbiting = true;
         }
 
