@@ -50,6 +50,7 @@ public class Pause : MonoBehaviour
         else
         {
             PlayerMoveRigidbody.HaltMovement = false;
+            if (options)
             options.SetActive(false);
         }
     }

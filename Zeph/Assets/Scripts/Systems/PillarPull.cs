@@ -43,7 +43,7 @@ public class PillarPull : Aspects
         {
             dot = Vector3.Dot(direction, gameObject.transform.forward);
         }
-        print(dot);
+        //print(dot);
         if (dot > 0)
         {
             myAnim.SetBool("Fall", true);
