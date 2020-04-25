@@ -92,8 +92,6 @@ namespace Movement
 
         private void Update()
         {
-            StopMovementAndPhysics = HaltMovement;
-            
             if (StopMovementAndPhysics)
             {
                 HaltMovement = true;
@@ -105,6 +103,9 @@ namespace Movement
             {
                 HaltMovement = false;
             }
+            
+            StopMovementAndPhysics = HaltMovement;
+            if (StopMovementAndPhysics || HaltMovement) return;
         
         
         
@@ -155,6 +156,7 @@ namespace Movement
         private void FixedUpdate()
         {
             if (HaltMovement) return;
+            if (StopMovementAndPhysics) return;
             velocity = rigidbody.velocity;
 
             UpdateGroundContacts();
