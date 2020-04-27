@@ -28,7 +28,22 @@ public class MosaicPickUp : MonoBehaviour
             {
                 if (myProg.playerProgress < 3)
                 {
-                    myProg.playerProgress += 1;
+                    if (SceneManager.GetActiveScene().name == "Ending_Tutorial")
+                    {
+                        myProg.playerProgress = 1;    
+                    }
+
+                    if (SceneManager.GetActiveScene().name == "Ending_Snow")
+                    {
+                        myProg.playerProgress = 2;
+                    }
+
+                    if (SceneManager.GetActiveScene().name == "Ending_ForestPuzzle")
+                    {
+                        myProg.playerProgress = 3;
+                    }
+                    
+                    //myProg.playerProgress += 1;
                     print(myProg.playerProgress);
                     myProg.SaveLevel();
                 }
