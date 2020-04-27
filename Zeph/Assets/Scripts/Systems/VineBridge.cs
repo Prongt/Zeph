@@ -59,6 +59,12 @@ public class VineBridge : Growable
             {
                 matX -= distortGrowSpeed * Time.deltaTime;
             }*/
+            
+            if (Animator.GetBool(distort) && HasGrown)
+            {
+                print("I should be growing");
+                matX = finalDistortValue;
+            }
         
     }
     
@@ -92,11 +98,6 @@ public class VineBridge : Growable
         yield return new WaitForSeconds(0f);
         if (Animator != null)
         {
-            if (Animator.GetBool(distort) && HasGrown)
-            {
-                matX = finalDistortValue;
-            }
-
             if (!Animator.GetBool(distort))
             {
                 if (matX >= finalValue)
