@@ -225,6 +225,12 @@ namespace Movement
             reverseY = !reverseY;
         }
 
+        public void SideCamera()
+        {
+            reverseX = !reverseX;
+            swapMovementAxis = !swapMovementAxis;
+        }
+
         private void ManageAnimation()
         {
             zephAnimator.SetBool(jumpVariable, !OnGround);

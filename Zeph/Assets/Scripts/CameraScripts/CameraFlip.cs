@@ -47,16 +47,29 @@ public class CameraFlip : MonoBehaviour
       t.z = -t.z;
       myCam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = t;
 
-      playerMoveRigidbody.FlipMovement();
+      playerMoveRigidbody.SideCamera();
       hasFlippedZ = !hasFlippedZ;
    }
 
    //Changes the orbit transposer default orbit point to be opposite where it begins
    public void OrbitChangePoint()
    {
-      myCam.GetCinemachineComponent<CinemachineOrbitalTransposer>().m_Heading.m_HeadingBias = 180;
-      playerMoveRigidbody.FlipMovement();
-      hasFlippedZ = !hasFlippedZ;
+      if (hasChangedOrbitPoint)
+      {
+         ResetOrbit();
+         playerMoveRigidbody.SideCamera();
+      }
+      else
+      {
+         myCam.GetCinemachineComponent<CinemachineOrbitalTransposer>().m_Heading.m_HeadingBias = -90;
+         playerMoveRigidbody.SideCamera();
+         hasChangedOrbitPoint = !hasChangedOrbitPoint;
+      }
+   }
+
+   public void ResetOrbit()
+   {
+      myCam.GetCinemachineComponent<CinemachineOrbitalTransposer>().m_Heading.m_HeadingBias = 0; 
    }
 
    public void ChangeYOffset()
@@ -89,8 +102,8 @@ public class CameraFlip : MonoBehaviour
 
             if (hasChangedOrbitPoint)
             {
-               OrbitChangePoint();
-               playerMoveRigidbody.FlipMovement();
+               ResetOrbit();
+               playerMoveRigidbody.SideCamera();
                cameraConfines.ChangeZOffset();
                hasChangedOrbitPoint = false;
             }
