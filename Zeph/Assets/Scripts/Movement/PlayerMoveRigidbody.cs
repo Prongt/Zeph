@@ -172,7 +172,7 @@ namespace Movement
 
         private void HandlePlayerInput()
         {
-            if (StopMovementAndPhysics) return;
+            //if (StopMovementAndPhysics) return;
             playerInput.x = -Input.GetAxis("Horizontal");
             playerInput.y = -Input.GetAxis("Vertical");
 
@@ -188,7 +188,8 @@ namespace Movement
             if (reverseY) playerInput.y = -playerInput.y;
 
             playerInput = Vector2.ClampMagnitude(playerInput, 1f);
-            if (Input.GetButtonDown("Jump")) hasScheduledJump = true;
+            //if (Input.GetButtonDown("Jump")) hasScheduledJump = true;
+            if (Input.GetButton("Jump")) hasScheduledJump = true;
         }
 
         private void GravitySwitching()
