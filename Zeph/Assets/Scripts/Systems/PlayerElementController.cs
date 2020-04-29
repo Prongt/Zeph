@@ -27,7 +27,7 @@ public class PlayerElementController : MonoBehaviour
     private bool lightP;
 
     //number of collisions detected for each element
-    private const int MaxAffectableObjects = 25;
+    private const int MaxAffectableObjects = 40;
 
     private static readonly int usePower = Animator.StringToHash("usePower");
 
@@ -35,11 +35,10 @@ public class PlayerElementController : MonoBehaviour
     private void Awake()
     {
         light = GetComponentInChildren<Light>();
-        //animator = GetComponentInChildren<Animator>();
 
         for (var i = 0; i < elementData.Length; i++)
         {
-            elementData[i].element.colliders = new Collider[25];
+            elementData[i].element.colliders = new Collider[MaxAffectableObjects];
         }
     }
 

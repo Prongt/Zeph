@@ -25,7 +25,7 @@ public class Story : Aspects
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-        
+        //Debug.Log("Story");
         GetComponentInChildren<FireflyController>().interacted = true;
     }
 
