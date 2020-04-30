@@ -153,6 +153,8 @@ public class Orbitable : Aspects
 
     private void Orbit()
     {
+        Physics.IgnoreLayerCollision(9,18,true);
+
         //Setting parent means the object does trail behind the player.
         gameObject.transform.SetParent(zephTransform);
 
