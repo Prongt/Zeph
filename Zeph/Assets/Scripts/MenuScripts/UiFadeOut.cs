@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class UiFadeOut : MonoBehaviour
 {
     [TextArea][SerializeField] private List<string> storyText = default;
+    [SerializeField] private string buttonToClose = "Story";
+
+    
     //[SerializeField] private float fadeTime = 2.0f;
 
     private MaskableGraphic[] guiElements;
@@ -43,7 +46,7 @@ public class UiFadeOut : MonoBehaviour
     {
         PlayerMoveRigidbody.HaltMovement = true;
         text.text = storyText[storyIndex];
-        if (Input.GetButtonDown("Story"))
+        if (Input.GetButtonDown(buttonToClose))
         {
             if (storyIndex == storyText.Count -1)
             {
