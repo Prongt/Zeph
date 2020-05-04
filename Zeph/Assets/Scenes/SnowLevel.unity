@@ -30447,7 +30447,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 62987359, guid: b872e7d6b6e39564090851c50ed6b907, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b872e7d6b6e39564090851c50ed6b907, type: 3}
 --- !u!4 &1096952019 stripped
 Transform:
@@ -41521,6 +41522,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacted: 0
   disappearDistance: 7
+--- !u!65 &1600308940
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600308938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 6.65, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.21}
 --- !u!65 &1600308945
 BoxCollider:
   m_ObjectHideFlags: 0
