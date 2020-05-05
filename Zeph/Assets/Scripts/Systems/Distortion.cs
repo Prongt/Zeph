@@ -87,7 +87,7 @@ public class Distortion : Aspects
         }
         else
         {
-            Debug.LogWarning("no Chromatic Aberration object found");
+//            Debug.LogWarning("no Chromatic Aberration object found");
             return false;
         }
     }
