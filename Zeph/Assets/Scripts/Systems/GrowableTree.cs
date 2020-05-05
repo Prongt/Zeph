@@ -20,10 +20,7 @@ public class GrowableTree : Growable
 
     private void Update()
     {
-        if (Animator.GetBool(grow))
-        {
-            Animator.SetBool(distort, Distortion.IsDistorting);
-        }
+        Animator.SetBool(distort, Distortion.IsDistorting);
 
         if (gameObject.CompareTag("VerticalSlice"))
         {
