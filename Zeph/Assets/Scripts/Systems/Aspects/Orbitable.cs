@@ -31,6 +31,7 @@ public class Orbitable : Aspects
 
     //Bools controlling if the object orbits or is thrown
     private bool orbiting;
+    public bool pullable = true;
 
     [Header("Orbit Vars")] [SerializeField]
     public float orbitSize = 3;
@@ -67,7 +68,7 @@ public class Orbitable : Aspects
     {
         //Finds player and checks for fireflies on current object
         zephTransform = GameObject.FindWithTag("Player").transform;
-        delayWaitForSeconds = new WaitForSeconds(0.3f);
+        delayWaitForSeconds = new WaitForSeconds(0.2f);
         myRb = GetComponent<Rigidbody>();
 
         /*if (!gameObject.CompareTag("Log"))
@@ -133,6 +134,7 @@ public class Orbitable : Aspects
         if (orbiting)
         {
             delay = true;
+
             orbiting = false;
         }
         else
@@ -153,7 +155,7 @@ public class Orbitable : Aspects
 
     private void Orbit()
     {
-        Physics.IgnoreLayerCollision(9,18,true);
+        //Physics.IgnoreLayerCollision(9,18,true);
 
         //Setting parent means the object does trail behind the player.
         gameObject.transform.SetParent(zephTransform);
@@ -213,7 +215,7 @@ public class Orbitable : Aspects
     {
         //Delay on checks to make things work smoother
         yield return delayWaitForSeconds;
-        if (Vector3.Distance(centerPoint.position, transform.position) <= 3)
+        if (Vector3.Distance(centerPoint.position, transform.position) <= 3 && pullable)
         {
             orbiting = true;
         }
@@ -227,6 +229,11 @@ public class Orbitable : Aspects
 
     private void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            pullable = false;
+        }
+        
         if (other.gameObject.CompareTag("Floor")) return;
 
         //switches which way the object is orbiting
@@ -252,5 +259,21 @@ public class Orbitable : Aspects
 
         if (collisionSoundEventEmitter.IsPlaying()) collisionSoundEventEmitter.Stop();
         collisionSoundEventEmitter.Play();
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            pullable = false;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            pullable = true;
+        }
     }
 }
