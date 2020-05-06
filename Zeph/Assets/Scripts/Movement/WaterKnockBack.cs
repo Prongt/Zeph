@@ -31,7 +31,6 @@ namespace Movement
 
         private void OnCollisionEnter(Collision col)
         {
-            print("Collided with: " + col.gameObject.name);
             if (!col.collider.CompareTag("Player")) return;
         
             if (applyKnockBackForce)
