@@ -17,6 +17,8 @@ public class IceController : MonoBehaviour
     [SerializeField] private bool dontReFreeze = false;
     private static readonly int iceLevel = Shader.PropertyToID("iceLevel");
     private Collider col;
+    [SerializeField]private float freezeShaderValue = -4.7f;
+    [SerializeField]private float meltShaderValue = 5.2f;
 
 
     private void Awake()
@@ -42,9 +44,8 @@ public class IceController : MonoBehaviour
     [ContextMenu("Melt")]
     public void Melt()
     {
-        SetIceOverTime(5.2f, meltTime);
+        SetIceOverTime(meltShaderValue, meltTime);
         col.isTrigger = true;
-        //Debug.Log("Melt");
 
         if (meltEvent != String.Empty)
         {
@@ -56,8 +57,8 @@ public class IceController : MonoBehaviour
     public void Freeze()
     {
         if (dontReFreeze) return;
-
-        SetIceOverTime(-4.7f, freezeTime);
+        
+        SetIceOverTime(freezeShaderValue, freezeTime);
         col.isTrigger = false;
         
         if (freezeEvent != String.Empty)
