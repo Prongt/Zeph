@@ -92,6 +92,7 @@ namespace Movement
 
         private void Update()
         {
+            //TODO Remove hard coded values
             if (StopMovementAndPhysics)
             {
                 HaltMovement = true;
@@ -234,6 +235,11 @@ namespace Movement
 
         private void ManageAnimation()
         {
+            if (StopMovementAndPhysics)
+            {
+                zephAnimator.SetBool(jumpVariable, false);
+                return;
+            }
             zephAnimator.SetBool(jumpVariable, !OnGround);
 
             if (StopMovementAndPhysics) return;
@@ -243,6 +249,7 @@ namespace Movement
                 StartCoroutine(DanceRoutine());
             }
             
+            //TODO Remove hardcoded values
             zephAnimator.SetFloat(moveVariable, desiredVelocity.magnitude > 0.25f ? 1.0f : 0f);
         }
 
@@ -256,7 +263,7 @@ namespace Movement
 
         private void RotatePlayerModel()
         {
-            if (playerInput.magnitude < 0.01f) return;
+            if (playerInput.magnitude < float.Epsilon) return;
 
             var targetRotation = Mathf.Atan2(playerInput.x, playerInput.y) * Mathf.Rad2Deg;
             var vel = rigidbody.velocity.magnitude;
@@ -336,7 +343,7 @@ namespace Movement
 
             float jumpSpeed;
             float force;
-
+            //TODO Clean here
             if (currentGravity.z < 0)
                 force = currentGravity.z;
             else if (currentGravity.z > 0)
