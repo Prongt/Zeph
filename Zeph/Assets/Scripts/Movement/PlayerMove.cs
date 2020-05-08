@@ -138,7 +138,7 @@ public class PlayerMove : MonoBehaviour
 		
 		if (PlayerMovementEnabled)
 		{
-			if (GravityRift.UseNewGravity)
+			if (GravityRift.AltGravityIsActive)
 			{
 				AltMove(inputDir, -Physics.gravity);
 			}
@@ -153,7 +153,7 @@ public class PlayerMove : MonoBehaviour
 		}
 		else
 		{
-			if (GravityRift.UseNewGravity == false)
+			if (GravityRift.AltGravityIsActive == false)
 			{
 				transform.up = Vector3.Lerp(transform.up, originalUp, (gravityFlipTime * 1.5f) * Time.deltaTime);
 				//transform.rotation = originalrot;
@@ -176,7 +176,7 @@ public class PlayerMove : MonoBehaviour
 		{
 			float jumpVelocity;
 		
-			if (GravityRift.UseNewGravity)
+			if (GravityRift.AltGravityIsActive)
 			{
 				jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJumpMultiplier);
 				upVelocity = jumpVelocity;
@@ -422,7 +422,7 @@ public class PlayerMove : MonoBehaviour
 	{
 		if (inputDir != Vector2.zero)
 		{
-			if (GravityRift.UseNewGravity)
+			if (GravityRift.AltGravityIsActive)
 			{
 				float targetRotation = Mathf.Atan2(-inputDir.x, -inputDir.y) * Mathf.Rad2Deg;
 				if (gravityDirection.z > 0 || gravityDirection.z < 0)
@@ -480,7 +480,7 @@ public class PlayerMove : MonoBehaviour
 		animator.SetBool(isJumping, true);
 		float jumpVelocity;
 		
-		if (GravityRift.UseNewGravity)
+		if (GravityRift.AltGravityIsActive)
 		{
 			jumpVelocity = Mathf.Sqrt(-2 * playerGravity * gravityJumpMultiplier);
 		}
@@ -536,7 +536,7 @@ public class PlayerMove : MonoBehaviour
 
 	private bool CheckIfGrounded(Vector3 direction, float distance)
 	{
-		if (GravityRift.UseNewGravity)
+		if (GravityRift.AltGravityIsActive)
 		{
 			Ray ray = new Ray(rayPoint.position, direction);
 			if (Physics.Raycast(ray, out var hit, distance))

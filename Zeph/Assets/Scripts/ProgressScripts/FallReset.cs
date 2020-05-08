@@ -19,7 +19,7 @@ public class FallReset : MonoBehaviour
         {
             playerMoveRigidbody.enabled = false;
             Physics.gravity = new Vector3(0,-9.81f,0);
-            GravityRift.UseNewGravity = false;
+            GravityRift.AltGravityIsActive = false;
             other.transform.position = CheckpointManager.curCheckpoint.transform.position;
             other.transform.rotation = CheckpointManager.curCheckpoint.transform.rotation;
             StartCoroutine(Delay());
@@ -32,7 +32,7 @@ public class FallReset : MonoBehaviour
         
         playerMoveRigidbody.enabled = false;
         Physics.gravity = new Vector3(0,-9.81f,0);
-        GravityRift.UseNewGravity = false;
+        GravityRift.AltGravityIsActive = false;
         other.transform.position = CheckpointManager.curCheckpoint.transform.position;
         other.transform.rotation = CheckpointManager.curCheckpoint.transform.rotation;
         StartCoroutine(Delay());

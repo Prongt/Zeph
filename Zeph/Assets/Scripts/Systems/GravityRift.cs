@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GravityRift : Aspects
 {
-    public static bool UseNewGravity;
+    public static bool AltGravityIsActive;
     private readonly Vector3 defaultGravity = new Vector3(0, -9.81f, 0);
 
     public Type[] componentTypes =
@@ -30,45 +30,31 @@ public class GravityRift : Aspects
     {
         return componentTypes;
     }
-
-    private void Update()
-    {
-        if (Physics.gravity == defaultGravity)
-        {
-            UseNewGravity = false;
-        }
-    }
-
-
+    
     public override void Promote(Transform source = null, Element element = null)
     {
         if (isCoolDownComplete == false)
         {
-            //Debug.Log("Cool down not complete on ", gameObject);
             return;
         }
 
         base.Promote(source, element);
 
-        ChangeGravity();
+        ChangeGravity(Physics.gravity);
     }
 
-    private void ChangeGravity()
+    private void ChangeGravity(Vector3 currentGravity)
     {
-        if (Physics.gravity.Equals(toGravity))
+        if (currentGravity.Equals(fromGravity))
         {
-            UseNewGravity = true;
-            Physics.gravity = fromGravity;
-            return;
-        }
-
-        if (Physics.gravity.Equals(fromGravity))
-        {
-            UseNewGravity = true;
             Physics.gravity = toGravity;
         }
-
-        if (Physics.gravity.Equals(defaultGravity)) UseNewGravity = false;
+        else if (currentGravity.Equals(toGravity))
+        {
+            Physics.gravity = fromGravity;
+        }
+        
+        AltGravityIsActive = !currentGravity.Equals(defaultGravity);
     }
 
     public override void Negate(Transform source = null)
