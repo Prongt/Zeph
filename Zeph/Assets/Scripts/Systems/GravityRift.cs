@@ -30,7 +30,7 @@ public class GravityRift : Aspects
     {
         return componentTypes;
     }
-    
+
     public override void Promote(Transform source = null, Element element = null)
     {
         if (isCoolDownComplete == false)
@@ -54,7 +54,7 @@ public class GravityRift : Aspects
             Physics.gravity = fromGravity;
         }
         
-        AltGravityIsActive = !currentGravity.Equals(defaultGravity);
+        AltGravityIsActive = Physics.gravity != defaultGravity;
     }
 
     public override void Negate(Transform source = null)
