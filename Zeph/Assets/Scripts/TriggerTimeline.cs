@@ -9,16 +9,16 @@ public class TriggerTimeline : MonoBehaviour
     [SerializeField]private PlayableDirector timeline;
     [SerializeField]private bool triggerOnce = true;
 
-    private bool triggered = false;
+    private bool hasBeentriggered = false;
 
 
     public void PlayTimeline()
     {
         if (triggerOnce)
         {
-            if (triggered) return;
+            if (hasBeentriggered) return;
         }
         timeline.Play();
-        triggered = true;
+        hasBeentriggered = true;
     }
 }
