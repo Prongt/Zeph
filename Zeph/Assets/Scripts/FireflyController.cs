@@ -17,7 +17,10 @@ public class FireflyController : MonoBehaviour
     void Start()
     {
         fireflies = GetComponentInChildren<ParticleSystem>();
-        fireflyRate = fireflies.emission;
+        if (fireflies)
+        {
+            fireflyRate = fireflies.emission;
+        }
         player = GameObject.FindWithTag("Player");
         orgRate = fireflyRate.rateOverTime;
 

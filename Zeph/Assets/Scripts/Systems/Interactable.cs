@@ -239,7 +239,7 @@ public class Interactable : MonoBehaviour
 
         if (requireDefaultGravity)
         {
-            if (GravityRift.UseNewGravity)
+            if (GravityRift.AltGravityIsActive)
             {
                 return;
             }

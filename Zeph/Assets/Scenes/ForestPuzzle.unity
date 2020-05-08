@@ -9101,7 +9101,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 479735239}
-  m_LocalRotation: {x: -0.000000015052708, y: 0.9937222, z: -0.11187624, w: -0.00000018867908}
+  m_LocalRotation: {x: -0.000000014977715, y: 0.9937252, z: -0.111849524, w: -0.00000018983029}
   m_LocalPosition: {x: -1.2, y: 4.355, z: 31.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -46763,7 +46763,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
-  requireRaycast: 1
+  requireRaycast: 0
 --- !u!4 &115026727279496835 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7479482813785416144, guid: 345cc7aa09d461849acf5d7499408482,
@@ -54121,7 +54121,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
-  requireRaycast: 1
+  requireRaycast: 0
 --- !u!23 &5809648994735269368
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -54215,6 +54215,20 @@ Rigidbody:
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &5925859386089469309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5925859386089469307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00eb9eeac059d0046b4a62acbc2b00a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeline: {fileID: 120640936}
+  triggerOnce: 1
+--- !u!114 &5925859386089469310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55220,7 +55234,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
-  requireRaycast: 1
+  requireRaycast: 0
 --- !u!114 &7078374788585113621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56292,8 +56306,8 @@ MonoBehaviour:
   onPromote:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 120640936}
-        m_MethodName: Play
+      - m_Target: {fileID: 5925859386089469309}
+        m_MethodName: PlayTimeline
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -56801,7 +56815,7 @@ MonoBehaviour:
   requireDefaultGravity: 0
   isFrozen: 0
   canBeFrozen: 0
-  requireRaycast: 1
+  requireRaycast: 0
 --- !u!33 &8820751690607936463
 MeshFilter:
   m_ObjectHideFlags: 0
