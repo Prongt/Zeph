@@ -123,6 +123,20 @@ MonoBehaviour:
       m_Calls: []
   coolDownTime: 0
   myCol: {fileID: 0}
+--- !u!114 &7594180725419437651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203314150654975084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7f6a71d9c9af84aa9f788fe6735c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interacted: 0
+  disappearDistance: 7
 --- !u!114 &8397615957388142913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,20 +156,50 @@ MonoBehaviour:
   - Log
   playOnce: 1
   audioPoint: {fileID: 1426170590969752389}
---- !u!114 &7594180725419437651
-MonoBehaviour:
+--- !u!1 &2446758123092471396
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2203314150654975084}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6514616642754816344}
+  - component: {fileID: 1388114682173425584}
+  m_Layer: 20
+  m_Name: Player Pushback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6514616642754816344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2446758123092471396}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5777596619545814462}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1388114682173425584
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2446758123092471396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c7f6a71d9c9af84aa9f788fe6735c7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interacted: 0
-  disappearDistance: 7
+  serializedVersion: 2
+  m_Size: {x: 1.5014238, y: 4.875961, z: 2.1948652}
+  m_Center: {x: -0.25071192, y: 1.9379804, z: -0.19275522}
 --- !u!1 &4124796863402226357
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,6 +229,7 @@ Transform:
   m_Children:
   - {fileID: 8310293075098020849}
   - {fileID: 1658575161182432233}
+  - {fileID: 6514616642754816344}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
