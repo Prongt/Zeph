@@ -5,18 +5,29 @@ using UnityEngine;
 public class MosaicUpdate : MonoBehaviour
 {
     public List<GameObject> mosaics;
-    private Animator anim;
     private LevelProgress prog;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
         prog = GameObject.Find("Player Progress").GetComponent<LevelProgress>();
     }
 
     void Update()
     {
-        anim.SetInteger("PlayerProgress", prog.playerProgress);
+        if (prog.playerProgress == 1)
+        {
+            mosaics[0].SetActive(true);
+        }
+        if (prog.playerProgress == 2)
+        {
+            mosaics[1].SetActive(true);
+        }
+        if (prog.playerProgress == 3)
+        {
+            mosaics[2].SetActive(true);
+            mosaics[0].SetActive(false);
+            mosaics[1].SetActive(false);
+        }
     }
 
 }
