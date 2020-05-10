@@ -21,11 +21,19 @@ public class Conductor : MonoBehaviour
     [SerializeField] private StudioEventEmitter conductorEvent;
     [SerializeField] [ParamRef] private string conductorExtentsParam;
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private string conductorAnimBoolName = "HeatedUp";
+    
+
+    
+    
     private void Awake()
     {
         objectsInRadius = new List<GameObject>();
         waitForSeconds = new WaitForSeconds(waitTime);
         conductorEvent = GetComponent<StudioEventEmitter>();
+        animator = GetComponentInParent<Animator>();
     }
 
     [ContextMenu("Grow")]
@@ -45,6 +53,8 @@ public class Conductor : MonoBehaviour
     private IEnumerator GrowWaitShrinkRoutine(float growingSpeed, float shrinkingSpeed)
     {
         if (!conductorEvent.IsPlaying()) conductorEvent.Play();
+        
+       animator.SetBool(conductorAnimBoolName, true);
 
         while (math.abs(transform.localScale.x - currentTarget) > 0.25f)
         {
@@ -52,15 +62,17 @@ public class Conductor : MonoBehaviour
                 growingSpeed * Time.deltaTime);
             yield return null;
         }
-
+        
+        animator.SetBool(conductorAnimBoolName, false);
         yield return waitForSeconds;
-
+        
         while (math.abs(transform.localScale.x - minRadius) > 0.25f)
         {
             transform.localScale =
                 Vector3.Slerp(transform.localScale, Vector3.one * minRadius, shrinkingSpeed * Time.deltaTime);
             yield return null;
         }
+        
         conductorEvent.Stop();
     }
 
