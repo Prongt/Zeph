@@ -19,6 +19,7 @@ public class PlayerElementController : MonoBehaviour
 
     [SerializeField] private VisualEffect fireEffect = default;
     [SerializeField] private VisualEffect leafEffect = default;
+    [SerializeField] private VisualEffect lightEffect = default;
 
     [SerializeField] private LayerMask layerMask;
 
@@ -77,6 +78,7 @@ public class PlayerElementController : MonoBehaviour
                     break;
                 case "LightPower":
                     //Debug.Log("Light power used");
+                    lightEffect.SetInt("Spawn Rate", 150);
                     light.intensity = 1200f;
                     lightP = true;
                     break;
@@ -162,6 +164,7 @@ public class PlayerElementController : MonoBehaviour
         //animator.SetBool(usePower, false);
         fireEffect.SetInt("Spawn Rate", 0);
         leafEffect.SetInt("Spawn Rate",0);
+        lightEffect.SetInt("Spawn Rate", 0);
     }
     
     
