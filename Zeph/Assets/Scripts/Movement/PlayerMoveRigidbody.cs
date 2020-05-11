@@ -62,6 +62,16 @@ namespace Movement
         [SerializeField] private Transform zephModel = default;
         [SerializeField] [Range(0f, 5f)] private float rotationModifier = 1f;
         [SerializeField] [Range(0f, 100f)] private float speed = 5f;
+        
+        [Header("Particles")] 
+        [SerializeField] private ParticleSystem jumpParticles;
+        private ParticleSystem.EmissionModule jumpEmmision;
+        private ParticleSystem.MinMaxCurve jumpEmmisionRate;
+        
+        [SerializeField] private ParticleSystem forwardParticles;
+        private ParticleSystem.EmissionModule moveForwardEmmision;
+        private ParticleSystem.MinMaxCurve moveForwardEmmisionRate;
+        
 
         private bool OnGround => groundContactCount > 0;
         private bool ZGravity => currentGravity.z < 0 || currentGravity.z > 0;
@@ -77,6 +87,18 @@ namespace Movement
             HaltMovement = false;
 
             orbitPoint = zephModel;
+
+            if (jumpParticles != null)
+            {
+                jumpEmmision = jumpParticles.emission;
+                jumpEmmisionRate = jumpEmmision.rateOverTime;
+            }
+
+            if (forwardParticles != null)
+            {
+                moveForwardEmmision = forwardParticles.emission;
+                moveForwardEmmisionRate = moveForwardEmmision.rateOverTime;
+            }
         }
 
         private void Start()
@@ -251,6 +273,23 @@ namespace Movement
             
             //TODO Remove hardcoded values
             zephAnimator.SetFloat(moveVariable, desiredVelocity.magnitude > 0.25f ? 1.0f : 0f);
+
+            //TODO avoid null checking during update
+            if (jumpParticles == null || forwardParticles == null) return;
+            
+            if (!OnGround)
+            {
+                //play jumping particles
+                jumpEmmision.rateOverTime = jumpEmmisionRate;
+                //jumpParticles;
+                moveForwardEmmision.rateOverTime = 0;
+            }
+            else
+            {
+                jumpEmmision.rateOverTime = 0;
+
+                moveForwardEmmision.rateOverTime = desiredVelocity.magnitude > 0.25f ? moveForwardEmmisionRate : 0;
+            }
         }
 
         private IEnumerator DanceRoutine()
