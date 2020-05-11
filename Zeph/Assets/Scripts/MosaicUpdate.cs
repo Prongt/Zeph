@@ -21,6 +21,7 @@ public class MosaicUpdate : MonoBehaviour
         if (prog.playerProgress == 2)
         {
             mosaics[1].SetActive(true);
+            mosaics[0].SetActive(true);
         }
         if (prog.playerProgress == 3)
         {
