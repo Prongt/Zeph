@@ -6118,6 +6118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableDuringDistort: 1
   disableDuringAltGravity: 0
+  enabledDuringAltGravity: 0
 --- !u!1 &342367181
 GameObject:
   m_ObjectHideFlags: 0
@@ -8264,6 +8265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableDuringDistort: 1
   disableDuringAltGravity: 0
+  enabledDuringAltGravity: 0
 --- !u!1 &427957905 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7919585591400953767, guid: 5242db45d41d9144b9fa70488b94f8b1,
@@ -8815,6 +8817,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 116.87197, y: 116.4019, z: 7.3267555}
   m_Center: {x: 0, y: -0.13000491, z: 0.6838878}
+--- !u!1 &466674287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 466674288}
+  - component: {fileID: 466674289}
+  m_Layer: 0
+  m_Name: Collider 3 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &466674288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466674287}
+  m_LocalRotation: {x: -0, y: -0.00000002235174, z: -0.12177689, w: 0.9925576}
+  m_LocalPosition: {x: 0.21652794, y: 11.06, z: 2.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1010053287}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -13.989}
+--- !u!65 &466674289
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466674287}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.542524, y: 6.6753793, z: 4.2433105}
+  m_Center: {x: 2.3782396, y: -2.8376904, z: 0.3119507}
 --- !u!1001 &467599403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9137,7 +9183,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 479735239}
-  m_LocalRotation: {x: -0.013603585, y: 0.9702878, z: -0.23494749, w: -0.05618022}
+  m_LocalRotation: {x: -0.013603645, y: 0.9702878, z: -0.23494749, w: -0.05618047}
   m_LocalPosition: {x: -1.2, y: 4.355, z: 31.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -15368,8 +15414,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699139676}
   m_LocalRotation: {x: -0, y: 0.70710695, z: -0, w: 0.7071066}
-  m_LocalPosition: {x: -25.53, y: 11.97, z: -20.6}
-  m_LocalScale: {x: 6.6372967, y: 7.93979, z: 1}
+  m_LocalPosition: {x: -25.53, y: 15.16, z: -20.6}
+  m_LocalScale: {x: 6.6372967, y: 17.797832, z: 1}
   m_Children: []
   m_Father: {fileID: 3050711281980774324}
   m_RootOrder: 7
@@ -32547,6 +32593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableDuringDistort: 1
   disableDuringAltGravity: 0
+  enabledDuringAltGravity: 0
 --- !u!1001 &1519583669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33289,6 +33336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableDuringDistort: 1
   disableDuringAltGravity: 1
+  enabledDuringAltGravity: 0
 --- !u!1 &1543372279
 GameObject:
   m_ObjectHideFlags: 0
@@ -33613,6 +33661,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1592667682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1592667683}
+  - component: {fileID: 1592667684}
+  m_Layer: 0
+  m_Name: Collider (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1592667683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592667682}
+  m_LocalRotation: {x: -0, y: -0, z: -0.3006804, w: 0.953725}
+  m_LocalPosition: {x: -6.91, y: 3.14, z: 1.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1010053287}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -34.997}
+--- !u!65 &1592667684
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592667682}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.16624868, y: 21.069275, z: 3.3197994}
+  m_Center: {x: 0.41686255, y: -0.24711795, z: 1.1599002}
 --- !u!1 &1600297107 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2142111675251919152, guid: a0fa9709b3579714aac745890da4d762,
@@ -41456,6 +41548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableDuringDistort: 1
   disableDuringAltGravity: 0
+  enabledDuringAltGravity: 0
 --- !u!1001 &1921267756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48610,6 +48703,7 @@ GameObject:
   - component: {fileID: 675878380855028282}
   - component: {fileID: 675878380855028281}
   - component: {fileID: 675878380855028280}
+  - component: {fileID: 675878380855028288}
   m_Layer: 0
   m_Name: Wall divider (1)
   m_TagString: Untagged
@@ -48626,11 +48720,26 @@ Transform:
   m_GameObject: {fileID: 675878380855028286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5, y: 13.9, z: -21.7}
-  m_LocalScale: {x: 3.3751156, y: 22.161697, z: 12.0277}
+  m_LocalScale: {x: 3.3751156, y: 40.128185, z: 12.0277}
   m_Children: []
   m_Father: {fileID: 3050711281980774324}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &675878380855028288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675878380855028286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da31fbd5c869074ca17aa1e8ded4b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableDuringDistort: 0
+  disableDuringAltGravity: 0
+  enabledDuringAltGravity: 1
 --- !u!1 &717645132480342319
 GameObject:
   m_ObjectHideFlags: 0

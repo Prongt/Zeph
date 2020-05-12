@@ -6,6 +6,7 @@ public class ColliderDisabler : MonoBehaviour
 {
     [SerializeField] private bool disableDuringDistort = false;
     [SerializeField] private bool disableDuringAltGravity = false;
+    [SerializeField] private bool enabledDuringAltGravity = false;
     
     private Collider collider;
 
@@ -16,7 +17,10 @@ public class ColliderDisabler : MonoBehaviour
 
     private void Update()
     {
-        //if (!disableDuringDistort && !disableDuringAltGravity) return;
+        if (enabledDuringAltGravity)
+        {
+            collider.isTrigger = GravityRift.AltGravityIsActive == false;
+        }
         
         if (disableDuringDistort)
         {
