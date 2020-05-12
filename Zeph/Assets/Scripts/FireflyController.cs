@@ -26,7 +26,7 @@ public class FireflyController : MonoBehaviour
 
         if (fireflies == null)
         {
-            Debug.LogWarning("Fireflies not found");
+            Debug.LogWarning("Fireflies not found " + gameObject.name);
         }
     }
 
