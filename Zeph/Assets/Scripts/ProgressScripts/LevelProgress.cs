@@ -31,6 +31,7 @@ public class LevelProgress : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         print(path);
         DontDestroyOnLoad(gameObject);
         print(Application.persistentDataPath);

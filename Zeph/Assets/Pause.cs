@@ -51,7 +51,7 @@ public class Pause : MonoBehaviour
         {
             //Time.timeScale = 1;
             if (options)
-            options.SetActive(false);
+                options.SetActive(false);
         }
     }
 
@@ -74,6 +74,8 @@ public class Pause : MonoBehaviour
 
     public void ExitToMenu(string sceneToLoad)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(sceneToLoad);
     }
+    
 }
