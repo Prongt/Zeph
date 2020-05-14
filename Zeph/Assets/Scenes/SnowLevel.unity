@@ -2274,6 +2274,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 51.61308, y: 11.996089, z: 33.500008}
   m_Center: {x: 0.0035181043, y: -1.948036, z: 16.750004}
+--- !u!1 &74228710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 74228712}
+  - component: {fileID: 74228711}
+  m_Layer: 0
+  m_Name: Undistorted Wall Climb Blocker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &74228711
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74228710}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.74136734, y: 15.954189, z: 8.039708}
+  m_Center: {x: 12.167589, y: 0.03999996, z: 3.5198545}
+--- !u!4 &74228712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74228710}
+  m_LocalRotation: {x: 0.00012415648, y: 0.0069213114, z: -0.017933654, w: 0.9998153}
+  m_LocalPosition: {x: 0.2, y: 0.34, z: 0.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 969128250}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0.028, y: 0.79300004, z: -2.055}
 --- !u!64 &75092931 stripped
 MeshCollider:
   m_CorrespondingSourceObject: {fileID: 4082552240133788121, guid: 2a948affe8e59454187a1b8a5af132dc,
@@ -29236,6 +29280,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 708aef1c3657fe54d97f8b5a9788d73a, type: 2}
+    - target: {fileID: 7101807757661243368, guid: 829ae75c1ecdb9a44be47844e0035b05,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8031056812471790842, guid: 829ae75c1ecdb9a44be47844e0035b05,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -36705,7 +36754,7 @@ PrefabInstance:
     - target: {fileID: 7134668082210917720, guid: 271f14a27fb01134e803fc208146b913,
         type: 3}
       propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7134668082210917720, guid: 271f14a27fb01134e803fc208146b913,
         type: 3}
@@ -36735,6 +36784,31 @@ PrefabInstance:
     - target: {fileID: 7134668082210917720, guid: 271f14a27fb01134e803fc208146b913,
         type: 3}
       propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7134668082210917720, guid: 271f14a27fb01134e803fc208146b913,
+        type: 3}
+      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7134668082210917720, guid: 271f14a27fb01134e803fc208146b913,
+        type: 3}
+      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7134668082210917720, guid: 271f14a27fb01134e803fc208146b913,
+        type: 3}
+      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 74228710}
+    - target: {fileID: 7134668082210917720, guid: 271f14a27fb01134e803fc208146b913,
+        type: 3}
+      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 7134668082210917720, guid: 271f14a27fb01134e803fc208146b913,
+        type: 3}
+      propertyPath: onPromote.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7312836316527053380, guid: 271f14a27fb01134e803fc208146b913,
@@ -45450,6 +45524,8 @@ GameObject:
   - component: {fileID: 1760355995}
   - component: {fileID: 1760355994}
   - component: {fileID: 1760355993}
+  - component: {fileID: 1760355996}
+  - component: {fileID: 1760355997}
   m_Layer: 0
   m_Name: Trees
   m_TagString: Untagged
@@ -45567,6 +45643,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1760355996
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760355992}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.1121564, y: 8.287968, z: 29.27776}
+  m_Center: {x: 1.8962, y: 3.6439838, z: 29.760805}
+--- !u!65 &1760355997
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760355992}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 22.7502, y: 18.182861, z: 23.727371}
+  m_Center: {x: -12.0652075, y: 8.591431, z: 31.960178}
 --- !u!1001 &1760588735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47036,6 +47138,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2888237651982898484, guid: 829ae75c1ecdb9a44be47844e0035b05,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3901517008787559046, guid: 829ae75c1ecdb9a44be47844e0035b05,
         type: 3}
       propertyPath: m_RootOrder
@@ -47051,6 +47158,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 5542030442314055975, guid: 829ae75c1ecdb9a44be47844e0035b05,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.639
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542030442314055975, guid: 829ae75c1ecdb9a44be47844e0035b05,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.591714
+      objectReference: {fileID: 0}
     - target: {fileID: 6252612320140171767, guid: 829ae75c1ecdb9a44be47844e0035b05,
         type: 3}
       propertyPath: m_RootOrder
@@ -47065,6 +47182,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426445654717521641, guid: 829ae75c1ecdb9a44be47844e0035b05,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.412
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426445654717521641, guid: 829ae75c1ecdb9a44be47844e0035b05,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0140369
       objectReference: {fileID: 0}
     - target: {fileID: 6875121441849689044, guid: 829ae75c1ecdb9a44be47844e0035b05,
         type: 3}
@@ -47095,6 +47222,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031056812471790842, guid: 829ae75c1ecdb9a44be47844e0035b05,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8146687725846365467, guid: 829ae75c1ecdb9a44be47844e0035b05,
         type: 3}
@@ -55327,6 +55459,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useSpecifiedConductor: 1
   conductor: {fileID: 596741070}
+--- !u!65 &3537889549611065016
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3537889549611065014}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 24.874912, y: 1.2674538, z: 16.980587}
+  m_Center: {x: 0.0044136047, y: -8.22726, z: 8.337215}
 --- !u!95 &3673345950158619479
 Animator:
   serializedVersion: 3
