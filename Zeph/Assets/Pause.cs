@@ -32,7 +32,7 @@ public class Pause : MonoBehaviour
 
         if (menuActive)
         {
-
+            print("PAUSED");
             Time.timeScale = 0;
                 pauseMenu.SetActive(true);
         }
@@ -44,12 +44,12 @@ public class Pause : MonoBehaviour
 
         if (optionsActive)
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             options.SetActive(true);
         }
         else
         {
-            Time.timeScale = 1;
+            //Time.timeScale = 1;
             if (options)
             options.SetActive(false);
         }
