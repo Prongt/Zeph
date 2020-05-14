@@ -69,7 +69,8 @@ public class CameraFlip : MonoBehaviour
 
    public void ResetOrbit()
    {
-      myCam.GetCinemachineComponent<CinemachineOrbitalTransposer>().m_Heading.m_HeadingBias = 0; 
+      myCam.GetCinemachineComponent<CinemachineOrbitalTransposer>().m_Heading.m_HeadingBias = 0;
+      hasChangedOrbitPoint = !hasChangedOrbitPoint;
    }
 
    public void ChangeYOffset()
