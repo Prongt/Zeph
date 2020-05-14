@@ -33,23 +33,23 @@ public class Pause : MonoBehaviour
         if (menuActive)
         {
 
-                PlayerMoveRigidbody.HaltMovement = true;
+            Time.timeScale = 0;
                 pauseMenu.SetActive(true);
         }
         else
         {
-            PlayerMoveRigidbody.HaltMovement = false;
+            Time.timeScale = 1;
             pauseMenu.SetActive(false);
         }
 
         if (optionsActive)
         {
-            PlayerMoveRigidbody.HaltMovement = true;
+            Time.timeScale = 0;
             options.SetActive(true);
         }
         else
         {
-            PlayerMoveRigidbody.HaltMovement = false;
+            Time.timeScale = 1;
             if (options)
             options.SetActive(false);
         }
