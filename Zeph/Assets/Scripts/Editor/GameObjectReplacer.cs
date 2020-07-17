@@ -2,6 +2,9 @@
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Editor window that replaces a list of gameobjects with a chosen prefab
+/// </summary>
 public class GameObjectReplacer : ScriptableWizard
 {
     public bool copyName = true;

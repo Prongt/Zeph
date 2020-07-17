@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Cinemachine;
 using Movement;
 
+/// <summary>
+/// Ensures the camera follows the player when walking on walls and the ceiling
+/// </summary>
 public class CameraFlip : MonoBehaviour
 {
    public CinemachineVirtualCamera myCam;
@@ -115,14 +116,15 @@ public class CameraFlip : MonoBehaviour
    //Same as above but for actual collisions as opposed to a trigger.
    void OnCollisionEnter(Collision other)
    {
-      if (gameObject.CompareTag("Flip"))
-         if (other.gameObject.CompareTag("Player"))
+      if (!gameObject.CompareTag("Flip")) return;
+
+      if (other.gameObject.CompareTag("Player"))
+      {
+         if (hasFlippedZ)
          {
-            if (hasFlippedZ)
-            {
-               FlipZ();
-               hasFlippedZ = false;
-            }
+            FlipZ();
+            hasFlippedZ = false;
          }
+      }
    }
 }

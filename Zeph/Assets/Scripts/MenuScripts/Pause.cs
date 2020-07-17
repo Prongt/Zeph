@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Movement;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Pause menu manager
+/// </summary>
 public class Pause : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
@@ -11,13 +11,11 @@ public class Pause : MonoBehaviour
     private bool menuActive;
     private bool optionsActive;
     
-    // Start is called before the first frame update
     void Start()
     {
         menuActive = false;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetButtonUp("Pause"))
@@ -32,7 +30,7 @@ public class Pause : MonoBehaviour
 
         if (menuActive)
         {
-            print("PAUSED");
+            //print("PAUSED");
             Time.timeScale = 0;
                 pauseMenu.SetActive(true);
         }

@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Movement;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
+/// <summary>
+/// Level selection controller
+/// </summary>
 public class MapControl : MonoBehaviour
 {
-    public EventSystem eve;
+    public EventSystem eventSystem;
     public GameObject defaultButton;
     private bool isOpen;
 
@@ -17,22 +17,22 @@ public class MapControl : MonoBehaviour
         isOpen = true;
     }
 
-    void Update()
+    private void Update()
     { 
         //freezes the player
         PlayerMoveRigidbody.HaltMovement = true;
         if (isOpen)
         {
-            eve.SetSelectedGameObject(defaultButton);
+            eventSystem.SetSelectedGameObject(defaultButton);
             isOpen = false;
         }
         
         //Resets the button if mouse is used and then the controller is used
-        if (eve.currentSelectedGameObject == null)
+        if (eventSystem.currentSelectedGameObject == null)
         {
-            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            if (Math.Abs(Input.GetAxis("Vertical")) > 0.01f || Math.Abs(Input.GetAxis("Horizontal")) > 0.01f)
             {
-                eve.SetSelectedGameObject(defaultButton);
+                eventSystem.SetSelectedGameObject(defaultButton);
             }
         }
     }

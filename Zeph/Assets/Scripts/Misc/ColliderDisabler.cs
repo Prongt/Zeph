@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Disables colliders of gameobjects when requirements are met
+/// </summary>
 public class ColliderDisabler : MonoBehaviour
 {
     [SerializeField] private bool disableDuringDistort = false;
@@ -46,15 +49,5 @@ public class ColliderDisabler : MonoBehaviour
                 collider.isTrigger = false;
             }
         }
-        
-            
-        // if (Distortion.IsDistorting || GravityRift.AltGravityIsActive)
-        // {
-        //     collider.isTrigger = true;
-        // }
-        // else
-        // {
-        //     collider.isTrigger = false;
-        // }
     }
 }

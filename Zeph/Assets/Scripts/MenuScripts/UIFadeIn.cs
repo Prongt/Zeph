@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Security.Permissions;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// Fades the alpha of the child UI elements on scene start
+/// </summary>
 public class UIFadeIn : MonoBehaviour
 {
     private MaskableGraphic[] guiElements;

@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The aspect class for the map gameobject
+/// </summary>
 public class Map : Aspects
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     protected override void Initialize()
     {
         base.Initialize();
@@ -25,7 +14,6 @@ public class Map : Aspects
 
     public Type[] componentTypes = new Type[]
     {
-        
     };
     
     public override Type[] RequiredComponents()

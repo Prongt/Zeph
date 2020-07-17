@@ -3,24 +3,27 @@ using Movement;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiFadeOut : MonoBehaviour
+/// <summary>
+/// Iterates through the story dialog and then fades it out when finished
+/// </summary>
+public class DisplayStoryText : MonoBehaviour
 {
     [TextArea][SerializeField] private List<string> storyText = default;
     [SerializeField] private string buttonToClose = "Story";
 
-    private Text text;
+    private Text textObject;
     private int storyIndex;
     
     private void Awake()
     {
-        text = GetComponentInChildren<Text>();
-        text.text = string.Empty;
+        textObject = GetComponentInChildren<Text>();
+        textObject.text = string.Empty;
         storyIndex = 0;
     }
 
     private void OnEnable()
     {
-        text.text = string.Empty;
+        textObject.text = string.Empty;
     }
 
     private void Update()
@@ -31,7 +34,7 @@ public class UiFadeOut : MonoBehaviour
     private void DisplayText()
     {
         PlayerMoveRigidbody.HaltMovement = true;
-        text.text = storyText[storyIndex];
+        textObject.text = storyText[storyIndex];
         if (Input.GetButtonDown(buttonToClose))
         {
             if (storyIndex == storyText.Count -1)

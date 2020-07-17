@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
 
-[InitializeOnLoad]
+/// <summary>
+/// Early iteration of a level editor
+/// </summary>
 public class PuzzleEditorWindow : EditorWindow
 {
     public static GameObject parentObj;

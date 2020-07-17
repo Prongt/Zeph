@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Allows properties to be hidden or disabled via attribute in the inspector
+/// </summary>
 [CustomPropertyDrawer(typeof(HideIfAttribute))]
 public class HideIfPropertyDrawer : PropertyDrawer
 {
