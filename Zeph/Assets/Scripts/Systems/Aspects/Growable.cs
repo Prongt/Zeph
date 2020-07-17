@@ -2,6 +2,9 @@
 using FMODUnity;
 using UnityEngine;
 
+/// <summary>
+/// Base class for growable ojbects
+/// </summary>
 public class Growable : Aspects
 {
     protected Animator Animator;

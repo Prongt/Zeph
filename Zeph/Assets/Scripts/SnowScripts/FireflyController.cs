@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Spawns particles around objects of interest 
+/// </summary>
 public class FireflyController : MonoBehaviour
 {
     private ParticleSystem fireflies;
@@ -12,8 +13,7 @@ public class FireflyController : MonoBehaviour
     public bool interacted = false;
     
     public float disappearDistance = 7;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         fireflies = GetComponentInChildren<ParticleSystem>();
@@ -29,8 +29,7 @@ public class FireflyController : MonoBehaviour
             Debug.LogWarning("Fireflies not found " + gameObject.name);
         }
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (fireflies != null)

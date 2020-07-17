@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.Rendering;
 
+/// <summary>
+/// When activated multiple times this object can trigger specific events
+/// </summary>
 public class Chargeable : Aspects
 {
     private float intensity;

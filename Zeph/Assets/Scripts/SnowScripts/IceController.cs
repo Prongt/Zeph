@@ -3,6 +3,9 @@ using FMODUnity;
 using Unity.Mathematics;
 using UnityEngine;
 
+/// <summary>
+/// Controller for the iceblock mechanic around interactable objects
+/// </summary>
 public class IceController : MonoBehaviour
 {
     private Renderer meshRenderer;

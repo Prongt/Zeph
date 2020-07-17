@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
+/// <summary>
+/// When activated a pillar fall animation is triggered 
+/// </summary>
 public class PillarPull : Aspects
 {
     private Animator myAnim;
@@ -16,9 +19,12 @@ public class PillarPull : Aspects
         typeof(Animator),
         typeof(FireflyController)
     };
-    
+
+    private FireflyController fireflyController;
+
     void Start()
     {
+        fireflyController = GetComponentInChildren<FireflyController>();
         myAnim = GetComponent<Animator>();
         if (!gameObject.CompareTag("Heavy"))
         {
@@ -31,7 +37,7 @@ public class PillarPull : Aspects
     {
         base.Promote(source, element);
         
-        GetComponentInChildren<FireflyController>().interacted = true;
+        fireflyController.interacted = true;
         
         if (myCol != null)
         {

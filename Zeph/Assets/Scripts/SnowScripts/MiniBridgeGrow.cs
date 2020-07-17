@@ -2,6 +2,9 @@
 using Unity.Mathematics;
 using UnityEngine;
 
+/// <summary>
+/// Growable bridge for the snow level 
+/// </summary>
 public class MiniBridgeGrow : Aspects
 {
     private Renderer meshRenderer;

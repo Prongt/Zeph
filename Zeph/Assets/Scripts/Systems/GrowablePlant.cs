@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Inherits from growable and applies to all growable plants
+/// </summary>
 public class GrowablePlant : Growable
 {
     protected override void Initialize()

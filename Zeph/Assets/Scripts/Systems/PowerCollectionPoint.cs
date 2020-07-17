@@ -1,6 +1,8 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// When the player enters the trigger the corresponding element is unlocked
+/// </summary>
 public class PowerCollectionPoint : MonoBehaviour
 {
     [SerializeField] private ElementState elementState = default;

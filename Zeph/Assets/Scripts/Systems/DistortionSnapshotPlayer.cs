@@ -1,6 +1,9 @@
 ﻿using FMODUnity;
 using UnityEngine;
 
+/// <summary>
+/// Applies an audio distortion to all sound when a distortion event is active
+/// </summary>
 public class DistortionSnapshotPlayer : MonoBehaviour
 {
     [SerializeField] private StudioEventEmitter distortionEventEmitter;

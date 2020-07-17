@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Sets a melted state for the gameobjects when the player activates the conductor
+/// </summary>
 public class SnowCutoutManager : MonoBehaviour
 {
     [SerializeField] private bool useSpecifiedConductor = true;

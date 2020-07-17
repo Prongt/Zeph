@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// When activated the animation for the rope bridge is triggered
+/// </summary>
 public class RopeBridge : Aspects
 {
     private Animator myAnim;
@@ -18,7 +19,6 @@ public class RopeBridge : Aspects
       typeof(FireflyController)
     };
     
-    // Start is called before the first frame update
     void Start()
     {
         myAnim = GetComponent<Animator>();
@@ -27,7 +27,7 @@ public class RopeBridge : Aspects
     public override void Promote(Transform source = null, Element element = null)
     {
         base.Promote(source, element);
-        print("RAISE");
+        //print("RAISE");
         myAnim.SetBool(raise, true);
     }
 

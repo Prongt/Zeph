@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
+/// <summary>
+/// Disables all player abilities when scene starts
+/// </summary>
 public class PowerDisabler : MonoBehaviour
 {
     [SerializeField] private ElementState[] elementsToDisable = default;

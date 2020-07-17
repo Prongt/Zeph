@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
+/// <summary>
+/// When activated a morph animation is triggered and the collider is changed
+/// </summary>
 public class Distortable : MonoBehaviour
 {
     [SerializeField] private Animator myAnim;

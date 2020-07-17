@@ -1,8 +1,9 @@
 ﻿ using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+ using UnityEngine;
 
+ /// <summary>
+ /// When activated objects in the scene are enabled or disabled via unity event
+ /// </summary>
 public class FadeRift : Aspects
 {
     protected override void Initialize()

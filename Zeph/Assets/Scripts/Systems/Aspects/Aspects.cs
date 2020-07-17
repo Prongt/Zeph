@@ -3,6 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Base class of for all aspects
+/// </summary>
 public abstract class Aspects : MonoBehaviour
 {
     [HideInInspector] public AspectType AspectType;
@@ -14,6 +17,8 @@ public abstract class Aspects : MonoBehaviour
     
     [SerializeField] private float coolDownTime = 0.0f;
     protected bool isCoolDownComplete = true;
+
+    private WaitForSeconds coolDownWaitForSeconds;
     private void Awake()
     {
         Initialize();
@@ -25,6 +30,7 @@ public abstract class Aspects : MonoBehaviour
         // //Debug.Log(aspectType);
         // AspectType = aspectType;
         // Debug.Log(AspectType);
+        coolDownWaitForSeconds = new WaitForSeconds(coolDownTime);
     }
 
     public abstract Type[] RequiredComponents();
@@ -56,7 +62,8 @@ public abstract class Aspects : MonoBehaviour
     {
         isCoolDownComplete = false;
         
-        yield return new WaitForSeconds(coolDownTime);
+        //yield return new WaitForSeconds(coolDownTime);
+        yield return coolDownWaitForSeconds;
 
         isCoolDownComplete = true;
     }

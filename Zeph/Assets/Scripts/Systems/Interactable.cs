@@ -4,6 +4,10 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
+
+/// <summary>
+/// Present on all interactable objects and triggers the promote & negate functions on all instances of the aspect class
+/// </summary>
 public class Interactable : MonoBehaviour
 {
     [Tooltip("Aspect material used by this object")] [Header("Aspects")] [SerializeField]

@@ -2,6 +2,9 @@
 using FMODUnity;
 using UnityEngine;
 
+/// <summary>
+/// When activated a distortion event is triggered in the world
+/// </summary>
 public class Distortion : Aspects
 {
     [SerializeField] private Animator myAnim;

@@ -3,6 +3,9 @@ using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
+/// <summary>
+/// When activated the object lerps into specified position
+/// </summary>
 public class Pullable : Aspects
 {
     public Type[] componentTypes =

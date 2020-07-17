@@ -1,6 +1,9 @@
 ﻿using Unity.Mathematics;
 using UnityEngine;
 
+/// <summary>
+/// Sets a melted state for the grounds snow when the player activates the conductor
+/// </summary>
 public class SnowController : MonoBehaviour
 {
     private Renderer meshRenderer;

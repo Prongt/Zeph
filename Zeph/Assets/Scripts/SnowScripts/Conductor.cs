@@ -4,6 +4,9 @@ using FMODUnity;
 using Unity.Mathematics;
 using UnityEngine;
 
+/// <summary>
+/// Controller script for the conductor gameplay mechanic 
+/// </summary>
 [RequireComponent(typeof(StudioEventEmitter))]
 public class Conductor : MonoBehaviour
 {

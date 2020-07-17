@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// A growable tree that can be affected by distortion events
+/// </summary>
 public class GrowableTree : Growable
 {
     protected override void Initialize()

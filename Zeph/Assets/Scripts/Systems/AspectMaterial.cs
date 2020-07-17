@@ -1,6 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Scriptable object that defines all the aspect types an object should contain
+/// </summary>
 [CreateAssetMenu(fileName = "AspectMaterial", menuName = "Aspects/Material", order = 2)]
 public class AspectMaterial : ScriptableObject
 {

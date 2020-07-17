@@ -4,7 +4,9 @@ using FMODUnity;
 using UnityEngine;
 using UnityEngine.VFX;
 
-
+/// <summary>
+/// Allows the player to activate interactable objects
+/// </summary>
 public class PlayerElementController : MonoBehaviour
 {
     public bool BlockPowers = false;

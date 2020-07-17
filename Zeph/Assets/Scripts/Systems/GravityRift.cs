@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
+/// <summary>
+/// When activated changes the direction of world gravity
+/// </summary>
 public class GravityRift : Aspects
 {
     public static bool AltGravityIsActive;

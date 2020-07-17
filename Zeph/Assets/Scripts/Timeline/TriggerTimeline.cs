@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.UI;
 
+/// <summary>
+/// Triggers cinemachine timeline
+/// </summary>
 public class TriggerTimeline : MonoBehaviour
 {
     [SerializeField]private PlayableDirector timeline;

@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Scriptatble object for the gameplay elements light, wind, firs
+/// </summary>
 [CreateAssetMenu(fileName = "Element", menuName = "Aspects/Element", order = 2)]
 public class Element : ScriptableObject
 {

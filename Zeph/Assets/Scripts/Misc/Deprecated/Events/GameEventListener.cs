@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Listener for custom event system
+/// </summary>
 public class GameEventListener : MonoBehaviour
 {
     [Tooltip("Event to register with.")]

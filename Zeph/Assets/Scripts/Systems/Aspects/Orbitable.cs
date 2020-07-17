@@ -4,6 +4,9 @@ using FMODUnity;
 using Movement;
 using UnityEngine;
 
+/// <summary>
+/// When activated the object can orbit around the player and be thrown by the player
+/// </summary>
 public class Orbitable : Aspects
 {
     public Transform centerPoint;

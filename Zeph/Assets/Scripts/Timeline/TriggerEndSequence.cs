@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Movement;
+﻿using Movement;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// When player enters trigger freeze movement & calls unity event
+/// </summary>
 public class TriggerEndSequence : MonoBehaviour
 {
     public UnityEvent OnPlayerEnter;

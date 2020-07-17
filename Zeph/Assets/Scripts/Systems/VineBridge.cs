@@ -1,7 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// When activated the ivy bridge is grown half way and continues growing when a distortion event is activated
+/// </summary>
 public class VineBridge : Growable
 {
     private Material mat;

@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// When activated the story dialog is activated
+/// </summary>
 public class Story : Aspects
 {
     protected override void Initialize()

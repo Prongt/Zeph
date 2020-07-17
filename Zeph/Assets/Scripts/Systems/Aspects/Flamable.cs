@@ -4,6 +4,9 @@ using FMODUnity;
 using UnityEngine;
 using UnityEngine.VFX;
 
+/// <summary>
+/// When activated the object is set on fire and can burn other objects
+/// </summary>
 public class Flamable : Aspects
 {
     [SerializeField] private bool lit;
