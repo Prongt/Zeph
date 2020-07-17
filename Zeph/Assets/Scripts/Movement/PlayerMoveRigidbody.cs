@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Movement
 {
+    /// <summary>
+    /// Player movement class that supports phyics and multiple directions of gravity
+    /// </summary>
     public class PlayerMoveRigidbody : MonoBehaviour
     {
         private static readonly int isDancing = Animator.StringToHash("IsDancing");
@@ -119,6 +122,8 @@ namespace Movement
             {
                 HaltMovement = true;
                 rigidbody.Sleep();
+                
+                //sets ground contacts to 2 so the falling/jump animations do not play
                 groundContactCount = 2;
                 hasScheduledJump = false;
             }
@@ -382,6 +387,7 @@ namespace Movement
 
             float jumpSpeed;
             float force;
+            
             //TODO Clean here
             if (currentGravity.z < 0)
                 force = currentGravity.z;

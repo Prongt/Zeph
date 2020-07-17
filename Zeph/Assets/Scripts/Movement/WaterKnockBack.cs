@@ -4,7 +4,9 @@ using UnityEngine;
 
 namespace Movement
 {
-
+    /// <summary>
+    /// Apply knock back force to player when colliding with a water collider
+    /// </summary>
     public class WaterKnockBack : MonoBehaviour
     {
         [SerializeField] private bool applyKnockBackForce = false;

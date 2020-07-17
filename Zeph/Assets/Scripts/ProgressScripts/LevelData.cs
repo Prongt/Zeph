@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
+﻿/// <summary>
+/// Level data type used for the progression system
+/// </summary>
 [System.Serializable]
 public class LevelData
 {

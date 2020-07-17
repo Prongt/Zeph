@@ -13,7 +13,7 @@ public class CurvedLineRenderer : MonoBehaviour
 	public float gizmoSize = 0.1f;
 	public Color gizmoColor = new Color(1,0,0,0.5f);
 	//PRIVATE
-	private CurvedLinePoint[] linePoints = new CurvedLinePoint[0];
+	private DrawDebugCurveForCinematics[] linePoints = new DrawDebugCurveForCinematics[0];
 	private Vector3[] linePositions = new Vector3[0];
 	private Vector3[] linePositionsOld = new Vector3[0];
 
@@ -27,7 +27,7 @@ public class CurvedLineRenderer : MonoBehaviour
 	void GetPoints()
 	{
 		//find curved points in children
-		linePoints = this.GetComponentsInChildren<CurvedLinePoint>();
+		linePoints = this.GetComponentsInChildren<DrawDebugCurveForCinematics>();
 
 		//add positions
 		linePositions = new Vector3[linePoints.Length];
@@ -84,7 +84,7 @@ public class CurvedLineRenderer : MonoBehaviour
 		}
 
 		//settings for gizmos
-		foreach( CurvedLinePoint linePoint in linePoints )
+		foreach( DrawDebugCurveForCinematics linePoint in linePoints )
 		{
 			linePoint.showGizmo = showGizmos;
 			linePoint.gizmoSize = gizmoSize;

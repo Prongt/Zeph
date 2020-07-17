@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using Movement;
 using UnityEngine;
 
+/// <summary>
+/// Resets the players position to the previous checkpoint when the player is out of bounds
+/// </summary>
 public class FallReset : MonoBehaviour
 {
     private PlayerMoveRigidbody playerMoveRigidbody;

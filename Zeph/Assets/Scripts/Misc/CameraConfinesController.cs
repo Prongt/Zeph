@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 
-public class ConfineController : MonoBehaviour
+/// <summary>
+/// Controls the camera confines regardless of player orientation 
+/// </summary>
+public class CameraConfinesController : MonoBehaviour
 {
     private Transform player;
     public float zOffset = 10;

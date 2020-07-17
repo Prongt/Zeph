@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Loads specified level at the start of a scene
+/// </summary>
 public class LevelLoad : MonoBehaviour
 {
     public String levelToLoad;

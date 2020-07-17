@@ -2,6 +2,11 @@
 using FMODUnity;
 using UnityEngine;
 
+
+
+/// <summary>
+/// Player movement controller that uses the unity character controller
+/// </summary>
 public class PlayerMove : MonoBehaviour
 {
 	public float playerMoveSpeed = 6f;
@@ -547,7 +552,6 @@ public class PlayerMove : MonoBehaviour
 			}
 
 			return false;
-
 		}
 		else
 		{

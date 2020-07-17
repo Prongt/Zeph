@@ -1,6 +1,9 @@
 ﻿using Cinemachine;
 using UnityEngine;
 
+/// <summary>
+/// Respawns object when it is out of bounds
+/// </summary>
 public class RespawnWhenOutOfBounds : MonoBehaviour
 {
     [SerializeField][TagField] private new string tag = default;

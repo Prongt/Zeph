@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class CurvedLinePoint : MonoBehaviour 
+/// <summary>
+/// Draws a curved line gizmo for debuging
+/// </summary>
+public class DrawDebugCurveForCinematics : MonoBehaviour 
 {
 	[HideInInspector] public bool showGizmo = true;
 	[HideInInspector] public float gizmoSize = 0.1f;

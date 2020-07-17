@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Displays active mosaics when in the hub scene
+/// </summary>
 public class MosaicUpdate : MonoBehaviour
 {
     public List<GameObject> mosaics;

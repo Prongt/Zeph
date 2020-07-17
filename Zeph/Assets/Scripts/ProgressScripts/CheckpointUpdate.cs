@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Updates the checkpoint manager when a checkpoint has been reached by the player
+/// </summary>
 public class CheckpointUpdate : CheckpointManager
 {
     public bool hitCheckpoint;

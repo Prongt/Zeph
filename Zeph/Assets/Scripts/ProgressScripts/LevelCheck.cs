@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enables or disables levels in the level select screen if level is not currently accessible to the player
+/// </summary>
 public class LevelCheck : MonoBehaviour
 {
     [SerializeField] private GameObject tutorialButton = default;
@@ -12,16 +14,14 @@ public class LevelCheck : MonoBehaviour
 
 
     private int levelNum;
-    // Start is called before the first frame update
     void Start()
     {
-        
+        levelNum = GameObject.Find("Player Progress").GetComponent<LevelProgress>().playerProgress;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        levelNum = GameObject.Find("Player Progress").GetComponent<LevelProgress>().playerProgress;
+        //levelNum = GameObject.Find("Player Progress").GetComponent<LevelProgress>().playerProgress;
         
 //        print(levelNum);
         if (levelNum == 0)

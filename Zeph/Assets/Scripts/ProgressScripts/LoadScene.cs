@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Loads specified scene when menu button is selected or when player enters loading area
+/// </summary>
 public class LoadScene : MonoBehaviour
 {
     [SerializeField] private string endingToLoad;

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages the progress checkpoints for each level
+/// </summary>
 public class CheckpointManager : MonoBehaviour
 {
     public static List<GameObject> checkpoints;

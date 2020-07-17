@@ -3,6 +3,9 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+/// <summary>
+/// Save system serializer and deserializer
+/// </summary>
 public static class SaveSystem
 {
    public static void SaveLevel(LevelProgress curLevel)

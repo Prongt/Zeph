@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-/// Disables colliders of gameobjects when requirements are met
+/// Disables or enables colliders when requirements are met
 /// </summary>
-public class ColliderDisabler : MonoBehaviour
+public class ColliderController : MonoBehaviour
 {
     [SerializeField] private bool disableDuringDistort = false;
     [SerializeField] private bool disableDuringAltGravity = false;

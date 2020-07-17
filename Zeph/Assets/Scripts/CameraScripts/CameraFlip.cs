@@ -12,7 +12,7 @@ public class CameraFlip : MonoBehaviour
    public static bool hasFlippedX;
    public static bool hasChangedOrbitPoint;
 
-   [SerializeField] private ConfineController cameraConfines;
+   [SerializeField] private CameraConfinesController cameraCameraConfineses;
    
 
    private PlayerMoveRigidbody playerMoveRigidbody;
@@ -22,7 +22,7 @@ public class CameraFlip : MonoBehaviour
       //Avoiding Errors
       if (!gameObject.CompareTag("Flip"))
       {
-         cameraConfines = null;
+         cameraCameraConfineses = null;
       }
       
       playerMoveRigidbody = FindObjectOfType<PlayerMoveRigidbody>();
@@ -91,14 +91,14 @@ public class CameraFlip : MonoBehaviour
             {
                FlipZ();
                playerMoveRigidbody.FlipMovement();
-               cameraConfines.ChangeZOffset();
+               cameraCameraConfineses.ChangeZOffset();
                hasFlippedZ = !hasFlippedZ;
             }
             if (hasFlippedX)
             {
                FlipX();
                playerMoveRigidbody.FlipMovement();
-               cameraConfines.ChangeXOffset();
+               cameraCameraConfineses.ChangeXOffset();
                hasFlippedX = false;
             }
 
@@ -106,7 +106,7 @@ public class CameraFlip : MonoBehaviour
             {
                ResetOrbit();
                playerMoveRigidbody.SideCamera();
-               cameraConfines.ChangeZOffset();
+               cameraCameraConfineses.ChangeZOffset();
                hasChangedOrbitPoint = false;
             }
          }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Runtime.Serialization.Formatters.Binary;
 
-
+/// <summary>
+/// Manages the loading and saving of game files
+/// </summary>
 public class LevelProgress : MonoBehaviour
 {
 
@@ -27,8 +24,7 @@ public class LevelProgress : MonoBehaviour
             SaveLevel();
        }
     }
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         Time.timeScale = 1;
@@ -37,10 +33,6 @@ public class LevelProgress : MonoBehaviour
         print(Application.persistentDataPath);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
     public void SaveLevel()
     {
